@@ -1,0 +1,120 @@
+====================================================
+=  index.html
+====================================================
+[FILE: index.html 시작]
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+  <meta charset="UTF-8" />
+  <title>휴대폰 특판</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json" />
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js');
+      });
+    }
+  </script>
+
+  <style>
+    body { margin:0; padding:16px; background:#050814; color:#fff; font-family:-apple-system,'Noto Sans KR'; }
+    .wrap { max-width:900px; margin:0 auto; }
+    h1 { font-size:26px; font-weight:800; margin-bottom:6px; }
+    .sub { opacity:.8; font-size:12px; margin-bottom:14px; }
+    .card { background:#111827; padding:14px; border-radius:14px; margin-bottom:12px; border:1px solid #2c3344; }
+    .price { font-size:30px; font-weight:900; color:#facc15; text-shadow:0 0 12px #facc15; }
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <h1>복지관 2층 휴대폰 특판 안내</h1>
+    <div class="sub">SK·KT·LG / 인터넷TV 현금 최대지급 / 알뜰요금 3,300원~</div>
+
+    <div class="card">
+      <h2>SK 기변 특가</h2>
+      <div class="price">판매가 0원</div>
+      <p>109 요금제 6개월 유지 / 기기변경 조건</p>
+    </div>
+
+    <div class="card">
+      <h2>알뜰요금 특가</h2>
+      <p>월 3,300원부터 / 즉시 개통 가능</p>
+    </div>
+
+    <div class="card">
+      <h2>인터넷 + TV</h2>
+      <p>현금 최대 지급 / 3사 견적 비교</p>
+    </div>
+
+    <p style="opacity:.6; font-size:12px;">※ 실제 조건은 재고·정책에 따라 달라질 수 있음</p>
+  </div>
+</body>
+</html>
+[FILE: index.html 끝]
+
+====================================================
+=  manifest.json
+====================================================
+[FILE: manifest.json 시작]
+{
+  "name": "휴대폰 특판",
+  "short_name": "특판",
+  "start_url": "index.html",
+  "display": "standalone",
+  "background_color": "#050814",
+  "theme_color": "#ff8a00",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    }
+  ]
+}
+[FILE: manifest.json 끝]
+
+====================================================
+=  service-worker.js
+====================================================
+[FILE: service-worker.js 시작]
+const CACHE_NAME = "phone-special-cache-v1";
+const FILES_TO_CACHE = [
+  "./",
+  "./index.html",
+  "./manifest.json",
+  "./icon-192.png",
+  "./icon-512.png"
+];
+
+self.addEventListener("install", (event) => {
+  event.waitUntil(
+    caches.open(CACHE_NAME).then(cache => cache.addAll(FILES_TO_CACHE))
+  );
+});
+
+self.addEventListener("fetch", (event) => {
+  event.respondWith(
+    caches.match(event.request).then(r => r || fetch(event.request))
+  );
+});
+[FILE: service-worker.js 끝]
+
+====================================================
+=  icon-192.png / icon-512.png 안내
+====================================================
+[아이콘 생성 방법]
+
+1) Canva / Photoshop / 또는 네가 요청하면 내가 디자인해줌  
+2) 크기  
+   icon-192.png  → 192×192  
+   icon-512.png  → 512×512  
+3) PNG로 저장  
+4) 같은 폴더에 넣기
