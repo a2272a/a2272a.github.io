@@ -1,62 +1,189 @@
-
 <!DOCTYPE html>
 <html lang="ko">
 <head>
   <meta charset="UTF-8" />
-  <title>휴대폰 특판</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>휴대폰 특판 안내</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, initial-scale=1" />
+  <link rel="manifest" href="manifest.json" />
 
   <!-- PWA -->
-  <link rel="manifest" href="manifest.json" />
   <script>
-    if ('serviceWorker' in navigator) {
-      window.addEventListener('load', () => {
-        navigator.serviceWorker.register('service-worker.js');
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("service-worker.js");
       });
     }
   </script>
 
   <style>
-    body { margin:0; padding:16px; background:#050814; color:#fff; font-family:-apple-system,'Noto Sans KR'; }
-    .wrap { max-width:900px; margin:0 auto; }
-    h1 { font-size:26px; font-weight:800; margin-bottom:6px; }
-    .sub { opacity:.8; font-size:12px; margin-bottom:14px; }
-    .card { background:#111827; padding:14px; border-radius:14px; margin-bottom:12px; border:1px solid #2c3344; }
-    .price { font-size:30px; font-weight:900; color:#facc15; text-shadow:0 0 12px #facc15; }
+    body {
+      margin: 0;
+      padding: 16px;
+      background: #050814;
+      color: #fff;
+      font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", sans-serif;
+    }
+
+    .wrap {
+      max-width: 900px;
+      margin: 0 auto;
+    }
+
+    h1 {
+      font-size: 26px;
+      font-weight: 800;
+      margin-bottom: 6px;
+    }
+
+    .sub {
+      opacity: 0.8;
+      font-size: 12px;
+      margin-bottom: 14px;
+    }
+
+    .card {
+      background: #111827;
+      padding: 14px;
+      border-radius: 14px;
+      margin-bottom: 12px;
+      border: 1px solid #2c3344;
+    }
+
+    .price {
+      font-size: 30px;
+      font-weight: 900;
+      color: #fac515;
+      text-shadow: 0 0 12px #fac515;
+    }
+
+    /* 탭바 스타일 */
+    .tab-bar {
+      display: flex;
+      gap: 6px;
+      padding: 10px 0;
+      position: sticky;
+      top: 0;
+      background: #050814;
+      z-index: 200;
+    }
+
+    .tab-btn {
+      flex: 1;
+      padding: 10px 6px;
+      background: #2c3344;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 13px;
+      cursor: pointer;
+    }
+
+    .tab-btn.active {
+      background: #fac515;
+      color: black;
+      font-weight: 900;
+    }
+
+    /* 섹션 숨기기 */
+    .section { display: none; }
+    .section.active { display: block; }
   </style>
 </head>
+
 <body>
+
+  <!-- 탭 메뉴 -->
   <nav class="tab-bar">
-  <button class="tab-btn active" data-tab="skt">SKT</button>
-  <button class="tab-btn" data-tab="kt">KT</button>
-  <button class="tab-btn" data-tab="lg">LGU+</button>
-  <button class="tab-btn" data-tab="mvno">알뜰요금</button>
-  <button class="tab-btn" data-tab="internet">인터넷·TV</button>
-</nav>
+    <button class="tab-btn active" data-tab="skt">SKT</button>
+    <button class="tab-btn" data-tab="kt">KT</button>
+    <button class="tab-btn" data-tab="lg">LGU+</button>
+    <button class="tab-btn" data-tab="mvno">알뜰요금</button>
+    <button class="tab-btn" data-tab="internet">인터넷·TV</button>
+  </nav>
 
-  <div class="wrap">
-    <h1>복지관 2층 휴대폰 특판 안내</h1>
-    <div class="sub">SK·KT·LG / 인터넷TV 현금 최대지급 / 알뜰요금 3,300원~</div>
+  <!-- SKT 섹션 -->
+  <div class="section active" id="skt">
+    <div class="wrap">
+      <h1>복지관 2층 휴대폰 특판 안내</h1>
+      <div class="sub">SK·KT·LG / 인터넷TV 현금 최대지급 / 알뜰요금 3,300원~</div>
 
-    <div class="card">
-      <h2>SK 기변 특가</h2>
-      <div class="price">판매가 0원</div>
-      <p>109 요금제 6개월 유지 / 기기변경 조건</p>
+      <div class="card">
+        <h2>SK 기변 특가</h2>
+        <div class="price">판매가 0원</div>
+        <p>109 요금제 6개월 유지 / 기기변경 조건</p>
+      </div>
     </div>
-
-    <div class="card">
-      <h2>알뜰요금 특가</h2>
-      <p>월 3,300원부터 / 즉시 개통 가능</p>
-    </div>
-
-    <div class="card">
-      <h2>인터넷 + TV</h2>
-      <p>현금 최대 지급 / 3사 견적 비교</p>
-    </div>
-
-    <p style="opacity:.6; font-size:12px;">※ 실제 조건은 재고·정책에 따라 달라질 수 있음</p>
   </div>
+
+  <!-- KT 섹션 -->
+  <div class="section" id="kt">
+    <div class="wrap">
+      <h1>KT 특판 안내</h1>
+      <div class="card">
+        <h2>KT 기변 특가</h2>
+        <div class="price">판매가 0원</div>
+        <p>요금제 6개월 유지 조건</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- LG 섹션 -->
+  <div class="section" id="lg">
+    <div class="wrap">
+      <h1>LGU+ 특판 안내</h1>
+      <div class="card">
+        <h2>LG 기변 특가</h2>
+        <div class="price">0원 특가 진행</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 알뜰요금 섹션 -->
+  <div class="section" id="mvno">
+    <div class="wrap">
+      <h1>알뜰요금 특가</h1>
+      <div class="card">
+        <h2>알뜰요금 특가</h2>
+        <p>월 3,300원부터 / 즉시 개통 가능</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 인터넷/TV 섹션 -->
+  <div class="section" id="internet">
+    <div class="wrap">
+      <h1>인터넷 + TV</h1>
+      <div class="card">
+        <p>현금 최대 지급 / 3사 견적 비교 가능</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- 탭 기능 스크립트 -->
+  <script>
+    const tabBtns = document.querySelectorAll(".tab-btn");
+    const sections = document.querySelectorAll(".section");
+
+    tabBtns.forEach(btn => {
+      btn.addEventListener("click", () => {
+
+        // 버튼 active 변경
+        tabBtns.forEach(b => b.classList.remove("active"));
+        btn.classList.add("active");
+
+        // 섹션 변경
+        const target = btn.dataset.tab;
+        sections.forEach(sec => {
+          sec.classList.remove("active");
+        });
+        document.getElementById(target).classList.add("active");
+      });
+    });
+  </script>
+
 </body>
 </html>
+
+
 
 
