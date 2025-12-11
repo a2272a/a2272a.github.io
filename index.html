@@ -27,7 +27,9 @@
       --price: #facc15;
     }
 
-    * { box-sizing: border-box; }
+    * {
+      box-sizing: border-box;
+    }
 
     body {
       margin: 0;
@@ -38,7 +40,8 @@
     }
 
     .wrap {
-      max-width: 460px;
+      width: 100%;
+      max-width: 480px;  /* 기본: 모바일 기준 */
       margin: 0 auto;
     }
 
@@ -132,6 +135,7 @@
       justify-content: space-between;
       align-items: center;
       margin-bottom: 4px;
+      gap: 6px;
     }
 
     .badge {
@@ -140,6 +144,7 @@
       border-radius: 999px;
       border: 1px solid rgba(148, 163, 184, 0.5);
       color: var(--text-sub);
+      white-space: nowrap;
     }
 
     .badge.hot {
@@ -199,6 +204,64 @@
     .footer-text strong {
       color: #e5e7eb;
     }
+
+    /* ========= PC(태블릿 이상)에서 레이아웃 확장 ========= */
+    @media (min-width: 768px) {
+      body {
+        padding: 24px;
+      }
+
+      .wrap {
+        max-width: 960px;       /* PC에서 넓게 */
+      }
+
+      .app-header {
+        padding: 0 0 14px;
+      }
+
+      .app-title {
+        font-size: 28px;
+      }
+
+      .app-sub {
+        font-size: 13px;
+      }
+
+      .tab-bar {
+        margin: 8px 0 16px;
+        gap: 10px;
+      }
+
+      .tab-btn {
+        padding: 12px 10px;
+        font-size: 14px;
+      }
+
+      .card-list {
+        gap: 14px;
+      }
+
+      .card {
+        padding: 16px 18px 14px;
+      }
+
+      .card-title {
+        font-size: 18px;
+      }
+
+      .card-price {
+        font-size: 28px;
+      }
+
+      .card-desc {
+        font-size: 13px;
+      }
+
+      .footer-text {
+        font-size: 12px;
+        margin-top: 12px;
+      }
+    }
   </style>
 </head>
 
@@ -236,7 +299,7 @@
 
   <!-- 탭별 데이터 & 렌더링 스크립트 -->
   <script>
-    // 탭별 카드 데이터 (나중에 JSON으로 빼서 관리 가능)
+    // 탭별 카드 데이터
     const PLANS = {
       skt: [
         {
@@ -393,6 +456,8 @@
   </script>
 </body>
 </html>
+
+
 
 
 
