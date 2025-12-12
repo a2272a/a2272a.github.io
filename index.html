@@ -1,242 +1,697 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<meta charset="UTF-8">
-<title>휴대폰 특판 안내</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta charset="UTF-8" />
+  <title>복지관 2층 휴대폰 특판 안내</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
 
-<style>
-/* ===== 기본 ===== */
-*{box-sizing:border-box}
-body{
-  margin:0;
-  font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",sans-serif;
-  background:#f5f7fb;
-  color:#111;
-}
-.container{
-  max-width:1100px;
-  margin:0 auto;
-  padding:14px;
-}
+  <!-- PWA manifest -->
+  <link rel="manifest" href="manifest.json" />
 
-/* ===== 탭 ===== */
-.tabs{
-  display:flex;
-  gap:8px;
-  margin-bottom:12px;
-}
-.tab{
-  flex:1;
-  padding:12px 6px;
-  border-radius:999px;
-  border:none;
-  background:#e5e7eb;
-  font-weight:900;
-  font-size:14px;
-  cursor:pointer;
-}
-.tab.active{
-  background:#2563eb;
-  color:#fff;
-}
+  <!-- service worker 등록 (이 부분은 건드리지 마세요) -->
+  <script>
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', () => {
+        navigator.serviceWorker.register('service-worker.js')
+          .catch(err => console.log('SW 등록 실패:', err));
+      });
+    }
+  </script>
 
-/* ===== 패널 분리 ===== */
-.panel{display:none}
-.panel.active{display:block}
+  <style>
+    :root{
+      --bg:#f6fbff;
+      --bg2:#ffffff;
+      --ink:#0b1220;
+      --sub:#475569;
+      --line:#dbe7f3;
+      --shadow:0 14px 40px rgba(8, 26, 55, 0.12);
 
-/* ===== 카드 (최대 강조) ===== */
-.card{
-  background:#ffffff;
-  border-radius:24px;
-  padding:20px;
-  margin-bottom:16px;
-  border:2px solid #e5e7eb;
-  box-shadow:
-    0 12px 28px rgba(0,0,0,.14),
-    inset 0 0 0 1px rgba(255,255,255,.6);
-  transition:.2s ease;
-}
-.card:hover{
-  transform:translateY(-2px);
-  box-shadow:0 20px 40px rgba(0,0,0,.2);
-}
+      --blue:#2563eb;
+      --mint:#06b6d4;
+      --gold:#f59e0b;
 
-/* ===== 텍스트 극대화 ===== */
-.title{
-  font-size:26px;
-  font-weight:1000;
-  letter-spacing:-0.02em;
-  margin-bottom:6px;
-}
-.price{
-  font-size:36px;
-  font-weight:1000;
-  color:#2563eb;
-  margin:8px 0;
-  text-shadow:0 10px 24px rgba(37,99,235,.25);
-}
-.sub{
-  font-size:15px;
-  font-weight:700;
-  color:#374151;
-}
+      --skt:#ff3344;
+      --kt:#111827;
+      --lg:#b91c91;
+      --internet:#f97316;
+      --mvno:#16a34a;
+    }
 
-/* ===== 배지 ===== */
-.badges{
-  display:flex;
-  flex-wrap:wrap;
-  gap:6px;
-  margin-top:10px;
-}
-.badge{
-  font-size:12px;
-  padding:6px 12px;
-  border-radius:999px;
-  background:#f1f5f9;
-  font-weight:800;
-}
+    *{ box-sizing:border-box; }
+    body{
+      margin:0;
+      background:linear-gradient(180deg, #eaffff 0%, var(--bg) 40%, #ffffff 100%);
+      color:var(--ink);
+      font-family:-apple-system,BlinkMacSystemFont,'Noto Sans KR',sans-serif;
+    }
 
-/* ===== 문의 버튼 ===== */
-.actions{
-  margin-top:16px;
-  display:flex;
-  gap:8px;
-}
-.btn{
-  flex:1;
-  text-align:center;
-  padding:14px;
-  border-radius:999px;
-  font-size:15px;
-  font-weight:1000;
-  text-decoration:none;
-}
-.btn-call{
-  background:#111;
-  color:#fff;
-}
-.btn-kakao{
-  background:#fee500;
-  color:#111;
-}
-</style>
+    .app{
+      width:100%;
+      min-height:100vh;
+      display:flex;
+      flex-direction:column;
+    }
+
+    /* PC에서도 작아지지 않게: 가운데 980px 컨테이너 */
+    .container{
+      width:min(980px, 100%);
+      margin:0 auto;
+      padding:0 16px;
+    }
+
+    /* HERO */
+    .hero{
+      padding:18px 0 12px;
+    }
+    .heroBox{
+      background:linear-gradient(135deg, #ffffff 0%, #f4fffe 50%, #ffffff 100%);
+      border:1px solid var(--line);
+      border-radius:22px;
+      box-shadow:var(--shadow);
+      padding:16px 16px 14px;
+    }
+    .heroTitle{
+      margin:0 0 6px;
+      font-weight:900;
+      letter-spacing:-0.04em;
+      font-size:28px;
+    }
+    .heroSub{
+      margin:0 0 10px;
+      color:#1f2937;
+      font-weight:700;
+      font-size:13px;
+      opacity:.9;
+    }
+    .heroRow{
+      display:flex;
+      gap:10px;
+      flex-wrap:wrap;
+      align-items:center;
+      justify-content:space-between;
+    }
+    .chip{
+      display:inline-flex;
+      align-items:center;
+      gap:8px;
+      padding:8px 12px;
+      border-radius:999px;
+      background:#0b1220;
+      color:#e6f6ff;
+      font-weight:800;
+      font-size:12px;
+      box-shadow:0 12px 24px rgba(11,18,32,.25);
+    }
+    .dot{
+      width:8px;height:8px;border-radius:50%;
+      background:#22c55e;
+      box-shadow:0 0 0 6px rgba(34,197,94,.18);
+    }
+    .mini{
+      display:flex;
+      gap:6px;
+      flex-wrap:wrap;
+    }
+    .mini span{
+      font-size:11px;
+      font-weight:700;
+      color:#0b1220;
+      background:#ffffffcc;
+      border:1px solid rgba(15,23,42,.08);
+      padding:5px 9px;
+      border-radius:999px;
+    }
+
+    /* TAB BAR */
+    .tabWrap{
+      position:sticky;
+      top:0;
+      z-index:20;
+      background:linear-gradient(180deg, rgba(246,251,255,0.95) 0%, rgba(246,251,255,0.75) 100%);
+      backdrop-filter: blur(10px);
+      border-bottom:1px solid rgba(219,231,243,.6);
+    }
+    .tabBar{
+      display:flex;
+      gap:10px;
+      padding:10px 0 10px;
+    }
+    .tabBtn{
+      flex:1;
+      border:none;
+      cursor:pointer;
+      border-radius:999px;
+      padding:12px 10px;
+      font-weight:900;
+      font-size:14px;
+      letter-spacing:-0.02em;
+      color:#0b1220;
+      background:#ffffff;
+      border:1px solid var(--line);
+      box-shadow:0 8px 18px rgba(8,26,55,.08);
+      transition:transform .14s ease, box-shadow .14s ease, background .14s ease;
+    }
+    .tabBtn:active{ transform:translateY(1px) scale(.99); }
+    .tabBtn.active{
+      background:linear-gradient(135deg, #2563eb 0%, #0ea5e9 45%, #06b6d4 100%);
+      color:#fff;
+      border-color:transparent;
+      box-shadow:0 18px 40px rgba(37,99,235,.28);
+    }
+
+    /* CONTENT */
+    .content{
+      padding:14px 0 110px;
+    }
+
+    .sectionTitle{
+      display:flex;
+      align-items:center;
+      gap:8px;
+      margin:8px 0 12px;
+      font-weight:900;
+      font-size:16px;
+      color:#0f172a;
+    }
+    .sectionDot{
+      width:10px;height:10px;border-radius:50%;
+      background:linear-gradient(135deg, var(--blue), var(--mint));
+      box-shadow:0 0 0 7px rgba(6,182,212,.12);
+    }
+
+    /* ===== 카드: “최대로 튀게” 핵심 ===== */
+    .card{
+      position:relative;
+      background:linear-gradient(180deg, #ffffff 0%, #fbfeff 100%);
+      border:1px solid var(--line);
+      border-radius:22px;
+      padding:16px 16px 14px;
+      box-shadow:0 18px 44px rgba(8,26,55,.10);
+      margin-bottom:14px;
+      overflow:hidden;
+      transform:translateZ(0);
+      transition:transform .12s ease, box-shadow .12s ease;
+    }
+    .card:active{
+      transform:scale(.995);
+      box-shadow:0 14px 36px rgba(8,26,55,.12);
+    }
+    /* 은은한 배경광 */
+    .card::before{
+      content:"";
+      position:absolute;
+      inset:-2px;
+      background:radial-gradient(600px 180px at 12% 0%, rgba(37,99,235,.18), transparent 60%),
+                 radial-gradient(500px 160px at 92% 10%, rgba(6,182,212,.16), transparent 58%);
+      pointer-events:none;
+    }
+
+    .cardTop{
+      display:flex;
+      align-items:flex-start;
+      justify-content:space-between;
+      gap:10px;
+      position:relative;
+    }
+    .cardTitle{
+      margin:0;
+      font-size:26px;        /* 제목 크게 */
+      font-weight:1000;
+      letter-spacing:-0.05em;
+      line-height:1.1;
+    }
+    .tag{
+      white-space:nowrap;
+      font-size:12px;
+      font-weight:900;
+      padding:6px 10px;
+      border-radius:999px;
+      background:#eef6ff;
+      border:1px solid #cfe2ff;
+      color:#1145b8;
+      box-shadow:0 10px 18px rgba(17,69,184,.10);
+      position:relative;
+    }
+
+    .price{
+      position:relative;
+      margin:10px 0 6px;
+      font-size:38px;        /* 가격 최대로 크게 */
+      font-weight:1000;
+      letter-spacing:-0.06em;
+      color:#0b1220;
+      line-height:1;
+      text-shadow:0 10px 26px rgba(37,99,235,.12);
+    }
+    .price .unit{
+      font-size:18px;
+      font-weight:900;
+      margin-left:4px;
+      color:#1f2937;
+      opacity:.95;
+    }
+    .sub{
+      position:relative;
+      margin:0 0 10px;
+      font-size:15px;        /* 조건도 크게 */
+      font-weight:800;
+      color:#243244;
+      line-height:1.35;
+    }
+
+    .badges{
+      position:relative;
+      display:flex;
+      flex-wrap:wrap;
+      gap:8px;
+      margin-top:8px;
+    }
+    .badge{
+      font-size:12px;
+      font-weight:900;
+      padding:7px 10px;
+      border-radius:999px;
+      background:#ffffff;
+      border:1px solid rgba(219,231,243,.9);
+      color:#0b1220;
+      box-shadow:0 12px 22px rgba(8,26,55,.06);
+    }
+
+    .flags{
+      position:absolute;
+      right:12px;
+      bottom:12px;
+      display:flex;
+      gap:6px;
+      z-index:2;
+    }
+    .flag{
+      font-size:11px;
+      font-weight:1000;
+      padding:6px 10px;
+      border-radius:999px;
+      color:#fff;
+      box-shadow:0 12px 24px rgba(8,26,55,.15);
+    }
+    .flag.pin{ background:linear-gradient(135deg, #111827, #334155); }
+    .flag.hit{ background:linear-gradient(135deg, #f59e0b, #f97316); }
+    .flag.clicks{ background:linear-gradient(135deg, #2563eb, #06b6d4); }
+
+    /* 통신사 컬러 라인 */
+    .bar{
+      position:absolute;
+      left:0; top:0;
+      width:100%;
+      height:6px;
+      z-index:3;
+    }
+    .bar.skt{ background:linear-gradient(90deg, var(--skt), #ff8a95); }
+    .bar.kt{ background:linear-gradient(90deg, #111827, #6b7280); }
+    .bar.lg{ background:linear-gradient(90deg, var(--lg), #ff4dc8); }
+    .bar.internet{ background:linear-gradient(90deg, var(--internet), #ffd08a); }
+    .bar.mvno{ background:linear-gradient(90deg, var(--mvno), #86efac); }
+
+    /* CTA 버튼 (A: 클릭 기준 수집용) */
+    .ctaRow{
+      position:relative;
+      display:flex;
+      gap:10px;
+      margin-top:12px;
+    }
+    .btn{
+      flex:1;
+      border:none;
+      cursor:pointer;
+      border-radius:16px;
+      padding:12px 10px;
+      font-weight:1000;
+      font-size:14px;
+      letter-spacing:-0.02em;
+      box-shadow:0 14px 30px rgba(8,26,55,.12);
+      transition:transform .12s ease;
+    }
+    .btn:active{ transform:translateY(1px) scale(.99); }
+    .btnAsk{
+      background:linear-gradient(135deg, #111827, #334155);
+      color:#fff;
+    }
+    .btnKakao{
+      background:#fee500;
+      color:#111827;
+      border:1px solid rgba(0,0,0,.05);
+    }
+
+    /* 하단 고정 */
+    .bottom{
+      position:fixed;
+      left:0; right:0; bottom:0;
+      background:#ffffffdd;
+      backdrop-filter: blur(10px);
+      border-top:1px solid rgba(219,231,243,.9);
+      box-shadow:0 -10px 24px rgba(8,26,55,.08);
+      padding:10px 0;
+      z-index:50;
+    }
+    .bottomText{
+      font-size:12px;
+      font-weight:900;
+      color:#0b1220;
+      opacity:.9;
+      margin-bottom:6px;
+    }
+    .bottomBtns{
+      display:flex;
+      gap:8px;
+    }
+    .bBtn{
+      flex:1;
+      text-align:center;
+      text-decoration:none;
+      border-radius:999px;
+      border:1px solid rgba(219,231,243,.9);
+      background:#fff;
+      color:#0b1220;
+      font-weight:1000;
+      padding:10px 10px;
+      box-shadow:0 12px 24px rgba(8,26,55,.06);
+    }
+    .bBtn.kakao{
+      background:#fee500;
+      border-color:#facc15;
+    }
+
+    .note{
+      margin-top:10px;
+      color:#64748b;
+      font-size:11px;
+      font-weight:700;
+      line-height:1.4;
+    }
+
+    @media (max-width:420px){
+      .heroTitle{ font-size:24px; }
+      .cardTitle{ font-size:24px; }
+      .price{ font-size:34px; }
+      .sub{ font-size:14px; }
+    }
+  </style>
 </head>
-
 <body>
-<div class="container">
 
-<!-- ===== 탭 ===== -->
-<div class="tabs">
-  <button class="tab active" data-tab="skt">SKT</button>
-  <button class="tab" data-tab="kt">KT</button>
-  <button class="tab" data-tab="lg">LGU+</button>
-  <button class="tab" data-tab="internet">인터넷·TV</button>
-  <button class="tab" data-tab="mvno">알뜰요금</button>
-</div>
+<div class="app">
 
-<!-- ===== SKT ===== -->
-<div class="panel active" data-panel="skt">
-
-  <div class="card">
-    <div class="title">아이폰17</div>
-    <div class="price">39만원</div>
-    <div class="sub">기기변경 · 109요금 6개월</div>
-    <div class="badges">
-      <span class="badge">SK 기변</span>
-      <span class="badge">부가없음</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-call" href="tel:0428212272">전화</a>
-      <a class="btn btn-kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank">카톡문의</a>
+  <div class="hero">
+    <div class="container">
+      <div class="heroBox">
+        <h1 class="heroTitle">복지관 2층 휴대폰 특판 안내</h1>
+        <p class="heroSub">SK·KT·LG / 인터넷·TV 현금 최대지원 / 알뜰요금 3,300원~</p>
+        <div class="heroRow">
+          <div class="chip"><span class="dot"></span><span>상담 전에 조건만 빠르게 확인</span></div>
+          <div class="mini">
+            <span>내부직원 전용</span>
+            <span>복지관 2층 휴대폰 매장</span>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 
-</div>
-
-<!-- ===== KT ===== -->
-<div class="panel" data-panel="kt">
-
-  <div class="card">
-    <div class="title">S25</div>
-    <div class="price">-6만원</div>
-    <div class="sub">번호이동 · 110요금 6개월</div>
-    <div class="badges">
-      <span class="badge">KT 이동</span>
-      <span class="badge">부가있음</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-call" href="tel:0428212272">전화</a>
-      <a class="btn btn-kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank">카톡문의</a>
+  <!-- 탭 -->
+  <div class="tabWrap">
+    <div class="container">
+      <div class="tabBar">
+        <button class="tabBtn active" data-tab="skt">SKT</button>
+        <button class="tabBtn" data-tab="kt">KT</button>
+        <button class="tabBtn" data-tab="lg">LGU+</button>
+        <button class="tabBtn" data-tab="internet">인터넷·TV</button>
+        <button class="tabBtn" data-tab="mvno">알뜰요금</button>
+      </div>
     </div>
   </div>
 
-</div>
+  <!-- 컨텐츠 -->
+  <div class="content">
+    <div class="container">
 
-<!-- ===== LG ===== -->
-<div class="panel" data-panel="lg">
+      <div class="panel active" data-panel="skt">
+        <div class="sectionTitle"><span class="sectionDot"></span>SKT 특판</div>
+        <div id="list-skt"></div>
+      </div>
 
-  <div class="card">
-    <div class="title">플립5</div>
-    <div class="price">0원</div>
-    <div class="sub">기기변경 · 95요금 6개월</div>
-    <div class="badges">
-      <span class="badge">LG 기변</span>
-    </div>
-    <div class="actions">
-      <a class="btn btn-call" href="tel:0428212272">전화</a>
-      <a class="btn btn-kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank">카톡문의</a>
-    </div>
-  </div>
+      <div class="panel" data-panel="kt">
+        <div class="sectionTitle"><span class="sectionDot"></span>KT 특판</div>
+        <div id="list-kt"></div>
+      </div>
 
-</div>
+      <div class="panel" data-panel="lg">
+        <div class="sectionTitle"><span class="sectionDot"></span>LGU+ 특판</div>
+        <div id="list-lg"></div>
+      </div>
 
-<!-- ===== 인터넷 ===== -->
-<div class="panel" data-panel="internet">
+      <div class="panel" data-panel="internet">
+        <div class="sectionTitle"><span class="sectionDot"></span>인터넷 · TV 현금 특판</div>
+        <div id="list-internet"></div>
+      </div>
 
-  <div class="card">
-    <div class="title">SK 인터넷 + TV</div>
-    <div class="price">현금 83만원</div>
-    <div class="sub">기가 · 결합 기준</div>
-    <div class="actions">
-      <a class="btn btn-kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank">카톡문의</a>
-    </div>
-  </div>
+      <div class="panel" data-panel="mvno">
+        <div class="sectionTitle"><span class="sectionDot"></span>알뜰 요금 특가</div>
+        <div id="list-mvno"></div>
+      </div>
 
-</div>
-
-<!-- ===== 알뜰 ===== -->
-<div class="panel" data-panel="mvno">
-
-  <div class="card">
-    <div class="title">알뜰요금제</div>
-    <div class="price">월 3,300원~</div>
-    <div class="sub">서브폰 · 부모님 추천</div>
-    <div class="actions">
-      <a class="btn btn-kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank">카톡문의</a>
+      <div class="note">
+        ※ 실제 판매가는 통신사 프로모션·재고·가입조건 등에 따라 달라질 수 있습니다.
+      </div>
     </div>
   </div>
 
-</div>
+  <!-- 하단 -->
+  <div class="bottom">
+    <div class="container">
+      <div class="bottomText">통화가 어려우시면 문자나 카카오톡으로 남겨주셔도 됩니다.</div>
+      <div class="bottomBtns">
+        <a class="bBtn" href="tel:0428212272">통화</a>
+        <a class="bBtn" href="sms:01058391512">문자</a>
+        <a class="bBtn kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener noreferrer">오픈카톡</a>
+      </div>
+    </div>
+  </div>
 
 </div>
 
 <script>
-/* ===== 탭 전환 ===== */
-const tabs=document.querySelectorAll('.tab');
-const panels=document.querySelectorAll('.panel');
+  /* ======================
+     탭 전환
+  ====================== */
+  const tabBtns = document.querySelectorAll('.tabBtn');
+  const panels  = document.querySelectorAll('.panel');
 
-tabs.forEach(tab=>{
-  tab.onclick=()=>{
-    const t=tab.dataset.tab;
-    tabs.forEach(b=>b.classList.remove('active'));
-    tab.classList.add('active');
-    panels.forEach(p=>{
-      p.classList.toggle('active',p.dataset.panel===t);
-      window.scrollTo({top:0});
+  tabBtns.forEach(btn=>{
+    btn.addEventListener('click', ()=>{
+      const t = btn.dataset.tab;
+      tabBtns.forEach(b=>b.classList.toggle('active', b===btn));
+      panels.forEach(p=>p.classList.toggle('active', p.dataset.panel===t));
+      window.scrollTo({top:0, behavior:'smooth'});
     });
-  };
-});
+  });
+
+  /* ======================
+     CSV 로드 + 렌더
+     - pin=TRUE 수동 상단고정
+     - (A) 클릭 많이 된 카드 상단
+     - today=TRUE는 기본 3순위 (원하면 끌 수 있음)
+  ====================== */
+
+  const CLICK_KEY = "jinju_clicks_v1"; // localStorage key
+
+  function getClicks(){
+    try{ return JSON.parse(localStorage.getItem(CLICK_KEY) || "{}"); }
+    catch(e){ return {}; }
+  }
+  function incClick(id){
+    const obj = getClicks();
+    obj[id] = (obj[id] || 0) + 1;
+    localStorage.setItem(CLICK_KEY, JSON.stringify(obj));
+  }
+
+  function parseCSV(text){
+    const lines = text.replace(/\r/g,'').split('\n').filter(l=>l.trim().length>0);
+    const header = lines.shift().split(',').map(s=>s.trim());
+    return lines.map(line=>{
+      // 간단 CSV(콤마 포함 문자열은 안쓴다는 전제)
+      const cols = line.split(',').map(s=>s.trim());
+      const row = {};
+      header.forEach((h,i)=> row[h] = (cols[i] ?? ""));
+      return row;
+    });
+  }
+
+  function bool(v){
+    return String(v).trim().toUpperCase() === "TRUE";
+  }
+
+  function priceLabel(row){
+    const p = (row.price || "").trim();
+    const type = (row.priceType || "").trim(); // free / minus / normal
+    if(!p) return "";
+    if(type === "minus") return `-${p}${p.endsWith("원") ? "" : "만원"}`;
+    if(type === "free")  return `${p}${p.includes("원") ? "" : "원"}`;
+    return p;
+  }
+
+  function carrierBarClass(c){
+    if(c==="skt") return "skt";
+    if(c==="kt") return "kt";
+    if(c==="lg") return "lg";
+    if(c==="internet") return "internet";
+    return "mvno";
+  }
+
+  function makeId(row, idx){
+    // id는 “carrier-title-tag-price” 기반으로 고정
+    const base = [row.carrier, row.title, row.tag, row.price].join('|');
+    return btoa(unescape(encodeURIComponent(base))).slice(0,16) + "_" + idx;
+  }
+
+  function cardHTML(row, id, clicks){
+    const c = (row.carrier || "").trim();
+    const title = (row.title || "").trim();
+    if(!title || title === "사용안함") return "";
+
+    const tag = (row.tag || "").trim();
+    const sub = (row.sub || "").trim();
+    const b1 = (row.badge1 || "").trim();
+    const b2 = (row.badge2 || "").trim();
+    const b3 = (row.badge3 || "").trim();
+
+    const pin = bool(row.pin);
+    const today = bool(row.today);
+
+    const flags = [];
+    if(pin) flags.push(`<span class="flag pin">고정</span>`);
+    if(today) flags.push(`<span class="flag hit">추천</span>`);
+    if((clicks||0) > 0) flags.push(`<span class="flag clicks">${clicks}클릭</span>`);
+
+    const p = priceLabel(row);
+    const unit = (p.includes("원") || p.includes("만원")) ? "" : "";
+
+    const badges = [b1,b2,b3].filter(x=>x && x!=="-").map(x=>`<span class="badge">${x}</span>`).join("");
+
+    return `
+      <div class="card" data-id="${id}">
+        <div class="bar ${carrierBarClass(c)}"></div>
+
+        <div class="cardTop">
+          <h2 class="cardTitle">${escapeHTML(title)}</h2>
+          ${tag ? `<div class="tag">${escapeHTML(tag)}</div>` : ``}
+        </div>
+
+        ${p ? `<div class="price">${escapeHTML(p)}<span class="unit">${unit}</span></div>` : ``}
+        ${sub ? `<div class="sub">${escapeHTML(sub)}</div>` : ``}
+
+        ${badges ? `<div class="badges">${badges}</div>` : ``}
+
+        <div class="ctaRow">
+          <button class="btn btnAsk" data-action="ask" data-id="${id}">문의하기</button>
+          <button class="btn btnKakao" data-action="kakao" data-id="${id}">오픈카톡</button>
+        </div>
+
+        ${flags.length ? `<div class="flags">${flags.join("")}</div>` : ``}
+      </div>
+    `;
+  }
+
+  function escapeHTML(s){
+    return String(s)
+      .replaceAll("&","&amp;")
+      .replaceAll("<","&lt;")
+      .replaceAll(">","&gt;")
+      .replaceAll('"',"&quot;")
+      .replaceAll("'","&#039;");
+  }
+
+  function sortRows(rows, clickMap){
+    // 정렬 우선순위:
+    // 1) pin TRUE
+    // 2) clicks desc (A)
+    // 3) today TRUE  (원하면 여기 지워도 됨)
+    // 4) title asc
+    return rows.sort((a,b)=>{
+      const ida = a._id, idb = b._id;
+      const pina = bool(a.pin), pinb = bool(b.pin);
+      if(pina !== pinb) return pinb - pina;
+
+      const ca = (clickMap[ida]||0), cb = (clickMap[idb]||0);
+      if(ca !== cb) return cb - ca;
+
+      const ta = bool(a.today), tb = bool(b.today);
+      if(ta !== tb) return tb - ta;
+
+      return (a.title||"").localeCompare((b.title||""), "ko");
+    });
+  }
+
+  async function loadAndRender(){
+    const res = await fetch("data.csv?v=" + Date.now());
+    const text = await res.text();
+    const rows = parseCSV(text).map((r, idx)=>{
+      r._id = makeId(r, idx);
+      return r;
+    });
+
+    const clickMap = getClicks();
+
+    // carrier별 분리
+    const groups = {
+      skt: [],
+      kt: [],
+      lg: [],
+      internet: [],
+      mvno: []
+    };
+
+    rows.forEach(r=>{
+      const c = (r.carrier||"").trim();
+      if(!groups[c]) return;
+      const title = (r.title||"").trim();
+      if(!title || title==="사용안함") return;
+      groups[c].push(r);
+    });
+
+    // 정렬 + 렌더
+    Object.keys(groups).forEach(key=>{
+      const listEl = document.getElementById("list-"+key);
+      const arr = sortRows(groups[key], clickMap);
+
+      const html = arr.map(r=>cardHTML(r, r._id, clickMap[r._id]||0)).join("");
+      listEl.innerHTML = html || `<div class="note">등록된 항목이 없습니다.</div>`;
+    });
+
+    // 버튼 이벤트 (A: 클릭수 누적)
+    document.querySelectorAll(".btn").forEach(btn=>{
+      btn.addEventListener("click", ()=>{
+        const id = btn.dataset.id;
+        const act = btn.dataset.action;
+
+        incClick(id); // 클릭 집계
+
+        // 원하면 GA 이벤트도 여기서 같이 보낼 수 있음 (GA 설치되어 있을 때만)
+        // if (window.gtag) gtag('event', 'card_click', { card_id: id, action: act });
+
+        if(act === "kakao"){
+          window.open("https://open.kakao.com/o/s729bI5h", "_blank", "noopener,noreferrer");
+        }else{
+          // 문의하기: 문자로 열어주기 (원하면 변경 가능)
+          location.href = "sms:01058391512?body=" + encodeURIComponent("[특판문의] 카드ID: " + id);
+        }
+
+        // 클릭 표시/정렬 반영을 위해 다시 렌더 (즉시 상단 이동)
+        loadAndRender();
+      }, { passive:true });
+    });
+  }
+
+  loadAndRender();
 </script>
 
 </body>
