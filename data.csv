@@ -1,4 +1,8 @@
 ﻿carrier,title,tag,price,priceType,sub,badge1,badge2,badge3,today
-skt,아이폰17,기기변경,판매가 0원,free,109요금 6개월,SK기변,재고문의,,TRUE
-skt,S25,번호이동,-25만원,minus,109요금 6개월,SK이동,부가별도,,FALSE
-kt,플립7,기기변경,판매가 0원,free,110요금 6개월,KT기변,재고문의,,
+skt,아이폰17,기기변경,39만원,free,109요금 6개월,SK기변,부가없음,,TRUE
+skt,아이폰AIR,기기변경,69만원,free,109요금 6개월,SK기변,부가없음,,FALSE
+skt,아이폰17프로,기기변경,89만원,free,109요금 6개월,SK기변,부가없음,,FALSE
+skt,아이폰17프로맥스,기기변경,131만원,free,109요금 6개월,SK기변,부가없음,,FALSE
+skt,S25,기기변경,11만원,free,110요금 6개월,SK이동,부가없음,,FALSE
+kt,아이폰17,번호이동,17만원,free,110요금 6개월,KT이동,부가있음,,TRUE
+kt,S25,번호이동,5,minus,110요금 7개월,KT이동,부가있음,,FALSE
