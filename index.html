@@ -7,26 +7,25 @@
 
 <link rel="manifest" href="manifest.json" />
 
-<!-- Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-36QKYC2X20"></script>
+<!-- (선택) Google Analytics: 측정ID로 바꾸기 -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
-  gtag('config', 'G-36QKYC2X20');
+  gtag('config', 'G-XXXXXXXXXX');
 </script>
 
-<!-- Service Worker -->
+<!-- service worker -->
 <script>
 if ('serviceWorker' in navigator) {
   window.addEventListener('load', () => {
-    navigator.serviceWorker.register('service-worker.js');
+    navigator.serviceWorker.register('service-worker.js').catch(()=>{});
   });
 }
 </script>
 
 <style>
-/* ===== 기본 변수 ===== */
 :root{
   --bg:#ffffff;
   --text:#020617;
@@ -35,6 +34,7 @@ if ('serviceWorker' in navigator) {
   --radius:18px;
 
   --blue:#2563eb;
+
   --skt:#ff4b55;
   --kt:#111827;
   --lg:#b91c91;
@@ -56,8 +56,16 @@ body{
   min-height:100vh;
   background:#fff;
 }
+@media (min-width:960px){
+  .app{
+    border-radius:24px;
+    box-shadow:0 12px 30px rgba(15,23,42,0.12);
+    overflow:hidden;
+    margin:18px auto;
+  }
+}
 
-/* ===== 상단 ===== */
+/* 상단 */
 .hero{
   padding:22px;
   background:linear-gradient(180deg,#ecfeff,#ffffff);
@@ -67,6 +75,7 @@ body{
   margin:0 0 6px;
   font-size:22px;
   font-weight:900;
+  letter-spacing:-0.03em;
 }
 .hero p{
   margin:0;
@@ -74,7 +83,7 @@ body{
   color:#475569;
 }
 
-/* ===== 탭 ===== */
+/* 탭 */
 .tab-bar{
   display:flex;
   gap:8px;
@@ -83,6 +92,7 @@ body{
   top:0;
   background:#fff;
   z-index:10;
+  border-bottom:1px solid rgba(0,0,0,0.04);
 }
 .tab-btn{
   flex:1;
@@ -90,22 +100,32 @@ body{
   border-radius:999px;
   padding:14px 6px;
   font-size:15px;
-  font-weight:800;
+  font-weight:900;
   background:#e5e7eb;
+  color:#111827;
   cursor:pointer;
+  transition:.15s ease;
 }
 .tab-btn.active{
   background:var(--blue);
   color:#fff;
-  box-shadow:0 0 14px rgba(0,0,0,.3);
+  box-shadow:
+    0 0 14px rgba(0,0,0,.22),
+    0 8px 20px rgba(0,0,0,.22);
 }
 
-/* ===== 컨텐츠 ===== */
-.content{padding:14px}
+/* 컨텐츠 */
+.content{padding:14px 14px 96px}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
+.section-title{
+  font-size:14px;
+  font-weight:900;
+  color:#64748b;
+  margin:4px 2px 10px;
+}
 
-/* ===== 카드 ===== */
+/* 카드(성지 느낌) */
 .card{
   position:relative;
   background:#fff;
@@ -113,53 +133,94 @@ body{
   border:2px solid rgba(0,0,0,.08);
   padding:16px;
   margin-bottom:14px;
-  box-shadow:0 12px 28px rgba(0,0,0,.18);
+  box-shadow:
+    0 12px 28px rgba(15,23,42,0.18),
+    0 0 0 1px rgba(37,99,235,0.06);
+}
+
+.card[data-carrier="skt"]{ border-color:rgba(255,75,85,0.55); box-shadow:0 12px 28px rgba(255,75,85,0.18); }
+.card[data-carrier="kt"]{  border-color:rgba(17,24,39,0.45);  box-shadow:0 12px 28px rgba(17,24,39,0.16); }
+.card[data-carrier="lg"]{  border-color:rgba(185,28,145,0.50); box-shadow:0 12px 28px rgba(185,28,145,0.16); }
+.card[data-carrier="internet"]{ border-color:rgba(249,115,22,0.55); box-shadow:0 12px 28px rgba(249,115,22,0.16); }
+.card[data-carrier="mvno"]{ border-color:rgba(22,163,74,0.55); box-shadow:0 12px 28px rgba(22,163,74,0.16); }
+
+.card-head{
+  display:flex;
+  align-items:flex-start;
+  justify-content:space-between;
+  gap:10px;
 }
 .card-title{
   font-size:22px;
   font-weight:900;
   margin:0 0 6px;
+  letter-spacing:-0.04em;
 }
+.card-tag{
+  padding:6px 12px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:900;
+  color:#0f172a;
+  background:rgba(148,163,184,0.18);
+  border:1px solid rgba(148,163,184,0.35);
+  white-space:nowrap;
+}
+
 .price-strong{
   font-size:32px;
   font-weight:900;
   margin:6px 0;
+  letter-spacing:-0.03em;
 }
-.price-strong.free{color:#16a34a;text-shadow:0 0 18px rgba(22,163,74,.6)}
-.price-strong.minus{color:#dc2626;text-shadow:0 0 18px rgba(220,38,38,.6)}
-.price-strong.cash{color:#f97316;text-shadow:0 0 18px rgba(249,115,22,.6)}
-.price-sub{
-  font-size:15px;
-  font-weight:700;
-  color:#1e293b;
+.price-strong.free{
+  color:#16a34a;
+  text-shadow:0 0 6px rgba(22,163,74,.55), 0 0 16px rgba(22,163,74,.35), 0 0 28px rgba(22,163,74,.25);
+}
+.price-strong.minus{
+  color:#dc2626;
+  text-shadow:0 0 6px rgba(220,38,38,.55), 0 0 16px rgba(220,38,38,.35), 0 0 28px rgba(220,38,38,.25);
+}
+.price-strong.cash{
+  color:#f97316;
+  text-shadow:0 0 6px rgba(249,115,22,.55), 0 0 16px rgba(249,115,22,.35), 0 0 28px rgba(249,115,22,.25);
+}
+.price-strong.normal{
+  color:var(--blue);
+  text-shadow:0 0 8px rgba(37,99,235,0.25);
 }
 
-/* ===== 배지 ===== */
-.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:8px}
+.price-sub{
+  font-size:15px;
+  font-weight:800;
+  color:#1e293b;
+  line-height:1.5;
+}
+
+/* 배지 */
+.badge-row{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}
 .badge{
   padding:8px 14px;
   border-radius:999px;
   font-size:13px;
-  font-weight:800;
-  border:2px solid currentColor;
+  font-weight:900;
+  border:2px solid #cbd5e1;
   background:#fff;
-  box-shadow:0 4px 12px rgba(0,0,0,.15);
+  box-shadow:0 4px 12px rgba(15,23,42,.10);
 }
-.badge.skt{color:var(--skt)}
-.badge.kt{color:var(--kt)}
-.badge.lg{color:var(--lg)}
-.badge.internet{color:var(--internet)}
-.badge.mvno{color:var(--mvno)}
+.badge.skt{border-color:var(--skt); color:var(--skt);}
+.badge.kt{border-color:var(--kt); color:var(--kt);}
+.badge.lg{border-color:var(--lg); color:var(--lg);}
+.badge.internet{border-color:var(--internet); color:var(--internet);}
+.badge.mvno{border-color:var(--mvno); color:var(--mvno);}
 
-/* ===== 오늘 특가 ===== */
+/* 오늘 특가 */
 @keyframes pulse{
-  0%{box-shadow:0 0 0 rgba(0,0,0,0)}
-  50%{box-shadow:0 0 32px rgba(37,99,235,.7)}
-  100%{box-shadow:0 0 0 rgba(0,0,0,0)}
+  0%{ box-shadow:0 0 0 rgba(0,0,0,0); }
+  50%{ box-shadow:0 0 34px rgba(37,99,235,.65); }
+  100%{ box-shadow:0 0 0 rgba(0,0,0,0); }
 }
-.card.today{
-  animation:pulse 1.6s infinite;
-}
+.card.today{ animation:pulse 1.6s infinite; }
 .card.today::before{
   content:"🔥 오늘 특가";
   position:absolute;
@@ -171,10 +232,10 @@ body{
   border-radius:999px;
   font-size:12px;
   font-weight:900;
-  box-shadow:0 0 22px rgba(255,61,0,.7);
+  box-shadow:0 0 22px rgba(255,61,0,.65);
 }
 
-/* ===== 하단 ===== */
+/* 하단 */
 .bottom{
   position:sticky;
   bottom:0;
@@ -182,88 +243,282 @@ body{
   border-top:1px solid var(--border);
   padding:10px;
 }
+.bottom .row{display:flex; gap:8px;}
 .bottom a{
-  display:inline-block;
-  width:32%;
+  flex:1;
   text-align:center;
   padding:10px;
   border-radius:999px;
   text-decoration:none;
-  font-weight:800;
+  font-weight:900;
   background:#fff;
   border:1px solid var(--border);
+  color:#111827;
 }
 .bottom .kakao{
   background:#fee500;
   border:none;
 }
+
+/* 탭별 테마 자동 */
+.app.theme-skt { --blue: var(--skt); }
+.app.theme-kt  { --blue: var(--kt); }
+.app.theme-lg  { --blue: var(--lg); }
+.app.theme-internet { --blue: var(--internet); }
+.app.theme-mvno { --blue: var(--mvno); }
 </style>
 </head>
 
 <body>
-<div class="app">
+<div class="app theme-skt">
 
 <header class="hero">
-  <h1>복지관 2층 휴대폰 특판</h1>
-  <p>SK · KT · LG · 인터넷 · 알뜰요금</p>
+  <h1>복지관 2층 휴대폰 특판 안내</h1>
+  <p>특판/인터넷/알뜰 운영용 (각 탭 10개 슬롯, 안쓰면 “사용안함”)</p>
 </header>
 
 <nav class="tab-bar">
   <button class="tab-btn active" data-tab="skt">SKT</button>
   <button class="tab-btn" data-tab="kt">KT</button>
   <button class="tab-btn" data-tab="lg">LGU+</button>
-  <button class="tab-btn" data-tab="internet">인터넷</button>
-  <button class="tab-btn" data-tab="mvno">알뜰</button>
+  <button class="tab-btn" data-tab="internet">인터넷·TV</button>
+  <button class="tab-btn" data-tab="mvno">알뜰요금</button>
 </nav>
 
 <main class="content">
+  <section class="tab-panel active" data-tab-panel="skt">
+    <div class="section-title">SKT 특판 (10개 슬롯)</div>
+    <div id="list-skt"></div>
+  </section>
 
-<section class="tab-panel active" data-tab-panel="skt">
-  <div class="card card-slot today" data-carrier="skt">
-    <h2 class="card-title">S25</h2>
-    <p class="price-strong free">판매가 0원</p>
-    <p class="price-sub">109요금 / 6개월 / 기기변경</p>
-    <div class="badge-row">
-      <span class="badge skt">SK 기변</span>
-      <span class="badge">109요금</span>
-      <span class="badge">부가 없음</span>
-    </div>
-  </div>
-</section>
+  <section class="tab-panel" data-tab-panel="kt">
+    <div class="section-title">KT 특판 (10개 슬롯)</div>
+    <div id="list-kt"></div>
+  </section>
 
-<section class="tab-panel" data-tab-panel="kt"></section>
-<section class="tab-panel" data-tab-panel="lg"></section>
-<section class="tab-panel" data-tab-panel="internet"></section>
-<section class="tab-panel" data-tab-panel="mvno"></section>
+  <section class="tab-panel" data-tab-panel="lg">
+    <div class="section-title">LGU+ 특판 (10개 슬롯)</div>
+    <div id="list-lg"></div>
+  </section>
 
+  <section class="tab-panel" data-tab-panel="internet">
+    <div class="section-title">인터넷·TV (10개 슬롯)</div>
+    <div id="list-internet"></div>
+  </section>
+
+  <section class="tab-panel" data-tab-panel="mvno">
+    <div class="section-title">알뜰요금 (10개 슬롯)</div>
+    <div id="list-mvno"></div>
+  </section>
 </main>
 
 <div class="bottom">
-  <a href="tel:0428212272">통화</a>
-  <a href="sms:01058391512">문자</a>
-  <a href="https://open.kakao.com/o/s729bI5h" class="kakao">카카오톡</a>
+  <div class="row">
+    <a href="tel:0428212272">통화</a>
+    <a href="sms:01058391512">문자</a>
+    <a class="kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener noreferrer">카카오톡</a>
+  </div>
 </div>
 
 </div>
 
 <script>
-/* 탭 */
-document.querySelectorAll('.tab-btn').forEach(btn=>{
-  btn.onclick=()=>{
-    document.querySelectorAll('.tab-btn').forEach(b=>b.classList.remove('active'));
-    btn.classList.add('active');
-    document.querySelectorAll('.tab-panel').forEach(p=>{
-      p.classList.toggle('active',p.dataset.tabPanel===btn.dataset.tab);
-    });
-  }
-});
+/* ==============================
+   ✅ [여기만 수정] 데이터 구역
+   - title이 "" 또는 "사용안함"이면 자동 숨김
+   - priceType: "free" | "minus" | "cash" | "normal"
+   - today: true면 🔥 오늘특가 + 펄스
+   - tag: 오른쪽 작은 라벨 (예: 기기변경/번호이동/인터넷/알뜰)
+================================ */
 
-/* 사용안함 카드 숨김 */
-document.querySelectorAll('.card-slot').forEach(card=>{
-  const t=card.querySelector('.card-title');
-  if(!t||t.textContent.trim()==='사용안함'){
-    card.style.display='none';
+function makeEmpty10(carrier){
+  return Array.from({length:10}, (_,i)=>({
+    carrier,
+    title: "사용안함",
+    tag: "",
+    price: "",
+    priceType: "normal",
+    sub: "",
+    badges: ["", "", ""],
+    today: false
+  }));
+}
+
+const DATA = {
+  skt: (() => {
+    const arr = makeEmpty10("skt");
+    arr[0] = {
+      carrier:"skt",
+      title:"아이폰17",
+      tag:"기기변경",
+      price:"판매가 0원",
+      priceType:"free",
+      sub:"109요금 / 6개월 유지 / 기기변경 조건",
+      badges:["SK 기변","109요금 6개월","재고문의"],
+      today:true
+    };
+    arr[1] = {
+      carrier:"skt",
+      title:"S25",
+      tag:"번호이동",
+      price:"판매가 -25만원",
+      priceType:"minus",
+      sub:"109요금 / 6개월 유지 / 번호이동 조건",
+      badges:["SK 이동","109요금 6개월","부가별도"],
+      today:false
+    };
+    return arr;
+  })(),
+
+  kt: (() => {
+    const arr = makeEmpty10("kt");
+    // 예시 1개만
+    arr[0] = {
+      carrier:"kt",
+      title:"사용안함",
+      tag:"기기변경",
+      price:"판매가 0원",
+      priceType:"free",
+      sub:"110요금 / 6개월 유지 / 기기변경",
+      badges:["KT 기변","110요금 6개월","재고문의"],
+      today:false
+    };
+    return arr;
+  })(),
+
+  lg: (() => {
+    const arr = makeEmpty10("lg");
+    return arr;
+  })(),
+
+  internet: (() => {
+    const arr = makeEmpty10("internet");
+    arr[0] = {
+      carrier:"internet",
+      title:"사용안함",
+      tag:"현금지원",
+      price:"현금 최대 83만원",
+      priceType:"cash",
+      sub:"3년약정 / 상품·지역·설치환경에 따라 변동",
+      badges:["현금지급","3년약정","설치비별도"],
+      today:false
+    };
+    return arr;
+  })(),
+
+  mvno: (() => {
+    const arr = makeEmpty10("mvno");
+    arr[0] = {
+      carrier:"mvno",
+      title:"사용안함",
+      tag:"최저요금",
+      price:"월 3,300원~",
+      priceType:"cash",
+      sub:"사용량 맞춤 / 즉시개통 가능 (유심/가입비 정책 상이)",
+      badges:["무약정","즉시개통","상담추천"],
+      today:false
+    };
+    return arr;
+  })()
+};
+
+/* ==============================
+   렌더링 (건드리지 마세요)
+================================ */
+function badgeClassByCarrier(c){
+  if(c==="skt") return "skt";
+  if(c==="kt") return "kt";
+  if(c==="lg") return "lg";
+  if(c==="internet") return "internet";
+  return "mvno";
+}
+
+function renderList(containerId, items){
+  const root = document.getElementById(containerId);
+  if(!root) return;
+  root.innerHTML = "";
+
+  items.forEach(item => {
+    const title = (item.title || "").trim();
+    if(title === "" || title === "사용안함") return;
+
+    const card = document.createElement("div");
+    card.className = "card card-slot" + (item.today ? " today" : "");
+    card.setAttribute("data-carrier", item.carrier);
+
+    const tagText = (item.tag || "").trim();
+    const priceType = (item.priceType || "normal").trim();
+
+    card.innerHTML = `
+      <div class="card-head">
+        <div>
+          <h2 class="card-title">${escapeHtml(title)}</h2>
+        </div>
+        ${tagText ? `<div class="card-tag">${escapeHtml(tagText)}</div>` : `<div style="width:1px"></div>`}
+      </div>
+
+      <p class="price-strong ${escapeHtml(priceType)}">${escapeHtml(item.price || "")}</p>
+      <p class="price-sub">${escapeHtml(item.sub || "")}</p>
+
+      <div class="badge-row">
+        ${(item.badges || []).filter(Boolean).slice(0,3).map(b => `
+          <span class="badge ${badgeClassByCarrier(item.carrier)}">${escapeHtml(b)}</span>
+        `).join("")}
+      </div>
+    `;
+    root.appendChild(card);
+  });
+
+  // 아무것도 없으면 안내 문구
+  if(root.children.length === 0){
+    const empty = document.createElement("div");
+    empty.style.color = "#64748b";
+    empty.style.fontWeight = "800";
+    empty.style.padding = "10px 2px";
+    empty.textContent = "현재 등록된 특판이 없습니다. (슬롯 title을 채우면 자동 표시)";
+    root.appendChild(empty);
   }
+}
+
+function escapeHtml(s){
+  return String(s)
+    .replaceAll("&","&amp;")
+    .replaceAll("<","&lt;")
+    .replaceAll(">","&gt;")
+    .replaceAll('"',"&quot;")
+    .replaceAll("'","&#39;");
+}
+
+renderList("list-skt", DATA.skt);
+renderList("list-kt", DATA.kt);
+renderList("list-lg", DATA.lg);
+renderList("list-internet", DATA.internet);
+renderList("list-mvno", DATA.mvno);
+
+/* 탭 전환 + 테마 */
+const appEl = document.querySelector('.app');
+const tabButtons = document.querySelectorAll('.tab-btn');
+const tabPanels  = document.querySelectorAll('.tab-panel');
+
+function setTheme(tab){
+  appEl.classList.remove('theme-skt','theme-kt','theme-lg','theme-internet','theme-mvno');
+  appEl.classList.add('theme-' + tab);
+}
+
+tabButtons.forEach(btn => {
+  btn.addEventListener('click', () => {
+    const target = btn.getAttribute('data-tab');
+
+    tabButtons.forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    tabPanels.forEach(panel => {
+      panel.classList.toggle('active', panel.getAttribute('data-tab-panel') === target);
+    });
+
+    setTheme(target);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
 });
 </script>
 
