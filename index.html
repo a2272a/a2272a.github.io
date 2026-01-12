@@ -38,7 +38,7 @@
   --ledBg:#070b12; --ledBg2:#0b1220; --ledBorder:rgba(255,255,255,.14);
   --ledText:#f8fffc;
 
-  /* 팝업(A안) */
+  /* 팝업(A안) 기본값 (아래 OVERRIDE로 홈쇼핑 스타일 적용됨) */
   --adBg1:#060a12;
   --adBg2:#0a1220;
   --adGlow: rgba(0,255,180,.55);
@@ -251,7 +251,8 @@ body{
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
 
 /* =========================
-   A안: 성지/홈쇼핑형 팝업
+   A안: 오늘의 카드(광고) 팝업 - 기본 구조
+   (아래 OVERRIDE로 홈쇼핑 스타일 적용)
    ========================= */
 .adBackdrop{
   position:fixed; inset:0;
@@ -485,6 +486,151 @@ body{
   font-weight:1000;
   font-size:12px;
 }
+
+/* =========================================================
+   홈쇼핑 스타일 팝업(오늘의 초특가) - OVERRIDE
+   (팝업만 완전 홈쇼핑으로 바꿈)
+   ========================================================= */
+.adBackdrop{ background: rgba(2,6,23,.70); }
+
+.adSheet{
+  border-radius:24px;
+  border: 2px solid rgba(255,255,255,.55);
+  box-shadow:
+    0 28px 90px rgba(2,6,23,.55),
+    0 0 0 4px rgba(255,255,255,.20),
+    0 0 42px rgba(255,0,70,.30);
+  background:
+    radial-gradient(900px 240px at 50% 0%, rgba(255,255,255,.40), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,245,210,.95) 40%, rgba(255,235,235,.96) 100%),
+    linear-gradient(90deg, #ff1744 0%, #ff2d55 35%, #ff1744 100%);
+}
+
+.adTopBar{
+  padding: 14px 14px 12px;
+  background: linear-gradient(90deg, #ff0033 0%, #ff2d55 50%, #ff0033 100%);
+  border-bottom: 2px solid rgba(255,255,255,.35);
+  position: relative;
+  overflow: hidden;
+}
+.adTopBar::before{
+  content:"";
+  position:absolute; inset:-40px -60px;
+  background:
+    linear-gradient(120deg,
+      transparent 0%,
+      rgba(255,255,255,.15) 35%,
+      rgba(255,255,255,.45) 50%,
+      rgba(255,255,255,.15) 65%,
+      transparent 100%);
+  transform: translateX(-55%);
+  animation: hs_shine 2.2s linear infinite;
+  pointer-events:none;
+  opacity:.65;
+}
+@keyframes hs_shine{
+  from{ transform: translateX(-55%); }
+  to{ transform: translateX(55%); }
+}
+
+.adTitleWrap{gap:4px;}
+.adTitle1{
+  font-size:20px;
+  font-weight:1000;
+  letter-spacing:-.8px;
+  color:#ffffff;
+  text-shadow: 0 3px 0 rgba(0,0,0,.35), 0 10px 24px rgba(0,0,0,.35);
+}
+.adTitle2{
+  font-size:13px;
+  font-weight:1000;
+  color: rgba(255,255,255,.92);
+  text-shadow: 0 2px 0 rgba(0,0,0,.20);
+}
+
+.adClose{
+  width:42px;height:42px;
+  border-radius:14px;
+  border: 2px solid rgba(0,0,0,.10);
+  background: linear-gradient(180deg, #fff6a6 0%, #ffd400 70%, #ffb300 100%);
+  color:#2b1b00;
+  font-weight:1000;
+  box-shadow: 0 12px 24px rgba(0,0,0,.22);
+}
+
+.adHeroCard{
+  border-radius:20px;
+  border: 2px solid rgba(0,0,0,.08);
+  background: rgba(255,255,255,.92);
+  box-shadow: 0 14px 34px rgba(2,6,23,.14);
+  padding:14px;
+}
+
+.adTag{
+  border:0;
+  background: linear-gradient(180deg, #111827 0%, #0b1220 100%);
+  color:#ffffff;
+  font-size:12px;
+  padding:7px 10px;
+  border-radius:999px;
+  text-shadow:none;
+  box-shadow: 0 10px 18px rgba(2,6,23,.25);
+}
+.adCarrierPill{
+  box-shadow: 0 10px 18px rgba(2,6,23,.18);
+}
+
+.adModel{
+  color:#0b1220;
+  text-shadow: 0 1px 0 rgba(255,255,255,.8);
+  font-size:28px;
+  line-height:1.12;
+}
+@media (max-width:420px){
+  .adModel{font-size:26px;}
+}
+
+.adInfo{ color:#334155; }
+.adDisc{ color:#1d4ed8; }
+
+.adPriceBox{
+  border-radius:18px;
+  border: 2px solid rgba(0,0,0,.08);
+  background:
+    radial-gradient(340px 140px at 50% 0%, rgba(255,255,255,.70), transparent 60%),
+    linear-gradient(180deg, #ffffff 0%, #fff7d6 55%, #fff1c0 100%);
+  box-shadow: 0 18px 36px rgba(2,6,23,.16);
+}
+.adPriceBox .k{ color:#475569; }
+.adPriceBox .v{
+  font-size:48px;
+  color:#0b1220;
+  text-shadow: 0 2px 0 rgba(255,255,255,.85);
+}
+@media (max-width:420px){
+  .adPriceBox .v{font-size:46px;}
+}
+.adPriceBox .v.neg{
+  color:#dc2626;
+  text-shadow: 0 2px 0 rgba(255,255,255,.85), 0 0 18px rgba(220,38,38,.18);
+}
+.adPriceBox .v.zero{
+  color:#0284c7;
+  text-shadow: 0 2px 0 rgba(255,255,255,.85), 0 0 18px rgba(2,132,199,.18);
+}
+
+.adBtn{
+  border-radius:18px;
+  border: 2px solid rgba(0,0,0,.10);
+  background: linear-gradient(180deg, #fff6a6 0%, #ffd400 70%, #ffb300 100%);
+  color:#2b1b00;
+  box-shadow: 0 16px 32px rgba(2,6,23,.18);
+}
+.adBtn.kakao{
+  background: linear-gradient(180deg, #fff47a 0%, #ffe300 65%, #ffc400 100%);
+}
+.adCheck{ color:#0b1220; }
+.adSmall{ color:#475569; }
 </style>
 </head>
 
@@ -544,12 +690,10 @@ body{
     <div class="adTopBar">
       <div class="adTopRow">
         <div class="adTitleWrap">
-          <div class="adTitle1">오늘의 초특가 · 성지급 특판</div>
-          <div class="adTitle2">원하시면 카톡으로 “기종+용량”만 보내주세요</div>
+          <div class="adTitle1">오늘만 초특가! 선착순 특판</div>
+          <div class="adTitle2">카톡에 “기종+용량”만 보내면 최저가 안내</div>
         </div>
-        <button class="adClose" id="adCloseBtn" type="button" aria-label="닫기">
-          ✕
-        </button>
+        <button class="adClose" id="adCloseBtn" type="button" aria-label="닫기">✕</button>
       </div>
     </div>
 
@@ -698,6 +842,12 @@ async function setUpdateStamp(){
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     location.reload();
+  });
+
+  // (선택) PC 우클릭으로 TODAY 팝업 상태 초기화
+  btn.addEventListener("contextmenu", (e) => {
+    e.preventDefault();
+    if(typeof resetTodayPopupDebug === "function") resetTodayPopupDebug();
   });
 })();
 
@@ -1153,10 +1303,7 @@ function renderMVNO(net = mvnoNet){
 }
 
 /* =========================
-   오늘의 카드(광고 팝업)
-   - CSV의 TODAY=1(또는 Y/O) 행을 "로테이션"으로 순환 표시
-   - 2시간마다 자동 (열린시간 기준)
-   - “오늘 하루 다시 보지 않기” 체크 시: TODAY 전체 오늘은 차단 (다음날 00:00 KST 자동 해제)
+   오늘의 카드(광고 팝업) - 전부 수정(안정화 포함)
    ========================= */
 function isTodayRow(x){
   const v = String(x["TODAY"] ?? "").trim().toUpperCase();
@@ -1171,45 +1318,35 @@ function safeHTML(s){
     .replace(/"/g,"&quot;");
 }
 
-// ✅ 날짜키 (자정 지나면 자동으로 키가 바뀜)
 function getTodayBlockAllKey(){
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone:"Asia/Seoul",
     year:"numeric", month:"2-digit", day:"2-digit"
   }).formatToParts(new Date());
   const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  const y = get("year"), m = get("month"), d = get("day");
-  return `TODAY_POPUP_BLOCKALL_${y}-${m}-${d}`;
+  return `TODAY_POPUP_BLOCKALL_${get("year")}-${get("month")}-${get("day")}`;
 }
 
-// ✅ 로테이션 인덱스 키(날짜별)
 function getRotateKey(){
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone:"Asia/Seoul",
     year:"numeric", month:"2-digit", day:"2-digit"
   }).formatToParts(new Date());
   const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  const y = get("year"), m = get("month"), d = get("day");
-  return `TODAY_POPUP_ROTATE_${y}-${m}-${d}`;
+  return `TODAY_POPUP_ROTATE_${get("year")}-${get("month")}-${get("day")}`;
 }
 
-// ✅ TODAY=1 행들 중 이번 회차에 보여줄 행(로테이션)
+/* ✅ TODAY 로테이션: 선택만 하고, 인덱스 증가는 "실제로 열릴 때" */
 function pickRotatingTodayRow(items){
   const todayRows = items.filter(isTodayRow);
   if(!todayRows.length) return null;
 
-  // 순서 고정(기종명 기준) — 필요시 TODAY_ORDER 컬럼로 바꿔도 됨
   todayRows.sort((a,b)=> String(a["기종"]||"").localeCompare(String(b["기종"]||""), "ko"));
 
   let idx = 0;
   try{ idx = Number(localStorage.getItem(getRotateKey()) || 0) || 0; }catch(e){ idx = 0; }
 
-  const row = todayRows[idx % todayRows.length];
-
-  // 다음 회차 준비(+1)
-  try{ localStorage.setItem(getRotateKey(), String(idx + 1)); }catch(e){}
-
-  return row;
+  return { row: todayRows[idx % todayRows.length], idx, len: todayRows.length };
 }
 
 function makePickFromRow(row){
@@ -1259,6 +1396,18 @@ function setLastShownTs(ts){
   try{ localStorage.setItem(POPUP_LAST_SHOWN_KEY, String(ts)); }catch(e){}
 }
 
+/* ✅ 관리자 디버그 초기화(테스트 편의) */
+function resetTodayPopupDebug(){
+  try{
+    localStorage.removeItem(POPUP_LAST_SHOWN_KEY);
+    localStorage.removeItem(getRotateKey());
+    localStorage.removeItem(getTodayBlockAllKey());
+    alert("TODAY 팝업 상태 초기화 완료");
+  }catch(e){
+    alert("초기화 실패(스토리지 접근 불가)");
+  }
+}
+
 async function openTodayPickPopupFromCSV(){
   const modal = document.getElementById("adModal");
   const backdrop = document.getElementById("adBackdrop");
@@ -1267,22 +1416,20 @@ async function openTodayPickPopupFromCSV(){
   const noShowToday = document.getElementById("noShowToday");
   const card = document.getElementById("adCard");
   const kakaoBtn = document.getElementById("adKakaoBtn");
-  if(!modal || !backdrop || !card || !kakaoBtn) return;
+  if(!modal || !backdrop || !card || !kakaoBtn || !closeBtn || !okBtn) return;
 
-  // 이미 열려있으면 또 열지 않음
   if(modal.classList.contains("show")) return;
 
-  // 오늘 전체 차단이면 종료(자정 지나면 키가 바뀌어 자동 해제)
+  // 오늘 전체 차단이면 종료
   try{
     if(localStorage.getItem(getTodayBlockAllKey()) === "1") return;
   }catch(e){}
 
-  // 열린시간 기준 2시간 간격 (마지막 오픈 시각 기준)
+  // 마지막 열린 시각 기준 2시간 간격
   const now = Date.now();
   const last = getLastShownTs();
   if(last && (now - last) < POPUP_INTERVAL_MS) return;
 
-  // 카카오 링크 동기화
   kakaoBtn.href = KAKAO_URL;
 
   let items = [];
@@ -1292,8 +1439,10 @@ async function openTodayPickPopupFromCSV(){
     return;
   }
 
-  const row = pickRotatingTodayRow(items);
-  const pick = makePickFromRow(row);
+  const picked = pickRotatingTodayRow(items);
+  if(!picked) return;
+
+  const pick = makePickFromRow(picked.row);
   if(!pick) return;
 
   const carrierClass = (pick.carrier === "SK") ? "sk" : (pick.carrier === "KT" ? "kt" : "lg");
@@ -1305,12 +1454,24 @@ async function openTodayPickPopupFromCSV(){
   const mvNum = asNum(mv);
   const chNum = asNum(ch);
 
-  // 체크박스 초기화(팝업 뜰 때마다)
   if(noShowToday) noShowToday.checked = false;
 
   card.innerHTML = `
+    <div style="
+      margin-bottom:10px;
+      border-radius:16px;
+      padding:10px 12px;
+      font-weight:1000;
+      color:#fff;
+      background: linear-gradient(90deg,#111827,#ef4444,#111827);
+      box-shadow: 0 14px 30px rgba(2,6,23,.18);
+      text-align:center;
+      letter-spacing:-.3px;">
+      마감 임박 · 재고는 문의
+    </div>
+
     <div class="adBadgeRow">
-      <div class="adTag">오늘의 카드</div>
+      <div class="adTag">오늘만 · 초특가</div>
       <div class="adCarrierPill ${carrierClass}">${safeHTML(pick.carrier)}</div>
     </div>
 
@@ -1338,14 +1499,17 @@ async function openTodayPickPopupFromCSV(){
     backdrop.setAttribute("aria-hidden","false");
     modal.setAttribute("aria-hidden","false");
     document.body.style.overflow = "hidden";
-    // ✅ 오픈 시각 저장(열린시간 기준 2시간)
+
+    // ✅ 오픈 시각 저장
     setLastShownTs(Date.now());
+
+    // ✅ "진짜로 열렸을 때" 로테이션 인덱스 +1 (스킵 방지)
+    try{ localStorage.setItem(getRotateKey(), String(picked.idx + 1)); }catch(e){}
   };
 
   const close = () => {
     try{
       if(noShowToday && noShowToday.checked){
-        // ✅ 오늘은 TODAY 팝업 전부 차단
         localStorage.setItem(getTodayBlockAllKey(), "1");
       }
     }catch(e){}
@@ -1361,15 +1525,30 @@ async function openTodayPickPopupFromCSV(){
     backdrop.addEventListener("click", close);
     closeBtn.addEventListener("click", close);
     okBtn.addEventListener("click", close);
+
+    // ✅ 모바일 터치 씹힘 보정
+    backdrop.addEventListener("touchstart", close, { passive:true });
+    closeBtn.addEventListener("touchstart", close, { passive:true });
+    okBtn.addEventListener("touchstart", close, { passive:true });
+
     document.addEventListener("keydown", (e)=>{
       if(e.key === "Escape" && modal.classList.contains("show")) close();
     });
     modal.dataset.bound = "1";
   }
 
-  // 즉시 열지 말고 약간 딜레이(렌더 안정)
   setTimeout(open, 260);
 }
+
+/* ✅ 모바일 백그라운드/복귀 시 재체크 (setInterval 지연 대응) */
+document.addEventListener("visibilitychange", () => {
+  if(document.visibilityState === "visible"){
+    openTodayPickPopupFromCSV();
+  }
+});
+window.addEventListener("focus", () => {
+  openTodayPickPopupFromCSV();
+});
 
 /* events */
 phoneTabsEl.querySelectorAll(".tabBtn").forEach(btn=>{
