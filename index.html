@@ -38,11 +38,16 @@
   --ledBg:#070b12; --ledBg2:#0b1220; --ledBorder:rgba(255,255,255,.14);
   --ledText:#f8fffc;
 
-  /* 팝업(A안) 기본값 (아래 OVERRIDE로 홈쇼핑 스타일 적용됨) */
-  --adBg1:#060a12;
-  --adBg2:#0a1220;
-  --adGlow: rgba(0,255,180,.55);
-  --adGlow2: rgba(0,255,180,.22);
+  /* ✅ 팝업(홈쇼핑 밝은 스타일) */
+  --adBg1:#fff7e6;            /* 따뜻한 크림 */
+  --adBg2:#ffffff;            /* 화이트 */
+  --adBorder:rgba(245,158,11,.55); /* 앰버 */
+  --adGlow: rgba(245,158,11,.45);
+  --adGlow2: rgba(245,158,11,.22);
+  --adRed:#ef4444;
+  --adOrange:#fb923c;
+  --adInk:#0f172a;
+  --adMuted:#475569;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
@@ -251,12 +256,11 @@ body{
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
 
 /* =========================
-   A안: 오늘의 카드(광고) 팝업 - 기본 구조
-   (아래 OVERRIDE로 홈쇼핑 스타일 적용)
+   ✅ 홈쇼핑 스타일 "오늘의 초특가" 팝업 (밝게)
    ========================= */
 .adBackdrop{
   position:fixed; inset:0;
-  background: rgba(0,0,0,.62);
+  background: rgba(15,23,42,.45); /* 너무 어둡지 않게 */
   opacity:0; pointer-events:none;
   transition: opacity .18s ease;
   z-index:2000;
@@ -275,78 +279,105 @@ body{
   width:min(720px, 100%);
   border-radius:22px;
   overflow:hidden;
-  border:1px solid rgba(255,255,255,.12);
+  border:2px solid var(--adBorder);
   box-shadow:
-    0 24px 70px rgba(0,0,0,.55),
-    0 0 0 2px rgba(255,255,255,.08),
-    0 0 36px var(--adGlow2);
+    0 24px 70px rgba(15,23,42,.30),
+    0 0 0 3px rgba(255,255,255,.85),
+    0 0 34px var(--adGlow2);
   background:
-    radial-gradient(900px 220px at 50% 0%, rgba(0,255,180,.14), transparent 55%),
-    linear-gradient(180deg, rgba(255,255,255,.06) 0%, rgba(0,0,0,.18) 45%, rgba(0,0,0,.28) 100%),
+    radial-gradient(900px 240px at 50% 0%, rgba(245,158,11,.18), transparent 60%),
+    linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.86) 100%),
     linear-gradient(90deg, var(--adBg1) 0%, var(--adBg2) 50%, var(--adBg1) 100%);
   transform: translateY(16px);
   transition: transform .22s ease;
 }
 .adModal.show .adSheet{ transform: translateY(0); }
 
+/* 상단 홈쇼핑 바(빨강/노랑 느낌) */
 .adTopBar{
-  padding:14px 14px 12px;
+  padding:12px 14px 10px;
   position:relative;
+  background:
+    linear-gradient(90deg, rgba(239,68,68,.96) 0%, rgba(251,146,60,.96) 50%, rgba(245,158,11,.96) 100%);
 }
-.adTopBar::before{
+.adTopBar::after{
   content:"";
-  position:absolute; inset:0;
-  background: radial-gradient(circle, rgba(255,255,255,.08) 1px, transparent 1.9px);
-  background-size: 8px 8px;
-  opacity:.18;
-  pointer-events:none;
+  position:absolute; left:0; right:0; bottom:0; height:4px;
+  background: linear-gradient(90deg, rgba(255,255,255,.0), rgba(255,255,255,.9), rgba(255,255,255,.0));
+  opacity:.7;
 }
 .adTopRow{
-  position:relative;
   display:flex; align-items:center; justify-content:space-between; gap:10px;
 }
-.adTitleWrap{display:flex;flex-direction:column;gap:6px;min-width:0;}
+.adTitleWrap{display:flex;flex-direction:column;gap:4px;min-width:0;}
 .adTitle1{
   font-weight:1000;
   letter-spacing:-.8px;
-  color:var(--ledText);
-  text-shadow: 0 0 14px rgba(0,255,180,.75), 0 0 26px rgba(0,255,180,.35), 0 2px 14px rgba(0,0,0,.85);
+  color:#fff;
   font-size:18px;
+  line-height:1.1;
   white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
+  text-shadow:0 2px 10px rgba(0,0,0,.25);
 }
 .adTitle2{
   font-weight:1000;
-  letter-spacing:-.4px;
-  color:rgba(248,255,252,.86);
+  letter-spacing:-.2px;
+  color: rgba(255,255,255,.95);
   font-size:13px;
-  text-shadow: 0 0 10px rgba(0,255,180,.35);
+  text-shadow:0 2px 10px rgba(0,0,0,.20);
 }
 .adClose{
   width:40px; height:40px;
-  border-radius:12px;
-  border:1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(248,255,252,.92);
+  border-radius:14px;
+  border:1px solid rgba(255,255,255,.55);
+  background: rgba(255,255,255,.18);
+  color:#fff;
   cursor:pointer;
   display:inline-flex; align-items:center; justify-content:center;
-  box-shadow: inset 0 14px 22px rgba(0,0,0,.35);
+  font-weight:1000;
 }
 .adClose:active{transform: translateY(1px); filter:brightness(.98);}
 
 .adBody{
-  padding: 6px 14px 14px;
+  padding: 12px 14px 14px;
   display:flex;
   flex-direction:column;
   gap:12px;
 }
+
 .adHeroCard{
   border-radius:18px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.05);
-  box-shadow: inset 0 18px 28px rgba(0,0,0,.35), 0 0 0 2px rgba(0,255,180,.08);
+  border:1px solid rgba(15,23,42,.10);
+  background: #fff;
+  box-shadow: 0 12px 24px rgba(15,23,42,.08);
   padding:14px;
+  position:relative;
+  overflow:hidden;
 }
-.adBadgeRow{display:flex; align-items:center; justify-content:space-between; gap:10px;}
+.adHeroCard::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(600px 240px at 50% -10%, rgba(245,158,11,.16), transparent 60%),
+    radial-gradient(520px 220px at 10% 10%, rgba(239,68,68,.10), transparent 60%),
+    radial-gradient(520px 220px at 90% 10%, rgba(56,189,248,.10), transparent 60%);
+  pointer-events:none;
+}
+.adRibbon{
+  position:absolute; top:12px; right:-34px;
+  transform: rotate(14deg);
+  background: linear-gradient(90deg, rgba(239,68,68,.98), rgba(251,146,60,.98));
+  color:#fff;
+  font-weight:1000;
+  font-size:12px;
+  padding:8px 46px;
+  box-shadow:0 10px 20px rgba(15,23,42,.18);
+  letter-spacing:-.2px;
+}
+.adBadgeRow{
+  position:relative;
+  display:flex; align-items:center; justify-content:space-between; gap:10px;
+}
 .adTag{
   display:inline-flex;
   align-items:center;
@@ -355,10 +386,9 @@ body{
   font-size:12px;
   padding:7px 10px;
   border-radius:999px;
-  color: rgba(248,255,252,.95);
-  border: 1px solid rgba(0,255,180,.35);
-  background: rgba(0,255,180,.10);
-  text-shadow: 0 0 10px rgba(0,255,180,.55);
+  color:#fff;
+  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
+  box-shadow:0 10px 20px rgba(15,23,42,.10);
 }
 .adCarrierPill{
   font-weight:1000;
@@ -372,34 +402,35 @@ body{
 .adCarrierPill.lg{background: var(--lg);}
 
 .adModel{
+  position:relative;
   margin-top:10px;
   font-weight:1000;
   letter-spacing:-1px;
-  color: var(--ledText);
-  text-shadow: 0 0 16px rgba(0,255,180,.55), 0 2px 18px rgba(0,0,0,.85);
+  color: var(--adInk);
   font-size:26px;
   line-height:1.15;
   word-break:keep-all;
 }
-@media (max-width:420px){
-  .adModel{font-size:24px;}
-}
+@media (max-width:420px){ .adModel{font-size:24px;} }
 
 .adInfo{
+  position:relative;
   margin:8px 0 0;
   font-size:13px;
   font-weight:1000;
   letter-spacing:-.2px;
-  color: rgba(248,255,252,.82);
+  color: var(--adMuted);
 }
 .adDisc{
+  position:relative;
   margin:6px 0 0;
   font-size:13px;
   font-weight:1000;
-  color: rgba(147,197,253,.95);
+  color: #2563eb;
 }
 
 .adPrices{
+  position:relative;
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));
   gap:10px;
@@ -408,9 +439,9 @@ body{
 .adPrices.one{grid-template-columns:1fr;}
 .adPriceBox{
   border-radius:16px;
-  border:1px solid rgba(255,255,255,.12);
-  background: rgba(255,255,255,.06);
-  box-shadow: inset 0 16px 24px rgba(0,0,0,.35);
+  border:1px solid rgba(15,23,42,.10);
+  background: #fff;
+  box-shadow: 0 10px 18px rgba(15,23,42,.08);
   padding:12px 12px 14px;
   text-align:center;
 }
@@ -418,22 +449,21 @@ body{
   font-size:12px;
   font-weight:1000;
   letter-spacing:-.2px;
-  color: rgba(248,255,252,.78);
+  color: rgba(71,85,105,.95);
   margin-bottom:6px;
 }
 .adPriceBox .v{
-  font-size:40px;
+  font-size:42px;
   font-weight:1000;
   letter-spacing:-1.2px;
   line-height:1;
-  color: var(--ledText);
-  text-shadow: 0 0 16px rgba(0,255,180,.55), 0 2px 22px rgba(0,0,0,.85);
+  color: var(--adRed);
+  text-shadow: 0 10px 22px rgba(239,68,68,.16);
 }
-@media (max-width:420px){
-  .adPriceBox .v{font-size:38px;}
-}
-.adPriceBox .v.neg{color:#ff5a5a;text-shadow: 0 0 16px rgba(255,90,90,.55), 0 2px 22px rgba(0,0,0,.85);}
-.adPriceBox .v.zero{color:#42c7ff;text-shadow: 0 0 16px rgba(66,199,255,.55), 0 2px 22px rgba(0,0,0,.85);}
+@media (max-width:420px){ .adPriceBox .v{font-size:40px;} }
+.adPriceBox .v.neg{color:#dc2626;}
+.adPriceBox .v.zero{color:#0284c7;}
+.adPriceBox .v.pos{color:#0f172a;text-shadow: 0 10px 22px rgba(15,23,42,.10);}
 
 .adCTAs{
   display:flex;
@@ -447,20 +477,25 @@ body{
   justify-content:center;
   gap:8px;
   border-radius:16px;
-  border:1px solid rgba(255,255,255,.14);
-  background: rgba(255,255,255,.06);
-  color: rgba(248,255,252,.95);
+  border:1px solid rgba(15,23,42,.12);
+  background: #fff;
+  color: var(--adInk);
   text-decoration:none;
   font-weight:1000;
   font-size:16px;
   padding:14px 12px;
-  box-shadow: 0 14px 30px rgba(0,0,0,.35), inset 0 16px 24px rgba(0,0,0,.25);
+  box-shadow: 0 14px 26px rgba(15,23,42,.10);
 }
 .adBtn:active{transform: translateY(1px); filter:brightness(.98);}
 .adBtn.kakao{
-  background: rgba(254,229,0,.32);
-  border-color: rgba(254,229,0,.55);
+  background: rgba(254,229,0,.55);
+  border-color: rgba(254,229,0,.85);
   color:#3b2f00;
+}
+#adOkBtn{
+  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(251,146,60,.96));
+  border-color: rgba(239,68,68,.30);
+  color:#fff;
 }
 .adBtn svg{width:20px;height:20px;stroke: currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
@@ -475,162 +510,17 @@ body{
   display:flex;
   align-items:center;
   gap:8px;
-  color: rgba(248,255,252,.78);
+  color: rgba(71,85,105,.95);
   font-weight:1000;
   font-size:13px;
   user-select:none;
 }
 .adCheck input{width:18px;height:18px; accent-color: #22c55e;}
 .adSmall{
-  color: rgba(248,255,252,.62);
+  color: rgba(71,85,105,.85);
   font-weight:1000;
   font-size:12px;
 }
-
-/* =========================================================
-   홈쇼핑 스타일 팝업(오늘의 초특가) - OVERRIDE
-   (팝업만 완전 홈쇼핑으로 바꿈)
-   ========================================================= */
-.adBackdrop{ background: rgba(2,6,23,.70); }
-
-.adSheet{
-  border-radius:24px;
-  border: 2px solid rgba(255,255,255,.55);
-  box-shadow:
-    0 28px 90px rgba(2,6,23,.55),
-    0 0 0 4px rgba(255,255,255,.20),
-    0 0 42px rgba(255,0,70,.30);
-  background:
-    radial-gradient(900px 240px at 50% 0%, rgba(255,255,255,.40), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.95) 0%, rgba(255,245,210,.95) 40%, rgba(255,235,235,.96) 100%),
-    linear-gradient(90deg, #ff1744 0%, #ff2d55 35%, #ff1744 100%);
-}
-
-.adTopBar{
-  padding: 14px 14px 12px;
-  background: linear-gradient(90deg, #ff0033 0%, #ff2d55 50%, #ff0033 100%);
-  border-bottom: 2px solid rgba(255,255,255,.35);
-  position: relative;
-  overflow: hidden;
-}
-.adTopBar::before{
-  content:"";
-  position:absolute; inset:-40px -60px;
-  background:
-    linear-gradient(120deg,
-      transparent 0%,
-      rgba(255,255,255,.15) 35%,
-      rgba(255,255,255,.45) 50%,
-      rgba(255,255,255,.15) 65%,
-      transparent 100%);
-  transform: translateX(-55%);
-  animation: hs_shine 2.2s linear infinite;
-  pointer-events:none;
-  opacity:.65;
-}
-@keyframes hs_shine{
-  from{ transform: translateX(-55%); }
-  to{ transform: translateX(55%); }
-}
-
-.adTitleWrap{gap:4px;}
-.adTitle1{
-  font-size:20px;
-  font-weight:1000;
-  letter-spacing:-.8px;
-  color:#ffffff;
-  text-shadow: 0 3px 0 rgba(0,0,0,.35), 0 10px 24px rgba(0,0,0,.35);
-}
-.adTitle2{
-  font-size:13px;
-  font-weight:1000;
-  color: rgba(255,255,255,.92);
-  text-shadow: 0 2px 0 rgba(0,0,0,.20);
-}
-
-.adClose{
-  width:42px;height:42px;
-  border-radius:14px;
-  border: 2px solid rgba(0,0,0,.10);
-  background: linear-gradient(180deg, #fff6a6 0%, #ffd400 70%, #ffb300 100%);
-  color:#2b1b00;
-  font-weight:1000;
-  box-shadow: 0 12px 24px rgba(0,0,0,.22);
-}
-
-.adHeroCard{
-  border-radius:20px;
-  border: 2px solid rgba(0,0,0,.08);
-  background: rgba(255,255,255,.92);
-  box-shadow: 0 14px 34px rgba(2,6,23,.14);
-  padding:14px;
-}
-
-.adTag{
-  border:0;
-  background: linear-gradient(180deg, #111827 0%, #0b1220 100%);
-  color:#ffffff;
-  font-size:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  text-shadow:none;
-  box-shadow: 0 10px 18px rgba(2,6,23,.25);
-}
-.adCarrierPill{
-  box-shadow: 0 10px 18px rgba(2,6,23,.18);
-}
-
-.adModel{
-  color:#0b1220;
-  text-shadow: 0 1px 0 rgba(255,255,255,.8);
-  font-size:28px;
-  line-height:1.12;
-}
-@media (max-width:420px){
-  .adModel{font-size:26px;}
-}
-
-.adInfo{ color:#334155; }
-.adDisc{ color:#1d4ed8; }
-
-.adPriceBox{
-  border-radius:18px;
-  border: 2px solid rgba(0,0,0,.08);
-  background:
-    radial-gradient(340px 140px at 50% 0%, rgba(255,255,255,.70), transparent 60%),
-    linear-gradient(180deg, #ffffff 0%, #fff7d6 55%, #fff1c0 100%);
-  box-shadow: 0 18px 36px rgba(2,6,23,.16);
-}
-.adPriceBox .k{ color:#475569; }
-.adPriceBox .v{
-  font-size:48px;
-  color:#0b1220;
-  text-shadow: 0 2px 0 rgba(255,255,255,.85);
-}
-@media (max-width:420px){
-  .adPriceBox .v{font-size:46px;}
-}
-.adPriceBox .v.neg{
-  color:#dc2626;
-  text-shadow: 0 2px 0 rgba(255,255,255,.85), 0 0 18px rgba(220,38,38,.18);
-}
-.adPriceBox .v.zero{
-  color:#0284c7;
-  text-shadow: 0 2px 0 rgba(255,255,255,.85), 0 0 18px rgba(2,132,199,.18);
-}
-
-.adBtn{
-  border-radius:18px;
-  border: 2px solid rgba(0,0,0,.10);
-  background: linear-gradient(180deg, #fff6a6 0%, #ffd400 70%, #ffb300 100%);
-  color:#2b1b00;
-  box-shadow: 0 16px 32px rgba(2,6,23,.18);
-}
-.adBtn.kakao{
-  background: linear-gradient(180deg, #fff47a 0%, #ffe300 65%, #ffc400 100%);
-}
-.adCheck{ color:#0b1220; }
-.adSmall{ color:#475569; }
 </style>
 </head>
 
@@ -683,15 +573,15 @@ body{
   </div>
 </div>
 
-<!-- A안: 오늘의 카드(광고) 팝업 -->
+<!-- ✅ 홈쇼핑 스타일: 오늘의 초특가 팝업 -->
 <div class="adBackdrop" id="adBackdrop" aria-hidden="true"></div>
 <div class="adModal" id="adModal" aria-hidden="true" role="dialog" aria-label="오늘의 카드 팝업">
   <div class="adSheet" role="document">
     <div class="adTopBar">
       <div class="adTopRow">
         <div class="adTitleWrap">
-          <div class="adTitle1">오늘만 초특가! 선착순 특판</div>
-          <div class="adTitle2">카톡에 “기종+용량”만 보내면 최저가 안내</div>
+          <div class="adTitle1">오늘의 초특가 · 홈쇼핑급 특판</div>
+          <div class="adTitle2">카톡에 “기종+용량”만 보내면 바로 안내</div>
         </div>
         <button class="adClose" id="adCloseBtn" type="button" aria-label="닫기">✕</button>
       </div>
@@ -699,6 +589,7 @@ body{
 
     <div class="adBody">
       <div class="adHeroCard" id="adCard">
+        <div class="adRibbon">오늘만</div>
         <!-- JS로 채움 -->
       </div>
 
@@ -805,9 +696,7 @@ async function setUpdateStamp(){
     const get = (t) => (parts.find(p => p.type === t)?.value || "");
     const stamp = `${get("year")}.${get("month")}.${get("day")} ${get("hour")}:${get("minute")}`;
     el.textContent = stamp;
-  }catch(e){
-    // 실패 시 아무 것도 하지 않음
-  }
+  }catch(e){}
 }
 
 /* 관리자 전용 새로고침: 공지(상단 바) 5번 탭하면 버튼 토글 */
@@ -842,12 +731,6 @@ async function setUpdateStamp(){
   btn.addEventListener("click", (e) => {
     e.preventDefault();
     location.reload();
-  });
-
-  // (선택) PC 우클릭으로 TODAY 팝업 상태 초기화
-  btn.addEventListener("contextmenu", (e) => {
-    e.preventDefault();
-    if(typeof resetTodayPopupDebug === "function") resetTodayPopupDebug();
   });
 })();
 
@@ -1166,7 +1049,7 @@ async function fetchCSV(){
   });
 }
 
-/* SK/KT/LG “통신사 탭만”으로 표시 */
+/* ✅ SK/KT/LG “통신사 탭만”으로 표시 + ✅ 2번 정렬(마이너스 우선 → 0원 → 플러스 저가순) */
 function buildCarrierSimple(items, carrier){
   const out = [];
   items.forEach(x=>{
@@ -1178,16 +1061,42 @@ function buildCarrierSimple(items, carrier){
 
     if (mv === "" && ch === "") return;
 
+    const mvNum = asNum(mv);
+    const chNum = asNum(ch);
+
+    // 대표가격(best) = 이동/기변 중 존재하는 값의 최소(마이너스 있으면 자동으로 마이너스 선택)
+    const nums = [mvNum, chNum].filter(v => v !== null);
+    const bestNum = nums.length ? Math.min(...nums) : null;
+
     out.push({
       model,
       mv,
       ch,
+      bestNum,
       infoText: infoLineWithPlan(carrier, x),
       discount: String(x["요금할인"]||"").trim().toUpperCase()==="O"
     });
   });
 
-  out.sort((a,b)=> a.model.localeCompare(b.model, "ko"));
+  // 마이너스(페이백) 우선 → 0원 → 플러스(저가순) → 없음(맨뒤)
+  out.sort((a,b)=>{
+    const A = a.bestNum;
+    const B = b.bestNum;
+
+    const group = (v) => {
+      if (v === null) return 3;
+      if (v < 0) return 0;
+      if (v === 0) return 1;
+      return 2;
+    };
+
+    const gA = group(A), gB = group(B);
+    if (gA !== gB) return gA - gB;
+
+    if (A !== null && B !== null && A !== B) return A - B;
+    return a.model.localeCompare(b.model, "ko");
+  });
+
   return out;
 }
 
@@ -1303,7 +1212,10 @@ function renderMVNO(net = mvnoNet){
 }
 
 /* =========================
-   오늘의 카드(광고 팝업) - 전부 수정(안정화 포함)
+   오늘의 카드(광고 팝업)
+   - CSV의 TODAY=1(또는 Y/O) 행을 로테이션 표시
+   - 2시간마다 자동(열린시간 기준)
+   - “오늘 하루 다시 보지 않기” 체크 시: TODAY 전체 오늘은 차단 (다음날 00:00 KST 자동 해제)
    ========================= */
 function isTodayRow(x){
   const v = String(x["TODAY"] ?? "").trim().toUpperCase();
@@ -1318,25 +1230,29 @@ function safeHTML(s){
     .replace(/"/g,"&quot;");
 }
 
+// 날짜키(자정 지나면 자동으로 키가 바뀜)
 function getTodayBlockAllKey(){
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone:"Asia/Seoul",
     year:"numeric", month:"2-digit", day:"2-digit"
   }).formatToParts(new Date());
   const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  return `TODAY_POPUP_BLOCKALL_${get("year")}-${get("month")}-${get("day")}`;
+  const y = get("year"), m = get("month"), d = get("day");
+  return `TODAY_POPUP_BLOCKALL_${y}-${m}-${d}`;
 }
 
+// 로테이션 인덱스 키(날짜별)
 function getRotateKey(){
   const parts = new Intl.DateTimeFormat("en-CA", {
     timeZone:"Asia/Seoul",
     year:"numeric", month:"2-digit", day:"2-digit"
   }).formatToParts(new Date());
   const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  return `TODAY_POPUP_ROTATE_${get("year")}-${get("month")}-${get("day")}`;
+  const y = get("year"), m = get("month"), d = get("day");
+  return `TODAY_POPUP_ROTATE_${y}-${m}-${d}`;
 }
 
-/* ✅ TODAY 로테이션: 선택만 하고, 인덱스 증가는 "실제로 열릴 때" */
+// TODAY=1 행들 중 이번 회차에 보여줄 행(로테이션)
 function pickRotatingTodayRow(items){
   const todayRows = items.filter(isTodayRow);
   if(!todayRows.length) return null;
@@ -1346,7 +1262,11 @@ function pickRotatingTodayRow(items){
   let idx = 0;
   try{ idx = Number(localStorage.getItem(getRotateKey()) || 0) || 0; }catch(e){ idx = 0; }
 
-  return { row: todayRows[idx % todayRows.length], idx, len: todayRows.length };
+  const row = todayRows[idx % todayRows.length];
+
+  try{ localStorage.setItem(getRotateKey(), String(idx + 1)); }catch(e){}
+
+  return row;
 }
 
 function makePickFromRow(row){
@@ -1396,18 +1316,6 @@ function setLastShownTs(ts){
   try{ localStorage.setItem(POPUP_LAST_SHOWN_KEY, String(ts)); }catch(e){}
 }
 
-/* ✅ 관리자 디버그 초기화(테스트 편의) */
-function resetTodayPopupDebug(){
-  try{
-    localStorage.removeItem(POPUP_LAST_SHOWN_KEY);
-    localStorage.removeItem(getRotateKey());
-    localStorage.removeItem(getTodayBlockAllKey());
-    alert("TODAY 팝업 상태 초기화 완료");
-  }catch(e){
-    alert("초기화 실패(스토리지 접근 불가)");
-  }
-}
-
 async function openTodayPickPopupFromCSV(){
   const modal = document.getElementById("adModal");
   const backdrop = document.getElementById("adBackdrop");
@@ -1416,16 +1324,14 @@ async function openTodayPickPopupFromCSV(){
   const noShowToday = document.getElementById("noShowToday");
   const card = document.getElementById("adCard");
   const kakaoBtn = document.getElementById("adKakaoBtn");
-  if(!modal || !backdrop || !card || !kakaoBtn || !closeBtn || !okBtn) return;
+  if(!modal || !backdrop || !card || !kakaoBtn) return;
 
   if(modal.classList.contains("show")) return;
 
-  // 오늘 전체 차단이면 종료
   try{
     if(localStorage.getItem(getTodayBlockAllKey()) === "1") return;
   }catch(e){}
 
-  // 마지막 열린 시각 기준 2시간 간격
   const now = Date.now();
   const last = getLastShownTs();
   if(last && (now - last) < POPUP_INTERVAL_MS) return;
@@ -1439,10 +1345,8 @@ async function openTodayPickPopupFromCSV(){
     return;
   }
 
-  const picked = pickRotatingTodayRow(items);
-  if(!picked) return;
-
-  const pick = makePickFromRow(picked.row);
+  const row = pickRotatingTodayRow(items);
+  const pick = makePickFromRow(row);
   if(!pick) return;
 
   const carrierClass = (pick.carrier === "SK") ? "sk" : (pick.carrier === "KT" ? "kt" : "lg");
@@ -1457,21 +1361,10 @@ async function openTodayPickPopupFromCSV(){
   if(noShowToday) noShowToday.checked = false;
 
   card.innerHTML = `
-    <div style="
-      margin-bottom:10px;
-      border-radius:16px;
-      padding:10px 12px;
-      font-weight:1000;
-      color:#fff;
-      background: linear-gradient(90deg,#111827,#ef4444,#111827);
-      box-shadow: 0 14px 30px rgba(2,6,23,.18);
-      text-align:center;
-      letter-spacing:-.3px;">
-      마감 임박 · 재고는 문의
-    </div>
+    <div class="adRibbon">오늘만</div>
 
     <div class="adBadgeRow">
-      <div class="adTag">오늘만 · 초특가</div>
+      <div class="adTag">오늘의 초특가</div>
       <div class="adCarrierPill ${carrierClass}">${safeHTML(pick.carrier)}</div>
     </div>
 
@@ -1482,12 +1375,12 @@ async function openTodayPickPopupFromCSV(){
     <div class="adPrices ${rowClass}">
       ${hasMove ? `
         <div class="adPriceBox">
-          <div class="k">이동</div>
+          <div class="k">이동 혜택가</div>
           <div class="v ${vClass(mvNum)}">${safeHTML(mv)}</div>
         </div>` : ``}
       ${hasChange ? `
         <div class="adPriceBox">
-          <div class="k">기변</div>
+          <div class="k">기변 혜택가</div>
           <div class="v ${vClass(chNum)}">${safeHTML(ch)}</div>
         </div>` : ``}
     </div>
@@ -1499,12 +1392,7 @@ async function openTodayPickPopupFromCSV(){
     backdrop.setAttribute("aria-hidden","false");
     modal.setAttribute("aria-hidden","false");
     document.body.style.overflow = "hidden";
-
-    // ✅ 오픈 시각 저장
     setLastShownTs(Date.now());
-
-    // ✅ "진짜로 열렸을 때" 로테이션 인덱스 +1 (스킵 방지)
-    try{ localStorage.setItem(getRotateKey(), String(picked.idx + 1)); }catch(e){}
   };
 
   const close = () => {
@@ -1520,17 +1408,10 @@ async function openTodayPickPopupFromCSV(){
     document.body.style.overflow = "";
   };
 
-  // 이벤트 중복 방지: 한 번만 바인딩
   if(!modal.dataset.bound){
     backdrop.addEventListener("click", close);
     closeBtn.addEventListener("click", close);
     okBtn.addEventListener("click", close);
-
-    // ✅ 모바일 터치 씹힘 보정
-    backdrop.addEventListener("touchstart", close, { passive:true });
-    closeBtn.addEventListener("touchstart", close, { passive:true });
-    okBtn.addEventListener("touchstart", close, { passive:true });
-
     document.addEventListener("keydown", (e)=>{
       if(e.key === "Escape" && modal.classList.contains("show")) close();
     });
@@ -1539,16 +1420,6 @@ async function openTodayPickPopupFromCSV(){
 
   setTimeout(open, 260);
 }
-
-/* ✅ 모바일 백그라운드/복귀 시 재체크 (setInterval 지연 대응) */
-document.addEventListener("visibilitychange", () => {
-  if(document.visibilityState === "visible"){
-    openTodayPickPopupFromCSV();
-  }
-});
-window.addEventListener("focus", () => {
-  openTodayPickPopupFromCSV();
-});
 
 /* events */
 phoneTabsEl.querySelectorAll(".tabBtn").forEach(btn=>{
@@ -1592,7 +1463,7 @@ setUpdateStamp();
 activatePhoneTab("SK");
 renderPhone("SK");
 
-// ✅ 최초 1회(페이지 켠 직후) + ✅ 이후 2시간마다(켜둔 경우 포함)
+// ✅ 최초 1회 + ✅ 이후 2시간마다(켜둔 경우 포함)
 setTimeout(() => { openTodayPickPopupFromCSV(); }, POPUP_FIRST_DELAY_MS);
 setInterval(() => { openTodayPickPopupFromCSV(); }, POPUP_INTERVAL_MS);
 
