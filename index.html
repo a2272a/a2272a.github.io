@@ -669,6 +669,56 @@ let lastPhoneTab = "SK";
 let mvnoNet = "LG";
 let inetCarrier = "SK";
 
+/* =========================
+   ✅ StorageSafe (모바일/인앱/사파리 프라이빗 대비)
+   - localStorage 실패하면 sessionStorage
+   - 둘 다 실패하면 메모리(Map)
+   ========================= */
+const StorageSafe = (() => {
+  const mem = new Map();
+
+  function getStore(){
+    try{
+      const t="__t__";
+      localStorage.setItem(t,"1");
+      localStorage.removeItem(t);
+      return localStorage;
+    }catch(e){
+      try{
+        const t="__t__";
+        sessionStorage.setItem(t,"1");
+        sessionStorage.removeItem(t);
+        return sessionStorage;
+      }catch(e2){
+        return null;
+      }
+    }
+  }
+
+  const store = getStore();
+
+  return {
+    get(key){
+      try{
+        if(store) return store.getItem(key);
+      }catch(e){}
+      return mem.has(key) ? mem.get(key) : null;
+    },
+    set(key,val){
+      try{
+        if(store) return store.setItem(key, String(val));
+      }catch(e){}
+      mem.set(key, String(val));
+    },
+    remove(key){
+      try{
+        if(store) return store.removeItem(key);
+      }catch(e){}
+      mem.delete(key);
+    }
+  };
+})();
+
 /* 업데이트 날짜/시간 자동 표시 (data.csv Last-Modified) */
 async function setUpdateStamp(){
   const el = document.getElementById("updateStamp");
@@ -1216,6 +1266,8 @@ function renderMVNO(net = mvnoNet){
    - CSV의 TODAY=1(또는 Y/O) 행을 로테이션 표시
    - 2시간마다 자동(열린시간 기준)
    - “오늘 하루 다시 보지 않기” 체크 시: TODAY 전체 오늘은 차단 (다음날 00:00 KST 자동 해제)
+   - ✅ 모바일/인앱 타이머/스토리지 불안정 보강(visibilitychange/focus, StorageSafe)
+   - ✅ CSV 실패 시에도 기본 1장 fallback 노출(원하면 제거 가능)
    ========================= */
 function isTodayRow(x){
   const v = String(x["TODAY"] ?? "").trim().toUpperCase();
@@ -1260,11 +1312,11 @@ function pickRotatingTodayRow(items){
   todayRows.sort((a,b)=> String(a["기종"]||"").localeCompare(String(b["기종"]||""), "ko"));
 
   let idx = 0;
-  try{ idx = Number(localStorage.getItem(getRotateKey()) || 0) || 0; }catch(e){ idx = 0; }
+  try{ idx = Number(StorageSafe.get(getRotateKey()) || 0) || 0; }catch(e){ idx = 0; }
 
   const row = todayRows[idx % todayRows.length];
 
-  try{ localStorage.setItem(getRotateKey(), String(idx + 1)); }catch(e){}
+  try{ StorageSafe.set(getRotateKey(), String(idx + 1)); }catch(e){}
 
   return row;
 }
@@ -1306,14 +1358,25 @@ function makePickFromRow(row){
 
 function getLastShownTs(){
   try{
-    const v = Number(localStorage.getItem(POPUP_LAST_SHOWN_KEY) || 0);
+    const v = Number(StorageSafe.get(POPUP_LAST_SHOWN_KEY) || 0);
     return Number.isFinite(v) ? v : 0;
   }catch(e){
     return 0;
   }
 }
 function setLastShownTs(ts){
-  try{ localStorage.setItem(POPUP_LAST_SHOWN_KEY, String(ts)); }catch(e){}
+  try{ StorageSafe.set(POPUP_LAST_SHOWN_KEY, String(ts)); }catch(e){}
+}
+
+function buildFallbackPick(){
+  return {
+    carrier:"SK",
+    model:"오늘의 초특가",
+    move:"카톡문의",
+    change:"",
+    infoText:"재고/조건은 카톡 문의",
+    discount:false
+  };
 }
 
 async function openTodayPickPopupFromCSV(){
@@ -1328,8 +1391,9 @@ async function openTodayPickPopupFromCSV(){
 
   if(modal.classList.contains("show")) return;
 
+  // ✅ 오늘 차단 체크(스토리지 안전)
   try{
-    if(localStorage.getItem(getTodayBlockAllKey()) === "1") return;
+    if(StorageSafe.get(getTodayBlockAllKey()) === "1") return;
   }catch(e){}
 
   const now = Date.now();
@@ -1339,14 +1403,17 @@ async function openTodayPickPopupFromCSV(){
   kakaoBtn.href = KAKAO_URL;
 
   let items = [];
+  let pick = null;
+
   try{
     items = (await fetchCSV()).filter(x => String(x["기종"] ?? "").trim() !== "");
+    const row = pickRotatingTodayRow(items);
+    pick = makePickFromRow(row);
   }catch(e){
-    return;
+    // ✅ CSV 실패 시에도 1장 fallback 노출(원하면 여기 블록 삭제하면 됨)
+    pick = buildFallbackPick();
   }
 
-  const row = pickRotatingTodayRow(items);
-  const pick = makePickFromRow(row);
   if(!pick) return;
 
   const carrierClass = (pick.carrier === "SK") ? "sk" : (pick.carrier === "KT" ? "kt" : "lg");
@@ -1398,7 +1465,7 @@ async function openTodayPickPopupFromCSV(){
   const close = () => {
     try{
       if(noShowToday && noShowToday.checked){
-        localStorage.setItem(getTodayBlockAllKey(), "1");
+        StorageSafe.set(getTodayBlockAllKey(), "1");
       }
     }catch(e){}
     backdrop.classList.remove("show");
@@ -1420,6 +1487,21 @@ async function openTodayPickPopupFromCSV(){
 
   setTimeout(open, 260);
 }
+
+/* ✅ 모바일/인앱에서 interval이 씹힐 때 보강: 다시 화면에 오면 즉시 팝업 체크 */
+(function popupRecheckOnResume(){
+  let lastKick = 0;
+  const kick = () => {
+    const now = Date.now();
+    if(now - lastKick < 1200) return;
+    lastKick = now;
+    openTodayPickPopupFromCSV();
+  };
+  document.addEventListener("visibilitychange", () => {
+    if(!document.hidden) kick();
+  });
+  window.addEventListener("focus", () => kick());
+})();
 
 /* events */
 phoneTabsEl.querySelectorAll(".tabBtn").forEach(btn=>{
