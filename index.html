@@ -767,7 +767,7 @@ const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
    ✅ 공지: notice.json에서 읽음 (data.csv와 완전 분리)
    - notice.json 없으면 아래 FALLBACK 사용
    ========================= */
-const FALLBACK_NOTICE_VERSION = "2026-02-01-01";
+const FALLBACK_NOTICE_VERSION = 1; // ✅ 숫자만
 const FALLBACK_NOTICE_TITLE   = "KT 위약금 면제 13일 종료 !!!";
 const FALLBACK_NOTICE_SUBTITLE= "해당 고객은 조건 확인이 필요합니다. 카톡에 “기종/통신사”만 보내주세요.";
 const FALLBACK_NOTICE_TAGS    = ["위약금","면제","마감임박","조건문의"];
@@ -793,14 +793,14 @@ async function loadNoticeFromJSON(){
     if(!r.ok) throw new Error("notice.json load fail");
     const j = await r.json();
 
-    const ver = String(j.version ?? "").trim();
+    const ver = j.version;
     const title = String(j.title ?? "").trim();
     const sub = String(j.subtitle ?? "").trim();
     const tags = Array.isArray(j.tags) ? j.tags.map(x=>String(x||"").trim()).filter(Boolean) : [];
     const urgent = !!j.urgent; // (현재 로직은 title 기반 urgent 판단이지만, 확장용)
 
     const out = {
-      version: ver || FALLBACK_NOTICE_VERSION,
+      version: (Number.isFinite(Number(ver)) ? Number(ver) : FALLBACK_NOTICE_VERSION),
       title: title || FALLBACK_NOTICE_TITLE,
       subtitle: sub || FALLBACK_NOTICE_SUBTITLE,
       tags: tags.length ? tags : (FALLBACK_NOTICE_TAGS.slice()),
@@ -1263,7 +1263,7 @@ function renderPhone(rows, carrier){
 
   if(!filtered.length){
     list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 카드가 없습니다.</div>`);
-    addCompactNoticeCard();
+    /* ✅ 요청사항: SK/KT/LG(휴대폰) 하단 "가입비·유심비..." 안내카드 삭제 */
     return;
   }
 
@@ -1283,7 +1283,7 @@ function renderPhone(rows, carrier){
     });
   });
 
-  addCompactNoticeCard();
+  /* ✅ 요청사항: SK/KT/LG(휴대폰) 하단 "가입비·유심비..." 안내카드 삭제 */
 }
 
 function renderMVNO(net){
@@ -1382,7 +1382,7 @@ function highlightNoticeTitle(t){
 function renderNoticeBanner(){
   const box = document.getElementById("noticeBanner");
   if(!box) return;
-  const urgent = /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
+  const urgent = NOTICE.urgent || /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
   box.classList.toggle("urgent", urgent);
 
   const tags = (NOTICE.tags || []).slice(0, 8);
