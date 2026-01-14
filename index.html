@@ -39,9 +39,9 @@
   --ledText:#f8fffc;
 
   /* ✅ 팝업(홈쇼핑 밝은 스타일) */
-  --adBg1:#fff7e6;            /* 따뜻한 크림 */
-  --adBg2:#ffffff;            /* 화이트 */
-  --adBorder:rgba(245,158,11,.55); /* 앰버 */
+  --adBg1:#fff7e6;
+  --adBg2:#ffffff;
+  --adBorder:rgba(245,158,11,.55);
   --adGlow: rgba(245,158,11,.45);
   --adGlow2: rgba(245,158,11,.22);
   --adRed:#ef4444;
@@ -83,9 +83,7 @@ body{
   border:1px solid rgba(255,255,255,.10);box-shadow: inset 0 12px 20px rgba(0,0,0,.34);
   gap:10px;
 }
-.marqueeInner{
-  display:flex;align-items:center;min-width:0;flex:1;
-}
+.marqueeInner{display:flex;align-items:center;min-width:0;flex:1;}
 
 /* 업데이트 문구 */
 .updateWrap{
@@ -108,16 +106,8 @@ body{
   min-width:0;
 }
 @media (max-width:480px){
-  .updateWrap{
-    flex-direction:column;
-    align-items:flex-start;
-    gap:2px;
-  }
-  .updateWrap .line1,
-  .updateWrap .line2{
-    font-size:16px;
-    white-space:normal;
-  }
+  .updateWrap{flex-direction:column;align-items:flex-start;gap:2px;}
+  .updateWrap .line1,.updateWrap .line2{font-size:16px;white-space:normal;}
 }
 
 /* 관리자 새로고침 버튼(기본 숨김) */
@@ -256,11 +246,11 @@ body{
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
 
 /* =========================
-   ✅ 홈쇼핑 스타일 "오늘의 초특가" 팝업 (밝게)
+   ✅ 공용 팝업 베이스
    ========================= */
 .adBackdrop{
   position:fixed; inset:0;
-  background: rgba(15,23,42,.45); /* 너무 어둡지 않게 */
+  background: rgba(15,23,42,.45);
   opacity:0; pointer-events:none;
   transition: opacity .18s ease;
   z-index:2000;
@@ -293,7 +283,6 @@ body{
 }
 .adModal.show .adSheet{ transform: translateY(0); }
 
-/* 상단 홈쇼핑 바(빨강/노랑 느낌) */
 .adTopBar{
   padding:12px 14px 10px;
   position:relative;
@@ -345,131 +334,7 @@ body{
   gap:12px;
 }
 
-.adHeroCard{
-  border-radius:18px;
-  border:1px solid rgba(15,23,42,.10);
-  background: #fff;
-  box-shadow: 0 12px 24px rgba(15,23,42,.08);
-  padding:14px;
-  position:relative;
-  overflow:hidden;
-}
-.adHeroCard::before{
-  content:"";
-  position:absolute; inset:-2px;
-  background:
-    radial-gradient(600px 240px at 50% -10%, rgba(245,158,11,.16), transparent 60%),
-    radial-gradient(520px 220px at 10% 10%, rgba(239,68,68,.10), transparent 60%),
-    radial-gradient(520px 220px at 90% 10%, rgba(56,189,248,.10), transparent 60%);
-  pointer-events:none;
-}
-.adRibbon{
-  position:absolute; top:12px; right:-34px;
-  transform: rotate(14deg);
-  background: linear-gradient(90deg, rgba(239,68,68,.98), rgba(251,146,60,.98));
-  color:#fff;
-  font-weight:1000;
-  font-size:12px;
-  padding:8px 46px;
-  box-shadow:0 10px 20px rgba(15,23,42,.18);
-  letter-spacing:-.2px;
-}
-.adBadgeRow{
-  position:relative;
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-}
-.adTag{
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-weight:1000;
-  font-size:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  color:#fff;
-  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
-  box-shadow:0 10px 20px rgba(15,23,42,.10);
-}
-.adCarrierPill{
-  font-weight:1000;
-  font-size:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  color:#fff;
-}
-.adCarrierPill.sk{background: var(--sk);}
-.adCarrierPill.kt{background: var(--kt);}
-.adCarrierPill.lg{background: var(--lg);}
-
-.adModel{
-  position:relative;
-  margin-top:10px;
-  font-weight:1000;
-  letter-spacing:-1px;
-  color: var(--adInk);
-  font-size:26px;
-  line-height:1.15;
-  word-break:keep-all;
-}
-@media (max-width:420px){ .adModel{font-size:24px;} }
-
-.adInfo{
-  position:relative;
-  margin:8px 0 0;
-  font-size:13px;
-  font-weight:1000;
-  letter-spacing:-.2px;
-  color: var(--adMuted);
-}
-.adDisc{
-  position:relative;
-  margin:6px 0 0;
-  font-size:13px;
-  font-weight:1000;
-  color: #2563eb;
-}
-
-.adPrices{
-  position:relative;
-  display:grid;
-  grid-template-columns:repeat(2, minmax(0, 1fr));
-  gap:10px;
-  margin-top:12px;
-}
-.adPrices.one{grid-template-columns:1fr;}
-.adPriceBox{
-  border-radius:16px;
-  border:1px solid rgba(15,23,42,.10);
-  background: #fff;
-  box-shadow: 0 10px 18px rgba(15,23,42,.08);
-  padding:12px 12px 14px;
-  text-align:center;
-}
-.adPriceBox .k{
-  font-size:12px;
-  font-weight:1000;
-  letter-spacing:-.2px;
-  color: rgba(71,85,105,.95);
-  margin-bottom:6px;
-}
-.adPriceBox .v{
-  font-size:42px;
-  font-weight:1000;
-  letter-spacing:-1.2px;
-  line-height:1;
-  color: var(--adRed);
-  text-shadow: 0 10px 22px rgba(239,68,68,.16);
-}
-@media (max-width:420px){ .adPriceBox .v{font-size:40px;} }
-.adPriceBox .v.neg{color:#dc2626;}
-.adPriceBox .v.zero{color:#0284c7;}
-.adPriceBox .v.pos{color:#0f172a;text-shadow: 0 10px 22px rgba(15,23,42,.10);}
-
-.adCTAs{
-  display:flex;
-  gap:10px;
-  align-items:stretch;
-}
+.adCTAs{display:flex;gap:10px;align-items:stretch;}
 .adBtn{
   flex:1;
   display:flex;
@@ -492,35 +357,261 @@ body{
   border-color: rgba(254,229,0,.85);
   color:#3b2f00;
 }
-#adOkBtn{
-  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(251,146,60,.96));
-  border-color: rgba(239,68,68,.30);
-  color:#fff;
-}
 .adBtn svg{width:20px;height:20px;stroke: currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 
-.adFoot{
+.adFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding: 2px 2px 10px;}
+.adCheck{
+  display:flex;align-items:center;gap:8px;
+  color: rgba(71,85,105,.95);
+  font-weight:1000;font-size:13px;user-select:none;
+}
+.adCheck input{width:18px;height:18px; accent-color: #22c55e;}
+.adSmall{color: rgba(71,85,105,.85);font-weight:1000;font-size:12px;}
+
+/* =========================
+   ✅ TODAY 카드: 쿠팡식 슬라이드 + 프리뷰 + 물결 스케일
+   ========================= */
+.todaySlider{ position:relative; overflow:hidden; }
+.todayTrack{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding: 0 8px; /* ✅ 프리뷰 6~8px */
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior:smooth;
+}
+.todayTrack::-webkit-scrollbar{display:none;}
+
+.todayItem{
+  flex: 0 0 calc(100% - 16px);
+  scroll-snap-align:center;
+  border-radius:18px;
+  border:1px solid rgba(15,23,42,.10);
+  background:#fff;
+  box-shadow: 0 12px 24px rgba(15,23,42,.08);
+  padding:14px;
+  position:relative;
+  overflow:hidden;
+  transform: scale(1);
+  transition: transform .16s ease;
+}
+
+/* ✅ 좌→우 그라데이션 번쩍 (0원/마이너스일 때만 ON) */
+.todayItem.sweepOn::after{
+  content:"";
+  position:absolute; inset:-80px;
+  background: linear-gradient(90deg,
+    rgba(255,255,255,0) 0%,
+    rgba(255,255,255,.0) 35%,
+    rgba(255,255,255,.65) 50%,
+    rgba(255,255,255,0) 65%,
+    rgba(255,255,255,0) 100%);
+  transform: translateX(-60%);
+  animation: sweep 1.2s linear infinite;
+  opacity:.55;
+  pointer-events:none;
+}
+@keyframes sweep{
+  0%{ transform: translateX(-70%); }
+  100%{ transform: translateX(70%); }
+}
+
+/* 상단 “오늘의 초특가” 마퀴 띠 */
+.todayMarquee{
+  position:absolute; left:0; right:0; top:0;
+  height:34px;
+  display:flex; align-items:center;
+  background: linear-gradient(90deg, rgba(15,23,42,.0), rgba(15,23,42,.06), rgba(15,23,42,.0));
+  border-bottom:1px solid rgba(15,23,42,.10);
+}
+.todayMarquee .bar{
+  width:100%;
+  height:100%;
   display:flex;
   align-items:center;
-  justify-content:space-between;
-  gap:10px;
-  padding: 2px 2px 10px;
+  overflow:hidden;
 }
-.adCheck{
+.todayMarquee .text{
+  display:inline-flex;
+  align-items:center;
+  gap:12px;
+  white-space:nowrap;
+  padding-left:100%;
+  animation: marquee 6.5s linear infinite;
+  font-weight:1000;
+  letter-spacing:-.4px;
+  font-size:13px;
+  color:#fff;
+  text-shadow:0 8px 16px rgba(0,0,0,.20);
+}
+@keyframes marquee{
+  0%{ transform: translateX(0); }
+  100%{ transform: translateX(-100%); }
+}
+
+/* 통신사별 마퀴 색상 */
+.todayItem[data-carrier="SK"] .todayMarquee{ background: linear-gradient(90deg, rgba(37,99,235,.98), rgba(14,165,233,.85)); }
+.todayItem[data-carrier="KT"] .todayMarquee{ background: linear-gradient(90deg, rgba(17,24,39,.98), rgba(71,85,105,.90)); }
+.todayItem[data-carrier="LG"] .todayMarquee{ background: linear-gradient(90deg, rgba(22,163,74,.98), rgba(34,197,94,.85)); }
+
+/* 내부 배지/모델/가격 */
+.todayInner{padding-top:34px;} /* 마퀴 높이만큼 */
+.todayBadgeRow{display:flex;align-items:center;justify-content:space-between;gap:10px;}
+.todayTag{
+  display:inline-flex;align-items:center;gap:8px;
+  font-weight:1000;font-size:12px;
+  padding:7px 10px;border-radius:999px;color:#fff;
+  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
+  box-shadow:0 10px 20px rgba(15,23,42,.10);
+}
+.todayCarrier{
+  font-weight:1000;font-size:12px;padding:7px 10px;border-radius:999px;color:#fff;
+}
+.todayCarrier.sk{background:var(--sk);}
+.todayCarrier.kt{background:var(--kt);}
+.todayCarrier.lg{background:var(--lg);}
+
+.todayModel{
+  margin-top:10px;
+  font-weight:1000;
+  letter-spacing:-1px;
+  color: var(--adInk);
+  font-size:26px;
+  line-height:1.15;
+  word-break:keep-all;
+}
+@media (max-width:420px){ .todayModel{font-size:24px;} }
+
+.todayInfo{margin:8px 0 0;font-size:13px;font-weight:1000;letter-spacing:-.2px;color:var(--adMuted);}
+.todayDisc{margin:6px 0 0;font-size:13px;font-weight:1000;color:#2563eb;}
+
+.todayPrices{
+  display:grid;
+  grid-template-columns:repeat(2, minmax(0, 1fr));
+  gap:10px;
+  margin-top:12px;
+}
+.todayPrices.one{grid-template-columns:1fr;}
+.todayPriceBox{
+  border-radius:16px;
+  border:1px solid rgba(15,23,42,.10);
+  background: #fff;
+  box-shadow: 0 10px 18px rgba(15,23,42,.08);
+  padding:12px 12px 14px;
+  text-align:center;
+}
+.todayPriceBox .k{font-size:12px;font-weight:1000;letter-spacing:-.2px;color: rgba(71,85,105,.95);margin-bottom:6px;}
+.todayPriceBox .v{
+  font-size:42px;font-weight:1000;letter-spacing:-1.2px;line-height:1;
+  color: var(--adRed);
+  text-shadow: 0 10px 22px rgba(239,68,68,.16);
+}
+@media (max-width:420px){ .todayPriceBox .v{font-size:40px;} }
+.todayPriceBox .v.neg{color:#dc2626;}
+.todayPriceBox .v.zero{color:#0284c7;}
+.todayPriceBox .v.pos{color:#0f172a;text-shadow: 0 10px 22px rgba(15,23,42,.10);}
+
+/* dots */
+.todayDots{
   display:flex;
+  justify-content:center;
+  gap:6px;
+  padding-top:8px;
+}
+.todayDot{
+  width:7px;height:7px;border-radius:999px;
+  background: rgba(15,23,42,.18);
+  transform: scale(1);
+  transition: transform .18s ease, background .18s ease, width .18s ease;
+}
+.todayDot.active{
+  background: rgba(15,23,42,.55);
+  width:18px;
+}
+
+/* =========================
+   ✅ 공지 팝업(쿠팡 배너 느낌)
+   ========================= */
+.noticeBanner{
+  border-radius:18px;
+  border:1px solid rgba(15,23,42,.10);
+  background:#fff;
+  box-shadow: 0 12px 24px rgba(15,23,42,.08);
+  padding:14px;
+  position:relative;
+  overflow:hidden;
+}
+.noticeBanner::before{
+  content:"";
+  position:absolute; inset:-2px;
+  background:
+    radial-gradient(600px 240px at 50% -10%, rgba(245,158,11,.18), transparent 60%),
+    radial-gradient(520px 220px at 10% 10%, rgba(239,68,68,.10), transparent 60%),
+    radial-gradient(520px 220px at 90% 10%, rgba(56,189,248,.10), transparent 60%);
+  pointer-events:none;
+}
+.noticeBadge{
+  position:relative;
+  display:inline-flex;
   align-items:center;
   gap:8px;
+  font-weight:1000;
+  font-size:12px;
+  padding:7px 10px;
+  border-radius:999px;
+  color:#fff;
+  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
+  box-shadow:0 10px 20px rgba(15,23,42,.10);
+}
+.noticeTitle{
+  position:relative;
+  margin-top:10px;
+  font-weight:1000;
+  letter-spacing:-1px;
+  color: #0f172a;
+  font-size:24px;
+  line-height:1.15;
+  word-break:keep-all;
+}
+.noticeSub{
+  position:relative;
+  margin-top:8px;
   color: rgba(71,85,105,.95);
   font-weight:1000;
   font-size:13px;
-  user-select:none;
+  line-height:1.25;
 }
-.adCheck input{width:18px;height:18px; accent-color: #22c55e;}
-.adSmall{
-  color: rgba(71,85,105,.85);
+.noticeTags{
+  position:relative;
+  display:flex;
+  flex-wrap:wrap;
+  gap:8px;
+  margin-top:10px;
+}
+.noticeTag{
   font-weight:1000;
   font-size:12px;
+  padding:7px 10px;
+  border-radius:999px;
+  border:1px solid rgba(15,23,42,.10);
+  background: rgba(15,23,42,.02);
+  color:#0f172a;
 }
+
+/* 숫자/마감 자동 강조(공지) */
+.noticeTitle .hlNum{ color:#ef4444; }
+.noticeTitle .hlClose{ color:#ef4444; }
+
+/* 강한 느낌(긴급 배너 흔들림) - 필요 시 클래스 토글용 */
+@keyframes nudge{
+  0%,100%{ transform: translateX(0); }
+  25%{ transform: translateX(-1px); }
+  50%{ transform: translateX(1px); }
+  75%{ transform: translateX(-1px); }
+}
+.noticeBanner.urgent{ animation: nudge .22s linear infinite; }
 </style>
 </head>
 
@@ -537,7 +628,6 @@ body{
             <div class="line2">새로고침 · 폰은 당겨서 · PC는 Ctrl+F5</div>
           </div>
         </div>
-        <!-- 관리자 전용(기본 숨김). 공지바 5번 탭하면 나타남 -->
         <button class="heroRefreshBtn" id="refreshBtn" type="button" aria-label="새로고침">새로고침</button>
       </div>
     </div>
@@ -573,9 +663,11 @@ body{
   </div>
 </div>
 
-<!-- ✅ 홈쇼핑 스타일: 오늘의 초특가 팝업 -->
+<!-- ✅ 공용 팝업 Backdrop -->
 <div class="adBackdrop" id="adBackdrop" aria-hidden="true"></div>
-<div class="adModal" id="adModal" aria-hidden="true" role="dialog" aria-label="오늘의 카드 팝업">
+
+<!-- ✅ TODAY 팝업 -->
+<div class="adModal" id="todayModal" aria-hidden="true" role="dialog" aria-label="오늘의 카드 팝업">
   <div class="adSheet" role="document">
     <div class="adTopBar">
       <div class="adTopRow">
@@ -583,37 +675,75 @@ body{
           <div class="adTitle1">오늘의 초특가 · 홈쇼핑급 특판</div>
           <div class="adTitle2">카톡에 “기종+용량”만 보내면 바로 안내</div>
         </div>
-        <button class="adClose" id="adCloseBtn" type="button" aria-label="닫기">✕</button>
+        <button class="adClose" id="todayCloseBtn" type="button" aria-label="닫기">✕</button>
       </div>
     </div>
 
     <div class="adBody">
-      <div class="adHeroCard" id="adCard">
-        <div class="adRibbon">오늘만</div>
-        <!-- JS로 채움 -->
+      <div class="todaySlider">
+        <div class="todayTrack" id="todayTrack"></div>
+        <div class="todayDots" id="todayDots"></div>
       </div>
 
       <div class="adCTAs">
-        <a class="adBtn kakao" id="adKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의">
+        <a class="adBtn kakao" id="todayKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의">
           <svg viewBox="0 0 24 24" aria-hidden="true">
             <path d="M20 11c0 3.87-3.58 7-8 7a9.8 9.8 0 0 1-2.5-.33L4 20l1.66-4.15A6.3 6.3 0 0 1 4 11c0-3.87 3.58-7 8-7s8 3.13 8 7z"/>
-            <path d="M9 11h.01"/>
-            <path d="M12 11h.01"/>
-            <path d="M15 11h.01"/>
+            <path d="M9 11h.01"/><path d="M12 11h.01"/><path d="M15 11h.01"/>
           </svg>
           <span>카톡 문의</span>
         </a>
-        <button class="adBtn" id="adOkBtn" type="button" aria-label="확인">
+        <button class="adBtn" id="todayOkBtn" type="button" aria-label="확인">
           <span>확인</span>
         </button>
       </div>
 
       <div class="adFoot">
         <label class="adCheck">
-          <input type="checkbox" id="noShowToday" />
+          <input type="checkbox" id="todayNoShowToday" />
           <span>오늘 하루 다시 보지 않기</span>
         </label>
         <div class="adSmall">※ 조건/재고는 문의</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ✅ 공지 팝업 -->
+<div class="adModal" id="noticeModal" aria-hidden="true" role="dialog" aria-label="공지 팝업">
+  <div class="adSheet" role="document">
+    <div class="adTopBar">
+      <div class="adTopRow">
+        <div class="adTitleWrap">
+          <div class="adTitle1">공지사항 · 꼭 확인</div>
+          <div class="adTitle2">중요 내용은 TODAY로 승격 가능</div>
+        </div>
+        <button class="adClose" id="noticeCloseBtn" type="button" aria-label="닫기">✕</button>
+      </div>
+    </div>
+
+    <div class="adBody">
+      <div class="noticeBanner" id="noticeBanner"></div>
+
+      <div class="adCTAs">
+        <a class="adBtn kakao" id="noticeKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의">
+          <svg viewBox="0 0 24 24" aria-hidden="true">
+            <path d="M20 11c0 3.87-3.58 7-8 7a9.8 9.8 0 0 1-2.5-.33L4 20l1.66-4.15A6.3 6.3 0 0 1 4 11c0-3.87 3.58-7 8-7s8 3.13 8 7z"/>
+            <path d="M9 11h.01"/><path d="M12 11h.01"/><path d="M15 11h.01"/>
+          </svg>
+          <span>카톡 문의</span>
+        </a>
+        <button class="adBtn" id="noticeOkBtn" type="button" aria-label="확인">
+          <span>확인</span>
+        </button>
+      </div>
+
+      <div class="adFoot">
+        <label class="adCheck">
+          <input type="checkbox" id="noticeNoShow" />
+          <span>다시 보지 않기</span>
+        </label>
+        <div class="adSmall">※ 공지 변경 시 다시 표시</div>
       </div>
     </div>
   </div>
@@ -630,8 +760,7 @@ body{
   <a class="dockBtn sms" href="sms:010-5839-1512" aria-label="문자">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
-      <path d="M8 10h8"/>
-      <path d="M8 14h5"/>
+      <path d="M8 10h8"/><path d="M8 14h5"/>
     </svg>
     <span>문자</span>
   </a>
@@ -639,9 +768,7 @@ body{
   <a class="dockBtn kakao" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M20 11c0 3.87-3.58 7-8 7a9.8 9.8 0 0 1-2.5-.33L4 20l1.66-4.15A6.3 6.3 0 0 1 4 11c0-3.87 3.58-7 8-7s8 3.13 8 7z"/>
-      <path d="M9 11h.01"/>
-      <path d="M12 11h.01"/>
-      <path d="M15 11h.01"/>
+      <path d="M9 11h.01"/><path d="M12 11h.01"/><path d="M15 11h.01"/>
     </svg>
     <span>카톡</span>
   </a>
@@ -657,12 +784,78 @@ const internetTabsEl = document.getElementById("internetTabs");
 const CSV_VER = "2025-12-23";
 const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
 
-// ✅ 2시간 간격(밀리초)
+/* =========================
+   ✅ 공지: data.csv의 "__NOTICE__" 행에서 불러오기
+   - CSV에 __NOTICE__ 행이 없으면 아래 기본값 사용(백업)
+   ========================= */
+const NOTICE_DEFAULT_VERSION  = "2026-02-01-01";
+const NOTICE_DEFAULT_TITLE    = "KT 위약금 면제 13일 종료 !!!";
+const NOTICE_DEFAULT_SUBTITLE = "해당 고객은 조건 확인이 필요합니다. 카톡에 “기종/통신사”만 보내주세요.";
+const NOTICE_DEFAULT_TAGS     = ["위약금", "면제", "마감임박", "조건문의"];
+
+// CSV 적용 결과(전역)
+let NOTICE_ON = true;
+let NOTICE_VERSION_CSV  = NOTICE_DEFAULT_VERSION;
+let NOTICE_TITLE_CSV    = NOTICE_DEFAULT_TITLE;
+let NOTICE_SUBTITLE_CSV = NOTICE_DEFAULT_SUBTITLE;
+let NOTICE_TAGS_CSV     = NOTICE_DEFAULT_TAGS.slice();
+
+function applyNoticeFromCSV(items){
+  try{
+    const row = items.find(x => String(x["기종"] ?? "").trim() === "__NOTICE__");
+    if(!row) return items;
+
+    const on = String(row["NOTICE_ON"] ?? "").trim();
+    if(on !== "") NOTICE_ON = (on === "1" || on.toUpperCase() === "Y" || on.toUpperCase() === "O");
+
+    const ver = String(row["NOTICE_VERSION"] ?? "").trim();
+    if(ver) NOTICE_VERSION_CSV = ver;
+
+    const t = String(row["NOTICE_TITLE"] ?? "").trim();
+    if(t) NOTICE_TITLE_CSV = t;
+
+    const sub = String(row["NOTICE_SUBTITLE"] ?? "").trim();
+    if(sub) NOTICE_SUBTITLE_CSV = sub;
+
+    const tagsRaw = String(row["NOTICE_TAGS"] ?? "").trim();
+    if(tagsRaw){
+      NOTICE_TAGS_CSV = tagsRaw.split("|").map(s=>s.trim()).filter(Boolean);
+    }
+
+    // ✅ 공지행은 목록/TODAY 후보에서 제거
+    return items.filter(x => String(x["기종"] ?? "").trim() !== "__NOTICE__");
+  }catch(e){
+    return items;
+  }
+}
+
+/* ✅ TODAY: 2시간 간격 */
 const POPUP_INTERVAL_MS = 2 * 60 * 60 * 1000;
-// ✅ 최초 오픈 딜레이(“700ms” = 0.7초)
 const POPUP_FIRST_DELAY_MS = 700;
-// ✅ 마지막 팝업 오픈 시각 저장 키(열린시간 기준 2시간)
 const POPUP_LAST_SHOWN_KEY = "TODAY_POPUP_LAST_SHOWN_TS";
+
+/* ✅ 공지 노출 여부(버전 기준) */
+const NOTICE_SEEN_VER_KEY = "NOTICE_SEEN_VERSION";
+
+/* ✅ 하루차단(오늘만) - TODAY용 */
+function getTodayBlockAllKey(){
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"
+  }).formatToParts(new Date());
+  const get = (t) => (parts.find(p => p.type === t)?.value || "");
+  const y = get("year"), m = get("month"), d = get("day");
+  return `TODAY_POPUP_BLOCKALL_${y}-${m}-${d}`;
+}
+
+/* ✅ 로테이션 키(날짜별) */
+function getRotateKey(){
+  const parts = new Intl.DateTimeFormat("en-CA", {
+    timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"
+  }).formatToParts(new Date());
+  const get = (t) => (parts.find(p => p.type === t)?.value || "");
+  const y = get("year"), m = get("month"), d = get("day");
+  return `TODAY_POPUP_ROTATE_${y}-${m}-${d}`;
+}
 
 let mode = "PHONE";
 let lastPhoneTab = "SK";
@@ -670,13 +863,10 @@ let mvnoNet = "LG";
 let inetCarrier = "SK";
 
 /* =========================
-   ✅ StorageSafe (모바일/인앱/사파리 프라이빗 대비)
-   - localStorage 실패하면 sessionStorage
-   - 둘 다 실패하면 메모리(Map)
+   ✅ StorageSafe
    ========================= */
 const StorageSafe = (() => {
   const mem = new Map();
-
   function getStore(){
     try{
       const t="__t__";
@@ -694,26 +884,18 @@ const StorageSafe = (() => {
       }
     }
   }
-
   const store = getStore();
-
   return {
     get(key){
-      try{
-        if(store) return store.getItem(key);
-      }catch(e){}
+      try{ if(store) return store.getItem(key); }catch(e){}
       return mem.has(key) ? mem.get(key) : null;
     },
     set(key,val){
-      try{
-        if(store) return store.setItem(key, String(val));
-      }catch(e){}
+      try{ if(store) return store.setItem(key, String(val)); }catch(e){}
       mem.set(key, String(val));
     },
     remove(key){
-      try{
-        if(store) return store.removeItem(key);
-      }catch(e){}
+      try{ if(store) return store.removeItem(key); }catch(e){}
       mem.delete(key);
     }
   };
@@ -723,33 +905,22 @@ const StorageSafe = (() => {
 async function setUpdateStamp(){
   const el = document.getElementById("updateStamp");
   if(!el) return;
-
   try{
-    const res = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, {
-      method: "HEAD",
-      cache: "no-store"
-    });
+    const res = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, { method: "HEAD", cache: "no-store" });
     const lm = res.headers.get("last-modified");
     if(!lm) return;
-
     const d = new Date(lm);
     const parts = new Intl.DateTimeFormat("ko-KR", {
       timeZone: "Asia/Seoul",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      hour12: false
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hour12: false
     }).formatToParts(d);
-
     const get = (t) => (parts.find(p => p.type === t)?.value || "");
-    const stamp = `${get("year")}.${get("month")}.${get("day")} ${get("hour")}:${get("minute")}`;
-    el.textContent = stamp;
+    el.textContent = `${get("year")}.${get("month")}.${get("day")} ${get("hour")}:${get("minute")}`;
   }catch(e){}
 }
 
-/* 관리자 전용 새로고침: 공지(상단 바) 5번 탭하면 버튼 토글 */
+/* 관리자 전용 새로고침: 공지바 5번 탭하면 버튼 토글 */
 (function adminRefreshToggle(){
   const hero = document.querySelector(".hero");
   const btn = document.getElementById("refreshBtn");
@@ -757,20 +928,11 @@ async function setUpdateStamp(){
 
   let taps = 0;
   let timer = null;
-
-  const reset = () => {
-    taps = 0;
-    if(timer){ clearTimeout(timer); timer = null; }
-  };
+  const reset = () => { taps = 0; if(timer){ clearTimeout(timer); timer = null; } };
 
   hero.addEventListener("click", () => {
     taps += 1;
-
-    // 2초 안에 5번 클릭하면 토글
-    if(!timer){
-      timer = setTimeout(() => reset(), 2000);
-    }
-
+    if(!timer){ timer = setTimeout(() => reset(), 2000); }
     if(taps >= 5){
       const hidden = (getComputedStyle(btn).display === "none");
       btn.style.display = hidden ? "inline-flex" : "none";
@@ -870,7 +1032,6 @@ function activateInetCarrier(c){
 function addAddonCard(carrier){
   const items = ADDON[carrier] || [];
   const pillClass = carrier === "SK" ? "sk" : (carrier === "KT" ? "kt" : "lg");
-
   const id = `addon_${carrier}`;
   const lis = items.map(x => `
     <li>
@@ -905,13 +1066,8 @@ function addAddonCard(carrier){
     btn.textContent = open ? "접기" : "펼치기";
   };
 
-  head.addEventListener("click", (e)=>{
-    if (e.target === btn) return;
-    toggle();
-  });
-  head.addEventListener("keydown", (e)=>{
-    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
-  });
+  head.addEventListener("click", (e)=>{ if (e.target === btn) return; toggle(); });
+  head.addEventListener("keydown", (e)=>{ if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
   btn.addEventListener("click", (e)=>{ e.preventDefault(); toggle(); });
 }
 
@@ -921,7 +1077,6 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
   const ch = (change ?? "");
   const mvNum = asNum(mv);
   const chNum = asNum(ch);
-
   const hasMove = (mv !== "");
   const hasChange = (ch !== "");
   const rowClass = (hasMove && hasChange) ? "" : "one";
@@ -1011,7 +1166,6 @@ const INTERNET_TV = [
   {carrier:"SK", net:"1G",   tv:"뉴이코노미", monthly:"47,300", bundle:"38,500"},
   {carrier:"SK", net:"1G",   tv:"스탠다드",   monthly:"50,600", bundle:"41,800"},
   {carrier:"SK", net:"1G",   tv:"ALL",        monthly:"53,900", bundle:"45,100"},
-
   {carrier:"KT", net:"100M", tv:"없음", monthly:"22,000", bundle:"16,500"},
   {carrier:"KT", net:"500M", tv:"없음", monthly:"33,000", bundle:"22,000"},
   {carrier:"KT", net:"1G",   tv:"없음", monthly:"38,500", bundle:"27,500"},
@@ -1021,7 +1175,6 @@ const INTERNET_TV = [
   {carrier:"KT", net:"500M", tv:"모든G", monthly:"49,500", bundle:"44,000"},
   {carrier:"KT", net:"1G",   tv:"베이직", monthly:"49,500", bundle:"44,000"},
   {carrier:"KT", net:"1G",   tv:"모든G", monthly:"55,000", bundle:"49,500"},
-
   {carrier:"LG", net:"100M", tv:"없음", monthly:"22,000", bundle:"16,500"},
   {carrier:"LG", net:"500M", tv:"없음", monthly:"33,000", bundle:"23,100"},
   {carrier:"LG", net:"1G",   tv:"없음", monthly:"38,500", bundle:"25,300"},
@@ -1045,14 +1198,12 @@ const MVNO_PLANS = [
   {net:"LG", talk:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:"12,900"},
   {net:"LG", talk:"무제한", sms:"무제한", data:"5GB+1Mbps무제한", fee:"17,500"},
   {net:"LG", talk:"100분",  sms:"100건",  data:"15GB+망내1회선+3Mbps무제한", fee:"28,820"},
-
   {net:"KT", talk:"무제한", sms:"무제한", data:"2.5GB+400Kbps무제한", fee:"9,500"},
   {net:"KT", talk:"무제한", sms:"무제한", data:"7GB+1Mbps무제한", fee:"17,900"},
   {net:"KT", talk:"무제한", sms:"무제한", data:"10GB+1Mbps무제한", fee:"19,900"},
   {net:"KT", talk:"무제한", sms:"무제한", data:"15GB+1Mbps무제한", fee:"22,400"},
   {net:"KT", talk:"무제한", sms:"무제한", data:"11GB+일2GB+3Mbps무제한", fee:"34,000"},
   {net:"KT", talk:"무제한", sms:"무제한", data:"100GB+5Mbps무제한", fee:"39,900"},
-
   {net:"SK", talk:"2,000분", sms:"2,000건", data:"2GB", fee:"6,820"},
   {net:"SK", talk:"무제한",  sms:"무제한",  data:"1GB+1Mbps무제한", fee:"13,340"},
   {net:"SK", talk:"무제한",  sms:"무제한",  data:"7GB+1Mbps무제한", fee:"19,140"},
@@ -1061,7 +1212,7 @@ const MVNO_PLANS = [
   {net:"SK", talk:"무제한",  sms:"무제한",  data:"11GB+일2GB+3Mbps무제한", fee:"36,140"},
 ];
 
-/* CSV loader (간단 파서: 콤마/따옴표 포함 라인도 처리) */
+/* CSV loader */
 function parseCSVLine(line){
   const out = [];
   let cur = "";
@@ -1073,17 +1224,12 @@ function parseCSVLine(line){
       else inQ = !inQ;
       continue;
     }
-    if(ch === "," && !inQ){
-      out.push(cur);
-      cur = "";
-      continue;
-    }
+    if(ch === "," && !inQ){ out.push(cur); cur = ""; continue; }
     cur += ch;
   }
   out.push(cur);
   return out;
 }
-
 async function fetchCSV(){
   const r = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, { cache: "no-store" });
   if (!r.ok) throw new Error("data.csv 로드 실패");
@@ -1099,52 +1245,35 @@ async function fetchCSV(){
   });
 }
 
-/* ✅ SK/KT/LG “통신사 탭만”으로 표시 + ✅ 2번 정렬(마이너스 우선 → 0원 → 플러스 저가순) */
+/* ✅ SK/KT/LG 정렬 */
 function buildCarrierSimple(items, carrier){
   const out = [];
   items.forEach(x=>{
     const model = String(x["기종"]||"").trim();
     if (!model) return;
-
     const mv = showVal(x[`${carrier}_이동`]);
     const ch = showVal(x[`${carrier}_기변`]);
-
     if (mv === "" && ch === "") return;
 
     const mvNum = asNum(mv);
     const chNum = asNum(ch);
-
-    // 대표가격(best) = 이동/기변 중 존재하는 값의 최소(마이너스 있으면 자동으로 마이너스 선택)
     const nums = [mvNum, chNum].filter(v => v !== null);
     const bestNum = nums.length ? Math.min(...nums) : null;
 
     out.push({
-      model,
-      mv,
-      ch,
-      bestNum,
+      model, mv, ch, bestNum,
       infoText: infoLineWithPlan(carrier, x),
       discount: String(x["요금할인"]||"").trim().toUpperCase()==="O"
     });
   });
 
-  // 마이너스(페이백) 우선 → 0원 → 플러스(저가순) → 없음(맨뒤)
   out.sort((a,b)=>{
-    const A = a.bestNum;
-    const B = b.bestNum;
-
-    const group = (v) => {
-      if (v === null) return 3;
-      if (v < 0) return 0;
-      if (v === 0) return 1;
-      return 2;
-    };
-
-    const gA = group(A), gB = group(B);
-    if (gA !== gB) return gA - gB;
-
-    if (A !== null && B !== null && A !== B) return A - B;
-    return a.model.localeCompare(b.model, "ko");
+    const A=a.bestNum, B=b.bestNum;
+    const group=(v)=> (v===null?3:(v<0?0:(v===0?1:2)));
+    const gA=group(A), gB=group(B);
+    if(gA!==gB) return gA-gB;
+    if(A!==null && B!==null && A!==B) return A-B;
+    return a.model.localeCompare(b.model,"ko");
   });
 
   return out;
@@ -1160,6 +1289,7 @@ async function renderPhone(tab){
   let items = [];
   try{
     items = (await fetchCSV()).filter(x => String(x["기종"] ?? "").trim() !== "");
+    items = applyNoticeFromCSV(items);
   }catch(e){
     clearList();
     list.insertAdjacentHTML("beforeend", `<p class="infoLine">CSV 파일을 읽지 못했습니다. (data.csv 파일명/위치 확인)</p>`);
@@ -1167,7 +1297,6 @@ async function renderPhone(tab){
   }
 
   clearList();
-
   if (!items.length){
     list.insertAdjacentHTML("beforeend", `<p class="infoLine">표시할 항목이 없습니다.</p>`);
     return;
@@ -1262,63 +1391,27 @@ function renderMVNO(net = mvnoNet){
 }
 
 /* =========================
-   오늘의 카드(광고 팝업)
-   - CSV의 TODAY=1(또는 Y/O) 행을 로테이션 표시
-   - 2시간마다 자동(열린시간 기준)
-   - “오늘 하루 다시 보지 않기” 체크 시: TODAY 전체 오늘은 차단 (다음날 00:00 KST 자동 해제)
-   - ✅ 모바일/인앱 타이머/스토리지 불안정 보강(visibilitychange/focus, StorageSafe)
-   - ✅ CSV 실패 시에도 기본 1장 fallback 노출(원하면 제거 가능)
+   ✅ TODAY / NOTICE 팝업 로직
+   - TODAY=1 있으면 TODAY 팝업
+   - TODAY=1 없으면 공지 팝업(버전 기준: CSV)
    ========================= */
 function isTodayRow(x){
   const v = String(x["TODAY"] ?? "").trim().toUpperCase();
   return v === "1" || v === "Y" || v === "O";
 }
-
 function safeHTML(s){
   return String(s ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;");
+    .replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");
 }
 
-// 날짜키(자정 지나면 자동으로 키가 바뀜)
-function getTodayBlockAllKey(){
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone:"Asia/Seoul",
-    year:"numeric", month:"2-digit", day:"2-digit"
-  }).formatToParts(new Date());
-  const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  const y = get("year"), m = get("month"), d = get("day");
-  return `TODAY_POPUP_BLOCKALL_${y}-${m}-${d}`;
+function getLastShownTs(){
+  try{
+    const v = Number(StorageSafe.get(POPUP_LAST_SHOWN_KEY) || 0);
+    return Number.isFinite(v) ? v : 0;
+  }catch(e){ return 0; }
 }
-
-// 로테이션 인덱스 키(날짜별)
-function getRotateKey(){
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone:"Asia/Seoul",
-    year:"numeric", month:"2-digit", day:"2-digit"
-  }).formatToParts(new Date());
-  const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  const y = get("year"), m = get("month"), d = get("day");
-  return `TODAY_POPUP_ROTATE_${y}-${m}-${d}`;
-}
-
-// TODAY=1 행들 중 이번 회차에 보여줄 행(로테이션)
-function pickRotatingTodayRow(items){
-  const todayRows = items.filter(isTodayRow);
-  if(!todayRows.length) return null;
-
-  todayRows.sort((a,b)=> String(a["기종"]||"").localeCompare(String(b["기종"]||""), "ko"));
-
-  let idx = 0;
-  try{ idx = Number(StorageSafe.get(getRotateKey()) || 0) || 0; }catch(e){ idx = 0; }
-
-  const row = todayRows[idx % todayRows.length];
-
-  try{ StorageSafe.set(getRotateKey(), String(idx + 1)); }catch(e){}
-
-  return row;
+function setLastShownTs(ts){
+  try{ StorageSafe.set(POPUP_LAST_SHOWN_KEY, String(ts)); }catch(e){}
 }
 
 function makePickFromRow(row){
@@ -1352,49 +1445,44 @@ function makePickFromRow(row){
     move: bestCarrier.move,
     change: bestCarrier.change,
     infoText: infoLineWithPlan(bestCarrier.carrier, row),
-    discount
+    discount,
+    best: bestCarrier.best
   };
 }
 
-function getLastShownTs(){
-  try{
-    const v = Number(StorageSafe.get(POPUP_LAST_SHOWN_KEY) || 0);
-    return Number.isFinite(v) ? v : 0;
-  }catch(e){
-    return 0;
-  }
-}
-function setLastShownTs(ts){
-  try{ StorageSafe.set(POPUP_LAST_SHOWN_KEY, String(ts)); }catch(e){}
+/* ✅ TODAY 여러장: 순환 시작 인덱스 */
+function getStartIndex(count){
+  let idx = 0;
+  try{ idx = Number(StorageSafe.get(getRotateKey()) || 0) || 0; }catch(e){ idx = 0; }
+  const start = idx % Math.max(1, count);
+  try{ StorageSafe.set(getRotateKey(), String(idx + 1)); }catch(e){}
+  return start;
 }
 
-function buildFallbackPick(){
-  return {
-    carrier:"SK",
-    model:"오늘의 초특가",
-    move:"카톡문의",
-    change:"",
-    infoText:"재고/조건은 카톡 문의",
-    discount:false
-  };
+function shouldAnimatePrice(pick){
+  const mvN = asNum(pick.move);
+  const chN = asNum(pick.change);
+  const has = [mvN, chN].filter(v=>v!==null);
+  if(!has.length) return false;
+  return Math.min(...has) <= 0;
 }
 
-async function openTodayPickPopupFromCSV(){
-  const modal = document.getElementById("adModal");
+/* ✅ TODAY 팝업 열기 */
+async function openTodayPopup(){
   const backdrop = document.getElementById("adBackdrop");
-  const closeBtn = document.getElementById("adCloseBtn");
-  const okBtn = document.getElementById("adOkBtn");
-  const noShowToday = document.getElementById("noShowToday");
-  const card = document.getElementById("adCard");
-  const kakaoBtn = document.getElementById("adKakaoBtn");
-  if(!modal || !backdrop || !card || !kakaoBtn) return;
+  const modal = document.getElementById("todayModal");
+  const track = document.getElementById("todayTrack");
+  const dots = document.getElementById("todayDots");
+  const closeBtn = document.getElementById("todayCloseBtn");
+  const okBtn = document.getElementById("todayOkBtn");
+  const noShowToday = document.getElementById("todayNoShowToday");
+  const kakaoBtn = document.getElementById("todayKakaoBtn");
+  if(!backdrop || !modal || !track || !dots || !kakaoBtn) return;
 
   if(modal.classList.contains("show")) return;
 
-  // ✅ 오늘 차단 체크(스토리지 안전)
-  try{
-    if(StorageSafe.get(getTodayBlockAllKey()) === "1") return;
-  }catch(e){}
+  // 오늘 차단(TODAY 전체)
+  try{ if(StorageSafe.get(getTodayBlockAllKey()) === "1") return; }catch(e){}
 
   const now = Date.now();
   const last = getLastShownTs();
@@ -1403,55 +1491,143 @@ async function openTodayPickPopupFromCSV(){
   kakaoBtn.href = KAKAO_URL;
 
   let items = [];
-  let pick = null;
-
   try{
     items = (await fetchCSV()).filter(x => String(x["기종"] ?? "").trim() !== "");
-    const row = pickRotatingTodayRow(items);
-    pick = makePickFromRow(row);
+    items = applyNoticeFromCSV(items);
   }catch(e){
-    // ✅ CSV 실패 시에도 1장 fallback 노출(원하면 여기 블록 삭제하면 됨)
-    pick = buildFallbackPick();
+    return;
   }
 
-  if(!pick) return;
+  const todayRows = items.filter(isTodayRow);
+  if(!todayRows.length) return;
 
-  const carrierClass = (pick.carrier === "SK") ? "sk" : (pick.carrier === "KT" ? "kt" : "lg");
-  const mv = String(pick.move ?? "");
-  const ch = String(pick.change ?? "");
-  const hasMove = mv !== "";
-  const hasChange = ch !== "";
-  const rowClass = (hasMove && hasChange) ? "" : "one";
-  const mvNum = asNum(mv);
-  const chNum = asNum(ch);
+  const picks = todayRows
+    .map(makePickFromRow)
+    .filter(Boolean);
 
+  if(!picks.length) return;
+
+  // ✅ 렌더
+  track.innerHTML = "";
+  dots.innerHTML = "";
   if(noShowToday) noShowToday.checked = false;
 
-  card.innerHTML = `
-    <div class="adRibbon">오늘만</div>
+  const start = getStartIndex(picks.length);
 
-    <div class="adBadgeRow">
-      <div class="adTag">오늘의 초특가</div>
-      <div class="adCarrierPill ${carrierClass}">${safeHTML(pick.carrier)}</div>
-    </div>
+  picks.forEach((pick, i)=>{
+    const carrierClass = (pick.carrier === "SK") ? "sk" : (pick.carrier === "KT" ? "kt" : "lg");
+    const mv = String(pick.move ?? "");
+    const ch = String(pick.change ?? "");
+    const hasMove = mv !== "";
+    const hasChange = ch !== "";
+    const rowClass = (hasMove && hasChange) ? "" : "one";
+    const mvNum = asNum(mv);
+    const chNum = asNum(ch);
 
-    <div class="adModel">${safeHTML(pick.model)}</div>
-    ${pick.infoText ? `<div class="adInfo">${safeHTML(pick.infoText)}</div>` : ``}
-    ${pick.discount ? `<div class="adDisc">요금할인 25% 가능</div>` : ``}
+    const sweepOn = shouldAnimatePrice(pick) ? "sweepOn" : "";
 
-    <div class="adPrices ${rowClass}">
-      ${hasMove ? `
-        <div class="adPriceBox">
-          <div class="k">이동 혜택가</div>
-          <div class="v ${vClass(mvNum)}">${safeHTML(mv)}</div>
-        </div>` : ``}
-      ${hasChange ? `
-        <div class="adPriceBox">
-          <div class="k">기변 혜택가</div>
-          <div class="v ${vClass(chNum)}">${safeHTML(ch)}</div>
-        </div>` : ``}
-    </div>
-  `;
+    track.insertAdjacentHTML("beforeend", `
+      <div class="todayItem ${sweepOn}" data-index="${i}" data-carrier="${safeHTML(pick.carrier)}">
+        <div class="todayMarquee">
+          <div class="bar">
+            <div class="text">오늘의 초특가 · 오늘의 초특가 · 오늘의 초특가 ·</div>
+          </div>
+        </div>
+
+        <div class="todayInner">
+          <div class="todayBadgeRow">
+            <div class="todayTag">오늘의 초특가</div>
+            <div class="todayCarrier ${carrierClass}">${safeHTML(pick.carrier)}</div>
+          </div>
+
+          <div class="todayModel">${safeHTML(pick.model)}</div>
+          ${pick.infoText ? `<div class="todayInfo">${safeHTML(pick.infoText)}</div>` : ``}
+          ${pick.discount ? `<div class="todayDisc">요금할인 25% 가능</div>` : ``}
+
+          <div class="todayPrices ${rowClass}">
+            ${hasMove ? `
+              <div class="todayPriceBox">
+                <div class="k">이동 혜택가</div>
+                <div class="v ${vClass(mvNum)}">${safeHTML(mv)}</div>
+              </div>` : ``}
+            ${hasChange ? `
+              <div class="todayPriceBox">
+                <div class="k">기변 혜택가</div>
+                <div class="v ${vClass(chNum)}">${safeHTML(ch)}</div>
+              </div>` : ``}
+          </div>
+        </div>
+      </div>
+    `);
+
+    dots.insertAdjacentHTML("beforeend", `<div class="todayDot ${i===start?'active':''}" data-dot="${i}"></div>`);
+  });
+
+  // ✅ 스크롤 초기 위치(시작 인덱스)
+  requestAnimationFrame(() => {
+    const item = track.querySelector(`.todayItem[data-index="${start}"]`);
+    if(item) item.scrollIntoView({behavior:"instant", block:"nearest", inline:"center"});
+  });
+
+  // ✅ 물결 스케일(스크롤 중 줄었다가 스냅되면 복귀)
+  function updateScaleAndDots(){
+    const rect = track.getBoundingClientRect();
+    const center = rect.left + rect.width/2;
+
+    let bestIdx = 0;
+    let bestDist = Infinity;
+
+    track.querySelectorAll(".todayItem").forEach(el=>{
+      const r = el.getBoundingClientRect();
+      const c = r.left + r.width/2;
+      const dist = Math.abs(c - center);
+
+      const t = Math.min(1, dist / (rect.width/2));
+      const scale = 1 - (0.04 * t);
+      el.style.transform = `scale(${scale.toFixed(3)})`;
+
+      if(dist < bestDist){ bestDist = dist; bestIdx = Number(el.dataset.index||0); }
+    });
+
+    dots.querySelectorAll(".todayDot").forEach(d=>{
+      d.classList.toggle("active", Number(d.dataset.dot) === bestIdx);
+    });
+  }
+
+  let raf = null;
+  const onScroll = () => {
+    if(raf) return;
+    raf = requestAnimationFrame(() => {
+      raf = null;
+      updateScaleAndDots();
+    });
+  };
+  track.addEventListener("scroll", onScroll, {passive:true});
+  updateScaleAndDots();
+
+  // ✅ 자동 슬라이드(여러장일 때만)
+  let autoTimer = null;
+  const startAuto = () => {
+    if(picks.length <= 1) return;
+    stopAuto();
+    autoTimer = setInterval(() => {
+      const activeDot = dots.querySelector(".todayDot.active");
+      const cur = activeDot ? Number(activeDot.dataset.dot) : 0;
+      const next = (cur + 1) % picks.length;
+      const el = track.querySelector(`.todayItem[data-index="${next}"]`);
+      if(el) el.scrollIntoView({behavior:"smooth", block:"nearest", inline:"center"});
+    }, 4500);
+  };
+  const stopAuto = () => { if(autoTimer){ clearInterval(autoTimer); autoTimer=null; } };
+
+  ["touchstart","mousedown"].forEach(ev=>{
+    track.addEventListener(ev, () => stopAuto(), {passive:true});
+  });
+  ["touchend","mouseup","mouseleave"].forEach(ev=>{
+    track.addEventListener(ev, () => startAuto(), {passive:true});
+  });
+
+  startAuto();
 
   const open = () => {
     backdrop.classList.add("show");
@@ -1468,6 +1644,7 @@ async function openTodayPickPopupFromCSV(){
         StorageSafe.set(getTodayBlockAllKey(), "1");
       }
     }catch(e){}
+    stopAuto();
     backdrop.classList.remove("show");
     modal.classList.remove("show");
     backdrop.setAttribute("aria-hidden","true");
@@ -1476,11 +1653,19 @@ async function openTodayPickPopupFromCSV(){
   };
 
   if(!modal.dataset.bound){
-    backdrop.addEventListener("click", close);
+    backdrop.addEventListener("click", () => {
+      if(modal.classList.contains("show")) close();
+      const n = document.getElementById("noticeModal");
+      if(n && n.classList.contains("show")) closeNotice();
+    });
     closeBtn.addEventListener("click", close);
     okBtn.addEventListener("click", close);
     document.addEventListener("keydown", (e)=>{
-      if(e.key === "Escape" && modal.classList.contains("show")) close();
+      if(e.key === "Escape"){
+        if(modal.classList.contains("show")) close();
+        const n = document.getElementById("noticeModal");
+        if(n && n.classList.contains("show")) closeNotice();
+      }
     });
     modal.dataset.bound = "1";
   }
@@ -1488,18 +1673,121 @@ async function openTodayPickPopupFromCSV(){
   setTimeout(open, 260);
 }
 
-/* ✅ 모바일/인앱에서 interval이 씹힐 때 보강: 다시 화면에 오면 즉시 팝업 체크 */
+/* ✅ 공지 텍스트 자동 강조 */
+function highlightNoticeTitle(s){
+  const raw = String(s||"");
+  let out = raw.replace(/(\d+)/g, `<span class="hlNum">$1</span>`);
+  out = out.replace(/(종료|마감|마지막|오늘까지|D-\s?0|D-\s?1)/gi, `<span class="hlClose">$1</span>`);
+  return out;
+}
+
+/* ✅ 공지 팝업: CSV 버전 기준 */
+function shouldShowNoticeByVersion(){
+  if(!NOTICE_ON) return false;
+  const seen = String(StorageSafe.get(NOTICE_SEEN_VER_KEY) || "");
+  if(seen === String(NOTICE_VERSION_CSV)) return false;
+  return true;
+}
+
+function closeNotice(){
+  const backdrop = document.getElementById("adBackdrop");
+  const modal = document.getElementById("noticeModal");
+  const noShow = document.getElementById("noticeNoShow");
+
+  // 체크 시: 이번 버전 다시 안 봄(보조)
+  try{
+    if(noShow && noShow.checked){
+      StorageSafe.set(NOTICE_SEEN_VER_KEY, String(NOTICE_VERSION_CSV));
+    }
+  }catch(e){}
+
+  backdrop.classList.remove("show");
+  modal.classList.remove("show");
+  backdrop.setAttribute("aria-hidden","true");
+  modal.setAttribute("aria-hidden","true");
+  document.body.style.overflow = "";
+}
+
+function openNoticePopup(){
+  const backdrop = document.getElementById("adBackdrop");
+  const modal = document.getElementById("noticeModal");
+  const banner = document.getElementById("noticeBanner");
+  const closeBtn = document.getElementById("noticeCloseBtn");
+  const okBtn = document.getElementById("noticeOkBtn");
+  const noShow = document.getElementById("noticeNoShow");
+  const kakaoBtn = document.getElementById("noticeKakaoBtn");
+  if(!backdrop || !modal || !banner || !kakaoBtn) return;
+
+  if(modal.classList.contains("show")) return;
+
+  if(!shouldShowNoticeByVersion()) return;
+
+  if(noShow) noShow.checked = false;
+  kakaoBtn.href = KAKAO_URL;
+
+  banner.classList.toggle("urgent", /종료|마감|D-\s?0|D-\s?1/.test(NOTICE_TITLE_CSV));
+
+  banner.innerHTML = `
+    <div class="noticeBadge">공지사항</div>
+    <div class="noticeTitle">${highlightNoticeTitle(safeHTML(NOTICE_TITLE_CSV))}</div>
+    <div class="noticeSub">${safeHTML(NOTICE_SUBTITLE_CSV)}</div>
+    <div class="noticeTags">
+      ${(NOTICE_TAGS_CSV||[]).map(t=>`<span class="noticeTag">${safeHTML(t)}</span>`).join("")}
+    </div>
+  `;
+
+  const open = () => {
+    backdrop.classList.add("show");
+    modal.classList.add("show");
+    backdrop.setAttribute("aria-hidden","false");
+    modal.setAttribute("aria-hidden","false");
+    document.body.style.overflow = "hidden";
+
+    // ✅ 광고 느낌 방지: "한 번이라도 보여줬으면" 같은 버전은 다시 안 뜸
+    try{
+      StorageSafe.set(NOTICE_SEEN_VER_KEY, String(NOTICE_VERSION_CSV));
+    }catch(e){}
+  };
+
+  if(!modal.dataset.bound){
+    closeBtn.addEventListener("click", closeNotice);
+    okBtn.addEventListener("click", closeNotice);
+    modal.dataset.bound = "1";
+  }
+
+  setTimeout(open, 260);
+}
+
+/* ✅ 팝업 오케스트레이션:
+   - TODAY 있으면 TODAY 먼저
+   - TODAY 없으면 NOTICE
+*/
+async function openPopupSmart(){
+  try{
+    let items = (await fetchCSV()).filter(x => String(x["기종"] ?? "").trim() !== "");
+    items = applyNoticeFromCSV(items);
+
+    const hasToday = items.some(isTodayRow);
+    if(hasToday){
+      openTodayPopup();
+      return;
+    }
+  }catch(e){
+    // CSV 실패면 공지만 시도(기본값/기존 저장값 기준)
+  }
+  openNoticePopup();
+}
+
+/* ✅ 모바일/인앱 interval 씹힘 보강 */
 (function popupRecheckOnResume(){
   let lastKick = 0;
   const kick = () => {
     const now = Date.now();
     if(now - lastKick < 1200) return;
     lastKick = now;
-    openTodayPickPopupFromCSV();
+    openPopupSmart();
   };
-  document.addEventListener("visibilitychange", () => {
-    if(!document.hidden) kick();
-  });
+  document.addEventListener("visibilitychange", () => { if(!document.hidden) kick(); });
   window.addEventListener("focus", () => kick());
 })();
 
@@ -1546,10 +1834,10 @@ activatePhoneTab("SK");
 renderPhone("SK");
 
 // ✅ 최초 1회 + ✅ 이후 2시간마다(켜둔 경우 포함)
-setTimeout(() => { openTodayPickPopupFromCSV(); }, POPUP_FIRST_DELAY_MS);
-setInterval(() => { openTodayPickPopupFromCSV(); }, POPUP_INTERVAL_MS);
+setTimeout(() => { openPopupSmart(); }, POPUP_FIRST_DELAY_MS);
+setInterval(() => { openPopupSmart(); }, POPUP_INTERVAL_MS);
 
-/* (옵션) SW 자동 새로고침 준비: sw.js 올리면 바로 활성화됨 */
+/* SW */
 (async function(){
   if(!('serviceWorker' in navigator)) return;
   try{
