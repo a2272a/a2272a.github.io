@@ -696,6 +696,10 @@ body{
           <div class="adTitle1">공지사항 · 꼭 확인</div>
           <div class="adTitle2">중요 내용은 TODAY로 승격 가능</div>
         </div>
+
+        <!-- ✅ 관리자 전용: 공지팝업 ON/OFF (기본 숨김) -->
+        <button class="adClose" id="noticeAdminToggleBtn" type="button" aria-label="공지팝업 토글" style="display:none;">OFF</button>
+
         <button class="adClose" id="noticeCloseBtn" type="button" aria-label="닫기">✕</button>
       </div>
     </div>
@@ -767,7 +771,7 @@ const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
    ✅ 공지: notice.json에서 읽음 (data.csv와 완전 분리)
    - notice.json 없으면 아래 FALLBACK 사용
    ========================= */
-const FALLBACK_NOTICE_VERSION = "2026-02-01-01";
+const FALLBACK_NOTICE_VERSION = "1";
 const FALLBACK_NOTICE_TITLE   = "KT 위약금 면제 13일 종료 !!!";
 const FALLBACK_NOTICE_SUBTITLE= "해당 고객은 조건 확인이 필요합니다. 카톡에 “기종/통신사”만 보내주세요.";
 const FALLBACK_NOTICE_TAGS    = ["위약금","면제","마감임박","조건문의"];
@@ -778,6 +782,16 @@ const POPUP_FIRST_DELAY_MS = 700;
 
 const POPUP_LAST_SHOWN_KEY = "TODAY_POPUP_LAST_SHOWN_TS";
 const NOTICE_SEEN_VER_KEY = "NOTICE_SEEN_VERSION";
+
+/* ✅ 공지팝업 스위치(기본 OFF) */
+const NOTICE_POPUP_ENABLED_KEY = "NOTICE_POPUP_ENABLED"; // "1"이면 ON, 아니면 OFF(기본)
+
+function isNoticePopupEnabled(){
+  return String(StorageSafe.get(NOTICE_POPUP_ENABLED_KEY) ?? "") === "1";
+}
+function setNoticePopupEnabled(on){
+  StorageSafe.set(NOTICE_POPUP_ENABLED_KEY, on ? "1" : "0");
+}
 
 let NOTICE = {
   version: FALLBACK_NOTICE_VERSION,
@@ -793,11 +807,11 @@ async function loadNoticeFromJSON(){
     if(!r.ok) throw new Error("notice.json load fail");
     const j = await r.json();
 
-    const ver = String(j.version ?? "").trim();
+    const ver = String(j.version ?? "").trim();       // 숫자여도 OK
     const title = String(j.title ?? "").trim();
     const sub = String(j.subtitle ?? "").trim();
     const tags = Array.isArray(j.tags) ? j.tags.map(x=>String(x||"").trim()).filter(Boolean) : [];
-    const urgent = !!j.urgent; // (확장용)
+    const urgent = !!j.urgent;
 
     const out = {
       version: ver || FALLBACK_NOTICE_VERSION,
@@ -924,6 +938,48 @@ async function setUpdateStamp(){
     e.preventDefault();
     location.reload();
   });
+})();
+
+/* ✅ 관리자 전용 공지팝업 토글: hero 5번 탭하면 버튼 노출 */
+(function adminNoticeToggle(){
+  const hero = document.querySelector(".hero");
+  const btn = document.getElementById("noticeAdminToggleBtn");
+  if(!hero || !btn) return;
+
+  function syncLabel(){
+    btn.textContent = isNoticePopupEnabled() ? "ON" : "OFF";
+    btn.style.background = isNoticePopupEnabled() ? "rgba(34,197,94,.22)" : "rgba(255,255,255,.18)";
+    btn.style.borderColor = isNoticePopupEnabled() ? "rgba(34,197,94,.55)" : "rgba(255,255,255,.55)";
+  }
+
+  let taps = 0;
+  let timer = null;
+  const reset = () => { taps = 0; if(timer){ clearTimeout(timer); timer = null; } };
+
+  hero.addEventListener("click", () => {
+    taps += 1;
+    if(!timer){ timer = setTimeout(() => reset(), 2000); }
+    if(taps >= 5){
+      const hidden = (getComputedStyle(btn).display === "none");
+      btn.style.display = hidden ? "inline-flex" : "none";
+      syncLabel();
+      reset();
+    }
+  }, { passive:true });
+
+  btn.addEventListener("click", (e) => {
+    e.preventDefault();
+    setNoticePopupEnabled(!isNoticePopupEnabled());
+    syncLabel();
+
+    // OFF로 바꾸면 떠있던 공지 팝업도 즉시 닫기
+    const nm = document.getElementById("noticeModal");
+    if(!isNoticePopupEnabled() && nm && nm.classList.contains("show")){
+      hideModal(nm);
+    }
+  });
+
+  syncLabel();
 })();
 
 /* 부가서비스 */
@@ -1106,9 +1162,6 @@ function addSimpleCard({badgeText, badgeClass, line1, line2, price1Label, price1
   `);
 }
 
-/* ✅ 하단 고정 안내(사용자 요청으로: SK/KT/LG 카드 하단 '가입비유심비...' 삭제)
-   - 기존 addCompactNoticeCard()는 유지하되, PHONE에서는 호출하지 않음
-*/
 function addCompactNoticeCard(){
   list.insertAdjacentHTML("beforeend", `
     <div class="card noticeCard">
@@ -1251,6 +1304,27 @@ function getRowBestPrice(row, carrier){
   return Math.min(mv, ch);
 }
 
+/* ✅ TODAY용: 한 행에서 SK/KT/LG 중 "가장 낮은(마이너스 우선)" 통신사 자동 선택 */
+function pickBestCarrierForRow(row){
+  const carriers = ["SK","KT","LG"];
+  let bestCarrier = lastPhoneTab || "SK";
+  let bestPrice = Number.POSITIVE_INFINITY;
+
+  carriers.forEach(c=>{
+    const p = getRowBestPrice(row, c);
+    if(p < bestPrice){
+      bestPrice = p;
+      bestCarrier = c;
+    }
+  });
+
+  // 전부 비어있으면 기존 탭
+  if(bestPrice === Number.POSITIVE_INFINITY){
+    return { carrier: (lastPhoneTab || "SK"), best: bestPrice };
+  }
+  return { carrier: bestCarrier, best: bestPrice };
+}
+
 function renderPhone(rows, carrier){
   clearList();
   addAddonCard(carrier);
@@ -1266,8 +1340,7 @@ function renderPhone(rows, carrier){
 
   if(!filtered.length){
     list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 카드가 없습니다.</div>`);
-    // ✅ PHONE에서는 하단 "가입비/유심비..." 안내 삭제 요청 -> 여기서도 안 붙임
-    return;
+    return; // ✅ 요청: SK/KT/LG 하단 '추가요금없음' 카드 삭제
   }
 
   filtered.forEach(r=>{
@@ -1286,7 +1359,7 @@ function renderPhone(rows, carrier){
     });
   });
 
-  // ✅ PHONE에서는 addCompactNoticeCard() 호출하지 않음 (요청사항)
+  // ✅ 요청: SK/KT/LG 하단 '가입비·유심비...' 카드 삭제 (아무것도 추가 안 함)
 }
 
 function renderMVNO(net){
@@ -1399,10 +1472,13 @@ function renderNoticeBanner(){
   `;
 }
 
-/* 공지 팝업 노출(A안): 버전 바뀌면 다시 뜸 */
+/* 공지 팝업 노출(A안): 버전 바뀌면 다시 뜸 + ✅ 관리자 스위치 ON일 때만 */
 function maybeShowNoticePopup(){
+  if(!isNoticePopupEnabled()) return; // ✅ 기본 OFF
+
   const seen = String(StorageSafe.get(NOTICE_SEEN_VER_KEY) ?? "");
   if(seen === String(NOTICE.version ?? "")) return; // 이미 본 버전
+
   renderNoticeBanner();
   showModal(noticeModal);
 }
@@ -1421,8 +1497,6 @@ document.getElementById("noticeNoShow").addEventListener("change", (e)=>{
 
 /* =========================
    ✅ TODAY 팝업 렌더/로직
-   - ✅ "같은 행에서 SK/KT/LG 중 최저가(마이너스 우선)" 자동 선택
-   - ✅ 그 최저가 기준으로 TODAY 목록 정렬(오름차순)
    ========================= */
 const todayTrack = document.getElementById("todayTrack");
 const todayDots = document.getElementById("todayDots");
@@ -1434,33 +1508,6 @@ function carrierClass(c){
   return "lg";
 }
 
-/* ✅ 같은 행에서 최저가 통신사 선택 */
-function pickBestCarrierForRow(row){
-  const carriers = ["SK","KT","LG"];
-  let bestC = "SK";
-  let bestP = Number.POSITIVE_INFINITY;
-
-  carriers.forEach(c=>{
-    const p = getRowBestPrice(row, c);
-    if(p < bestP){
-      bestP = p;
-      bestC = c;
-    }
-  });
-
-  return { carrier: bestC, price: bestP };
-}
-
-/* ✅ TODAY rows를 "행 기준 최저가"로 정렬하기 위한 랭킹 */
-function sortTodayRowsByBestPrice(rows){
-  return rows
-    .map(r=>{
-      const best = pickBestCarrierForRow(r);
-      return { row:r, bestCarrier: best.carrier, bestPrice: best.price };
-    })
-    .sort((a,b)=> a.bestPrice - b.bestPrice);
-}
-
 function buildTodayCards(todayRows){
   todayTrack.innerHTML = "";
   todayDots.innerHTML = "";
@@ -1470,23 +1517,25 @@ function buildTodayCards(todayRows){
     return;
   }
 
-  // ✅ 1) TODAY를 "행 기준 최저가(마이너스/낮은값)"로 먼저 정렬
-  const ranked = sortTodayRowsByBestPrice(todayRows); // [{row, bestCarrier, bestPrice}, ...]
+  // ✅ 1) 행별로 "최저가 통신사" 자동 선택 + best 값 생성
+  const enriched = todayRows.map(r=>{
+    const picked = pickBestCarrierForRow(r);
+    return { row:r, c:picked.carrier, best:picked.best };
+  });
 
-  // ✅ 2) 오늘 로테이션(날짜 단위): 0/1/2... 순환 (정렬된 목록에서 회전)
+  // ✅ 2) 전체를 "가장 낮은 값(마이너스 우선)"부터 정렬해서 첫 카드가 최저가가 되게
+  enriched.sort((a,b)=> (a.best - b.best));
+
+  // ✅ 3) 날짜 로테이션(정렬된 상태에서 회전) - 원하면 꺼도 됨
   const rKey = getRotateKey();
   const cur = Number(StorageSafe.get(rKey) ?? "0");
-  const startIdx = (Number.isFinite(cur) ? cur : 0) % ranked.length;
+  const startIdx = (Number.isFinite(cur) ? cur : 0) % enriched.length;
   StorageSafe.set(rKey, String(startIdx + 1));
+  const rotated = enriched.slice(startIdx).concat(enriched.slice(0, startIdx));
 
-  // ✅ 3) 회전 시작점 기준 재정렬
-  const rotated = ranked.slice(startIdx).concat(ranked.slice(0, startIdx));
-
-  rotated.forEach((item, idx)=>{
-    const r = item.row;
-
-    // ✅ 같은 행에서 최저가 통신사로 표시
-    const c = item.bestCarrier;
+  rotated.forEach((pack, idx)=>{
+    const r = pack.row;
+    const c = pack.c;
 
     const model = String(r["기종"] ?? "").trim() || "-";
     const mv = showVal(r[`${c}_이동`]);
@@ -1498,7 +1547,7 @@ function buildTodayCards(todayRows){
     const hasChange = (ch !== "");
     const one = !(hasMove && hasChange);
 
-    const best = item.bestPrice;
+    const best = getRowBestPrice(r, c);
     const sweepOn = (best !== Number.POSITIVE_INFINITY) && (best <= 0);
 
     todayTrack.insertAdjacentHTML("beforeend", `
@@ -1664,7 +1713,7 @@ internetTabsEl.addEventListener("click", (e)=>{
     activatePhoneTab(lastPhoneTab);
     renderPhone(rows, lastPhoneTab);
 
-    // ✅ 공지 팝업(버전 기준) - TODAY와 무관하게 동작
+    // ✅ 공지 팝업(버전 기준) - ✅ 스위치 ON일 때만 뜸(기본 OFF)
     setTimeout(()=> maybeShowNoticePopup(), 300);
 
     // ✅ TODAY 팝업(2시간 기준)
@@ -1687,8 +1736,7 @@ internetTabsEl.addEventListener("click", (e)=>{
 
   }catch(err){
     console.error(err);
-    const msg = (err && err.message) ? err.message : String(err);
-    showLoading(`초기화 실패: ${msg}`);
+    showLoading("data.csv를 불러오지 못했습니다. 파일명/경로를 확인해주세요.");
   }
 })();
 </script>
