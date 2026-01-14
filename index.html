@@ -767,7 +767,7 @@ const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
    ✅ 공지: notice.json에서 읽음 (data.csv와 완전 분리)
    - notice.json 없으면 아래 FALLBACK 사용
    ========================= */
-const FALLBACK_NOTICE_VERSION = 1; // ✅ 숫자만
+const FALLBACK_NOTICE_VERSION = "2026-02-01-01";
 const FALLBACK_NOTICE_TITLE   = "KT 위약금 면제 13일 종료 !!!";
 const FALLBACK_NOTICE_SUBTITLE= "해당 고객은 조건 확인이 필요합니다. 카톡에 “기종/통신사”만 보내주세요.";
 const FALLBACK_NOTICE_TAGS    = ["위약금","면제","마감임박","조건문의"];
@@ -793,14 +793,14 @@ async function loadNoticeFromJSON(){
     if(!r.ok) throw new Error("notice.json load fail");
     const j = await r.json();
 
-    const ver = j.version;
+    const ver = String(j.version ?? "").trim();
     const title = String(j.title ?? "").trim();
     const sub = String(j.subtitle ?? "").trim();
     const tags = Array.isArray(j.tags) ? j.tags.map(x=>String(x||"").trim()).filter(Boolean) : [];
-    const urgent = !!j.urgent; // (현재 로직은 title 기반 urgent 판단이지만, 확장용)
+    const urgent = !!j.urgent; // (확장용)
 
     const out = {
-      version: (Number.isFinite(Number(ver)) ? Number(ver) : FALLBACK_NOTICE_VERSION),
+      version: ver || FALLBACK_NOTICE_VERSION,
       title: title || FALLBACK_NOTICE_TITLE,
       subtitle: sub || FALLBACK_NOTICE_SUBTITLE,
       tags: tags.length ? tags : (FALLBACK_NOTICE_TAGS.slice()),
@@ -1106,6 +1106,9 @@ function addSimpleCard({badgeText, badgeClass, line1, line2, price1Label, price1
   `);
 }
 
+/* ✅ 하단 고정 안내(사용자 요청으로: SK/KT/LG 카드 하단 '가입비유심비...' 삭제)
+   - 기존 addCompactNoticeCard()는 유지하되, PHONE에서는 호출하지 않음
+*/
 function addCompactNoticeCard(){
   list.insertAdjacentHTML("beforeend", `
     <div class="card noticeCard">
@@ -1263,7 +1266,7 @@ function renderPhone(rows, carrier){
 
   if(!filtered.length){
     list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 카드가 없습니다.</div>`);
-    /* ✅ 요청사항: SK/KT/LG(휴대폰) 하단 "가입비·유심비..." 안내카드 삭제 */
+    // ✅ PHONE에서는 하단 "가입비/유심비..." 안내 삭제 요청 -> 여기서도 안 붙임
     return;
   }
 
@@ -1283,7 +1286,7 @@ function renderPhone(rows, carrier){
     });
   });
 
-  /* ✅ 요청사항: SK/KT/LG(휴대폰) 하단 "가입비·유심비..." 안내카드 삭제 */
+  // ✅ PHONE에서는 addCompactNoticeCard() 호출하지 않음 (요청사항)
 }
 
 function renderMVNO(net){
@@ -1382,7 +1385,7 @@ function highlightNoticeTitle(t){
 function renderNoticeBanner(){
   const box = document.getElementById("noticeBanner");
   if(!box) return;
-  const urgent = NOTICE.urgent || /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
+  const urgent = /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
   box.classList.toggle("urgent", urgent);
 
   const tags = (NOTICE.tags || []).slice(0, 8);
@@ -1418,6 +1421,8 @@ document.getElementById("noticeNoShow").addEventListener("change", (e)=>{
 
 /* =========================
    ✅ TODAY 팝업 렌더/로직
+   - ✅ "같은 행에서 SK/KT/LG 중 최저가(마이너스 우선)" 자동 선택
+   - ✅ 그 최저가 기준으로 TODAY 목록 정렬(오름차순)
    ========================= */
 const todayTrack = document.getElementById("todayTrack");
 const todayDots = document.getElementById("todayDots");
@@ -1428,6 +1433,34 @@ function carrierClass(c){
   if(c==="KT") return "kt";
   return "lg";
 }
+
+/* ✅ 같은 행에서 최저가 통신사 선택 */
+function pickBestCarrierForRow(row){
+  const carriers = ["SK","KT","LG"];
+  let bestC = "SK";
+  let bestP = Number.POSITIVE_INFINITY;
+
+  carriers.forEach(c=>{
+    const p = getRowBestPrice(row, c);
+    if(p < bestP){
+      bestP = p;
+      bestC = c;
+    }
+  });
+
+  return { carrier: bestC, price: bestP };
+}
+
+/* ✅ TODAY rows를 "행 기준 최저가"로 정렬하기 위한 랭킹 */
+function sortTodayRowsByBestPrice(rows){
+  return rows
+    .map(r=>{
+      const best = pickBestCarrierForRow(r);
+      return { row:r, bestCarrier: best.carrier, bestPrice: best.price };
+    })
+    .sort((a,b)=> a.bestPrice - b.bestPrice);
+}
+
 function buildTodayCards(todayRows){
   todayTrack.innerHTML = "";
   todayDots.innerHTML = "";
@@ -1437,18 +1470,23 @@ function buildTodayCards(todayRows){
     return;
   }
 
-  // 오늘 로테이션(날짜 단위): 0/1/2... 순환
+  // ✅ 1) TODAY를 "행 기준 최저가(마이너스/낮은값)"로 먼저 정렬
+  const ranked = sortTodayRowsByBestPrice(todayRows); // [{row, bestCarrier, bestPrice}, ...]
+
+  // ✅ 2) 오늘 로테이션(날짜 단위): 0/1/2... 순환 (정렬된 목록에서 회전)
   const rKey = getRotateKey();
   const cur = Number(StorageSafe.get(rKey) ?? "0");
-  const startIdx = (Number.isFinite(cur) ? cur : 0) % todayRows.length;
-  StorageSafe.set(rKey, String(startIdx + 1)); // 다음번 시작점 갱신
+  const startIdx = (Number.isFinite(cur) ? cur : 0) % ranked.length;
+  StorageSafe.set(rKey, String(startIdx + 1));
 
-  // 회전 시작점 기준으로 배열 재정렬
-  const rotated = todayRows.slice(startIdx).concat(todayRows.slice(0, startIdx));
+  // ✅ 3) 회전 시작점 기준 재정렬
+  const rotated = ranked.slice(startIdx).concat(ranked.slice(0, startIdx));
 
-  rotated.forEach((r, idx)=>{
-    const carrier = String(r["통신사"] ?? r["CARRIER"] ?? "").trim().toUpperCase();
-    const c = (carrier==="SK"||carrier==="KT"||carrier==="LG") ? carrier : (lastPhoneTab || "SK");
+  rotated.forEach((item, idx)=>{
+    const r = item.row;
+
+    // ✅ 같은 행에서 최저가 통신사로 표시
+    const c = item.bestCarrier;
 
     const model = String(r["기종"] ?? "").trim() || "-";
     const mv = showVal(r[`${c}_이동`]);
@@ -1460,7 +1498,7 @@ function buildTodayCards(todayRows){
     const hasChange = (ch !== "");
     const one = !(hasMove && hasChange);
 
-    const best = getRowBestPrice(r, c);
+    const best = item.bestPrice;
     const sweepOn = (best !== Number.POSITIVE_INFINITY) && (best <= 0);
 
     todayTrack.insertAdjacentHTML("beforeend", `
@@ -1649,7 +1687,8 @@ internetTabsEl.addEventListener("click", (e)=>{
 
   }catch(err){
     console.error(err);
-    showLoading("data.csv를 불러오지 못했습니다. 파일명/경로를 확인해주세요.");
+    const msg = (err && err.message) ? err.message : String(err);
+    showLoading(`초기화 실패: ${msg}`);
   }
 })();
 </script>
