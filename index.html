@@ -760,11 +760,12 @@ const mvnoTabsEl = document.getElementById("mvnoTabs");
 const internetTabsEl = document.getElementById("internetTabs");
 
 const CSV_VER = "2025-12-23"; // 캐시 무효용(원하면 숫자만 바꿔도 됨)
+const NOTICE_JSON_VER = "2026-01-14"; // ✅ notice.json 캐시 무효용(원하면 숫자만 바꿔도 됨)
 const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
 
 /* =========================
-   ✅ 공지: data.csv의 __NOTICE__ 행에서 읽음
-   - 없으면 아래 FALLBACK 사용
+   ✅ 공지: notice.json에서 읽음 (data.csv와 완전 분리)
+   - notice.json 없으면 아래 FALLBACK 사용
    ========================= */
 const FALLBACK_NOTICE_VERSION = "2026-02-01-01";
 const FALLBACK_NOTICE_TITLE   = "KT 위약금 면제 13일 종료 !!!";
@@ -785,29 +786,36 @@ let NOTICE = {
   tags: FALLBACK_NOTICE_TAGS
 };
 
-function normalizeTags(v){
-  const s = String(v ?? "").trim();
-  if(!s) return [];
-  const parts = s.includes("|") ? s.split("|") : s.split(",");
-  return parts.map(x=>String(x||"").trim()).filter(Boolean);
-}
-function readNoticeFromCSVRows(rows){
-  const r = rows.find(x => String(x["기종"] ?? "").trim() === "__NOTICE__") || null;
-  if(!r) return null;
+/* ✅ notice.json 로딩 */
+async function loadNoticeFromJSON(){
+  try{
+    const r = await fetch(`notice.json?v=${encodeURIComponent(NOTICE_JSON_VER)}`, { cache:"no-store" });
+    if(!r.ok) throw new Error("notice.json load fail");
+    const j = await r.json();
 
-  const ver = String(r["NOTICE_VERSION"] ?? "").trim();
-  const title = String(r["NOTICE_TITLE"] ?? "").trim();
-  const sub = String(r["NOTICE_SUBTITLE"] ?? "").trim();
-  const tagsRaw = r["NOTICE_TAGS"];
+    const ver = String(j.version ?? "").trim();
+    const title = String(j.title ?? "").trim();
+    const sub = String(j.subtitle ?? "").trim();
+    const tags = Array.isArray(j.tags) ? j.tags.map(x=>String(x||"").trim()).filter(Boolean) : [];
+    const urgent = !!j.urgent; // (현재 로직은 title 기반 urgent 판단이지만, 확장용)
 
-  const next = {
-    version: ver || FALLBACK_NOTICE_VERSION,
-    title: title || FALLBACK_NOTICE_TITLE,
-    subtitle: sub || FALLBACK_NOTICE_SUBTITLE,
-    tags: normalizeTags(tagsRaw)
-  };
-  if(!next.tags.length) next.tags = FALLBACK_NOTICE_TAGS.slice();
-  return next;
+    const out = {
+      version: ver || FALLBACK_NOTICE_VERSION,
+      title: title || FALLBACK_NOTICE_TITLE,
+      subtitle: sub || FALLBACK_NOTICE_SUBTITLE,
+      tags: tags.length ? tags : (FALLBACK_NOTICE_TAGS.slice()),
+      urgent
+    };
+    return out;
+  }catch(e){
+    return {
+      version: FALLBACK_NOTICE_VERSION,
+      title: FALLBACK_NOTICE_TITLE,
+      subtitle: FALLBACK_NOTICE_SUBTITLE,
+      tags: FALLBACK_NOTICE_TAGS.slice(),
+      urgent: false
+    };
+  }
 }
 
 /* ✅ TODAY 하루차단(오늘만) */
@@ -1354,7 +1362,7 @@ adBackdrop.addEventListener("click", ()=>{
 });
 
 /* =========================
-   ✅ 공지 팝업 렌더
+   ✅ 공지 팝업 렌더/로직
    ========================= */
 function escapeHtml(s){
   return String(s ?? "")
@@ -1499,9 +1507,6 @@ function buildTodayCards(todayRows){
     dots.forEach((d,idx)=> d.classList.toggle("active", idx===i));
   }
   todayTrack.addEventListener("scroll", ()=>{
-    const left = todayTrack.scrollLeft;
-    const w = todayTrack.clientWidth;
-    // center 기준으로 가장 가까운 index
     let bestIdx = 0;
     let bestDist = Infinity;
     items.forEach((el, idx)=>{
@@ -1561,7 +1566,6 @@ serviceTabsEl.addEventListener("click", (e)=>{
     hideAllSubTabs();
     showMvnoTabs(true);
     showInternetTabs(false);
-    // 휴대폰 탭 비활성 느낌(숨기진 않음)
     renderMVNO(mvnoNet);
     activateMvnoNet(mvnoNet);
   }else if(next === "INTERNET"){
@@ -1583,7 +1587,6 @@ phoneTabsEl.addEventListener("click", (e)=>{
   setServiceActive(null);
   hideAllSubTabs();
   activatePhoneTab(tab);
-  // rows는 전역에 저장(로드 후)
   if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
 });
 
@@ -1610,12 +1613,11 @@ internetTabsEl.addEventListener("click", (e)=>{
   await setUpdateStamp();
 
   try{
+    // ✅ 공지 먼저: notice.json
+    NOTICE = await loadNoticeFromJSON();
+
     const rows = await fetchCSV();
     window.__CSV_ROWS__ = rows;
-
-    // ✅ 공지 읽기
-    const n = readNoticeFromCSVRows(rows);
-    if(n) NOTICE = n;
 
     // ✅ 기본 화면: PHONE (SK)
     mode = "PHONE";
@@ -1624,7 +1626,7 @@ internetTabsEl.addEventListener("click", (e)=>{
     activatePhoneTab(lastPhoneTab);
     renderPhone(rows, lastPhoneTab);
 
-    // ✅ 공지 팝업(버전 기준)
+    // ✅ 공지 팝업(버전 기준) - TODAY와 무관하게 동작
     setTimeout(()=> maybeShowNoticePopup(), 300);
 
     // ✅ TODAY 팝업(2시간 기준)
@@ -1636,14 +1638,13 @@ internetTabsEl.addEventListener("click", (e)=>{
           showModal(todayModal);
         }
       }, POPUP_FIRST_DELAY_MS);
-      // 열린 상태에서도 2시간마다 체크
+
       setInterval(()=>{
         if(shouldShowTodayPopup()){
-          // 오늘 차단 체크박스는 항상 false로 초기화(사용자가 다시 선택할 수 있게)
           todayNoShowToday.checked = false;
           showModal(todayModal);
         }
-      }, 30 * 1000); // 30초마다 조건 확인(가볍게)
+      }, 30 * 1000);
     }
 
   }catch(err){
