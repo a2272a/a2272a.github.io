@@ -166,7 +166,24 @@ body{
 .badge.hot{background:var(--hot);} .badge.low{background:var(--low);}
 
 .infoLine{font-size:12px;font-weight:1000;color:var(--muted);margin:0 0 6px;}
-.discountLine{font-size:12px;font-weight:1000;color:#2563eb;margin:0 0 8px;}
+.discountLine{font-size:12px;font-weight:1000;color:#2563eb;margin:0 0 8px;} /* (기존 유지: 지금은 사용 안 함) */
+
+/* ✅ B안: 모델 아래 작은 알약 배지 */
+.discountPill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin: 2px 0 8px;
+  padding:6px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:1000;
+  color:#1d4ed8;
+  background: rgba(37,99,235,.10);
+  border:1px solid rgba(37,99,235,.22);
+  line-height:1;
+}
+.discountPill strong{font-weight:1000;}
 
 /* price row */
 .priceRow{
@@ -471,7 +488,23 @@ body{
 @media (max-width:420px){ .todayModel{font-size:24px;} }
 
 .todayInfo{margin:8px 0 0;font-size:13px;font-weight:1000;letter-spacing:-.2px;color:var(--adMuted);}
-.todayDisc{margin:6px 0 0;font-size:13px;font-weight:1000;color:#2563eb;}
+
+/* ✅ B안: TODAY에서도 모델 아래 작은 알약(요금할인) */
+.todayDiscPill{
+  display:inline-flex;
+  align-items:center;
+  gap:6px;
+  margin-top:8px;
+  padding:7px 10px;
+  border-radius:999px;
+  font-size:12px;
+  font-weight:1000;
+  color:#1d4ed8;
+  background: rgba(37,99,235,.10);
+  border:1px solid rgba(37,99,235,.22);
+  line-height:1;
+}
+.todayDiscPill strong{font-weight:1000;}
 
 .todayPrices{
   display:grid;
@@ -1076,6 +1109,12 @@ function addAddonCard(carrier){
   btn.addEventListener("click", (e)=>{ e.preventDefault(); toggle(); });
 }
 
+/* ✅ B안: 요금할인(O/X) 판별 (CSV 컬럼: 요금할인) */
+function isDiscountRow(x){
+  const v = String(x["요금할인"] ?? "").trim().toLowerCase();
+  return (v === "o" || v === "1" || v === "true" || v === "y" || v === "yes" || v === "on");
+}
+
 /* phone card */
 function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount}){
   const mv = (move ?? "");
@@ -1093,7 +1132,7 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
         <div class="badge ${badgeClass}">${badgeText}</div>
       </div>
       ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
-      ${discount ? `<p class="discountLine">요금할인 25% 가능</p>` : ``}
+      ${discount ? `<div class="discountPill">요금할인 <strong>25%</strong></div>` : ``}
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
           <div class="pill">
@@ -1292,7 +1331,7 @@ function renderPhone(rows, carrier){
     const model = String(r["기종"] ?? "").trim() || "-";
     const move = showVal(r[`${carrier}_이동`]);
     const change = showVal(r[`${carrier}_기변`]);
-    const discount = String(r[`${carrier}_선택약정`] ?? "").trim() === "1";
+    const discount = isDiscountRow(r); // ✅ CSV: 요금할인(O/X)
     addPhoneCard({
       badgeText: carrier,
       badgeClass: carrier === "SK" ? "sk" : carrier === "KT" ? "kt" : "lg",
@@ -1449,9 +1488,7 @@ function buildTodayCards(todayRows){
     return;
   }
 
-  /* ✅ (요청) TODAY는 SK부터가 아니라 "최저(가장 낮은 값, 마이너스 우선)" 기준으로 시작
-     - 전체 todayRows 중 각 행의 최소값(3사 중 존재하는 이동/기변 최저)을 계산해서 정렬 후 표시
-     - 같은 값이면 모델명으로 안정 정렬 */
+  /* ✅ (요청) TODAY는 "최저(가장 낮은 값, 마이너스 우선)" 기준으로 시작 */
   const scoreRow = (r) => {
     const carriers = ["SK","KT","LG"];
     let best = Number.POSITIVE_INFINITY;
@@ -1480,7 +1517,6 @@ function buildTodayCards(todayRows){
 
   rotated.forEach((r, idx)=>{
     // ✅ 카드 내부는 "행에서 실제 값이 있는 통신사"를 우선 표시
-    // (없으면 lastPhoneTab)
     const pickCarrier = () => {
       const cands = ["SK","KT","LG"];
       let bestC = lastPhoneTab || "SK";
@@ -1524,7 +1560,7 @@ function buildTodayCards(todayRows){
 
           <div class="todayModel">${escapeHtml(model)}</div>
           <div class="todayInfo">${escapeHtml(infoLineWithPlan(c, r))}</div>
-          <div class="todayDisc">${String(r[`${c}_선택약정`] ?? "").trim() === "1" ? "요금할인 25% 가능" : ""}</div>
+          ${isDiscountRow(r) ? `<div class="todayDiscPill">요금할인 <strong>25%</strong></div>` : ``}
 
           <div class="todayPrices ${one ? "one" : ""}">
             ${hasMove ? `
