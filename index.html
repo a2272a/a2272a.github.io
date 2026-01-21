@@ -123,7 +123,7 @@ body{
   font-size:12px;
   cursor:pointer;
   text-shadow:0 0 10px rgba(0,255,180,.55);
-  display:none; /* ✅ 5번 탭하면 보이게 */
+  display:none;
 }
 .heroRefreshBtn:active{transform:translateY(1px);filter:brightness(.98);}
 
@@ -184,43 +184,59 @@ body{
 }
 .discountPill strong{font-weight:1000;}
 
-/* ✅ 초강력 CTA: “부가서비스 유지조건” 클릭 유도 */
-.addonCta{
-  width:100%;
-  margin:10px 0 10px;
-  padding:12px 12px;
-  border-radius:14px;
-  border:2px solid rgba(239,68,68,.55);
-  background:
-    linear-gradient(90deg, rgba(239,68,68,.14), rgba(251,146,60,.14)),
-    #fff;
-  color:#7f1d1d;
-  font-weight:1000;
-  font-size:14px;
-  letter-spacing:-.3px;
-  cursor:pointer;
+/* ✅ 가격카드 내 부가서비스 CTA는 완전 금지 (사용 안함) */
+.addonCta{ display:none !important; }
+
+/* ✅ (핵심) 목록 최상단 “부가서비스 유지조건” 초강력 고정 CTA 1개 */
+.addonCtaGlobal{
+  grid-column:1/-1;
+  position: sticky;
+  top: 8px;
+  z-index: 50;
+  margin: 0 0 10px;
+  padding: 14px 14px;
+  border-radius: 16px;
+  border: 2px solid rgba(239,68,68,.60);
+  background: linear-gradient(90deg, rgba(239,68,68,.18), rgba(251,146,60,.18)), #fff;
+  box-shadow:0 18px 36px rgba(239,68,68,.16);
   display:flex;
   align-items:center;
   justify-content:space-between;
   gap:10px;
-  box-shadow: 0 14px 26px rgba(239,68,68,.10);
+  cursor:pointer;
+  user-select:none;
+  animation: addonPulse 1.0s ease-in-out infinite;
 }
-.addonCta strong{font-weight:1000;}
-.addonCta .arr{
-  flex:0 0 auto;
-  width:34px;height:34px;
-  border-radius:12px;
-  display:flex;align-items:center;justify-content:center;
-  background: linear-gradient(90deg, rgba(239,68,68,.92), rgba(251,146,60,.92));
+.addonCtaGlobal .t{
+  font-weight:1000;
+  font-size:16px;
+  letter-spacing:-.4px;
+  color:#7f1d1d;
+  line-height:1.15;
+}
+.addonCtaGlobal .s{
+  font-weight:1000;
+  font-size:12px;
+  color: rgba(127,29,29,.78);
+  margin-top:4px;
+}
+.addonCtaGlobal .go{
+  width:44px;height:44px;
+  border-radius:14px;
+  background: linear-gradient(90deg,#ef4444,#fb923c);
   color:#fff;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  font-weight:1000;
+  flex:0 0 auto;
   box-shadow:0 14px 22px rgba(239,68,68,.20);
 }
-@keyframes ctaPulse{
-  0%,100%{ transform: translateY(0); filter:brightness(1); }
-  50%{ transform: translateY(-1px); filter:brightness(1.02); }
+@keyframes addonPulse{
+  0%,100%{ transform: translateY(0); }
+  50%{ transform: translateY(-2px); }
 }
-.addonCta{ animation: ctaPulse .9s ease-in-out infinite; }
-.addonCta:active{ transform: translateY(1px); animation:none; }
+.addonCtaGlobal:active{transform: translateY(1px); animation:none;}
 
 /* price row */
 .priceRow{
@@ -278,16 +294,6 @@ body{
 .addonList{margin:0;padding-left:18px;}
 .addonList li{margin:10px 0;font-size:15px;font-weight:1000;color:#0f172a;line-height:1.25;}
 .addonList .sub{margin-top:4px;font-size:14px;font-weight:1000;color:var(--muted);}
-.addonMeta{
-  margin-top:10px;
-  font-size:12px;
-  font-weight:1000;
-  color:rgba(71,85,105,.92);
-  padding:8px 10px;
-  border-radius:12px;
-  border:1px dashed rgba(15,23,42,.18);
-  background: rgba(15,23,42,.02);
-}
 
 /* bottom dock */
 .bottomDock{
@@ -443,7 +449,7 @@ body{
 .todaySlider{ position:relative; overflow:hidden; }
 .todayTrack{
   display:flex; gap:10px; overflow-x:auto;
-  padding: 0 8px; /* ✅ 프리뷰 6~8px */
+  padding: 0 8px;
   scroll-snap-type:x mandatory;
   -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
@@ -843,8 +849,8 @@ const serviceTabsEl = document.getElementById("serviceTabs");
 const mvnoTabsEl = document.getElementById("mvnoTabs");
 const internetTabsEl = document.getElementById("internetTabs");
 
-const CSV_VER = "2025-12-23"; // 캐시 무효용(원하면 숫자만 바꿔도 됨)
-const NOTICE_JSON_VER = "2026-01-14"; // ✅ notice.json 캐시 무효용(원하면 숫자만 바꿔도 됨)
+const CSV_VER = "2025-12-23"; // 캐시 무효용
+const NOTICE_JSON_VER = "2026-01-14"; // notice.json 캐시 무효용
 const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
 
 /* =========================
@@ -1002,9 +1008,7 @@ async function setUpdateStamp(){
   const reset = () => { taps = 0; if(timer){ clearTimeout(timer); timer = null; } };
 
   hero.addEventListener("click", (e) => {
-    // ✅ 관리자 버튼 클릭은 카운트 제외
-    if(e.target && e.target.closest && e.target.closest(".heroRefreshBtn")) return;
-
+    if(e.target && e.target.closest && e.target.closest(".heroRefreshBtn")) return; // ✅ 제외
     taps += 1;
     if(!timer){ timer = setTimeout(() => reset(), 2000); }
     if(taps >= 5){
@@ -1020,7 +1024,6 @@ async function setUpdateStamp(){
     location.reload();
   });
 
-  // ✅ 공지 토글 버튼 라벨 초기화
   function syncNoticeLabel(){
     const on = (String(StorageSafe.get(NOTICE_ADMIN_ON_KEY) ?? "") === "1");
     btnNotice.textContent = on ? "공지ON" : "공지OFF";
@@ -1038,7 +1041,7 @@ async function setUpdateStamp(){
 /* =========================
    ✅ data.csv에서 부가서비스 로딩 (__ADDON__ 행)
    - 포맷(2번):  항목1::설명1|항목2::설명2|...
-   - 컬럼: SK_부가 / KT_부가 / LG_부가 / 부가변경일
+   - 컬럼: SK_부가 / KT_부가 / LG_부가 / 부가변경일(있어도 화면엔 표시 안함)
    ========================= */
 let ADDON_DATA = {
   SK: { items: [], changed: "" },
@@ -1049,7 +1052,6 @@ let ADDON_DATA = {
 function parseAddonCell(raw){
   const s = String(raw ?? "").trim();
   if(!s) return [];
-  // 항목1::설명1|항목2::설명2 ...
   return s.split("|")
     .map(x => String(x||"").trim())
     .filter(Boolean)
@@ -1147,7 +1149,6 @@ function addAddonCard(carrier){
   const pillClass = carrier === "SK" ? "sk" : (carrier === "KT" ? "kt" : "lg");
   const id = `addon_${carrier}`;
   const items = (ADDON_DATA?.[carrier]?.items || []);
-  const changed = String(ADDON_DATA?.[carrier]?.changed || "").trim();
 
   const lis = items.length
     ? items.map(x => `
@@ -1169,7 +1170,6 @@ function addAddonCard(carrier){
       </div>
       <div class="addonBody" id="addonBody_${carrier}">
         <ol class="addonList">${lis}</ol>
-        ${changed ? `<div class="addonMeta">최근 변경일: <strong>${changed}</strong> (data.csv __ADDON__)</div>` : ``}
       </div>
     </div>
   `);
@@ -1190,7 +1190,7 @@ function addAddonCard(carrier){
   btn.addEventListener("click", (e)=>{ e.preventDefault(); toggle(); });
 }
 
-/* ✅ CTA 클릭하면 무조건 펼치고 중앙으로 이동 */
+/* ✅ 글로벌 CTA 클릭하면 무조건 펼치고 중앙으로 이동 */
 function openAddonForCarrier(carrier){
   const root = document.getElementById(`addon_${carrier}`);
   const body = document.getElementById(`addonBody_${carrier}`);
@@ -1206,22 +1206,13 @@ function openAddonForCarrier(carrier){
   root.scrollIntoView({ behavior:"smooth", block:"center" });
 }
 
-/* 부가서비스 CTA 델리게이트(카드 버튼) */
-list.addEventListener("click", (e)=>{
-  const b = e.target.closest(".addonCta");
-  if(!b) return;
-  const carrier = String(b.dataset.carrier || "").trim();
-  if(!carrier) return;
-  openAddonForCarrier(carrier);
-});
-
 /* ✅ B안: 요금할인(O/X) 판별 (CSV 컬럼: 요금할인) */
 function isDiscountRow(x){
   const v = String(x["요금할인"] ?? "").trim().toLowerCase();
   return (v === "o" || v === "1" || v === "true" || v === "y" || v === "yes" || v === "on");
 }
 
-/* phone card */
+/* phone card (가격카드: 부가서비스 관련 요소 완전 제거) */
 function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount}){
   const mv = (move ?? "");
   const ch = (change ?? "");
@@ -1239,12 +1230,6 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
       </div>
       ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
       ${discount ? `<div class="discountPill">요금할인 <strong>25%</strong></div>` : ``}
-
-      <!-- ✅ 요청: 카드에 부가조건 문구는 표시 금지 / 대신 클릭 유도 버튼만 -->
-      <button class="addonCta" type="button" data-carrier="${badgeText}">
-        <span><strong>부가서비스 유지조건</strong> 눌러서 확인</span>
-        <span class="arr">▶</span>
-      </button>
 
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
@@ -1424,13 +1409,25 @@ function getRowBestPrice(row, carrier){
 function renderPhone(rows, carrier){
   clearList();
 
-  // ✅ 카드 상단(목록 맨 앞)에 “부가서비스 유지조건” 카드 1개만 배치
+  // ✅ (1) 목록 맨 앞: “부가서비스 유지조건” 초강력 CTA 1개
+  list.insertAdjacentHTML("beforeend", `
+    <div class="addonCtaGlobal" id="addonCtaGlobal" role="button" tabindex="0" aria-label="부가서비스 유지조건">
+      <div style="min-width:0;">
+        <div class="t">부가서비스 유지조건 (필수확인)</div>
+        <div class="s">미가입/미유지 시 추가요금 발생 가능</div>
+      </div>
+      <div class="go">▶</div>
+    </div>
+  `);
+
+  // ✅ (2) 그 다음: 부가서비스 카드(내용)
   addAddonCard(carrier);
 
+  // ✅ (3) 그 다음: 가격카드
   const filtered = rows
     .filter(r => {
       const m = String(r["기종"] ?? "").trim();
-      return (m !== "__NOTICE__" && m !== "__ADDON__"); // ✅ 관리행 제외
+      return (m !== "__NOTICE__" && m !== "__ADDON__");
     })
     .filter(r => {
       const mv = showVal(r[`${carrier}_이동`]);
@@ -1441,6 +1438,7 @@ function renderPhone(rows, carrier){
 
   if(!filtered.length){
     list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 카드가 없습니다.</div>`);
+    bindAddonGlobalCTA(carrier);
     return;
   }
 
@@ -1448,7 +1446,7 @@ function renderPhone(rows, carrier){
     const model = String(r["기종"] ?? "").trim() || "-";
     const move = showVal(r[`${carrier}_이동`]);
     const change = showVal(r[`${carrier}_기변`]);
-    const discount = isDiscountRow(r); // ✅ CSV: 요금할인(O/X)
+    const discount = isDiscountRow(r);
     addPhoneCard({
       badgeText: carrier,
       badgeClass: carrier === "SK" ? "sk" : carrier === "KT" ? "kt" : "lg",
@@ -1459,6 +1457,18 @@ function renderPhone(rows, carrier){
       discount
     });
   });
+
+  // ✅ 글로벌 CTA 바인딩
+  bindAddonGlobalCTA(carrier);
+}
+
+/* ✅ 글로벌 CTA 클릭 → 해당 통신사 부가서비스 카드로 이동 + 자동 펼침 */
+function bindAddonGlobalCTA(carrier){
+  const cta = document.getElementById("addonCtaGlobal");
+  if(!cta) return;
+  const go = ()=> openAddonForCarrier(carrier);
+  cta.addEventListener("click", go);
+  cta.addEventListener("keydown", (e)=>{ if(e.key==="Enter" || e.key===" "){ e.preventDefault(); go(); } });
 }
 
 function renderMVNO(net){
@@ -1546,14 +1556,9 @@ function escapeHtml(s){
 /* (선택) 공지 강조 순서 개선 */
 function highlightNoticeTitle(t){
   let s = escapeHtml(t);
-
-  // 1) D- 먼저 강조
   s = s.replace(/(D-\d+)/g, '<span class="hlClose">$1</span>');
-  // 2) 키워드 강조
   s = s.replace(/(마감|종료|오늘|긴급)/g, '<span class="hlClose">$1</span>');
-  // 3) 숫자 강조(이미 span 포함돼도 큰 문제 없게 단순 처리)
   s = s.replace(/(\d+)/g, '<span class="hlNum">$1</span>');
-
   return s;
 }
 
@@ -1613,7 +1618,7 @@ function buildTodayCards(todayRows){
     return;
   }
 
-  /* ✅ TODAY는 "최저(가장 낮은 값, 마이너스 우선)" 기준으로 시작 */
+  /* ✅ TODAY는 "최저(가장 낮은 값, 마이너스 우선)" 기준 */
   const scoreRow = (r) => {
     const carriers = ["SK","KT","LG"];
     let best = Number.POSITIVE_INFINITY;
@@ -1632,7 +1637,6 @@ function buildTodayCards(todayRows){
     return am.localeCompare(bm, "ko");
   });
 
-  // 로테이션은 유지(날짜 단위)하되, 정렬된 배열 기준으로 회전
   const rKey = getRotateKey();
   const cur = Number(StorageSafe.get(rKey) ?? "0");
   const startIdx = (Number.isFinite(cur) ? cur : 0) % sorted.length;
@@ -1641,7 +1645,6 @@ function buildTodayCards(todayRows){
   const rotated = sorted.slice(startIdx).concat(sorted.slice(0, startIdx));
 
   rotated.forEach((r, idx)=>{
-    // ✅ 카드 내부는 "행에서 실제 값이 있는 통신사"를 우선 표시
     const pickCarrier = () => {
       const cands = ["SK","KT","LG"];
       let bestC = lastPhoneTab || "SK";
