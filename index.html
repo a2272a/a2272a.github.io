@@ -11,7 +11,7 @@
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="국과연특판 | 복지관2층매장" />
-<meta property="og:description" content="국과연특판 · 특가폰/알뜰요금/인터넷TV 안내. 카톡문의로 빠르게 상담." />
+<meta property="og:description" content="국과연특판 · 복지관2층매장 특가폰/알뜰요금/인터넷TV 안내. 카톡문의로 빠르게 상담." />
 <meta property="og:url" content="https://a2272a.github.io/" />
 <meta name="twitter:card" content="summary" />
 
@@ -771,7 +771,8 @@ body{
     <span>전화</span>
   </a>
 
-  <a class="dockBtn sms" href="sms:010-5839-1512" aria-label="문자">
+  <!-- ✅ (선택) SMS 링크 포맷 정리 -->
+  <a class="dockBtn sms" href="sms:01058391512" aria-label="문자">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
       <path d="M8 10h8"/><path d="M8 14h5"/>
@@ -818,11 +819,13 @@ const NOTICE_SEEN_VER_KEY = "NOTICE_SEEN_VERSION";
 /* ✅ 공지 관리자 ON/OFF (기본 OFF) */
 const NOTICE_ADMIN_ON_KEY = "NOTICE_ADMIN_ON"; // "1"이면 ON, 그 외는 OFF
 
+/* ✅ (필수) NOTICE 초기값 urgent 포함 */
 let NOTICE = {
   version: FALLBACK_NOTICE_VERSION,
   title: FALLBACK_NOTICE_TITLE,
   subtitle: FALLBACK_NOTICE_SUBTITLE,
-  tags: FALLBACK_NOTICE_TAGS
+  tags: FALLBACK_NOTICE_TAGS,
+  urgent: false
 };
 
 /* ✅ notice.json 로딩 */
@@ -953,7 +956,10 @@ async function setUpdateStamp(){
   let timer = null;
   const reset = () => { taps = 0; if(timer){ clearTimeout(timer); timer = null; } };
 
-  hero.addEventListener("click", () => {
+  hero.addEventListener("click", (ev) => {
+    /* ✅ (필수) 버튼 클릭은 5탭 카운트에서 제외 */
+    if (ev.target.closest("#refreshBtn, #noticeAdminToggleBtn")) return;
+
     taps += 1;
     if(!timer){ timer = setTimeout(() => reset(), 2000); }
     if(taps >= 5){
@@ -1427,12 +1433,15 @@ function escapeHtml(s){
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#39;");
 }
+
+/* ✅ (선택) 공지 강조 순서 개선: 키워드 → 숫자 */
 function highlightNoticeTitle(t){
   let s = escapeHtml(t);
-  s = s.replace(/(\d+)/g, '<span class="hlNum">$1</span>');
   s = s.replace(/(마감|종료|오늘|긴급|D-\d+)/g, '<span class="hlClose">$1</span>');
+  s = s.replace(/(\d+)/g, '<span class="hlNum">$1</span>');
   return s;
 }
+
 function renderNoticeBanner(){
   const box = document.getElementById("noticeBanner");
   if(!box) return;
@@ -1615,6 +1624,12 @@ function markTodayShown(){
   StorageSafe.set(POPUP_LAST_SHOWN_KEY, String(Date.now()));
 }
 
+/* ✅ (필수) TODAY 표시 "순간" markTodayShown() 먼저 */
+function showTodayOnce(){
+  markTodayShown();
+  showModal(todayModal);
+}
+
 /* TODAY 팝업 버튼 */
 document.getElementById("todayCloseBtn").addEventListener("click", ()=>{
   if(todayNoShowToday.checked){
@@ -1712,14 +1727,14 @@ internetTabsEl.addEventListener("click", (e)=>{
       buildTodayCards(todayRows);
       setTimeout(()=>{
         if(shouldShowTodayPopup()){
-          showModal(todayModal);
+          showTodayOnce(); /* ✅ (필수) 표시 순간 기록 후 show */
         }
       }, POPUP_FIRST_DELAY_MS);
 
       setInterval(()=>{
         if(shouldShowTodayPopup()){
           todayNoShowToday.checked = false;
-          showModal(todayModal);
+          showTodayOnce(); /* ✅ (필수) 표시 순간 기록 후 show */
         }
       }, 30 * 1000);
     }
