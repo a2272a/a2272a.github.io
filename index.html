@@ -1049,9 +1049,9 @@ const showVal = (raw) => {
 const vClass = (n) => (n === null) ? "" : (n < 0 ? "neg" : (n === 0 ? "zero" : "pos"));
 
 const fixedInfoLine = (c) => {
-  if (c === "SK") return "SK 109요금 6개월 / 부가필수 문의";
-  if (c === "KT") return "KT 110요금 6개월 / 부가필수 문의";
-  return "LG 115요금 6개월 / 부가필수 문의";
+  if (c === "SK") return "SK 109요금 6개월 / 부가서비스 유지조건 클릭";
+  if (c === "KT") return "KT 110요금 6개월 / 부가서비스 유지조건 클릭";
+  return "LG 115요금 6개월 / 부가서비스 유지조건 클릭";
 };
 const infoLineWithPlan = (c, x) => {
   const p = asNum(x[`${c}_요금제`]);
@@ -1773,4 +1773,5 @@ internetTabsEl.addEventListener("click", (e)=>{
 </script>
 </body>
 </html>
+
 
