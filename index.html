@@ -231,12 +231,35 @@ body{
   border:1px solid rgba(15,23,42,.12);
   background: linear-gradient(180deg, rgba(15,23,42,.03), rgba(15,23,42,.015));
 }
-.addonHead{display:flex;align-items:center;justify-content:space-between;gap:10px;cursor:pointer;user-select:none;}
+
+/* ✅ 헤더 탭만으로 토글 + 버튼 제거 + chevron */
+.addonHead{
+  display:flex;align-items:center;justify-content:space-between;gap:10px;
+  cursor:pointer;user-select:none;
+  padding:2px 2px; /* 터치영역 확보 */
+}
 .addonTitle{font-size:16px;font-weight:1000;letter-spacing:-.2px;color:#0f172a;}
 .addonPill{font-size:13px;font-weight:1000;padding:7px 11px;border-radius:999px;color:#fff;white-space:nowrap;}
 .addonPill.sk{background:var(--sk);} .addonPill.kt{background:var(--kt);} .addonPill.lg{background:var(--lg);}
-.addonBtn{border:1px solid rgba(15,23,42,.14);background:#fff;padding:10px 12px;border-radius:12px;font-weight:1000;font-size:14px;cursor:pointer;}
-.addonBody{margin-top:12px;display:none;}
+
+.addonChevron{
+  flex:0 0 auto;
+  width:36px;height:36px;
+  display:inline-flex;align-items:center;justify-content:center;
+  border-radius:12px;
+  border:1px solid rgba(15,23,42,.10);
+  background: rgba(255,255,255,.75);
+}
+.addonChevron svg{
+  width:18px;height:18px;
+  stroke: rgba(15,23,42,.65);
+  stroke-width:2.6;
+  fill:none;stroke-linecap:round;stroke-linejoin:round;
+  transition: transform .18s ease;
+}
+.addonCard.open .addonChevron svg{ transform: rotate(180deg); }
+
+.addonBody{margin-top:10px;display:none;}
 .addonBody.show{display:block;}
 .addonList{margin:0;padding-left:18px;}
 .addonList li{margin:10px 0;font-size:15px;font-weight:1000;color:#0f172a;line-height:1.25;}
@@ -771,7 +794,6 @@ body{
     <span>전화</span>
   </a>
 
-  <!-- ✅ (선택) SMS 링크 포맷 정리 -->
   <a class="dockBtn sms" href="sms:01058391512" aria-label="문자">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M21 15a4 4 0 0 1-4 4H8l-5 3V7a4 4 0 0 1 4-4h10a4 4 0 0 1 4 4z"/>
@@ -1072,7 +1094,7 @@ function activateInetCarrier(c){
   });
 }
 
-/* addon card */
+/* ✅ addon card (버튼 제거: 헤더 탭만 토글 + chevron 회전) */
 function addAddonCard(carrier){
   const items = ADDON[carrier] || [];
   const pillClass = carrier === "SK" ? "sk" : (carrier === "KT" ? "kt" : "lg");
@@ -1091,7 +1113,11 @@ function addAddonCard(carrier){
           <span class="addonPill ${pillClass}">${carrier}</span>
           <span class="addonTitle">부가서비스 유지 조건</span>
         </div>
-        <button class="addonBtn" type="button">펼치기</button>
+        <span class="addonChevron" aria-hidden="true">
+          <svg viewBox="0 0 24 24">
+            <path d="M6 9l6 6 6-6"/>
+          </svg>
+        </span>
       </div>
       <div class="addonBody">
         <ol class="addonList">${lis}</ol>
@@ -1101,18 +1127,18 @@ function addAddonCard(carrier){
 
   const root = document.getElementById(id);
   const head = root.querySelector(".addonHead");
-  const btn = root.querySelector(".addonBtn");
   const body = root.querySelector(".addonBody");
 
   const toggle = () => {
     const open = body.classList.toggle("show");
     head.setAttribute("aria-expanded", open ? "true" : "false");
-    btn.textContent = open ? "접기" : "펼치기";
+    root.classList.toggle("open", open);
   };
 
-  head.addEventListener("click", (e)=>{ if (e.target === btn) return; toggle(); });
-  head.addEventListener("keydown", (e)=>{ if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); } });
-  btn.addEventListener("click", (e)=>{ e.preventDefault(); toggle(); });
+  head.addEventListener("click", (e)=>{ e.preventDefault(); toggle(); });
+  head.addEventListener("keydown", (e)=>{
+    if (e.key === "Enter" || e.key === " ") { e.preventDefault(); toggle(); }
+  });
 }
 
 /* ✅ B안: 요금할인(O/X) 판별 (CSV 컬럼: 요금할인) */
