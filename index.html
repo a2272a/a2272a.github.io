@@ -1055,7 +1055,7 @@ const fixedInfoLine = (c) => {
 };
 const infoLineWithPlan = (c, x) => {
   const p = asNum(x[`${c}_요금제`]);
-  return (p && p > 0) ? `${c} ${p}요금 6개월 / 부가필수 문의` : fixedInfoLine(c);
+  return (p && p > 0) ? `${c} ${p}요금 6개월 / 부가서비스 유지조건 클릭` : fixedInfoLine(c);
 };
 
 function clearList(){ list.innerHTML = ""; }
@@ -1773,5 +1773,6 @@ internetTabsEl.addEventListener("click", (e)=>{
 </script>
 </body>
 </html>
+
 
 
