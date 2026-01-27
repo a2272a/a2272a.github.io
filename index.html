@@ -285,6 +285,14 @@ body{
 .dockBtn.sms{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.22);color:#083244;}
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
 
+/* ✅ 하단 버튼 탭 미스 방지: 터치 영역/정렬 안정화 */
+.dockBtn{ min-height:54px; padding:0 12px; }
+.dockBtn span{ line-height:1; }
+@media (max-width:480px){
+  .bottomDock{ height:64px; }
+  .dockBtn{ min-height:58px; }
+}
+
 /* =========================
    ✅ 공용 팝업 베이스
    ========================= */
@@ -1015,9 +1023,7 @@ async function setUpdateStamp(){
 /* 부가서비스 */
 const ADDON = {
   SK: [
-   
     { t:"마이스마트콜(3,500)", d:"3개월 유지 / 미 가입시 +2" },
-   
   ],
   KT: [
     { t:"필수팩(9,900)", d:"4개월 유지 / 미 가입시 +5" },
@@ -1148,7 +1154,17 @@ function isDiscountRow(x){
   return (v === "o" || v === "1" || v === "true" || v === "y" || v === "yes" || v === "on");
 }
 
-/* phone card */
+/* ✅ 안전: HTML 이스케이프 (CSV 값이 UI를 깨는 것 방지) */
+function esc(s){
+  return String(s ?? "")
+    .replace(/&/g,"&amp;")
+    .replace(/</g,"&lt;")
+    .replace(/>/g,"&gt;")
+    .replace(/"/g,"&quot;")
+    .replace(/'/g,"&#39;");
+}
+
+/* phone card (✅ escape 적용) */
 function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount}){
   const mv = (move ?? "");
   const ch = (change ?? "");
@@ -1161,21 +1177,21 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
   list.insertAdjacentHTML("beforeend", `
     <div class="card">
       <div class="titleRow">
-        <div class="model">${model}</div>
-        <div class="badge ${badgeClass}">${badgeText}</div>
+        <div class="model">${esc(model)}</div>
+        <div class="badge ${badgeClass}">${esc(badgeText)}</div>
       </div>
-      ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
+      ${infoText ? `<p class="infoLine">${esc(infoText)}</p>` : ``}
       ${discount ? `<div class="discountPill">요금할인 <strong>25%</strong></div>` : ``}
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
           <div class="pill">
             <div class="k">이동</div>
-            <div class="v ${vClass(mvNum)}">${mv}</div>
+            <div class="v ${vClass(mvNum)}">${esc(mv)}</div>
           </div>` : ``}
         ${hasChange ? `
           <div class="pill">
             <div class="k">기변</div>
-            <div class="v ${vClass(chNum)}">${ch}</div>
+            <div class="v ${vClass(chNum)}">${esc(ch)}</div>
           </div>` : ``}
       </div>
     </div>
@@ -1186,18 +1202,18 @@ function addSimpleCard({badgeText, badgeClass, line1, line2, price1Label, price1
   list.insertAdjacentHTML("beforeend", `
     <div class="card">
       <div class="titleRow">
-        <div class="model">${line1}</div>
-        <div class="badge ${badgeClass}">${badgeText}</div>
+        <div class="model">${esc(line1)}</div>
+        <div class="badge ${badgeClass}">${esc(badgeText)}</div>
       </div>
-      ${line2 ? `<p class="planLine">${line2}</p>` : ``}
+      ${line2 ? `<p class="planLine">${esc(line2)}</p>` : ``}
       <div class="moneyRow">
-        <div class="label">${price1Label}</div>
-        <div class="val">${price1}</div>
+        <div class="label">${esc(price1Label)}</div>
+        <div class="val">${esc(price1)}</div>
       </div>
       ${price2 ? `
         <div class="moneyRow" style="margin-top:6px;">
-          <div class="label">${price2Label}</div>
-          <div class="val2">${price2}</div>
+          <div class="label">${esc(price2Label)}</div>
+          <div class="val2">${esc(price2)}</div>
         </div>` : ``}
     </div>
   `);
@@ -1451,6 +1467,13 @@ adBackdrop.addEventListener("click", ()=>{
   if(todayModal.classList.contains("show")) hideModal(todayModal);
 });
 
+/* ✅ ESC로 팝업 닫기 */
+document.addEventListener("keydown", (e)=>{
+  if(e.key !== "Escape") return;
+  if(noticeModal && noticeModal.classList.contains("show")) hideModal(noticeModal);
+  if(todayModal && todayModal.classList.contains("show")) hideModal(todayModal);
+}, { passive:true });
+
 /* ✅ 공지 팝업 렌더/로직 */
 function escapeHtml(s){
   return String(s ?? "")
@@ -1472,7 +1495,9 @@ function highlightNoticeTitle(t){
 function renderNoticeBanner(){
   const box = document.getElementById("noticeBanner");
   if(!box) return;
-  const urgent = /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
+
+  /* ✅ urgent: JSON urgent도 반영 */
+  const urgent = !!NOTICE.urgent || /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
   box.classList.toggle("urgent", urgent);
 
   const tags = (NOTICE.tags || []).slice(0, 8);
@@ -1651,9 +1676,17 @@ function markTodayShown(){
   StorageSafe.set(POPUP_LAST_SHOWN_KEY, String(Date.now()));
 }
 
-/* ✅ (필수) TODAY 표시 "순간" markTodayShown() 먼저 */
+/* ✅ (필수) TODAY 표시 "순간" markTodayShown() 먼저 + 첫 카드로 초기화 */
 function showTodayOnce(){
   markTodayShown();
+
+  // ✅ 항상 첫 카드로 보여주기
+  try{
+    if(todayTrack) todayTrack.scrollLeft = 0;
+    const dots = Array.from(document.querySelectorAll("#todayDots .todayDot"));
+    dots.forEach((d, i)=> d.classList.toggle("active", i===0));
+  }catch(e){}
+
   showModal(todayModal);
 }
 
@@ -1754,14 +1787,14 @@ internetTabsEl.addEventListener("click", (e)=>{
       buildTodayCards(todayRows);
       setTimeout(()=>{
         if(shouldShowTodayPopup()){
-          showTodayOnce(); /* ✅ (필수) 표시 순간 기록 후 show */
+          showTodayOnce(); /* ✅ 표시 순간 기록 + 첫카드로 */
         }
       }, POPUP_FIRST_DELAY_MS);
 
       setInterval(()=>{
         if(shouldShowTodayPopup()){
           todayNoShowToday.checked = false;
-          showTodayOnce(); /* ✅ (필수) 표시 순간 기록 후 show */
+          showTodayOnce(); /* ✅ 표시 순간 기록 + 첫카드로 */
         }
       }, 30 * 1000);
     }
@@ -1774,7 +1807,3 @@ internetTabsEl.addEventListener("click", (e)=>{
 </script>
 </body>
 </html>
-
-
-
-
