@@ -654,6 +654,144 @@ body{
   75%{ transform: translateX(-1px); }
 }
 .noticeBanner.urgent{ animation: nudge .22s linear infinite; }
+
+/* =========================
+   ✅ 메인 홍보 슬라이드 (쿠팡식 3장)
+   ========================= */
+.promo{ margin-top:12px; }
+.promoHead{ padding: 0 4px 10px; }
+.promoTitle{
+  font-weight:1000; letter-spacing:-.8px;
+  font-size:18px; color:#0f172a;
+}
+.promoSub{
+  margin-top:4px;
+  font-weight:1000; font-size:12px;
+  color: rgba(71,85,105,.95);
+}
+
+.promoSlider{
+  border-radius:18px;
+  border:1px solid rgba(15,23,42,.10);
+  background:#fff;
+  box-shadow: 0 12px 24px rgba(15,23,42,.08);
+  overflow:hidden;
+}
+
+.promoTrack{
+  display:flex;
+  gap:10px;
+  overflow-x:auto;
+  padding:10px 8px 12px; /* ✅ 양옆 프리뷰 */
+  scroll-snap-type:x mandatory;
+  -webkit-overflow-scrolling: touch;
+  overscroll-behavior-x: contain;
+  scroll-behavior:smooth;
+}
+.promoTrack::-webkit-scrollbar{ display:none; }
+
+.promoItem{
+  flex: 0 0 calc(100% - 16px);
+  scroll-snap-align:center;
+  border-radius:16px;
+  overflow:hidden;
+  position:relative;
+  border:1px solid rgba(15,23,42,.10);
+  box-shadow: 0 12px 24px rgba(15,23,42,.08);
+  background:#fff;
+  transform: scale(0.99);
+  transition: transform .16s ease;
+}
+
+/* ✅ “이미지 카드” */
+.promoMedia{
+  height: 168px;
+  background: linear-gradient(90deg, rgba(15,23,42,.03), rgba(15,23,42,.01));
+  position:relative;
+}
+.promoMedia img{
+  width:100%; height:100%;
+  object-fit:cover;
+  display:block;
+}
+
+/* ✅ 이미지 없을 때(텍스트/그라데이션 카드) */
+.promoMedia.fallback{
+  background:
+    radial-gradient(700px 220px at 30% 0%, rgba(245,158,11,.20), transparent 60%),
+    radial-gradient(700px 220px at 80% 20%, rgba(56,189,248,.16), transparent 60%),
+    linear-gradient(90deg, rgba(239,68,68,.22), rgba(245,158,11,.16), rgba(34,197,94,.14));
+}
+
+.promoBody{ padding:12px; }
+.promoBadgeRow{ display:flex; align-items:center; justify-content:space-between; gap:10px; }
+.promoBadge{
+  display:inline-flex; align-items:center; gap:8px;
+  font-weight:1000; font-size:12px;
+  padding:7px 10px; border-radius:999px;
+  color:#fff;
+  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
+}
+.promoTag{
+  font-weight:1000; font-size:12px;
+  padding:7px 10px; border-radius:999px;
+  border:1px solid rgba(15,23,42,.10);
+  background: rgba(15,23,42,.02);
+  color:#0f172a;
+  white-space:nowrap;
+}
+.promoH1{
+  margin-top:10px;
+  font-weight:1000; letter-spacing:-1px;
+  font-size:24px; line-height:1.15;
+  color:#0f172a;
+  word-break:keep-all;
+}
+.promoP{
+  margin-top:8px;
+  font-weight:1000; font-size:13px;
+  color: rgba(71,85,105,.95);
+  line-height:1.25;
+}
+
+.promoCTAs{ margin-top:10px; display:flex; gap:10px; }
+.promoBtn{
+  flex:1;
+  display:flex; align-items:center; justify-content:center;
+  gap:8px;
+  border-radius:14px;
+  border:1px solid rgba(15,23,42,.12);
+  background:#fff;
+  color:#0f172a;
+  text-decoration:none;
+  font-weight:1000;
+  padding:12px 10px;
+  box-shadow: 0 12px 22px rgba(15,23,42,.08);
+}
+.promoBtn:active{ transform: translateY(1px); filter:brightness(.98); }
+.promoBtn.kakao{
+  background: rgba(254,229,0,.55);
+  border-color: rgba(254,229,0,.85);
+  color:#3b2f00;
+}
+
+/* dots */
+.promoDots{
+  display:flex; justify-content:center; gap:6px;
+  padding: 0 0 10px;
+}
+.promoDot{
+  width:7px; height:7px; border-radius:999px;
+  background: rgba(15,23,42,.18);
+  transition: transform .18s ease, background .18s ease, width .18s ease;
+}
+.promoDot.active{ background: rgba(15,23,42,.55); width:18px; }
+
+/* ✅ 모바일 폰트 살짝 키움 */
+@media (max-width:420px){
+  .promoMedia{ height:156px; }
+  .promoH1{ font-size:22px; }
+}
 </style>
 </head>
 
@@ -677,6 +815,19 @@ body{
       </div>
     </div>
   </div>
+
+  <!-- ✅ 메인 홍보 슬라이드(쿠팡식 3장) -->
+  <section class="promo" aria-label="메인 홍보">
+    <div class="promoHead">
+      <div class="promoTitle">지금 혜택 한눈에</div>
+      <div class="promoSub">좌우로 넘기기 · 톡으로 “기종+용량”만 보내세요</div>
+    </div>
+
+    <div class="promoSlider" id="promoSlider">
+      <div class="promoTrack" id="promoTrack" aria-label="홍보 슬라이드 트랙"></div>
+      <div class="promoDots" id="promoDots" aria-label="홍보 슬라이드 도트"></div>
+    </div>
+  </section>
 
   <!-- 서비스 탭 -->
   <div class="tabs" id="serviceTabs" aria-label="서비스 탭">
@@ -1757,11 +1908,147 @@ internetTabsEl.addEventListener("click", (e)=>{
 });
 
 /* =========================
+   ✅ 메인 홍보 슬라이드(3장) - 쿠팡식
+   - 이미지 3장 쓰면: ./ad1.webp ./ad2.webp ./ad3.webp 로 올려두면 끝
+   - 이미지 없으면: fallback 그라데이션 카드로 자동 표시
+   ========================= */
+const PROMO = [
+  {
+    badge: "초특가",
+    tag: "TODAY/시세표",
+    title: "오늘 조건, 바로 확인",
+    desc: "카톡에 “기종+용량”만 보내면\n가능 조건부터 빠르게 안내합니다.",
+    img: "./ad1.webp",
+    ctaText: "카톡 문의",
+    ctaHref: KAKAO_URL
+  },
+  {
+    badge: "알뜰요금",
+    tag: "최저 3,300원~",
+    title: "알뜰요금 최저 라인업",
+    desc: "부담 줄이고 혜택은 크게.\n원하는 망(SK/KT/LG)로 바로 선택.",
+    img: "./ad2.webp",
+    ctaText: "알뜰요금 보기",
+    ctaHref: "#"
+  },
+  {
+    badge: "인터넷TV",
+    tag: "현금지원",
+    title: "인터넷 + TV\n현금지원 문의",
+    desc: "결합 여부에 따라 조건이 달라요.\n카톡 문의로 맞춤 안내드립니다.",
+    img: "./ad3.webp",
+    ctaText: "인터넷TV 보기",
+    ctaHref: "#"
+  }
+];
+
+function renderPromoSlider(){
+  const track = document.getElementById("promoTrack");
+  const dotsWrap = document.getElementById("promoDots");
+  if(!track || !dotsWrap) return;
+
+  track.innerHTML = "";
+  dotsWrap.innerHTML = "";
+
+  PROMO.forEach((p, idx)=>{
+    const safeTitle = escapeHtml(p.title || "");
+    const hasImg = !!p.img;
+
+    track.insertAdjacentHTML("beforeend", `
+      <article class="promoItem" data-idx="${idx}">
+        <div class="promoMedia ${hasImg ? "" : "fallback"}">
+          ${hasImg ? `<img src="${p.img}" alt="${safeTitle}" loading="lazy" onerror="this.closest('.promoMedia').classList.add('fallback'); this.remove();" />` : ``}
+        </div>
+        <div class="promoBody">
+          <div class="promoBadgeRow">
+            <div class="promoBadge">${escapeHtml(p.badge || "혜택")}</div>
+            <div class="promoTag">${escapeHtml(p.tag || "")}</div>
+          </div>
+          <div class="promoH1">${escapeHtml(p.title || "").replace(/\n/g,"<br/>")}</div>
+          <div class="promoP">${escapeHtml(p.desc || "").replace(/\n/g,"<br/>")}</div>
+
+          <div class="promoCTAs">
+            <a class="promoBtn kakao" href="${p.ctaHref || KAKAO_URL}" target="_blank" rel="noopener">${escapeHtml(p.ctaText || "카톡 문의")}</a>
+            <button class="promoBtn" type="button" data-act="goto" data-idx="${idx}">바로가기</button>
+          </div>
+        </div>
+      </article>
+    `);
+
+    dotsWrap.insertAdjacentHTML("beforeend", `<div class="promoDot ${idx===0 ? "active" : ""}" data-idx="${idx}"></div>`);
+  });
+
+  const items = Array.from(track.querySelectorAll(".promoItem"));
+  const dots = Array.from(dotsWrap.querySelectorAll(".promoDot"));
+
+  function setActive(i){
+    dots.forEach((d, idx)=> d.classList.toggle("active", idx===i));
+    items.forEach((el, idx)=> el.style.transform = (idx===i ? "scale(1.01)" : "scale(0.99)"));
+  }
+  setActive(0);
+
+  // ✅ dots 클릭 이동
+  dots.forEach((d)=>{
+    d.style.cursor = "pointer";
+    d.addEventListener("click", ()=>{
+      const i = Number(d.dataset.idx || "0");
+      const el = items[i];
+      if(!el) return;
+      el.scrollIntoView({ behavior:"smooth", inline:"center", block:"nearest" });
+      setActive(i);
+    }, { passive:true });
+  });
+
+  // ✅ 스크롤에 따라 활성 dot 변경
+  track.addEventListener("scroll", ()=>{
+    let bestIdx = 0;
+    let bestDist = Infinity;
+    const tr = track.getBoundingClientRect();
+    const cc = tr.left + tr.width/2;
+    items.forEach((el, idx)=>{
+      const r = el.getBoundingClientRect();
+      const cx = r.left + r.width/2;
+      const dist = Math.abs(cx - cc);
+      if(dist < bestDist){ bestDist = dist; bestIdx = idx; }
+    });
+    setActive(bestIdx);
+  }, { passive:true });
+
+  // ✅ “바로가기” 버튼 액션(슬라이드별로 탭 이동)
+  track.addEventListener("click", (e)=>{
+    const btn = e.target.closest('button[data-act="goto"]');
+    if(!btn) return;
+    const i = Number(btn.dataset.idx || "0");
+
+    // 2번/3번은 페이지 내 탭으로 연결(충돌 없이)
+    if(i === 1){
+      // 알뜰요금 탭 열기
+      const b = document.querySelector('#serviceTabs .tabBtn[data-mode="MVNO"]');
+      if(b) b.click();
+      window.scrollTo({ top: 0, behavior:"smooth" });
+      return;
+    }
+    if(i === 2){
+      // 인터넷TV 탭 열기
+      const b = document.querySelector('#serviceTabs .tabBtn[data-mode="INTERNET"]');
+      if(b) b.click();
+      window.scrollTo({ top: 0, behavior:"smooth" });
+      return;
+    }
+    // 1번은 카톡 문의
+    window.open(KAKAO_URL, "_blank", "noopener");
+  });
+}
+
+/* =========================
    ✅ 초기 로딩
    ========================= */
 (async function init(){
   showLoading("data.csv 불러오는 중…");
   await setUpdateStamp();
+
+  // ✅ 메인 홍보 슬라이드 렌더(이미지 없어도 자동 fallback)
+  renderPromoSlider();
 
   try{
     NOTICE = await loadNoticeFromJSON();
