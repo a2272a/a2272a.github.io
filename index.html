@@ -7,7 +7,7 @@
 <title>국과연특판 | 복지관2층매장</title>
 <meta name="description" content="국과연특판 · 복지관2층매장 특가폰/알뜰요금/인터넷TV 안내. 카톡문의로 빠르게 상담 가능합니다." />
 <link rel="canonical" href="https://a2272a.github.io/" />
-<meta name="robots" content="index,follow,max-image-preview:large,max-snippet=-1,max-video-preview=-1" />
+<meta name="robots" content="index,follow,max-image-preview:large,max-snippet:-1,max-video-preview:-1" />
 
 <meta property="og:type" content="website" />
 <meta property="og:title" content="국과연특판 | 복지관2층매장" />
@@ -654,60 +654,6 @@ body{
   75%{ transform: translateX(-1px); }
 }
 .noticeBanner.urgent{ animation: nudge .22s linear infinite; }
-
-/* =========================
-   ✅ 인터넷TV 현금지원 카톡문의 바
-   ========================= */
-.inetCashBar{
-  grid-column:1/-1;
-  border-radius:18px;
-  border:1px solid rgba(245,158,11,.45);
-  background: linear-gradient(90deg, rgba(239,68,68,.95), rgba(245,158,11,.95));
-  box-shadow:0 14px 30px rgba(15,23,42,.22);
-  padding:14px;
-  color:#fff;
-}
-.inetCashRow{
-  display:flex;
-  align-items:center;
-  justify-content:space-between;
-  gap:12px;
-}
-.inetCashText{
-  display:flex;
-  flex-direction:column;
-  gap:4px;
-}
-.inetCashTitle{
-  font-size:18px;
-  font-weight:1000;
-  letter-spacing:-.6px;
-}
-.inetCashSub{
-  font-size:13px;
-  font-weight:1000;
-  opacity:.95;
-}
-.inetCashBtn{
-  flex:0 0 auto;
-  display:inline-flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  padding:12px 14px;
-  border-radius:14px;
-  background: rgba(254,229,0,.95);
-  color:#3b2f00;
-  font-weight:1000;
-  font-size:14px;
-  text-decoration:none;
-  box-shadow:0 10px 22px rgba(0,0,0,.25);
-  white-space:nowrap;
-}
-.inetCashBtn:active{
-  transform:translateY(1px);
-  filter:brightness(.97);
-}
 </style>
 </head>
 
@@ -1302,21 +1248,6 @@ function addInternetNoticeCard(){
   `);
 }
 
-/* ✅ 인터넷TV 상단 현금지원 바 */
-function addInternetCashBar(){
-  list.insertAdjacentHTML("beforeend", `
-    <div class="inetCashBar">
-      <div class="inetCashRow">
-        <div class="inetCashText">
-          <div class="inetCashTitle">인터넷 · TV 현금지원</div>
-          <div class="inetCashSub">설치완료 후 지급 · 조건/지역 문의</div>
-        </div>
-        <a class="inetCashBtn" href="${KAKAO_URL}" target="_blank" rel="noopener">카톡 문의</a>
-      </div>
-    </div>
-  `);
-}
-
 /* internet data */
 const INTERNET_TV = [
   {carrier:"SK", net:"100M", tv:"없음", monthly:"22,000", bundle:"17,600"},
@@ -1489,10 +1420,6 @@ function renderMVNO(net){
 
 function renderInternet(carrier){
   clearList();
-
-  /* ✅ (추가) 인터넷TV 탭 상단 "현금지원 · 카톡문의" 바 */
-  addInternetCashBar();
-
   const items = INTERNET_TV.filter(x=>x.carrier===carrier);
   if(!items.length){
     list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 상품이 없습니다.</div>`);
