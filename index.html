@@ -38,6 +38,7 @@
   --ledBg:#070b12; --ledBg2:#0b1220; --ledBorder:rgba(255,255,255,.14);
   --ledText:#f8fffc;
 
+  /* ✅ 팝업(홈쇼핑 밝은 스타일) */
   --adBg1:#fff7e6;
   --adBg2:#ffffff;
   --adBorder:rgba(245,158,11,.55);
@@ -56,6 +57,7 @@ body{
 }
 .wrap{max-width:760px;margin:0 auto;padding:14px 14px 190px;}
 
+/* hero */
 .hero{
   border-radius:18px;
   overflow:hidden;
@@ -83,6 +85,7 @@ body{
 }
 .marqueeInner{display:flex;align-items:center;min-width:0;flex:1;}
 
+/* 업데이트 문구 */
 .updateWrap{
   display:flex;
   align-items:center;
@@ -107,6 +110,7 @@ body{
   .updateWrap .line1,.updateWrap .line2{font-size:16px;white-space:normal;}
 }
 
+/* 관리자 버튼(기본 숨김) */
 .heroRefreshBtn{
   flex:0 0 auto;
   height:28px;
@@ -119,10 +123,11 @@ body{
   font-size:12px;
   cursor:pointer;
   text-shadow:0 0 10px rgba(0,255,180,.55);
-  display:none;
+  display:none; /* ✅ 5번 탭하면 보이게 */
 }
 .heroRefreshBtn:active{transform:translateY(1px);filter:brightness(.98);}
 
+/* tabs */
 .tabs{display:flex;gap:8px;margin-top:12px;}
 .tabBtn{
   flex:1;padding:12px 0;border-radius:999px;border:1px solid var(--line);
@@ -138,6 +143,7 @@ body{
 
 .panel{margin-top:14px;background:#fff;border:1px solid var(--line);border-radius:16px;padding:14px;}
 
+/* sub tabs */
 .subTabs{display:none;gap:8px;margin:0 0 12px;}
 .subTabs.show{ display:flex; }
 .subTabBtn{
@@ -162,6 +168,7 @@ body{
 .infoLine{font-size:12px;font-weight:1000;color:var(--muted);margin:0 0 6px; line-height:1.25;}
 .discountLine{font-size:12px;font-weight:1000;color:#2563eb;margin:0 0 8px;}
 
+/* ✅ (추가) infoLine 안 보조문구 */
 .subHint{
   display:block;
   margin-top:2px;
@@ -170,6 +177,7 @@ body{
   font-weight:1000;
 }
 
+/* ✅ B안: 모델 아래 작은 알약 배지 */
 .discountPill{
   display:inline-flex;
   align-items:center;
@@ -186,6 +194,7 @@ body{
 }
 .discountPill strong{font-weight:1000;}
 
+/* price row */
 .priceRow{
   display:grid;
   grid-template-columns:repeat(2, minmax(0, 1fr));
@@ -206,22 +215,7 @@ body{
 
 .loading{grid-column:1/-1;padding:18px;text-align:center;font-weight:1000;color:#64748b;}
 
-.noticeCard{
-  grid-column:1/-1;
-  padding:10px 12px;
-  border-radius:14px;
-  background: linear-gradient(180deg, rgba(15,23,42,.04), rgba(15,23,42,.02));
-}
-.noticeCard .row{display:flex; align-items:center; justify-content:space-between; gap:10px;}
-.noticeCard .twrap{display:flex;flex-direction:column;gap:4px;}
-.noticeCard .t1{font-size:13px;font-weight:1000;letter-spacing:-.2px;color:#0f172a;line-height:1.2;}
-.noticeCard .t2{font-size:12px;font-weight:1000;letter-spacing:-.2px;color:var(--muted);line-height:1.2;}
-.noticeCard a{
-  flex:0 0 auto;
-  text-decoration:none;font-weight:1000;font-size:13px;padding:8px 10px;border-radius:12px;
-  background:rgba(254,229,0,.35);border:1px solid rgba(254,229,0,.55);color:#3b2f00;
-}
-
+/* addon */
 .addonCard{
   grid-column:1/-1;
   padding:14px;
@@ -229,6 +223,8 @@ body{
   border:1px solid rgba(15,23,42,.12);
   background: linear-gradient(180deg, rgba(15,23,42,.03), rgba(15,23,42,.015));
 }
+
+/* ✅ 헤더 탭만으로 토글 + 버튼 제거 + chevron */
 .addonHead{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   cursor:pointer;user-select:none;
@@ -237,6 +233,7 @@ body{
 .addonTitle{font-size:16px;font-weight:1000;letter-spacing:-.2px;color:#0f172a;}
 .addonPill{font-size:13px;font-weight:1000;padding:7px 11px;border-radius:999px;color:#fff;white-space:nowrap;}
 .addonPill.sk{background:var(--sk);} .addonPill.kt{background:var(--kt);} .addonPill.lg{background:var(--lg);}
+
 .addonChevron{
   flex:0 0 auto;
   width:36px;height:36px;
@@ -253,12 +250,14 @@ body{
   transition: transform .18s ease;
 }
 .addonCard.open .addonChevron svg{ transform: rotate(180deg); }
+
 .addonBody{margin-top:10px;display:none;}
 .addonBody.show{display:block;}
 .addonList{margin:0;padding-left:18px;}
 .addonList li{margin:10px 0;font-size:15px;font-weight:1000;color:#0f172a;line-height:1.25;}
 .addonList .sub{margin-top:4px;font-size:14px;font-weight:1000;color:var(--muted);}
 
+/* bottom dock */
 .bottomDock{
   position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));
   height:60px;padding:8px;display:flex;gap:10px;border-radius:18px;
@@ -277,352 +276,13 @@ body{
 .dockBtn.call{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.22);color:#0b3a22;}
 .dockBtn.sms{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.22);color:#083244;}
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
+
 .dockBtn{ min-height:54px; padding:0 12px; }
 .dockBtn span{ line-height:1; }
 @media (max-width:480px){
   .bottomDock{ height:64px; }
   .dockBtn{ min-height:58px; }
 }
-
-/* 팝업 css(원본 유지) */
-.adBackdrop{
-  position:fixed; inset:0;
-  background: rgba(15,23,42,.45);
-  opacity:0; pointer-events:none;
-  transition: opacity .18s ease;
-  z-index:2000;
-}
-.adModal{
-  position:fixed; inset:0;
-  display:flex; align-items:flex-end; justify-content:center;
-  padding: 14px 12px calc(14px + env(safe-area-inset-bottom));
-  opacity:0; pointer-events:none;
-  transition: opacity .18s ease;
-  z-index:2001;
-}
-.adModal.show, .adBackdrop.show{ opacity:1; pointer-events:auto; }
-
-.adSheet{
-  width:min(720px, 100%);
-  border-radius:22px;
-  overflow:hidden;
-  border:2px solid var(--adBorder);
-  box-shadow:
-    0 24px 70px rgba(15,23,42,.30),
-    0 0 0 3px rgba(255,255,255,.85),
-    0 0 34px var(--adGlow2);
-  background:
-    radial-gradient(900px 240px at 50% 0%, rgba(245,158,11,.18), transparent 60%),
-    linear-gradient(180deg, rgba(255,255,255,.92) 0%, rgba(255,255,255,.86) 100%),
-    linear-gradient(90deg, var(--adBg1) 0%, var(--adBg2) 50%, var(--adBg1) 100%);
-  transform: translateY(16px);
-  transition: transform .22s ease;
-}
-.adModal.show .adSheet{ transform: translateY(0); }
-
-.adTopBar{
-  padding:12px 14px 10px;
-  position:relative;
-  background:
-    linear-gradient(90deg, rgba(239,68,68,.96) 0%, rgba(251,146,60,.96) 50%, rgba(245,158,11,.96) 100%);
-}
-.adTopBar::after{
-  content:"";
-  position:absolute; left:0; right:0; bottom:0; height:4px;
-  background: linear-gradient(90deg, rgba(255,255,255,.0), rgba(255,255,255,.9), rgba(255,255,255,.0));
-  opacity:.7;
-}
-.adTopRow{
-  display:flex; align-items:center; justify-content:space-between; gap:10px;
-}
-.adTitleWrap{display:flex;flex-direction:column;gap:4px;min-width:0;}
-.adTitle1{
-  font-weight:1000;
-  letter-spacing:-.8px;
-  color:#fff;
-  font-size:18px;
-  line-height:1.1;
-  white-space:nowrap; overflow:hidden; text-overflow:ellipsis;
-  text-shadow:0 2px 10px rgba(0,0,0,.25);
-}
-.adTitle2{
-  font-weight:1000;
-  letter-spacing:-.2px;
-  color: rgba(255,255,255,.95);
-  font-size:13px;
-  text-shadow:0 2px 10px rgba(0,0,0,.20);
-}
-.adClose{
-  width:40px; height:40px;
-  border-radius:14px;
-  border:1px solid rgba(255,255,255,.55);
-  background: rgba(255,255,255,.18);
-  color:#fff;
-  cursor:pointer;
-  display:inline-flex; align-items:center; justify-content:center;
-  font-weight:1000;
-}
-.adClose:active{transform: translateY(1px); filter:brightness(.98);}
-
-.adBody{
-  padding: 12px 14px 14px;
-  display:flex;
-  flex-direction:column;
-  gap:12px;
-}
-
-.adCTAs{display:flex;gap:10px;align-items:stretch;}
-.adBtn{
-  flex:1;
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:8px;
-  border-radius:16px;
-  border:1px solid rgba(15,23,42,.12);
-  background: #fff;
-  color: var(--adInk);
-  text-decoration:none;
-  font-weight:1000;
-  font-size:16px;
-  padding:14px 12px;
-  box-shadow: 0 14px 26px rgba(15,23,42,.10);
-}
-.adBtn:active{transform: translateY(1px); filter:brightness(.98);}
-.adBtn.kakao{
-  background: rgba(254,229,0,.55);
-  border-color: rgba(254,229,0,.85);
-  color:#3b2f00;
-}
-#adOkBtn{
-  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(251,146,60,.96));
-  border-color: rgba(239,68,68,.30);
-  color:#fff;
-}
-.adBtn svg{width:20px;height:20px;stroke: currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
-
-.adFoot{display:flex;align-items:center;justify-content:space-between;gap:10px;padding: 2px 2px 10px;}
-.adCheck{
-  display:flex;align-items:center;gap:8px;
-  color: rgba(71,85,105,.95);
-  font-weight:1000;font-size:13px;user-select:none;
-}
-.adCheck input{width:18px;height:18px; accent-color: #22c55e;}
-.adSmall{color: rgba(71,85,105,.85);font-weight:1000;font-size:12px;}
-
-.todaySlider{ position:relative; overflow:hidden; }
-.todayTrack{
-  display:flex; gap:10px; overflow-x:auto;
-  padding: 0 8px;
-  scroll-snap-type:x mandatory;
-  -webkit-overflow-scrolling: touch;
-  overscroll-behavior-x: contain;
-  scroll-behavior:smooth;
-}
-.todayTrack::-webkit-scrollbar{display:none;}
-.todayItem{
-  flex: 0 0 calc(100% - 16px);
-  scroll-snap-align:center;
-  border-radius:18px;
-  border:1px solid rgba(15,23,42,.10);
-  background:#fff;
-  box-shadow: 0 12px 24px rgba(15,23,42,.08);
-  padding:14px;
-  position:relative;
-  overflow:hidden;
-  transform: scale(1);
-  transition: transform .16s ease;
-}
-.todayItem.sweepOn::after{
-  content:"";
-  position:absolute; inset:-80px;
-  background: linear-gradient(90deg,
-    rgba(255,255,255,0) 0%,
-    rgba(255,255,255,.0) 35%,
-    rgba(255,255,255,.65) 50%,
-    rgba(255,255,255,0) 65%,
-    rgba(255,255,255,0) 100%);
-  transform: translateX(-60%);
-  animation: sweep 1.2s linear infinite;
-  opacity:.55;
-  pointer-events:none;
-}
-@keyframes sweep{
-  0%{ transform: translateX(-70%); }
-  100%{ transform: translateX(70%); }
-}
-.todayMarquee{
-  position:absolute; left:0; right:0; top:0;
-  height:34px;
-  display:flex; align-items:center;
-  background: linear-gradient(90deg, rgba(15,23,42,.0), rgba(15,23,42,.06), rgba(15,23,42,.0));
-  border-bottom:1px solid rgba(15,23,42,.10);
-}
-.todayMarquee .bar{ width:100%; height:100%; display:flex; align-items:center; overflow:hidden; }
-.todayMarquee .text{
-  display:inline-flex; align-items:center; gap:12px;
-  white-space:nowrap;
-  padding-left:100%;
-  animation: marquee 6.5s linear infinite;
-  font-weight:1000; letter-spacing:-.4px; font-size:13px;
-  color:#fff;
-  text-shadow:0 8px 16px rgba(0,0,0,.20);
-}
-@keyframes marquee{ 0%{ transform: translateX(0); } 100%{ transform: translateX(-100%); } }
-.todayItem[data-carrier="SK"] .todayMarquee{ background: linear-gradient(90deg, rgba(37,99,235,.98), rgba(14,165,233,.85)); }
-.todayItem[data-carrier="KT"] .todayMarquee{ background: linear-gradient(90deg, rgba(17,24,39,.98), rgba(71,85,105,.90)); }
-.todayItem[data-carrier="LG"] .todayMarquee{ background: linear-gradient(90deg, rgba(22,163,74,.98), rgba(34,197,94,.85)); }
-
-.todayInner{padding-top:34px;}
-.todayBadgeRow{display:flex;align-items:center;justify-content:space-between;gap:10px;}
-.todayTag{
-  display:inline-flex;align-items:center;gap:8px;
-  font-weight:1000;font-size:12px;
-  padding:7px 10px;border-radius:999px;color:#fff;
-  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
-  box-shadow:0 10px 20px rgba(15,23,42,.10);
-}
-.todayCarrier{ font-weight:1000;font-size:12px;padding:7px 10px;border-radius:999px;color:#fff; }
-.todayCarrier.sk{background:var(--sk);} .todayCarrier.kt{background:var(--kt);} .todayCarrier.lg{background:var(--lg);}
-
-.todayModel{
-  margin-top:10px;
-  font-weight:1000;
-  letter-spacing:-1px;
-  color: var(--adInk);
-  font-size:26px;
-  line-height:1.15;
-  word-break:keep-all;
-}
-@media (max-width:420px){ .todayModel{font-size:24px;} }
-
-.todayInfo{margin:8px 0 0;font-size:13px;font-weight:1000;letter-spacing:-.2px;color:var(--adMuted);}
-
-.todayDiscPill{
-  display:inline-flex;
-  align-items:center;
-  gap:6px;
-  margin-top:8px;
-  padding:7px 10px;
-  border-radius:999px;
-  font-size:12px;
-  font-weight:1000;
-  color:#1d4ed8;
-  background: rgba(37,99,235,.10);
-  border:1px solid rgba(37,99,235,.22);
-  line-height:1;
-}
-.todayDiscPill strong{font-weight:1000;}
-
-.todayPrices{
-  display:grid;
-  grid-template-columns:repeat(2, minmax(0, 1fr));
-  gap:10px;
-  margin-top:12px;
-}
-.todayPrices.one{grid-template-columns:1fr;}
-.todayPriceBox{
-  border-radius:16px;
-  border:1px solid rgba(15,23,42,.10);
-  background: #fff;
-  box-shadow: 0 10px 18px rgba(15,23,42,.08);
-  padding:12px 12px 14px;
-  text-align:center;
-}
-.todayPriceBox .k{font-size:12px;font-weight:1000;letter-spacing:-.2px;color: rgba(71,85,105,.95);margin-bottom:6px;}
-.todayPriceBox .v{
-  font-size:42px;font-weight:1000;letter-spacing:-1.2px;line-height:1;
-  color: var(--adRed);
-  text-shadow: 0 10px 22px rgba(239,68,68,.16);
-}
-@media (max-width:420px){ .todayPriceBox .v{font-size:40px;} }
-.todayPriceBox .v.neg{color:#dc2626;}
-.todayPriceBox .v.zero{color:#0284c7;}
-.todayPriceBox .v.pos{color:#0f172a;text-shadow: 0 10px 22px rgba(15,23,42,.10);}
-
-.todayDots{ display:flex; justify-content:center; gap:6px; padding-top:8px; }
-.todayDot{
-  width:7px;height:7px;border-radius:999px;
-  background: rgba(15,23,42,.18);
-  transform: scale(1);
-  transition: transform .18s ease, background .18s ease, width .18s ease;
-}
-.todayDot.active{ background: rgba(15,23,42,.55); width:18px; }
-
-.noticeBanner{
-  border-radius:18px;
-  border:1px solid rgba(15,23,42,.10);
-  background:#fff;
-  box-shadow: 0 12px 24px rgba(15,23,42,.08);
-  padding:14px;
-  position:relative;
-  overflow:hidden;
-}
-.noticeBanner::before{
-  content:"";
-  position:absolute; inset:-2px;
-  background:
-    radial-gradient(600px 240px at 50% -10%, rgba(245,158,11,.18), transparent 60%),
-    radial-gradient(520px 220px at 10% 10%, rgba(239,68,68,.10), transparent 60%),
-    radial-gradient(520px 220px at 90% 10%, rgba(56,189,248,.10), transparent 60%);
-  pointer-events:none;
-}
-.noticeBadge{
-  position:relative;
-  display:inline-flex;
-  align-items:center;
-  gap:8px;
-  font-weight:1000;
-  font-size:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  color:#fff;
-  background: linear-gradient(90deg, rgba(239,68,68,.96), rgba(245,158,11,.96));
-  box-shadow:0 10px 20px rgba(15,23,42,.10);
-}
-.noticeTitle{
-  position:relative;
-  margin-top:10px;
-  font-weight:1000;
-  letter-spacing:-1px;
-  color: #0f172a;
-  font-size:24px;
-  line-height:1.15;
-  word-break:keep-all;
-}
-.noticeSub{
-  position:relative;
-  margin-top:8px;
-  color: rgba(71,85,105,.95);
-  font-weight:1000;
-  font-size:13px;
-  line-height:1.25;
-}
-.noticeTags{
-  position:relative;
-  display:flex;
-  flex-wrap:wrap;
-  gap:8px;
-  margin-top:10px;
-}
-.noticeTag{
-  font-weight:1000;
-  font-size:12px;
-  padding:7px 10px;
-  border-radius:999px;
-  border:1px solid rgba(15,23,42,.10);
-  background: rgba(15,23,42,.02);
-  color:#0f172a;
-}
-.noticeTitle .hlNum{ color:#ef4444; }
-.noticeTitle .hlClose{ color:#ef4444; }
-@keyframes nudge{
-  0%,100%{ transform: translateX(0); }
-  25%{ transform: translateX(-1px); }
-  50%{ transform: translateX(1px); }
-  75%{ transform: translateX(-1px); }
-}
-.noticeBanner.urgent{ animation: nudge .22s linear infinite; }
 </style>
 </head>
 
@@ -645,11 +305,13 @@ body{
     </div>
   </div>
 
+  <!-- 서비스 탭 -->
   <div class="tabs" id="serviceTabs" aria-label="서비스 탭">
     <button class="tabBtn svc mvno" data-mode="MVNO">알뜰요금</button>
     <button class="tabBtn svc internet" data-mode="INTERNET">인터넷TV</button>
   </div>
 
+  <!-- 휴대폰 탭 -->
   <div class="tabs" id="phoneTabs" aria-label="휴대폰 탭">
     <button class="tabBtn sk active" data-tab="SK">SK</button>
     <button class="tabBtn kt" data-tab="KT">KT</button>
@@ -670,89 +332,6 @@ body{
     </div>
 
     <div class="list" id="list"></div>
-  </div>
-</div>
-
-<div class="adBackdrop" id="adBackdrop" aria-hidden="true"></div>
-
-<div class="adModal" id="todayModal" aria-hidden="true" role="dialog" aria-label="오늘의 카드 팝업">
-  <div class="adSheet" role="document">
-    <div class="adTopBar">
-      <div class="adTopRow">
-        <div class="adTitleWrap">
-          <div class="adTitle1">오늘의 초특가 · 홈쇼핑급 특판</div>
-          <div class="adTitle2">카톡에 “기종+용량”만 보내면 바로 안내</div>
-        </div>
-        <button class="adClose" id="todayCloseBtn" type="button" aria-label="닫기">✕</button>
-      </div>
-    </div>
-
-    <div class="adBody">
-      <div class="todaySlider">
-        <div class="todayTrack" id="todayTrack"></div>
-        <div class="todayDots" id="todayDots"></div>
-      </div>
-
-      <div class="adCTAs">
-        <a class="adBtn kakao" id="todayKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20 11c0 3.87-3.58 7-8 7a9.8 9.8 0 0 1-2.5-.33L4 20l1.66-4.15A6.3 6.3 0 0 1 4 11c0-3.87 3.58-7 8-7s8 3.13 8 7z"/>
-            <path d="M9 11h.01"/><path d="M12 11h.01"/><path d="M15 11h.01"/>
-          </svg>
-          <span>카톡 문의</span>
-        </a>
-        <button class="adBtn" id="todayOkBtn" type="button" aria-label="확인">
-          <span>확인</span>
-        </button>
-      </div>
-
-      <div class="adFoot">
-        <label class="adCheck">
-          <input type="checkbox" id="todayNoShowToday" />
-          <span>오늘 하루 다시 보지 않기</span>
-        </label>
-        <div class="adSmall">※ 조건/재고는 문의</div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<div class="adModal" id="noticeModal" aria-hidden="true" role="dialog" aria-label="공지 팝업">
-  <div class="adSheet" role="document">
-    <div class="adTopBar">
-      <div class="adTopRow">
-        <div class="adTitleWrap">
-          <div class="adTitle1">공지사항 · 꼭 확인</div>
-          <div class="adTitle2">중요 내용은 TODAY로 승격 가능</div>
-        </div>
-        <button class="adClose" id="noticeCloseBtn" type="button" aria-label="닫기">✕</button>
-      </div>
-    </div>
-
-    <div class="adBody">
-      <div class="noticeBanner" id="noticeBanner"></div>
-
-      <div class="adCTAs">
-        <a class="adBtn kakao" id="noticeKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의">
-          <svg viewBox="0 0 24 24" aria-hidden="true">
-            <path d="M20 11c0 3.87-3.58 7-8 7a9.8 9.8 0 0 1-2.5-.33L4 20l1.66-4.15A6.3 6.3 0 0 1 4 11c0-3.87 3.58-7 8-7s8 3.13 8 7z"/>
-            <path d="M9 11h.01"/><path d="M12 11h.01"/><path d="M15 11h.01"/>
-          </svg>
-          <span>카톡 문의</span>
-        </a>
-        <button class="adBtn" id="noticeOkBtn" type="button" aria-label="확인">
-          <span>확인</span>
-        </button>
-      </div>
-
-      <div class="adFoot">
-        <label class="adCheck">
-          <input type="checkbox" id="noticeNoShow" />
-          <span>다시 보지 않기</span>
-        </label>
-        <div class="adSmall">※ 공지 변경 시 다시 표시</div>
-      </div>
-    </div>
   </div>
 </div>
 
@@ -789,180 +368,15 @@ const mvnoTabsEl = document.getElementById("mvnoTabs");
 const internetTabsEl = document.getElementById("internetTabs");
 
 const CSV_VER = "2025-12-23";
-const NOTICE_JSON_VER = "2026-01-14";
 const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
-
-const FALLBACK_NOTICE_VERSION = "2026-02-01-01";
-const FALLBACK_NOTICE_TITLE   = "KT 위약금 면제 13일 종료 !!!";
-const FALLBACK_NOTICE_SUBTITLE= "해당 고객은 조건 확인이 필요합니다. 카톡에 “기종/통신사”만 보내주세요.";
-const FALLBACK_NOTICE_TAGS    = ["위약금","면제","마감임박","조건문의"];
-
-const POPUP_INTERVAL_MS = 2 * 60 * 60 * 1000;
-const POPUP_FIRST_DELAY_MS = 700;
-
-const POPUP_LAST_SHOWN_KEY = "TODAY_POPUP_LAST_SHOWN_TS";
-const NOTICE_SEEN_VER_KEY = "NOTICE_SEEN_VERSION";
-const NOTICE_ADMIN_ON_KEY = "NOTICE_ADMIN_ON";
-
-let NOTICE = {
-  version: FALLBACK_NOTICE_VERSION,
-  title: FALLBACK_NOTICE_TITLE,
-  subtitle: FALLBACK_NOTICE_SUBTITLE,
-  tags: FALLBACK_NOTICE_TAGS,
-  urgent: false
-};
-
-async function loadNoticeFromJSON(){
-  try{
-    const r = await fetch(`notice.json?v=${encodeURIComponent(NOTICE_JSON_VER)}`, { cache:"no-store" });
-    if(!r.ok) throw new Error("notice.json load fail");
-    const j = await r.json();
-
-    const ver = String(j.version ?? "").trim();
-    const title = String(j.title ?? "").trim();
-    const sub = String(j.subtitle ?? "").trim();
-    const tags = Array.isArray(j.tags) ? j.tags.map(x=>String(x||"").trim()).filter(Boolean) : [];
-    const urgent = !!j.urgent;
-
-    return {
-      version: ver || FALLBACK_NOTICE_VERSION,
-      title: title || FALLBACK_NOTICE_TITLE,
-      subtitle: sub || FALLBACK_NOTICE_SUBTITLE,
-      tags: tags.length ? tags : (FALLBACK_NOTICE_TAGS.slice()),
-      urgent
-    };
-  }catch(e){
-    return {
-      version: FALLBACK_NOTICE_VERSION,
-      title: FALLBACK_NOTICE_TITLE,
-      subtitle: FALLBACK_NOTICE_SUBTITLE,
-      tags: FALLBACK_NOTICE_TAGS.slice(),
-      urgent: false
-    };
-  }
-}
-
-function getTodayBlockAllKey(){
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"
-  }).formatToParts(new Date());
-  const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  const y = get("year"), m = get("month"), d = get("day");
-  return `TODAY_POPUP_BLOCKALL_${y}-${m}-${d}`;
-}
-function getRotateKey(){
-  const parts = new Intl.DateTimeFormat("en-CA", {
-    timeZone:"Asia/Seoul", year:"numeric", month:"2-digit", day:"2-digit"
-  }).formatToParts(new Date());
-  const get = (t) => (parts.find(p => p.type === t)?.value || "");
-  const y = get("year"), m = get("month"), d = get("day");
-  return `TODAY_POPUP_ROTATE_${y}-${m}-${d}`;
-}
 
 let mode = "PHONE";
 let lastPhoneTab = "SK";
 let mvnoNet = "LG";
 let inetCarrier = "SK";
 
-const StorageSafe = (() => {
-  const mem = new Map();
-  function getStore(){
-    try{
-      const t="__t__";
-      localStorage.setItem(t,"1");
-      localStorage.removeItem(t);
-      return localStorage;
-    }catch(e){
-      try{
-        const t="__t__";
-        sessionStorage.setItem(t,"1");
-        sessionStorage.removeItem(t);
-        return sessionStorage;
-      }catch(e2){
-        return null;
-      }
-    }
-  }
-  const store = getStore();
-  return {
-    get(key){
-      try{ if(store) return store.getItem(key); }catch(e){}
-      return mem.has(key) ? mem.get(key) : null;
-    },
-    set(key,val){
-      try{ if(store) return store.setItem(key, String(val)); }catch(e){}
-      mem.set(key, String(val));
-    },
-    remove(key){
-      try{ if(store) return store.removeItem(key); }catch(e){}
-      mem.delete(key);
-    }
-  };
-})();
-
-async function setUpdateStamp(){
-  const el = document.getElementById("updateStamp");
-  if(!el) return;
-  try{
-    const res = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, { method: "HEAD", cache: "no-store" });
-    const lm = res.headers.get("last-modified");
-    if(!lm) return;
-    const d = new Date(lm);
-    const parts = new Intl.DateTimeFormat("ko-KR", {
-      timeZone: "Asia/Seoul",
-      year: "numeric", month: "2-digit", day: "2-digit",
-      hour: "2-digit", minute: "2-digit", hour12: false
-    }).formatToParts(d);
-    const get = (t) => (parts.find(p => p.type === t)?.value || "");
-    el.textContent = `${get("year")}.${get("month")}.${get("day")} ${get("hour")}:${get("minute")}`;
-  }catch(e){}
-}
-
-(function adminButtonsToggle(){
-  const hero = document.querySelector(".hero");
-  const btnRefresh = document.getElementById("refreshBtn");
-  const btnNotice = document.getElementById("noticeAdminToggleBtn");
-  if(!hero || !btnRefresh || !btnNotice) return;
-
-  let taps = 0;
-  let timer = null;
-  const reset = () => { taps = 0; if(timer){ clearTimeout(timer); timer = null; } };
-
-  hero.addEventListener("click", (ev) => {
-    if (ev.target.closest("#refreshBtn, #noticeAdminToggleBtn")) return;
-    taps += 1;
-    if(!timer){ timer = setTimeout(() => reset(), 2000); }
-    if(taps >= 5){
-      const hidden = (getComputedStyle(btnRefresh).display === "none");
-      btnRefresh.style.display = hidden ? "inline-flex" : "none";
-      btnNotice.style.display  = hidden ? "inline-flex" : "none";
-      reset();
-    }
-  }, { passive:true });
-
-  btnRefresh.addEventListener("click", (e) => {
-    e.preventDefault();
-    location.reload();
-  });
-
-  function syncNoticeLabel(){
-    const on = (String(StorageSafe.get(NOTICE_ADMIN_ON_KEY) ?? "") === "1");
-    btnNotice.textContent = on ? "공지ON" : "공지OFF";
-  }
-  syncNoticeLabel();
-
-  btnNotice.addEventListener("click", (e)=>{
-    e.preventDefault();
-    const on = (String(StorageSafe.get(NOTICE_ADMIN_ON_KEY) ?? "") === "1");
-    StorageSafe.set(NOTICE_ADMIN_ON_KEY, on ? "0" : "1");
-    syncNoticeLabel();
-  });
-})();
-
 const ADDON = {
-  SK: [
-    { t:"마이스마트콜(3,500)", d:"3개월 유지 / 미 가입시 +2" },
-  ],
+  SK: [{ t:"마이스마트콜(3,500)", d:"3개월 유지 / 미 가입시 +2" }],
   KT: [
     { t:"필수팩(9,900)", d:"4개월 유지 / 미 가입시 +5" },
     { t:"보험(모델별 상이)", d:"4개월 유지 / 미 가입시 +3" },
@@ -972,7 +386,7 @@ const ADDON = {
     { t:"통화편의+구글원(10,300)", d:"95일 유지 / 미 가입시 +5" },
     { t:"V컬+음악+벨링(15,400)", d:"95일 유지 / 미 가입시 +5" },
     { t:"폰교체보험(모델별 상이)", d:"95일 유지 / 미 가입시 +5" },
-    { t:"익시오(무료)", d:"95일 유지 / 미 가입시 +3" },
+    { t:"익시오(무료)", d:"95일 유지 / 미 가입시 +3" }
   ],
 };
 
@@ -1001,7 +415,6 @@ function esc(s){
     .replace(/'/g,"&#39;");
 }
 
-/* ✅ 요금제 숫자만 */
 function onlyDigits(s){
   const v = String(s ?? "").trim();
   const m = v.match(/\d+/);
@@ -1034,6 +447,7 @@ function showLoading(msg="불러오는 중…"){
   clearList();
   list.insertAdjacentHTML("beforeend", `<div class="loading">${esc(msg)}</div>`);
 }
+
 function setServiceActive(next){
   serviceTabsEl.querySelectorAll(".tabBtn").forEach(b => b.classList.remove("active"));
   if (!next) return;
@@ -1133,8 +547,8 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
       </div>
 
       ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
-
       ${discount ? `<div class="discountPill">요금할인 <strong>25%</strong></div>` : ``}
+
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
           <div class="pill">
@@ -1150,112 +564,6 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
     </div>
   `);
 }
-
-function addSimpleCard({badgeText, badgeClass, line1, line2, price1Label, price1, price2Label, price2}){
-  list.insertAdjacentHTML("beforeend", `
-    <div class="card">
-      <div class="titleRow">
-        <div class="model">${esc(line1)}</div>
-        <div class="badge ${badgeClass}">${esc(badgeText)}</div>
-      </div>
-      ${line2 ? `<p class="planLine">${esc(line2)}</p>` : ``}
-      <div class="moneyRow">
-        <div class="label">${esc(price1Label)}</div>
-        <div class="val">${esc(price1)}</div>
-      </div>
-      ${price2 ? `
-        <div class="moneyRow" style="margin-top:6px;">
-          <div class="label">${esc(price2Label)}</div>
-          <div class="val2">${esc(price2)}</div>
-        </div>` : ``}
-    </div>
-  `);
-}
-
-function addCompactNoticeCard(){
-  list.insertAdjacentHTML("beforeend", `
-    <div class="card noticeCard">
-      <div class="row">
-        <div class="twrap">
-          <div class="t1">가입비·유심비 등 추가 요금 없음</div>
-          <div class="t2">궁금하신 점은 카톡문의</div>
-        </div>
-        <a href="${KAKAO_URL}" target="_blank" rel="noopener">카톡 열기</a>
-      </div>
-    </div>
-  `);
-}
-function addInternetNoticeCard(){
-  list.insertAdjacentHTML("beforeend", `
-    <div class="card noticeCard">
-      <div class="row">
-        <div class="twrap">
-          <div class="t1"><strong>현금지원금</strong> 카톡문의</div>
-          <div class="t2">궁금하신 점은 카톡문의</div>
-        </div>
-        <a href="${KAKAO_URL}" target="_blank" rel="noopener">카톡 열기</a>
-      </div>
-    </div>
-  `);
-}
-
-const INTERNET_TV = [
-  {carrier:"SK", net:"100M", tv:"없음", monthly:"22,000", bundle:"17,600"},
-  {carrier:"SK", net:"500M", tv:"없음", monthly:"33,000", bundle:"22,000"},
-  {carrier:"SK", net:"1G",   tv:"없음", monthly:"38,500", bundle:"25,300"},
-  {carrier:"SK", net:"100M", tv:"뉴이코노미", monthly:"34,100", bundle:"30,800"},
-  {carrier:"SK", net:"100M", tv:"스탠다드",   monthly:"37,400", bundle:"34,100"},
-  {carrier:"SK", net:"100M", tv:"ALL",        monthly:"40,700", bundle:"37,400"},
-  {carrier:"SK", net:"500M", tv:"뉴이코노미", monthly:"41,800", bundle:"35,200"},
-  {carrier:"SK", net:"500M", tv:"스탠다드",   monthly:"45,100", bundle:"38,500"},
-  {carrier:"SK", net:"500M", tv:"ALL",        monthly:"48,400", bundle:"41,800"},
-  {carrier:"SK", net:"1G",   tv:"뉴이코노미", monthly:"47,300", bundle:"38,500"},
-  {carrier:"SK", net:"1G",   tv:"스탠다드",   monthly:"50,600", bundle:"41,800"},
-  {carrier:"SK", net:"1G",   tv:"ALL",        monthly:"53,900", bundle:"45,100"},
-  {carrier:"KT", net:"100M", tv:"없음", monthly:"22,000", bundle:"16,500"},
-  {carrier:"KT", net:"500M", tv:"없음", monthly:"33,000", bundle:"22,000"},
-  {carrier:"KT", net:"1G",   tv:"없음", monthly:"38,500", bundle:"27,500"},
-  {carrier:"KT", net:"100M", tv:"베이직", monthly:"38,500", bundle:"33,000"},
-  {carrier:"KT", net:"100M", tv:"모든G", monthly:"44,000", bundle:"40,700"},
-  {carrier:"KT", net:"500M", tv:"베이직", monthly:"44,000", bundle:"38,500"},
-  {carrier:"KT", net:"500M", tv:"모든G", monthly:"49,500", bundle:"44,000"},
-  {carrier:"KT", net:"1G",   tv:"베이직", monthly:"49,500", bundle:"44,000"},
-  {carrier:"KT", net:"1G",   tv:"모든G", monthly:"55,000", bundle:"49,500"},
-  {carrier:"LG", net:"100M", tv:"없음", monthly:"22,000", bundle:"16,500"},
-  {carrier:"LG", net:"500M", tv:"없음", monthly:"33,000", bundle:"23,100"},
-  {carrier:"LG", net:"1G",   tv:"없음", monthly:"38,500", bundle:"25,300"},
-  {carrier:"LG", net:"100M", tv:"실속형", monthly:"39,600", bundle:"34,100"},
-  {carrier:"LG", net:"100M", tv:"프리미엄", monthly:"42,900", bundle:"37,400"},
-  {carrier:"LG", net:"500M", tv:"실속형", monthly:"45,100", bundle:"35,200"},
-  {carrier:"LG", net:"500M", tv:"프리미엄", monthly:"48,400", bundle:"38,500"},
-  {carrier:"LG", net:"1G",   tv:"실속형", monthly:"50,600", bundle:"37,400"},
-  {carrier:"LG", net:"1G",   tv:"프리미엄", monthly:"53,900", bundle:"40,700"},
-];
-
-const MVNO_PLANS = [
-  {net:"LG", talk:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:"9,900"},
-  {net:"LG", talk:"무제한", sms:"무제한", data:"7GB+1Mbps무제한", fee:"15,900"},
-  {net:"LG", talk:"무제한", sms:"무제한", data:"10GB+1Mbps무제한", fee:"18,900"},
-  {net:"LG", talk:"100분",  sms:"100건",  data:"15GB+3Mbps무제한", fee:"25,250"},
-  {net:"LG", talk:"무제한", sms:"무제한", data:"11GB+일2GB+3Mbps무제한", fee:"32,990"},
-  {net:"LG", talk:"무제한", sms:"무제한", data:"100GB+5Mbps무제한", fee:"38,200"},
-  {net:"LG", talk:"50분",   sms:"50건",   data:"500MB", fee:"3,300"},
-  {net:"LG", talk:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:"12,900"},
-  {net:"LG", talk:"무제한", sms:"무제한", data:"5GB+1Mbps무제한", fee:"17,500"},
-  {net:"LG", talk:"100분",  sms:"100건",  data:"15GB+망내1회선+3Mbps무제한", fee:"28,820"},
-  {net:"KT", talk:"무제한", sms:"무제한", data:"2.5GB+400Kbps무제한", fee:"9,500"},
-  {net:"KT", talk:"무제한", sms:"무제한", data:"7GB+1Mbps무제한", fee:"17,900"},
-  {net:"KT", talk:"무제한", sms:"무제한", data:"10GB+1Mbps무제한", fee:"19,900"},
-  {net:"KT", talk:"무제한", sms:"무제한", data:"15GB+1Mbps무제한", fee:"22,400"},
-  {net:"KT", talk:"무제한", sms:"무제한", data:"11GB+일2GB+3Mbps무제한", fee:"34,000"},
-  {net:"KT", talk:"무제한", sms:"무제한", data:"100GB+5Mbps무제한", fee:"39,900"},
-  {net:"SK", talk:"2,000분", sms:"2,000건", data:"2GB", fee:"6,820"},
-  {net:"SK", talk:"무제한",  sms:"무제한",  data:"1GB+1Mbps무제한", fee:"13,340"},
-  {net:"SK", talk:"무제한",  sms:"무제한",  data:"7GB+1Mbps무제한", fee:"19,140"},
-  {net:"SK", talk:"무제한",  sms:"무제한",  data:"10GB+1Mbps무제한", fee:"19,640"},
-  {net:"SK", talk:"100분",   sms:"100건",   data:"15GB+3Mbps무제한", fee:"25,740"},
-  {net:"SK", talk:"무제한",  sms:"무제한",  data:"11GB+일2GB+3Mbps무제한", fee:"36,140"},
-];
 
 /* CSV loader */
 function parseCSVLine(line){
@@ -1275,13 +583,32 @@ function parseCSVLine(line){
   out.push(cur);
   return out;
 }
+
+/* ✅✅✅ 핵심 수정: 중복 헤더 자동 .1 부여 */
+function makeUniqueHeader(rawHeader){
+  const seen = Object.create(null);
+  return rawHeader.map(h=>{
+    const key = String(h||"").trim();
+    if(!seen[key]){
+      seen[key] = 1;
+      return key;
+    }
+    const idx = seen[key];
+    seen[key] = idx + 1;
+    return `${key}.${idx}`;  // 두번째가 .1
+  });
+}
+
 async function fetchCSV(){
   const r = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, { cache: "no-store" });
   if (!r.ok) throw new Error("data.csv 로드 실패");
   const t = await r.text();
   const lines = t.replace(/^\uFEFF/,"").trim().split(/\r?\n/);
   if (!lines.length) return [];
-  const header = parseCSVLine(lines.shift()).map(s => String(s||"").trim());
+
+  const rawHeader = parseCSVLine(lines.shift());
+  const header = makeUniqueHeader(rawHeader);
+
   return lines.map(line => {
     const cols = parseCSVLine(line);
     const o = {};
@@ -1290,13 +617,6 @@ async function fetchCSV(){
   });
 }
 
-/* ✅ TODAY 행 판별 */
-function isTodayRow(x){
-  const v = String(x["TODAY"] ?? "").trim().toLowerCase();
-  return (v === "1" || v === "true" || v === "y" || v === "yes" || v === "on");
-}
-
-/* ✅ 정렬용 */
 function getRowBestPrice(row, carrier){
   const mv = asNum(row[`${carrier}_이동`]);
   const ch = asNum(row[`${carrier}_기변`]);
@@ -1306,136 +626,6 @@ function getRowBestPrice(row, carrier){
   return Math.min(mv, ch);
 }
 
-/* ======================================================
-   ✅✅✅ 핵심: data.csv 어떤 헤더든 "표준키"로 자동 변환
-   - (1) SK_이동/KT_이동/LG_이동 있는 경우: 그대로 사용
-   - (2) "이동,기변,요금제,이동.1,..." 반복형: SK/KT/LG로 매핑
-   - (3) "통신사+기종" long형: 모델 기준으로 합치기
-   ====================================================== */
-function pickCol(row, candidates){
-  for(const k of candidates){
-    if(Object.prototype.hasOwnProperty.call(row, k)) return k;
-  }
-  const keys = Object.keys(row);
-  const lowMap = new Map(keys.map(k => [String(k).toLowerCase(), k]));
-  for(const k of candidates){
-    const kk = lowMap.get(String(k).toLowerCase());
-    if(kk) return kk;
-  }
-  return "";
-}
-function normCarrier(v){
-  const s = String(v||"").trim().toUpperCase();
-  if(!s) return "";
-  if(s.includes("SK")) return "SK";
-  if(s.includes("KT")) return "KT";
-  if(s.includes("LG") || s.includes("U+")) return "LG";
-  return "";
-}
-function detectMode(rows){
-  const r = rows[0] || {};
-  const keys = Object.keys(r).map(x=>String(x));
-  const hasStd = keys.some(k => /^SK_/.test(k) || /^KT_/.test(k) || /^LG_/.test(k));
-  if(hasStd) return "WIDE";
-  const hasCarrier = !!pickCol(r, ["통신사","캐리어","망","carrier"]);
-  const hasMove = !!pickCol(r, ["이동","번호이동","mnp"]);
-  const hasChg  = !!pickCol(r, ["기변","기기변경"]);
-  if(hasCarrier && (hasMove || hasChg)) return "LONG";
-  return "WIDE";
-}
-function normalizeRows(rawRows){
-  if(!rawRows.length) return [];
-
-  const normalizeModel = (r)=>{
-    const modelCol = pickCol(r, ["기종","모델","기기","기종명","단말","단말기","상품명"]);
-    if(modelCol && modelCol !== "기종" && !r["기종"]) r["기종"] = r[modelCol];
-    return r;
-  };
-
-  const mode = detectMode(rawRows);
-
-  // LONG → 모델 기준으로 SK/KT/LG 합치기
-  if(mode === "LONG"){
-    const byModel = new Map();
-
-    for(const r0 of rawRows){
-      const r = normalizeModel({ ...r0 });
-
-      const carrierCol = pickCol(r, ["통신사","캐리어","망","carrier"]);
-      const model = String(r["기종"]||"").trim();
-      if(!carrierCol || !model) continue;
-
-      const c = normCarrier(r[carrierCol]);
-      if(!c || !["SK","KT","LG"].includes(c)) continue;
-
-      if(!byModel.has(model)) byModel.set(model, { "기종": model });
-      const out = byModel.get(model);
-
-      const mvCol = pickCol(r, ["이동","번호이동","MNP","mnp"]);
-      const chCol = pickCol(r, ["기변","기기변경"]);
-      if(mvCol) out[`${c}_이동`] = String(r[mvCol]??"").trim();
-      if(chCol) out[`${c}_기변`] = String(r[chCol]??"").trim();
-
-      const planCol = pickCol(r, ["요금제","요금제명","플랜","plan"]);
-      if(planCol){
-        const pv = String(r[planCol]??"").trim();
-        if(pv){
-          out[`${c}_요금제`] = pv;
-          out[`${c}_요금제.1`] = pv;
-        }
-      }
-
-      const discCol = pickCol(r, ["요금할인","요금할인25","선택약정","25%"]);
-      if(discCol){
-        const v = String(r[discCol]||"").trim().toLowerCase();
-        if(v==="o"||v==="1"||v==="true"||v==="y"||v==="yes"||v==="on") out["요금할인"]="O";
-      }
-
-      // TODAY 같은 공통필드 유지
-      if(!out["TODAY"] && r["TODAY"]) out["TODAY"] = r["TODAY"];
-    }
-
-    return Array.from(byModel.values());
-  }
-
-  // WIDE → 반복형 헤더를 표준키로 생성
-  const rows = rawRows.map(r0 => normalizeModel({ ...r0 }));
-  const headerKeys = Object.keys(rows[0] || {});
-
-  // 이미 표준키면 그대로
-  const hasStd = (c)=> headerKeys.includes(`${c}_이동`) || headerKeys.includes(`${c}_기변`) || headerKeys.includes(`${c}_요금제`);
-  if(hasStd("SK") || hasStd("KT") || hasStd("LG")) return rows;
-
-  // 반복형 패턴
-  const moveCols = headerKeys.filter(k => /^이동(\.\d+)?$/.test(k));
-  const chgCols  = headerKeys.filter(k => /^기변(\.\d+)?$/.test(k));
-  const planCols = headerKeys.filter(k => /^요금제(\.\d+)?$/.test(k));
-
-  // ✅ 여기서 0=SK, 1=KT, 2=LG (네 엑셀 구조가 대부분 이 순서)
-  const carriers = ["SK","KT","LG"];
-  const mapByIndex = (cols, idx) => (cols[idx] ?? "");
-
-  rows.forEach(r=>{
-    carriers.forEach((c, i)=>{
-      const mvK = mapByIndex(moveCols, i);
-      const chK = mapByIndex(chgCols,  i);
-      const plK = mapByIndex(planCols, i);
-
-      if(mvK && String(r[mvK]??"").trim()!=="") r[`${c}_이동`] = String(r[mvK]).trim();
-      if(chK && String(r[chK]??"").trim()!=="") r[`${c}_기변`] = String(r[chK]).trim();
-
-      if(plK && String(r[plK]??"").trim()!==""){
-        const pv = String(r[plK]).trim();
-        r[`${c}_요금제`] = pv;
-        r[`${c}_요금제.1`] = pv;
-      }
-    });
-  });
-
-  return rows;
-}
-
-/* ✅ PHONE 렌더 */
 function renderPhone(rows, carrier){
   clearList();
   addAddonCard(carrier);
@@ -1472,300 +662,20 @@ function renderPhone(rows, carrier){
   });
 }
 
-function renderMVNO(net){
-  clearList();
-  const items = MVNO_PLANS.filter(p=>p.net===net);
-  if(!items.length){
-    list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 요금제가 없습니다.</div>`);
-    addCompactNoticeCard();
-    return;
-  }
-  items.forEach(p=>{
-    addSimpleCard({
-      badgeText: `${net}망`,
-      badgeClass: net==="SK" ? "sk" : net==="KT" ? "kt" : "lg",
-      line1: `${p.data}`,
-      line2: `통화 ${p.talk} · 문자 ${p.sms}`,
-      price1Label: "월 요금",
-      price1: `${p.fee}원`,
-      price2Label: "",
-      price2: ""
-    });
-  });
-  addCompactNoticeCard();
-}
-
-function renderInternet(carrier){
-  clearList();
-  const items = INTERNET_TV.filter(x=>x.carrier===carrier);
-  if(!items.length){
-    list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 상품이 없습니다.</div>`);
-    addInternetNoticeCard();
-    return;
-  }
-  items.forEach(p=>{
-    addSimpleCard({
-      badgeText: carrier,
-      badgeClass: carrier==="SK" ? "sk" : carrier==="KT" ? "kt" : "lg",
-      line1: `인터넷 ${p.net} + TV ${p.tv}`,
-      line2: "",
-      price1Label: "월 요금",
-      price1: `${p.monthly}원`,
-      price2Label: "휴대폰 결합",
-      price2: `${p.bundle}원`
-    });
-  });
-  addInternetNoticeCard();
-}
-
-/* 팝업 로직(원본 유지) */
-const adBackdrop = document.getElementById("adBackdrop");
-const todayModal = document.getElementById("todayModal");
-const noticeModal = document.getElementById("noticeModal");
-
-function showModal(modal){
-  adBackdrop.classList.add("show");
-  modal.classList.add("show");
-  modal.setAttribute("aria-hidden","false");
-  adBackdrop.setAttribute("aria-hidden","false");
-}
-function hideModal(modal){
-  modal.classList.remove("show");
-  modal.setAttribute("aria-hidden","true");
-  if(!todayModal.classList.contains("show") && !noticeModal.classList.contains("show")){
-    adBackdrop.classList.remove("show");
-    adBackdrop.setAttribute("aria-hidden","true");
-  }
-}
-adBackdrop.addEventListener("click", ()=>{
-  if(noticeModal.classList.contains("show")) hideModal(noticeModal);
-  if(todayModal.classList.contains("show")) hideModal(todayModal);
-});
-document.addEventListener("keydown", (e)=>{
-  if(e.key !== "Escape") return;
-  if(noticeModal && noticeModal.classList.contains("show")) hideModal(noticeModal);
-  if(todayModal && todayModal.classList.contains("show")) hideModal(todayModal);
-}, { passive:true });
-
-function escapeHtml(s){
-  return String(s ?? "")
-    .replace(/&/g,"&amp;")
-    .replace(/</g,"&lt;")
-    .replace(/>/g,"&gt;")
-    .replace(/"/g,"&quot;")
-    .replace(/'/g,"&#39;");
-}
-function highlightNoticeTitle(t){
-  let s = escapeHtml(t);
-  s = s.replace(/(마감|종료|오늘|긴급|D-\d+)/g, '<span class="hlClose">$1</span>');
-  s = s.replace(/(\d+)/g, '<span class="hlNum">$1</span>');
-  return s;
-}
-function renderNoticeBanner(){
-  const box = document.getElementById("noticeBanner");
-  if(!box) return;
-  const urgent = !!NOTICE.urgent || /마감|종료|긴급|D-\d+/i.test(String(NOTICE.title||""));
-  box.classList.toggle("urgent", urgent);
-
-  const tags = (NOTICE.tags || []).slice(0, 8);
-  box.innerHTML = `
-    <div class="noticeBadge">공지</div>
-    <div class="noticeTitle">${highlightNoticeTitle(NOTICE.title || "")}</div>
-    <div class="noticeSub">${escapeHtml(NOTICE.subtitle || "")}</div>
-    <div class="noticeTags">
-      ${tags.map(t=>`<span class="noticeTag">#${escapeHtml(t)}</span>`).join("")}
-    </div>
-  `;
-}
-function maybeShowNoticePopup(){
-  const seen = String(StorageSafe.get(NOTICE_SEEN_VER_KEY) ?? "");
-  if(seen === String(NOTICE.version ?? "")) return;
-  renderNoticeBanner();
-  showModal(noticeModal);
-}
-document.getElementById("noticeCloseBtn").addEventListener("click", ()=> hideModal(noticeModal));
-document.getElementById("noticeOkBtn").addEventListener("click", ()=> hideModal(noticeModal));
-document.getElementById("noticeNoShow").addEventListener("change", (e)=>{
-  if(e.target.checked){
-    StorageSafe.set(NOTICE_SEEN_VER_KEY, String(NOTICE.version ?? ""));
-  }else{
-    StorageSafe.remove(NOTICE_SEEN_VER_KEY);
-  }
-});
-
-const todayTrack = document.getElementById("todayTrack");
-const todayDots = document.getElementById("todayDots");
-const todayNoShowToday = document.getElementById("todayNoShowToday");
-
-function carrierClass(c){
-  if(c==="SK") return "sk";
-  if(c==="KT") return "kt";
-  return "lg";
-}
-function buildTodayCards(todayRows){
-  todayTrack.innerHTML = "";
-  todayDots.innerHTML = "";
-
-  if(!todayRows.length){
-    todayTrack.innerHTML = `<div class="todayItem"><div class="todayInner"><div class="todayModel">오늘의 카드가 없습니다</div><div class="todayInfo">TODAY=1 로 지정된 행이 없어요.</div></div></div>`;
-    return;
-  }
-
-  const scoreRow = (r) => {
-    const carriers = ["SK","KT","LG"];
-    let best = Number.POSITIVE_INFINITY;
-    carriers.forEach(c=>{
-      best = Math.min(best, getRowBestPrice(r, c));
-    });
-    return best;
-  };
-
-  const sorted = todayRows.slice().sort((a,b)=>{
-    const av = scoreRow(a);
-    const bv = scoreRow(b);
-    if(av !== bv) return av - bv;
-    const am = String(a["기종"] ?? "");
-    const bm = String(b["기종"] ?? "");
-    return am.localeCompare(bm, "ko");
-  });
-
-  const rKey = getRotateKey();
-  const cur = Number(StorageSafe.get(rKey) ?? "0");
-  const startIdx = (Number.isFinite(cur) ? cur : 0) % sorted.length;
-  StorageSafe.set(rKey, String(startIdx + 1));
-  const rotated = sorted.slice(startIdx).concat(sorted.slice(0, startIdx));
-
-  rotated.forEach((r, idx)=>{
-    const pickCarrier = () => {
-      const cands = ["SK","KT","LG"];
-      let bestC = lastPhoneTab || "SK";
-      let bestV = Number.POSITIVE_INFINITY;
-      cands.forEach(c=>{
-        const v = getRowBestPrice(r, c);
-        if(v < bestV){ bestV = v; bestC = c; }
-      });
-      return bestC;
-    };
-    const c = pickCarrier();
-
-    const model = String(r["기종"] ?? "").trim() || "-";
-    const mv = showVal(r[`${c}_이동`]);
-    const ch = showVal(r[`${c}_기변`]);
-
-    const mvNum = asNum(mv);
-    const chNum = asNum(ch);
-    const hasMove = (mv !== "");
-    const hasChange = (ch !== "");
-    const one = !(hasMove && hasChange);
-
-    const best = getRowBestPrice(r, c);
-    const sweepOn = (best !== Number.POSITIVE_INFINITY) && (best <= 0);
-
-    todayTrack.insertAdjacentHTML("beforeend", `
-      <div class="todayItem ${sweepOn ? "sweepOn" : ""}" data-carrier="${c}">
-        <div class="todayMarquee">
-          <div class="bar">
-            <div class="text">오늘의 초특가 · TODAY · TODAY · TODAY · 오늘의 초특가 · TODAY · TODAY ·</div>
-          </div>
-        </div>
-
-        <div class="todayInner">
-          <div class="todayBadgeRow">
-            <div class="todayTag">TODAY</div>
-            <div class="todayCarrier ${carrierClass(c)}">${escapeHtml(c)}</div>
-          </div>
-
-          <div class="todayModel">${escapeHtml(model)}</div>
-          <div class="todayInfo">${escapeHtml(String(infoLineWithPlan(c, r)).replace(/<br>/g," · ").replace(/<[^>]*>/g,"").trim())}</div>
-          ${isDiscountRow(r) ? `<div class="todayDiscPill">요금할인 <strong>25%</strong></div>` : ``}
-
-          <div class="todayPrices ${one ? "one" : ""}">
-            ${hasMove ? `
-              <div class="todayPriceBox">
-                <div class="k">이동</div>
-                <div class="v ${vClass(mvNum)}">${escapeHtml(mv)}</div>
-              </div>` : ``}
-            ${hasChange ? `
-              <div class="todayPriceBox">
-                <div class="k">기변</div>
-                <div class="v ${vClass(chNum)}">${escapeHtml(ch)}</div>
-              </div>` : ``}
-          </div>
-        </div>
-      </div>
-    `);
-
-    todayDots.insertAdjacentHTML("beforeend", `<div class="todayDot ${idx===0 ? "active" : ""}"></div>`);
-  });
-
-  const items = Array.from(todayTrack.querySelectorAll(".todayItem"));
-  const dots = Array.from(todayDots.querySelectorAll(".todayDot"));
-  function setActive(i){
-    dots.forEach((d,idx)=> d.classList.toggle("active", idx===i));
-  }
-  todayTrack.addEventListener("scroll", ()=>{
-    let bestIdx = 0;
-    let bestDist = Infinity;
-    items.forEach((el, idx)=>{
-      const rect = el.getBoundingClientRect();
-      const cx = rect.left + rect.width/2;
-      const containerRect = todayTrack.getBoundingClientRect();
-      const cc = containerRect.left + containerRect.width/2;
-      const dist = Math.abs(cx - cc);
-      if(dist < bestDist){ bestDist = dist; bestIdx = idx; }
-    });
-    setActive(bestIdx);
-  }, { passive:true });
-}
-
-function shouldShowTodayPopup(){
-  const blockKey = getTodayBlockAllKey();
-  if(String(StorageSafe.get(blockKey) ?? "") === "1") return false;
-
-  const last = Number(StorageSafe.get(POPUP_LAST_SHOWN_KEY) ?? "0");
-  const now = Date.now();
-  if(!last) return true;
-  return (now - last) >= POPUP_INTERVAL_MS;
-}
-function markTodayShown(){
-  StorageSafe.set(POPUP_LAST_SHOWN_KEY, String(Date.now()));
-}
-function showTodayOnce(){
-  markTodayShown();
-  try{
-    if(todayTrack) todayTrack.scrollLeft = 0;
-    const dots = Array.from(document.querySelectorAll("#todayDots .todayDot"));
-    dots.forEach((d, i)=> d.classList.toggle("active", i===0));
-  }catch(e){}
-  showModal(todayModal);
-}
-
-document.getElementById("todayCloseBtn").addEventListener("click", ()=>{
-  if(todayNoShowToday.checked){
-    StorageSafe.set(getTodayBlockAllKey(), "1");
-  }
-  markTodayShown();
-  hideModal(todayModal);
-});
-document.getElementById("todayOkBtn").addEventListener("click", ()=>{
-  if(todayNoShowToday.checked){
-    StorageSafe.set(getTodayBlockAllKey(), "1");
-  }
-  markTodayShown();
-  hideModal(todayModal);
-});
-
+/* 탭 이벤트 */
 serviceTabsEl.addEventListener("click", (e)=>{
   const b = e.target.closest(".tabBtn");
   if(!b) return;
   const next = b.dataset.mode;
+
   if(next === "MVNO"){
     mode = "MVNO";
     setServiceActive("MVNO");
     hideAllSubTabs();
     showMvnoTabs(true);
     showInternetTabs(false);
-    renderMVNO(mvnoNet);
+    clearList();
+    list.insertAdjacentHTML("beforeend", `<div class="loading">알뜰요금 데이터는 기존 코드 그대로 쓰면 됩니다.</div>`);
     activateMvnoNet(mvnoNet);
   }else if(next === "INTERNET"){
     mode = "INTERNET";
@@ -1773,7 +683,8 @@ serviceTabsEl.addEventListener("click", (e)=>{
     hideAllSubTabs();
     showInternetTabs(true);
     showMvnoTabs(false);
-    renderInternet(inetCarrier);
+    clearList();
+    list.insertAdjacentHTML("beforeend", `<div class="loading">인터넷TV 데이터는 기존 코드 그대로 쓰면 됩니다.</div>`);
     activateInetCarrier(inetCarrier);
   }
 });
@@ -1789,33 +700,32 @@ phoneTabsEl.addEventListener("click", (e)=>{
   if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
 });
 
-mvnoTabsEl.addEventListener("click", (e)=>{
-  const b = e.target.closest(".subTabBtn");
-  if(!b) return;
-  const net = b.dataset.mvno;
-  activateMvnoNet(net);
-  renderMVNO(net);
-});
-internetTabsEl.addEventListener("click", (e)=>{
-  const b = e.target.closest(".subTabBtn");
-  if(!b) return;
-  const c = b.dataset.inet;
-  activateInetCarrier(c);
-  renderInternet(c);
-});
+/* 업데이트 날짜/시간 자동 표시 (data.csv Last-Modified) */
+async function setUpdateStamp(){
+  const el = document.getElementById("updateStamp");
+  if(!el) return;
+  try{
+    const res = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, { method: "HEAD", cache: "no-store" });
+    const lm = res.headers.get("last-modified");
+    if(!lm) return;
+    const d = new Date(lm);
+    const parts = new Intl.DateTimeFormat("ko-KR", {
+      timeZone: "Asia/Seoul",
+      year: "numeric", month: "2-digit", day: "2-digit",
+      hour: "2-digit", minute: "2-digit", hour12: false
+    }).formatToParts(d);
+    const get = (t) => (parts.find(p => p.type === t)?.value || "");
+    el.textContent = `${get("year")}.${get("month")}.${get("day")} ${get("hour")}:${get("minute")}`;
+  }catch(e){}
+}
 
+/* 초기 로딩 */
 (async function init(){
   showLoading("data.csv 불러오는 중…");
   await setUpdateStamp();
 
   try{
-    NOTICE = await loadNoticeFromJSON();
-
-    const rawRows = await fetchCSV();
-
-    // ✅✅✅ 여기서 "표준키 변환" 확정 적용
-    const rows = normalizeRows(rawRows);
-
+    const rows = await fetchCSV();
     window.__CSV_ROWS__ = rows;
 
     mode = "PHONE";
@@ -1823,29 +733,6 @@ internetTabsEl.addEventListener("click", (e)=>{
     hideAllSubTabs();
     activatePhoneTab(lastPhoneTab);
     renderPhone(rows, lastPhoneTab);
-
-    setTimeout(()=>{
-      const on = (String(StorageSafe.get(NOTICE_ADMIN_ON_KEY) ?? "") === "1");
-      if(on) maybeShowNoticePopup();
-    }, 300);
-
-    const todayRows = rows.filter(isTodayRow).filter(r => String(r["기종"] ?? "").trim() !== "__NOTICE__");
-    if(todayRows.length){
-      buildTodayCards(todayRows);
-      setTimeout(()=>{
-        if(shouldShowTodayPopup()){
-          showTodayOnce();
-        }
-      }, POPUP_FIRST_DELAY_MS);
-
-      setInterval(()=>{
-        if(shouldShowTodayPopup()){
-          todayNoShowToday.checked = false;
-          showTodayOnce();
-        }
-      }, 30 * 1000);
-    }
-
   }catch(err){
     console.error(err);
     showLoading("data.csv를 불러오지 못했습니다. 파일명/경로를 확인해주세요.");
