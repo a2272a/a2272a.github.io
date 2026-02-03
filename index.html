@@ -165,8 +165,24 @@ body{
 .badge.sk{background:var(--sk);} .badge.kt{background:var(--kt);} .badge.lg{background:var(--lg);}
 .badge.hot{background:var(--hot);} .badge.low{background:var(--low);}
 
-.infoLine{font-size:12px;font-weight:1000;color:var(--muted);margin:0 0 6px;}
-.discountLine{font-size:12px;font-weight:1000;color:#2563eb;margin:0 0 8px;} /* (기존 유지: 지금은 사용 안 함) */
+.infoLine{
+  font-size:12px;
+  font-weight:1000;
+  color:var(--muted);
+  margin:0 0 6px;
+  line-height:1.25;
+  white-space:normal; /* ✅ 줄바꿈 허용 (B안) */
+}
+.infoLine .subHint{
+  display:block;
+  margin-top:2px;
+  font-size:11px;
+  font-weight:1000;
+  color:#94a3b8;
+}
+
+/* (기존 유지: 지금은 사용 안 함) */
+.discountLine{font-size:12px;font-weight:1000;color:#2563eb;margin:0 0 8px;}
 
 /* ✅ B안: 모델 아래 작은 알약 배지 */
 .discountPill{
@@ -518,7 +534,22 @@ body{
 }
 @media (max-width:420px){ .todayModel{font-size:24px;} }
 
-.todayInfo{margin:8px 0 0;font-size:13px;font-weight:1000;letter-spacing:-.2px;color:var(--adMuted);}
+.todayInfo{
+  margin:8px 0 0;
+  font-size:13px;
+  font-weight:1000;
+  letter-spacing:-.2px;
+  color:var(--adMuted);
+  white-space:normal; /* ✅ B안 줄바꿈 허용 */
+  line-height:1.25;
+}
+.todayInfo .subHint{
+  display:block;
+  margin-top:2px;
+  font-size:12px;
+  font-weight:1000;
+  color:rgba(71,85,105,.85);
+}
 
 /* ✅ B안: TODAY에서도 모델 아래 작은 알약(요금할인) */
 .todayDiscPill{
@@ -1055,14 +1086,51 @@ const showVal = (raw) => {
 };
 const vClass = (n) => (n === null) ? "" : (n < 0 ? "neg" : (n === 0 ? "zero" : "pos"));
 
+/* =========================
+   ✅ B안(이동/기변 요금제 분리) + CSV 호환 읽기
+   ========================= */
+function pick(row, keys, fallback = ""){
+  for(const k of keys){
+    const v = row?.[k];
+    if(v !== undefined && v !== null && String(v).trim() !== "") return String(v).trim();
+  }
+  return fallback;
+}
+function getCarrierPlans(row, carrier){
+  const movePlan = pick(row, [
+    `${carrier}_요금제`,        // ✅ 현재 CSV(이동)
+    `${carrier}_이동요금제`,
+    `${carrier}_plan_move`,
+  ], "");
+  const changePlan = pick(row, [
+    `${carrier}_요금제.1`,      // ✅ 현재 CSV(기변) : 중복헤더 -> .1
+    `${carrier}_기변요금제`,
+    `${carrier}_plan_change`,
+  ], "");
+  return { movePlan, changePlan };
+}
+
+/* ✅ fallback(요금제 컬럼이 아예 비었을 때만 사용) */
 const fixedInfoLine = (c) => {
-  if (c === "SK") return "SK 109요금 6개월 / 부가서비스 유지조건 클릭";
-  if (c === "KT") return "KT 110요금 6개월 / 부가서비스 유지조건 클릭";
-  return "LG 115요금 6개월 / 부가서비스 유지조건 클릭";
+  if (c === "SK") return `이동: SK 109요금 6개월<br>기변: SK 109요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  if (c === "KT") return `이동: KT 110요금 6개월<br>기변: KT 110요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  return `이동: LG 115요금 6개월<br>기변: LG 115요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
 };
-const infoLineWithPlan = (c, x) => {
-  const p = asNum(x[`${c}_요금제`]);
-  return (p && p > 0) ? `${c} ${p}요금 6개월 / 부가서비스 유지조건 클릭` : fixedInfoLine(c);
+
+/* ✅ B안 표기(이동/기변 요금제 분리) - data.csv 그대로 읽음 */
+const infoLineWithPlan = (c, row) => {
+  const { movePlan, changePlan } = getCarrierPlans(row, c);
+
+  if(!movePlan && !changePlan) return fixedInfoLine(c);
+
+  if(movePlan && !changePlan){
+    return `이동: ${c} ${movePlan}요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  }
+  if(!movePlan && changePlan){
+    return `기변: ${c} ${changePlan}요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  }
+
+  return `이동: ${c} ${movePlan}요금 6개월<br>기변: ${c} ${changePlan}요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
 };
 
 function clearList(){ list.innerHTML = ""; }
@@ -1164,7 +1232,8 @@ function esc(s){
     .replace(/'/g,"&#39;");
 }
 
-/* phone card (✅ escape 적용) */
+/* phone card (✅ escape 적용)
+   ✅ B안 줄바꿈을 위해 infoText는 "우리 함수가 만든 HTML" 그대로 출력 */
 function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount}){
   const mv = (move ?? "");
   const ch = (change ?? "");
@@ -1180,7 +1249,7 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
         <div class="model">${esc(model)}</div>
         <div class="badge ${badgeClass}">${esc(badgeText)}</div>
       </div>
-      ${infoText ? `<p class="infoLine">${esc(infoText)}</p>` : ``}
+      ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
       ${discount ? `<div class="discountPill">요금할인 <strong>25%</strong></div>` : ``}
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
@@ -1620,7 +1689,7 @@ function buildTodayCards(todayRows){
           </div>
 
           <div class="todayModel">${escapeHtml(model)}</div>
-          <div class="todayInfo">${escapeHtml(infoLineWithPlan(c, r))}</div>
+          <div class="todayInfo">${infoLineWithPlan(c, r)}</div>
           ${isDiscountRow(r) ? `<div class="todayDiscPill">요금할인 <strong>25%</strong></div>` : ``}
 
           <div class="todayPrices ${one ? "one" : ""}">
