@@ -166,9 +166,7 @@ body{
 .badge.hot{background:var(--hot);} .badge.low{background:var(--low);}
 
 .infoLine{font-size:12px;font-weight:1000;color:var(--muted);margin:0 0 6px; line-height:1.25;}
-.discountLine{font-size:12px;font-weight:1000;color:#2563eb;margin:0 0 8px;}
 
-/* ✅ (추가) infoLine 안 보조문구 */
 .subHint{
   display:block;
   margin-top:2px;
@@ -207,12 +205,6 @@ body{
 .pill .v{font-size:20px;font-weight:1000;letter-spacing:-.4px;}
 .neg{color:#dc2626;} .zero{color:#0ea5e9;} .pos{color:#0f172a;}
 
-.planLine{font-size:13px;font-weight:1000;letter-spacing:-.2px;margin:0 0 8px;color:#0f172a;line-height:1.25;}
-.moneyRow{display:flex;justify-content:space-between;align-items:baseline;gap:10px;}
-.moneyRow .label{font-size:12px;font-weight:1000;color:var(--muted);}
-.moneyRow .val{font-size:22px;font-weight:1000;letter-spacing:-.4px;color:#0f172a;}
-.moneyRow .val2{font-size:19px;font-weight:1000;letter-spacing:-.4px;color:#0f172a;}
-
 .loading{grid-column:1/-1;padding:18px;text-align:center;font-weight:1000;color:#64748b;}
 
 /* addon */
@@ -223,8 +215,6 @@ body{
   border:1px solid rgba(15,23,42,.12);
   background: linear-gradient(180deg, rgba(15,23,42,.03), rgba(15,23,42,.015));
 }
-
-/* ✅ 헤더 탭만으로 토글 + 버튼 제거 + chevron */
 .addonHead{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
   cursor:pointer;user-select:none;
@@ -276,7 +266,6 @@ body{
 .dockBtn.call{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.22);color:#0b3a22;}
 .dockBtn.sms{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.22);color:#083244;}
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
-
 .dockBtn{ min-height:54px; padding:0 12px; }
 .dockBtn span{ line-height:1; }
 @media (max-width:480px){
@@ -300,7 +289,7 @@ body{
         </div>
 
         <button class="heroRefreshBtn" id="refreshBtn" type="button" aria-label="새로고침">새로고침</button>
-        <button class="heroRefreshBtn" id="noticeAdminToggleBtn" type="button" aria-label="공지팝업 토글">공지OFF</button>
+        <button class="heroRefreshBtn" id="noticeAdminToggleBtn" type="button" aria-label="공지 토글">공지OFF</button>
       </div>
     </div>
   </div>
@@ -368,7 +357,6 @@ const mvnoTabsEl = document.getElementById("mvnoTabs");
 const internetTabsEl = document.getElementById("internetTabs");
 
 const CSV_VER = "2025-12-23";
-const KAKAO_URL = "https://open.kakao.com/o/s729bI5h";
 
 let mode = "PHONE";
 let lastPhoneTab = "SK";
@@ -387,6 +375,82 @@ const ADDON = {
     { t:"V컬+음악+벨링(15,400)", d:"95일 유지 / 미 가입시 +5" },
     { t:"폰교체보험(모델별 상이)", d:"95일 유지 / 미 가입시 +5" },
     { t:"익시오(무료)", d:"95일 유지 / 미 가입시 +3" }
+  ],
+};
+
+/* =========================
+   ✅ 알뜰요금(표) - CSV 없이 바로 표시
+   ========================= */
+const MVNO_PLANS = {
+  LG: [
+    { call:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:  9900 },
+    { call:"무제한", sms:"무제한", data:"7GB+1Mbps무제한", fee: 15900 },
+    { call:"무제한", sms:"무제한", data:"10GB+1Mbps무제한", fee:18900 },
+    { call:"100분", sms:"100건", data:"15GB+3Mbps무제한", fee:25250 },
+    { call:"무제한", sms:"무제한", data:"11GB+일2GB+3Mbps무제한", fee:32990 },
+    { call:"무제한", sms:"무제한", data:"100GB+5Mbps무제한", fee:38200 },
+    { call:"50분",  sms:"50건",  data:"500MB", fee:3300 },
+    { call:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:12900 },
+    { call:"무제한", sms:"무제한", data:"5GB+1Mbps무제한", fee:17500 },
+    { call:"100분", sms:"100건", data:"15GB+망내1회선+3Mbps무제한", fee:28820 },
+  ],
+  KT: [
+    { call:"무제한", sms:"무제한", data:"2.5GB+400Kbps무제한", fee: 9500 },
+    { call:"무제한", sms:"무제한", data:"7GB+1Mbps무제한", fee: 17900 },
+    { call:"무제한", sms:"무제한", data:"10GB+1Mbps무제한", fee:19900 },
+    { call:"무제한", sms:"무제한", data:"15GB+1Mbps무제한", fee:22400 },
+    { call:"무제한", sms:"무제한", data:"11GB+일2GB+3Mbps무제한", fee:34000 },
+    { call:"무제한", sms:"무제한", data:"100GB+5Mbps무제한", fee:39900 },
+  ],
+  SK: [
+    { call:"2,000분", sms:"2,000건", data:"2GB", fee:6820 },
+    { call:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:13340 },
+    { call:"무제한", sms:"무제한", data:"7GB+1Mbps무제한", fee:19140 },
+    { call:"무제한", sms:"무제한", data:"10GB+1Mbps무제한", fee:19640 },
+    { call:"100분", sms:"100건", data:"15GB+3Mbps무제한", fee:25740 },
+    { call:"무제한", sms:"무제한", data:"11GB+일2GB+3Mbps무제한", fee:36140 },
+  ],
+};
+
+/* =========================
+   ✅ 인터넷TV(표) - CSV 없이 바로 표시
+   ========================= */
+const INET_PLANS = {
+  SK: [
+    { inet:"100M", tv:"X", fee:22000, combo:17600 },
+    { inet:"500M", tv:"X", fee:33000, combo:22000 },
+    { inet:"1G",   tv:"X", fee:38500, combo:25300 },
+    { inet:"100M", tv:"뉴이코노미", fee:34100, combo:30800 },
+    { inet:"100M", tv:"스탠다드",   fee:37400, combo:34100 },
+    { inet:"100M", tv:"ALL",        fee:40700, combo:37400 },
+    { inet:"500M", tv:"뉴이코노미", fee:41800, combo:35200 },
+    { inet:"500M", tv:"스탠다드",   fee:45100, combo:38500 },
+    { inet:"500M", tv:"ALL",        fee:48400, combo:41800 },
+    { inet:"1G",   tv:"뉴이코노미", fee:47300, combo:38500 },
+    { inet:"1G",   tv:"스탠다드",   fee:50600, combo:41800 },
+    { inet:"1G",   tv:"ALL",        fee:53900, combo:45100 },
+  ],
+  KT: [
+    { inet:"100M", tv:"X",      fee:22000, combo:16500 },
+    { inet:"500M", tv:"X",      fee:33000, combo:22000 },
+    { inet:"1G",   tv:"X",      fee:38500, combo:27500 },
+    { inet:"100M", tv:"베이직", fee:38500, combo:33000 },
+    { inet:"100M", tv:"모든G",  fee:44000, combo:40700 },
+    { inet:"500M", tv:"베이직", fee:44000, combo:38500 },
+    { inet:"500M", tv:"모든G",  fee:49500, combo:44000 },
+    { inet:"1G",   tv:"베이직", fee:49500, combo:44000 },
+    { inet:"1G",   tv:"모든G",  fee:55000, combo:49500 },
+  ],
+  LG: [
+    { inet:"100M", tv:"X",        fee:22000, combo:16500 },
+    { inet:"500M", tv:"X",        fee:33000, combo:23100 },
+    { inet:"1G",   tv:"X",        fee:38500, combo:25300 },
+    { inet:"100M", tv:"실속형",   fee:39600, combo:34100 },
+    { inet:"100M", tv:"프리미엄", fee:42900, combo:37400 },
+    { inet:"500M", tv:"실속형",   fee:45100, combo:35200 },
+    { inet:"500M", tv:"프리미엄", fee:48400, combo:38500 },
+    { inet:"1G",   tv:"실속형",   fee:50600, combo:37400 },
+    { inet:"1G",   tv:"프리미엄", fee:53900, combo:40700 },
   ],
 };
 
@@ -414,31 +478,31 @@ function esc(s){
     .replace(/"/g,"&quot;")
     .replace(/'/g,"&#39;");
 }
-
 function onlyDigits(s){
   const v = String(s ?? "").trim();
   const m = v.match(/\d+/);
   return m ? m[0] : "";
 }
+function fmtWon(x){
+  const n = asNum(x);
+  if(n === null) return "";
+  return n.toLocaleString("ko-KR");
+}
 
+/* ✅ 휴대폰 infoLine */
 const fixedInfoLine = (c) => {
   if (c === "SK") return `이동: SK 109요금 6개월<br>기변: SK 109요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
   if (c === "KT") return `이동: KT 110요금 6개월<br>기변: KT 110요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
   return `이동: LG 115요금 6개월<br>기변: LG 115요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
 };
-
 const infoLineWithPlan = (c, row) => {
   const moveRaw   = row?.[`${c}_요금제`];
   const chgRaw    = row?.[`${c}_요금제.1`];
-
   const movePlan  = onlyDigits(moveRaw);
   const changePlan= onlyDigits(chgRaw);
-
   if(!movePlan && !changePlan) return fixedInfoLine(c);
-
   const m = movePlan || changePlan;
   const k = changePlan || movePlan;
-
   return `이동: ${esc(c)} ${esc(m)}요금 6개월<br>기변: ${esc(c)} ${esc(k)}요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
 };
 
@@ -479,6 +543,7 @@ function activateInetCarrier(c){
   });
 }
 
+/* ✅ 부가서비스 카드 */
 function addAddonCard(carrier){
   const items = ADDON[carrier] || [];
   const pillClass = carrier === "SK" ? "sk" : (carrier === "KT" ? "kt" : "lg");
@@ -552,12 +617,12 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
           <div class="pill">
-            <div class="k">이동</div>
+            <div class="k">${mode==="INTERNET" ? "월요금" : (mode==="MVNO" ? "월요금" : "이동")}</div>
             <div class="v ${vClass(mvNum)}">${esc(mv)}</div>
           </div>` : ``}
         ${hasChange ? `
           <div class="pill">
-            <div class="k">기변</div>
+            <div class="k">${mode==="INTERNET" ? "결합" : "기변"}</div>
             <div class="v ${vClass(chNum)}">${esc(ch)}</div>
           </div>` : ``}
       </div>
@@ -565,7 +630,7 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
   `);
 }
 
-/* CSV loader */
+/* CSV parser */
 function parseCSVLine(line){
   const out = [];
   let cur = "";
@@ -584,7 +649,7 @@ function parseCSVLine(line){
   return out;
 }
 
-/* ✅✅✅ 핵심 수정: 중복 헤더 자동 .1 부여 */
+/* ✅✅✅ 중복 헤더 자동 .1 부여 */
 function makeUniqueHeader(rawHeader){
   const seen = Object.create(null);
   return rawHeader.map(h=>{
@@ -595,12 +660,13 @@ function makeUniqueHeader(rawHeader){
     }
     const idx = seen[key];
     seen[key] = idx + 1;
-    return `${key}.${idx}`;  // 두번째가 .1
+    return `${key}.${idx}`;
   });
 }
 
-async function fetchCSV(){
-  const r = await fetch(`data.csv?v=${encodeURIComponent(CSV_VER)}`, { cache: "no-store" });
+async function fetchCSV(extraBust=""){
+  const url = `data.csv?v=${encodeURIComponent(CSV_VER)}${extraBust ? `&b=${extraBust}` : ""}`;
+  const r = await fetch(url, { cache: "no-store" });
   if (!r.ok) throw new Error("data.csv 로드 실패");
   const t = await r.text();
   const lines = t.replace(/^\uFEFF/,"").trim().split(/\r?\n/);
@@ -626,12 +692,20 @@ function getRowBestPrice(row, carrier){
   return Math.min(mv, ch);
 }
 
+/* =========================
+   ✅ PHONE 렌더 (CSV)
+   ========================= */
 function renderPhone(rows, carrier){
   clearList();
   addAddonCard(carrier);
 
   const filtered = rows
-    .filter(r => String(r["기종"] ?? "").trim() !== "__NOTICE__")
+    .filter(r => {
+      const isNotice = String(r["기종"] ?? "").trim() === "__NOTICE__";
+      if(!isNotice) return true;
+      return !(window.__NOTICE_OFF__ && window.__NOTICE_OFF__());
+    })
+    .filter(r => String(r["기종"] ?? "").trim() !== "__NOTICE__" ? true : true)
     .filter(r => {
       const mv = showVal(r[`${carrier}_이동`]);
       const ch = showVal(r[`${carrier}_기변`]);
@@ -662,7 +736,61 @@ function renderPhone(rows, carrier){
   });
 }
 
-/* 탭 이벤트 */
+/* =========================
+   ✅ MVNO 렌더 (하드코딩)
+   ========================= */
+function renderMVNO(_rowsIgnored, net){
+  clearList();
+  const arr = MVNO_PLANS[net] || [];
+  if(!arr.length){
+    list.insertAdjacentHTML("beforeend", `<div class="loading">${esc(net)}망 알뜰요금 데이터가 없습니다.</div>`);
+    return;
+  }
+  const sorted = [...arr].sort((a,b)=> (asNum(a.fee) ?? 1e18) - (asNum(b.fee) ?? 1e18));
+  sorted.forEach(x=>{
+    const fee = fmtWon(x.fee);
+    addPhoneCard({
+      badgeText: `${net}망`,
+      badgeClass: net === "SK" ? "sk" : net === "KT" ? "kt" : "lg",
+      model: x.data || "알뜰요금",
+      move: fee ? `${fee}원` : "",
+      change: "",
+      infoText: `통화: ${esc(x.call)} · 문자: ${esc(x.sms)}<br>데이터: ${esc(x.data)}<span class="subHint">※ 요금/구성은 변동될 수 있어요</span>`,
+      discount: false
+    });
+  });
+}
+
+/* =========================
+   ✅ INTERNET 렌더 (하드코딩)
+   ========================= */
+function renderINTERNET(_rowsIgnored, carrier){
+  clearList();
+  const arr = INET_PLANS[carrier] || [];
+  if(!arr.length){
+    list.insertAdjacentHTML("beforeend", `<div class="loading">${esc(carrier)} 인터넷TV 데이터가 없습니다.</div>`);
+    return;
+  }
+  const sorted = [...arr].sort((a,b)=> (asNum(a.fee) ?? 1e18) - (asNum(b.fee) ?? 1e18));
+  sorted.forEach(x=>{
+    const fee = fmtWon(x.fee);
+    const combo = fmtWon(x.combo);
+    const title = `${x.inet} / TV ${x.tv}`;
+    addPhoneCard({
+      badgeText: carrier,
+      badgeClass: carrier === "SK" ? "sk" : carrier === "KT" ? "kt" : "lg",
+      model: title,
+      move: fee ? `${fee}원` : "",
+      change: combo ? `${combo}원` : "",
+      infoText: `월 요금 / 1대 결합시 월 요금<span class="subHint">설치/지역/사은품 조건은 카톡문의</span>`,
+      discount: false
+    });
+  });
+}
+
+/* =========================
+   탭 이벤트
+   ========================= */
 serviceTabsEl.addEventListener("click", (e)=>{
   const b = e.target.closest(".tabBtn");
   if(!b) return;
@@ -674,18 +802,19 @@ serviceTabsEl.addEventListener("click", (e)=>{
     hideAllSubTabs();
     showMvnoTabs(true);
     showInternetTabs(false);
-    clearList();
-    list.insertAdjacentHTML("beforeend", `<div class="loading">알뜰요금 데이터는 기존 코드 그대로 쓰면 됩니다.</div>`);
     activateMvnoNet(mvnoNet);
-  }else if(next === "INTERNET"){
+    renderMVNO(null, mvnoNet);
+    return;
+  }
+  if(next === "INTERNET"){
     mode = "INTERNET";
     setServiceActive("INTERNET");
     hideAllSubTabs();
     showInternetTabs(true);
     showMvnoTabs(false);
-    clearList();
-    list.insertAdjacentHTML("beforeend", `<div class="loading">인터넷TV 데이터는 기존 코드 그대로 쓰면 됩니다.</div>`);
     activateInetCarrier(inetCarrier);
+    renderINTERNET(null, inetCarrier);
+    return;
   }
 });
 
@@ -698,6 +827,28 @@ phoneTabsEl.addEventListener("click", (e)=>{
   hideAllSubTabs();
   activatePhoneTab(tab);
   if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
+});
+
+mvnoTabsEl.addEventListener("click", (e)=>{
+  const b = e.target.closest(".subTabBtn");
+  if(!b) return;
+  const net = b.dataset.mvno;
+  activateMvnoNet(net);
+  mode = "MVNO";
+  setServiceActive("MVNO");
+  showMvnoTabs(true); showInternetTabs(false);
+  renderMVNO(null, net);
+});
+
+internetTabsEl.addEventListener("click", (e)=>{
+  const b = e.target.closest(".subTabBtn");
+  if(!b) return;
+  const c = b.dataset.inet;
+  activateInetCarrier(c);
+  mode = "INTERNET";
+  setServiceActive("INTERNET");
+  showInternetTabs(true); showMvnoTabs(false);
+  renderINTERNET(null, c);
 });
 
 /* 업데이트 날짜/시간 자동 표시 (data.csv Last-Modified) */
@@ -719,6 +870,77 @@ async function setUpdateStamp(){
   }catch(e){}
 }
 
+/* =========================
+   ✅ 관리자 버튼: 공지영역 5번 탭하면 노출
+   - 새로고침: 휴대폰 CSV만 강력 갱신 + 현재 모드 재렌더
+   - 공지OFF: __NOTICE__ 숨김 저장
+   ========================= */
+(function adminButtonsInit(){
+  const hero = document.querySelector(".hero");
+  const refreshBtn = document.getElementById("refreshBtn");
+  const noticeBtn = document.getElementById("noticeAdminToggleBtn");
+  if(!hero || !refreshBtn || !noticeBtn) return;
+
+  let tap = 0;
+  let tmr = null;
+
+  const KEY_NOTICE_OFF = "NOTICE_OFF";
+  const readNoticeOff = () => localStorage.getItem(KEY_NOTICE_OFF) === "1";
+  const setNoticeOff = (v) => localStorage.setItem(KEY_NOTICE_OFF, v ? "1" : "0");
+
+  const applyNoticeBtnUI = () => {
+    const off = readNoticeOff();
+    noticeBtn.textContent = off ? "공지ON" : "공지OFF";
+  };
+
+  window.__NOTICE_OFF__ = readNoticeOff;
+
+  hero.addEventListener("click", ()=>{
+    tap++;
+    clearTimeout(tmr);
+    tmr = setTimeout(()=> tap = 0, 1200);
+    if(tap >= 5){
+      tap = 0;
+      const now = refreshBtn.style.display === "inline-flex" ? "none" : "inline-flex";
+      refreshBtn.style.display = now;
+      noticeBtn.style.display  = now;
+      applyNoticeBtnUI();
+    }
+  });
+
+  function rerenderByMode(){
+    if(mode === "PHONE") {
+      if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, lastPhoneTab);
+      return;
+    }
+    if(mode === "MVNO") { renderMVNO(null, mvnoNet); return; }
+    if(mode === "INTERNET") { renderINTERNET(null, inetCarrier); return; }
+  }
+
+  refreshBtn.addEventListener("click", async ()=>{
+    try{
+      showLoading("강력 새로고침 중…");
+      const bust = String(Date.now());
+      const rows = await fetchCSV(bust);
+      window.__CSV_ROWS__ = rows;
+      await setUpdateStamp();
+      rerenderByMode();
+    }catch(e){
+      console.error(e);
+      showLoading("새로고침 실패: data.csv 확인 필요");
+    }
+  });
+
+  noticeBtn.addEventListener("click", ()=>{
+    const next = !readNoticeOff();
+    setNoticeOff(next);
+    applyNoticeBtnUI();
+    rerenderByMode();
+  });
+
+  applyNoticeBtnUI();
+})();
+
 /* 초기 로딩 */
 (async function init(){
   showLoading("data.csv 불러오는 중…");
@@ -733,6 +955,10 @@ async function setUpdateStamp(){
     hideAllSubTabs();
     activatePhoneTab(lastPhoneTab);
     renderPhone(rows, lastPhoneTab);
+
+    activateMvnoNet(mvnoNet);
+    activateInetCarrier(inetCarrier);
+
   }catch(err){
     console.error(err);
     showLoading("data.csv를 불러오지 못했습니다. 파일명/경로를 확인해주세요.");
