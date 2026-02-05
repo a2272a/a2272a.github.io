@@ -274,76 +274,79 @@ body{
 }
 
 /* =========================================================
-   ✅ 인터넷TV 현금 팝업 (이미지 스타일: 노랑/빨강/초록)
+   ✅ 팝업: 예시 이미지 스타일(노랑 프레임 + 빨강 리본 + 초록 버튼)
    ========================================================= */
 .inetPopup{
   position:fixed; inset:0;
-  display:none; /* JS에서 열기 */
+  display:none;
   align-items:center; justify-content:center;
   background:rgba(17,24,39,.72);
   z-index:99999;
-  padding:16px;
+  padding:18px;
 }
 .inetPopup.show{ display:flex; }
 
 .inetPopCard{
-  width:min(520px, 94vw);
-  border-radius:18px;
-  background:
-    radial-gradient(600px 240px at 50% 0%, rgba(255,255,255,.55), rgba(255,255,255,0) 60%),
-    linear-gradient(180deg, #fff6c8 0%, #ffe58a 55%, #fff2b0 100%);
-  border:1px solid rgba(255,255,255,.35);
-  box-shadow:0 30px 80px rgba(0,0,0,.45);
-  padding:20px;
+  width:min(560px, 96vw);
   position:relative;
+  border-radius:22px;
+  background:rgba(255,255,255,.06);
+  padding:14px;
+  box-shadow:0 30px 90px rgba(0,0,0,.55);
 }
 
+/* ✅ 동그란 X (무조건 위에 보이게) */
 .inetPopX{
-  position:absolute; top:12px; right:12px;
-  width:38px; height:38px;
+  position:absolute;
+  top:6px; right:6px;
+  width:44px; height:44px;
   border-radius:999px;
-  border:1px solid rgba(15,23,42,.18);
-  background:#fff;
-  box-shadow:0 10px 22px rgba(0,0,0,.18);
+  border:2px solid rgba(255,255,255,.9);
+  background:linear-gradient(180deg,#ffffff 0%, #f3f4f6 100%);
+  box-shadow:0 16px 26px rgba(0,0,0,.35);
   cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  font-size:22px; font-weight:1000; color:#111827;
+  font-size:30px; font-weight:1000;
+  color:#111827;
+  z-index:50;
 }
 .inetPopX:active{ transform:translateY(1px); filter:brightness(.98); }
 
-.inetInner{
-  border-radius:14px;
+.inetFrame{
+  border-radius:18px;
+  padding:16px;
   background:
-    radial-gradient(520px 260px at 50% 20%, rgba(255,255,255,.16), rgba(255,255,255,0) 60%),
-    linear-gradient(180deg, #ff3b30 0%, #d10000 100%);
-  padding:18px 16px 16px;
+    radial-gradient(700px 260px at 50% 0%, rgba(255,255,255,.55), transparent 60%),
+    linear-gradient(180deg, #fff7c9 0%, #ffe484 55%, #fff3b5 100%);
+  border:1px solid rgba(0,0,0,.08);
+}
+
+/* 중앙 카드(빨간 패널) */
+.inetCard{
+  border-radius:16px;
+  padding:16px 16px 18px;
+  background:
+    radial-gradient(520px 240px at 50% 15%, rgba(255,255,255,.18), transparent 60%),
+    linear-gradient(180deg, #ff3b30 0%, #c80000 100%);
+  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), 0 18px 40px rgba(0,0,0,.25);
   position:relative;
   overflow:hidden;
-  box-shadow: inset 0 0 0 1px rgba(255,255,255,.18);
 }
 
-/* 배경 광선 */
-.inetInner::before{
+/* 은은한 광선 */
+.inetCard::before{
   content:"";
-  position:absolute; inset:-30px -30px -30px -30px;
+  position:absolute; inset:-50px;
   background:
     repeating-conic-gradient(from 10deg,
-      rgba(255,255,255,.14) 0 10deg,
+      rgba(255,255,255,.18) 0 10deg,
       rgba(255,255,255,0) 10deg 20deg);
-  opacity:.22;
-  filter:blur(0.2px);
+  opacity:.18;
 }
-.inetInner::after{
-  content:"";
-  position:absolute; inset:0;
-  background: radial-gradient(240px 140px at 50% 62%, rgba(0,0,0,.28), transparent 60%);
-  pointer-events:none;
-}
+.inetCard > *{ position:relative; z-index:2; }
 
-/* 리본 */
+/* 빨간 리본 */
 .inetRibbon{
-  position:relative;
-  z-index:2;
   display:flex;
   justify-content:center;
   margin-bottom:10px;
@@ -351,76 +354,74 @@ body{
 .inetRibbon span{
   display:inline-block;
   padding:10px 18px;
-  border-radius:10px;
-  background: linear-gradient(180deg, #ffb703 0%, #ff7a00 100%);
+  border-radius:12px;
+  background:linear-gradient(180deg,#ffb703 0%, #ff7a00 100%);
   color:#1f2937;
   font-weight:1000;
   letter-spacing:-.8px;
-  box-shadow:0 14px 26px rgba(0,0,0,.22);
+  box-shadow:0 14px 28px rgba(0,0,0,.28);
   font-size:26px;
 }
 @media (max-width:420px){
   .inetRibbon span{ font-size:22px; padding:9px 14px; }
 }
 
-/* 메인 텍스트(현금 최대 지급) */
-.inetMain{
-  position:relative;
-  z-index:2;
+/* 메인 텍스트 */
+.inetHeadline{
   text-align:center;
-  margin-top:8px;
+  font-size:42px;
   font-weight:1000;
-  letter-spacing:-1.2px;
-  font-size:40px;
-  color:#ffe76a;
+  letter-spacing:-1.4px;
+  color:#ffe66b;
   text-shadow:
     0 4px 0 rgba(0,0,0,.25),
-    0 14px 30px rgba(0,0,0,.25);
+    0 16px 34px rgba(0,0,0,.30);
 }
 @media (max-width:420px){
-  .inetMain{ font-size:34px; }
+  .inetHeadline{ font-size:34px; }
 }
 
-/* 돈/코인 느낌(순수 CSS) */
-.moneyStage{
+/* 중앙 비주얼(돈/코인) */
+.inetVisual{
+  height:132px;
+  margin:12px 0 10px;
   position:relative;
-  z-index:2;
-  height:110px;
-  margin-top:10px;
 }
-.cashStack{
+
+.cash{
   position:absolute;
   left:50%; top:44px;
   transform:translateX(-50%);
-  width:210px; height:70px;
-  border-radius:10px;
-  background:
-    linear-gradient(180deg, #eaffea 0%, #c7f9cc 100%);
-  box-shadow:0 16px 30px rgba(0,0,0,.25);
+  width:240px; height:74px;
+  border-radius:12px;
+  background:linear-gradient(180deg,#eaffea 0%, #bff7c9 100%);
+  box-shadow:0 18px 34px rgba(0,0,0,.28);
 }
-.cashStack::before{
+.cash::before{
   content:"";
-  position:absolute; inset:10px 10px 10px 10px;
-  border-radius:8px;
-  background: linear-gradient(180deg, rgba(255,255,255,.70), rgba(255,255,255,.25));
+  position:absolute; inset:10px;
+  border-radius:10px;
+  background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.22));
   box-shadow: inset 0 0 0 2px rgba(16,185,129,.25);
 }
-.cashBand{
+.cash::after{
+  content:"";
   position:absolute;
   left:50%; top:6px;
   transform:translateX(-50%);
-  width:52px; height:58px;
-  border-radius:8px;
-  background: linear-gradient(180deg, #fff 0%, #e5e7eb 100%);
+  width:56px; height:62px;
+  border-radius:10px;
+  background:linear-gradient(180deg,#fff 0%, #e5e7eb 100%);
   box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
-  opacity:.9;
+  opacity:.92;
 }
+
 .coin{
   position:absolute;
-  width:44px; height:44px;
+  width:46px; height:46px;
   border-radius:999px;
   background: radial-gradient(circle at 30% 30%, #fff3b0 0%, #ffd166 35%, #f59e0b 70%, #b45309 100%);
-  box-shadow:0 14px 24px rgba(0,0,0,.22);
+  box-shadow:0 16px 26px rgba(0,0,0,.24);
 }
 .coin::after{
   content:"";
@@ -428,47 +429,61 @@ body{
   border-radius:999px;
   box-shadow: inset 0 0 0 3px rgba(255,255,255,.28);
 }
-.coin.c1{ left:22px; top:56px; transform:rotate(-12deg); }
-.coin.c2{ left:64px; top:70px; transform:scale(.92) rotate(10deg); }
-.coin.c3{ right:22px; top:56px; transform:rotate(14deg); }
-.coin.c4{ right:64px; top:72px; transform:scale(.92) rotate(-8deg); }
+.coin.c1{ left:26px; top:66px; transform:rotate(-10deg); }
+.coin.c2{ left:78px; top:84px; transform:scale(.92) rotate(10deg); }
+.coin.c3{ right:26px; top:66px; transform:rotate(12deg); }
+.coin.c4{ right:78px; top:86px; transform:scale(.92) rotate(-8deg); }
 
-/* 카톡 문의 버튼 */
-.kakaoBig{
-  margin-top:10px;
-  position:relative;
-  z-index:2;
-  display:flex;
-  justify-content:center;
+/* 반짝이 */
+.spark{
+  position:absolute;
+  width:10px; height:10px;
+  background:rgba(255,255,255,.9);
+  border-radius:2px;
+  transform:rotate(45deg);
+  opacity:.9;
+  box-shadow:0 0 14px rgba(255,255,255,.55);
 }
-.kakaoBig a{
+.spark.s1{ left:22%; top:20px; }
+.spark.s2{ left:56%; top:12px; transform:rotate(20deg); opacity:.75; }
+.spark.s3{ left:78%; top:28px; opacity:.7; }
+
+/* ✅ 카톡 문의 버튼(예시처럼 광택+두께) */
+.inetKakaoBtn{
   display:flex;
   align-items:center;
   justify-content:center;
   gap:10px;
-  width:min(420px, 92%);
-  height:66px;
+  width:min(420px, 94%);
+  height:70px;
+  margin:0 auto;
   border-radius:999px;
   text-decoration:none;
-  font-size:28px;
+  font-size:30px;
   font-weight:1000;
   letter-spacing:-1px;
   color:#ffffff;
-  background: linear-gradient(180deg, #22c55e 0%, #16a34a 100%);
-  border:1px solid rgba(0,0,0,.18);
-  box-shadow:0 18px 32px rgba(0,0,0,.25), inset 0 0 0 2px rgba(255,255,255,.16);
-}
-.kakaoBig a:active{ transform:translateY(1px); filter:brightness(.98); }
 
-/* 말풍선 아이콘(순수 CSS) */
-.kakaoIcon{
-  width:34px; height:34px;
+  background:
+    radial-gradient(260px 120px at 30% 15%, rgba(255,255,255,.35), transparent 60%),
+    linear-gradient(180deg,#28d463 0%, #169e49 100%);
+  border:2px solid rgba(0,0,0,.16);
+  box-shadow:
+    0 18px 32px rgba(0,0,0,.28),
+    inset 0 2px 0 rgba(255,255,255,.22),
+    inset 0 -6px 0 rgba(0,0,0,.18);
+}
+.inetKakaoBtn:active{ transform:translateY(1px); filter:brightness(.98); }
+
+/* 말풍선 아이콘 */
+.kakaoBubble{
+  width:36px; height:36px;
   border-radius:999px;
   background: radial-gradient(circle at 35% 30%, #fff 0%, #ffe76a 55%, #fbbf24 100%);
   position:relative;
   box-shadow: inset 0 0 0 2px rgba(0,0,0,.10);
 }
-.kakaoIcon::after{
+.kakaoBubble::after{
   content:"";
   position:absolute;
   left:7px; bottom:-6px;
@@ -478,13 +493,13 @@ body{
   border-bottom-left-radius:10px;
 }
 
-/* 하단 24H 체크 */
+/* 하단 24H */
 .inetFoot{
   margin-top:12px;
   display:flex;
   align-items:center;
   gap:8px;
-  color:#0f172a;
+  color:#111827;
   font-weight:900;
   font-size:14px;
 }
@@ -569,38 +584,34 @@ body{
   </a>
 </div>
 
-<!-- =========================================================
-     ✅ 인터넷 가입시 / 현금 최대 지급 / 카톡 문의 팝업
-     - 접속시 항상 뜸
-     - 24H 체크 후 닫으면 24시간 안뜸
-     - 카톡 문의 누르면 오픈채팅 이동
-     ========================================================= -->
+<!-- ✅ 인터넷TV 현금 팝업 -->
 <div class="inetPopup" id="inetPopup" aria-hidden="true">
   <div class="inetPopCard" role="dialog" aria-modal="true" aria-label="인터넷TV 현금 팝업">
     <button class="inetPopX" id="inetPopClose" type="button" aria-label="닫기">×</button>
 
-    <div class="inetInner">
-      <div class="inetRibbon"><span>인터넷 가입시</span></div>
-      <div class="inetMain">현금 최대 지급</div>
+    <div class="inetFrame">
+      <div class="inetCard">
+        <div class="inetRibbon"><span>인터넷 가입시</span></div>
+        <div class="inetHeadline">현금 최대 지급</div>
 
-      <div class="moneyStage" aria-hidden="true">
-        <div class="cashStack"><div class="cashBand"></div></div>
-        <div class="coin c1"></div><div class="coin c2"></div>
-        <div class="coin c3"></div><div class="coin c4"></div>
-      </div>
+        <div class="inetVisual" aria-hidden="true">
+          <div class="cash"></div>
+          <div class="coin c1"></div><div class="coin c2"></div>
+          <div class="coin c3"></div><div class="coin c4"></div>
+          <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div>
+        </div>
 
-      <div class="kakaoBig">
-        <a href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의로 이동">
-          <span class="kakaoIcon" aria-hidden="true"></span>
+        <a class="inetKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의로 이동">
+          <span class="kakaoBubble" aria-hidden="true"></span>
           카톡 문의
         </a>
       </div>
-    </div>
 
-    <label class="inetFoot" for="inetHide24">
-      <input id="inetHide24" type="checkbox" />
-      24H 동안 보지 않기
-    </label>
+      <label class="inetFoot" for="inetHide24">
+        <input id="inetHide24" type="checkbox" />
+        24H 동안 보지 않기
+      </label>
+    </div>
   </div>
 </div>
 
@@ -957,13 +968,9 @@ function renderPhone(rows, carrier){
   const filtered = rows
     .filter(r => {
       const type = String(r["기종"] ?? "").trim();
-
-      // ✅ 공지행: 공지OFF면 숨김
       if (type === "__NOTICE__") {
         return !(window.__NOTICE_OFF__ && window.__NOTICE_OFF__());
       }
-
-      // ✅ 일반행: 이동/기변 둘 다 비어있으면 숨김
       const mv = showVal(r[`${carrier}_이동`]);
       const ch = showVal(r[`${carrier}_기변`]);
       return (mv !== "" || ch !== "");
