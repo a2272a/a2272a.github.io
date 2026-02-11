@@ -25,20 +25,11 @@
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary">
   
-  <!-- Favicon & App Icons -->
-  <link rel="icon" type="image/png" sizes="16x16" href="/icons/icon-16x16.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/icons/icon-32x32.png">
-  <link rel="apple-touch-icon" sizes="180x180" href="/icons/icon-192x192.png">
-  
-  <!-- iOS Splash Screens -->
-  <link rel="apple-touch-startup-image" href="/splash/splash-640x1136.png" media="(device-width: 320px) and (device-height: 568px)">
-  <link rel="apple-touch-startup-image" href="/splash/splash-750x1334.png" media="(device-width: 375px) and (device-height: 667px)">
-  <link rel="apple-touch-startup-image" href="/splash/splash-1242x2208.png" media="(device-width: 414px) and (device-height: 736px)">
-  <link rel="apple-touch-startup-image" href="/splash/splash-1125x2436.png" media="(device-width: 375px) and (device-height: 812px)">
-  <link rel="apple-touch-startup-image" href="/splash/splash-1242x2688.png" media="(device-width: 414px) and (device-height: 896px)">
+  <!-- Favicon -->
+  <link rel="icon" type="image/png" sizes="32x32" href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAABHNCSVQICAgIfAhkiAAAAAlwSFlzAAAA7AAAAOwBeShxvQAAABl0RVh0U29mdHdhcmUAd3d3Lmlua3NjYXBlLm9yZ5vuPBoAAAIhSURBVFiF7ZbPaxNBFMe/M5vdJJu0aWprqlUreCqCB0/Sf8CLN/EPEPHgxT+gePTgSRDBo+jJi6AHQfDgwYMgCIIgCFYQxUOLrdZqbdJskt1kZ8bDJk2bTZq0m+rBfmGYefN+fN/MezOzwD9dGQBCCBhjYIxBSgkpJYQQkFJCCAEhBBhjEEJACHFwALTWcBwHnudBa/3bvO/7cF0XnufBdd2DA+B5HlzXRRRFiKIIURRBSokwDBFFEcIwPDgAnuchiiIIIdYAAqnHEkJACBGfZ+kAjDFwzkEpBUopOOcghIBzDkopKKUQBAGEEOCcgzEGxhiUUpBSQggBxhiklJBSwvf9OP7t27cP06dPY2RkBIODg+ju7obv+/FaSikYYxBCxOe/t3MA0vco+P7+Pvr6+jA+Pg7P8+LztNZgjK0B+L6P6elpXLt2DfX1dVhYWEB3dzempqawvLyM9vZ2VFZWYnZ2Nvl6CYBzjjAMYdv22pxlWairq0MQBLh9+zYaGhqwuLiIUqkEKSVKpRIAYHJyEtPT0xgYGIDruvB9f83gBgBCCEgpoZRCEAT49esXWlpaUCwWMTg4iLa2NrS2tuLChQuoqakBAOzbt2/XFk8EYK0RARARCCKC1hpRFAEApqamEIYhgiDA6OgoAODu3bvxUv3TlQGAqakplEol3Lx5E+vr63BdF1NTU/B9H2EYIggCAMDQ0BAYYxgZGQHnPI4fhmHs/5+uDAAcx0Eul4PjONBaw3EcOI4D13X/+dpgLwD+6foAAy8m8VnlV70AAAAASUVORK5CYII=">
   
   <!-- Manifest -->
-  <link rel="manifest" href="/manifest.json">
+  <link rel="manifest" href="data:application/json;base64,ewogICJuYW1lIjogIuq1reuPhOyXsO2ThO2MkCDtmLTrjIDtj7Ag7Iuc7IS4IiwKICAic2hvcnRfbmFtZSI6ICLqta3qsLzsl7DtirQiLAogICJkZXNjcmlwdGlvbiI6ICLqta3qsLnsl7Dqsr3sp4Ag67O17KeA6rCA7J6QIDLsuLXrp6TsnqXrrLjtirTqsIDtj7Dsl6DrtoXso6DrjaDquIwvqmrroqjspoTrqZQv7J247YSw64+3VFYg7IucIOyVieuCtCIsCiAgInN0YXJ0X3VybCI6ICIvIiwKICAiZGlzcGxheSI6ICJzdGFuZGFsb25lIiwKICAiYmFja2dyb3VuZF9jb2xvciI6ICIjZjVmNmY4IiwKICAidGhlbWVfY29sb3IiOiAiIzI1NjNlYiIsCiAgIm9yaWVudGF0aW9uIjogInBvcnRyYWl0LXByaW1hcnkiLAogICJzY29wZSI6ICIvIiwKICAibGFuZyI6ICJrby1LUiIsCiAgImRpciI6ICJsdHIiLAogICJpY29ucyI6IFsKICAgIHsKICAgICAgInNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUJnQUFBQVlDQVlBQUFEZ2R6K2NBQUFBQkhOQ1NWUUNJQ0FnSWZBaGtpQUFBQUFsd1NGbHpBQUFBN0FBQUFPd0JlU2h4dlFBQUFCbDBSVmgwVTI5bWRIZGhjbVVBZDNkM0xtbHVhM05qWVhCbExtOXlaend2ZkpvQUFBSWhTVVJCVkZpRjdaYlBheE5CRk1lL002c2RKdXpTWnBKc2tKdXBxNlVvckVJVVBlLyIsICJzaXplcyI6ICIxOTJ4MTkyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIiwgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIn0sCiAgICB7InNyYyI6ICJkYXRhOmltYWdlL3BuZztiYXNlNjQsaVZCT1J3MEtHZ29BQUFBTlNVaEVVZ0FBQUFBQUFBQUFDQVlBQUFEL0FBQUFBQUFBQVNVVk9SSzVDWUlJPSIsICJzaXplcyI6ICI1MTJ4NTEyIiwgInR5cGUiOiAiaW1hZ2UvcG5nIiwgInB1cnBvc2UiOiAiYW55IG1hc2thYmxlIn0KICBdCn0=">
   
   <!-- JSON-LD -->
   <script type="application/ld+json">
@@ -105,9 +96,6 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
-/* ========================================
-   Typography & Common Styles
-======================================== */
 h1, h2, h3, h4, h5, h6 {
   font-weight: 700;
   line-height: 1.3;
@@ -124,9 +112,7 @@ button:active, a:active {
   transform: scale(0.98);
 }
 
-/* ========================================
-   Hero Banner (LED Notice)
-======================================== */
+/* Hero Banner */
 .hero {
   background: linear-gradient(135deg, #1e3a8a 0%, #1e40af 100%);
   color: white;
@@ -144,13 +130,7 @@ button:active, a:active {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: repeating-linear-gradient(
-    0deg,
-    transparent,
-    transparent 2px,
-    rgba(255,255,255,0.03) 2px,
-    rgba(255,255,255,0.03) 4px
-  );
+  background: repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.03) 2px, rgba(255,255,255,0.03) 4px);
   animation: scanlines 8s linear infinite;
 }
 
@@ -209,9 +189,7 @@ button:active, a:active {
   display: block;
 }
 
-/* ========================================
-   Service Tabs
-======================================== */
+/* Service Tabs */
 #serviceTabs {
   display: flex;
   background: white;
@@ -263,10 +241,8 @@ button:active, a:active {
   gap: 6px;
 }
 
-/* ========================================
-   Phone Tabs (Carrier Selection)
-======================================== */
-#phoneTabs {
+/* Phone/MVNO/Internet Tabs */
+#phoneTabs, #mvnoTabs, #internetTabs {
   display: flex;
   gap: 8px;
   padding: 12px 16px;
@@ -275,14 +251,13 @@ button:active, a:active {
   overflow-x: auto;
   -webkit-overflow-scrolling: touch;
   scrollbar-width: none;
-  position: relative;
 }
 
-#phoneTabs::-webkit-scrollbar {
+#phoneTabs::-webkit-scrollbar, #mvnoTabs::-webkit-scrollbar, #internetTabs::-webkit-scrollbar {
   display: none;
 }
 
-.phoneTabBtn {
+.phoneTabBtn, .mvnoTabBtn, .internetTabBtn {
   flex-shrink: 0;
   padding: 10px 20px;
   border: 2px solid var(--border);
@@ -294,27 +269,25 @@ button:active, a:active {
   transition: all 0.3s ease;
 }
 
-.phoneTabBtn.active {
+.phoneTabBtn.active, .mvnoTabBtn.active, .internetTabBtn.active {
   color: white;
   border-color: transparent;
   box-shadow: 0 4px 12px rgba(0,0,0,0.15);
 }
 
-.phoneTabBtn[data-carrier="SK"].active {
+.phoneTabBtn[data-carrier="SK"].active, .mvnoTabBtn[data-carrier="SK"].active, .internetTabBtn[data-carrier="SK"].active {
   background: var(--sk);
 }
 
-.phoneTabBtn[data-carrier="KT"].active {
+.phoneTabBtn[data-carrier="KT"].active, .mvnoTabBtn[data-carrier="KT"].active, .internetTabBtn[data-carrier="KT"].active {
   background: var(--kt);
 }
 
-.phoneTabBtn[data-carrier="LG"].active {
+.phoneTabBtn[data-carrier="LG"].active, .mvnoTabBtn[data-carrier="LG"].active, .internetTabBtn[data-carrier="LG"].active {
   background: var(--lg);
 }
 
-/* ========================================
-   Search & Filter Section
-======================================== */
+/* Search Section */
 #searchSection {
   padding: 16px;
   background: white;
@@ -358,10 +331,6 @@ button:active, a:active {
   flex-shrink: 0;
 }
 
-.filterTrigger:active {
-  background: var(--bg);
-}
-
 .filterBadge {
   position: absolute;
   top: -6px;
@@ -377,17 +346,10 @@ button:active, a:active {
   align-items: center;
   justify-content: center;
   box-shadow: 0 2px 6px rgba(239,68,68,0.4);
-  animation: popIn 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
 .filterBadge.show {
   display: flex;
-}
-
-@keyframes popIn {
-  0% { transform: scale(0); }
-  50% { transform: scale(1.2); }
-  100% { transform: scale(1); }
 }
 
 #activeFiltersBar {
@@ -411,18 +373,6 @@ button:active, a:active {
   border-radius: 20px;
   font-size: 0.85rem;
   font-weight: 600;
-  animation: slideIn 0.3s ease;
-}
-
-@keyframes slideIn {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
 }
 
 .activeFilterTag button {
@@ -432,9 +382,6 @@ button:active, a:active {
   font-size: 1rem;
   line-height: 1;
   padding: 0;
-  margin: 0;
-  display: flex;
-  align-items: center;
 }
 
 #quickFilters {
@@ -460,9 +407,7 @@ button:active, a:active {
   border-color: var(--primary);
 }
 
-/* ========================================
-   View Mode Toggle (Single / Compare)
-======================================== */
+/* View Mode */
 #viewModeTabs {
   display: flex;
   gap: 8px;
@@ -488,324 +433,7 @@ button:active, a:active {
   border-color: var(--primary);
 }
 
-/* ========================================
-   Filter Bottom Sheet
-======================================== */
-.filterSheetOverlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
-}
-
-.filterSheetOverlay.show {
-  display: block;
-}
-
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.filterSheet {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 24px 24px 0 0;
-  max-height: 85vh;
-  z-index: 1000;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-}
-
-.filterSheet.show {
-  transform: translateY(0);
-}
-
-.filterHandle {
-  width: 40px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  margin: 12px auto 8px;
-}
-
-.filterHeader {
-  padding: 12px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.filterHeader h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.filterCloseBtn {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  padding: 4px;
-  line-height: 1;
-}
-
-.filterBody {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.filterGroup {
-  margin-bottom: 28px;
-}
-
-.filterGroup h4 {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 12px;
-}
-
-/* Price Range Slider */
-.priceRangeContainer {
-  padding: 8px 0;
-}
-
-.priceRangeInputs {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  position: relative;
-}
-
-.rangeInput {
-  position: relative;
-  flex: 1;
-}
-
-.rangeInput input[type="range"] {
-  width: 100%;
-  height: 6px;
-  background: linear-gradient(to right, var(--primary) 0%, var(--primary) 50%, var(--border) 50%, var(--border) 100%);
-  border-radius: 3px;
-  outline: none;
-  -webkit-appearance: none;
-  position: absolute;
-  top: 0;
-  pointer-events: none;
-}
-
-.rangeInput input[type="range"]::-webkit-slider-thumb {
-  -webkit-appearance: none;
-  width: 20px;
-  height: 20px;
-  background: white;
-  border: 3px solid var(--primary);
-  border-radius: 50%;
-  cursor: pointer;
-  pointer-events: all;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.rangeInput input[type="range"]::-moz-range-thumb {
-  width: 20px;
-  height: 20px;
-  background: white;
-  border: 3px solid var(--primary);
-  border-radius: 50%;
-  cursor: pointer;
-  pointer-events: all;
-  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-}
-
-.priceLabels {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--primary);
-}
-
-/* Brand Filter */
-.brandOptions {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 10px;
-}
-
-.brandOption {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 12px;
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.brandOption:active {
-  transform: scale(0.97);
-}
-
-.brandOption.selected {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: white;
-}
-
-.brandOption input[type="checkbox"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  cursor: pointer;
-}
-
-.brandOption label {
-  flex: 1;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Sort Options */
-.sortOptions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.sortOption {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px;
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.sortOption:active {
-  transform: scale(0.98);
-}
-
-.sortOption.selected {
-  background: var(--primary);
-  border-color: var(--primary);
-  color: white;
-}
-
-.sortOption input[type="radio"] {
-  width: 18px;
-  height: 18px;
-  margin: 0;
-  cursor: pointer;
-}
-
-.sortOption label {
-  flex: 1;
-  font-size: 0.95rem;
-  font-weight: 600;
-  cursor: pointer;
-}
-
-/* Discount Toggle */
-.toggleSwitch {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 14px;
-  background: var(--bg);
-  border-radius: 12px;
-}
-
-.toggleSwitch label {
-  font-size: 0.95rem;
-  font-weight: 600;
-}
-
-.toggleSwitch input[type="checkbox"] {
-  width: 48px;
-  height: 26px;
-  position: relative;
-  -webkit-appearance: none;
-  background: var(--border);
-  border-radius: 13px;
-  outline: none;
-  cursor: pointer;
-  transition: background 0.3s;
-}
-
-.toggleSwitch input[type="checkbox"]:checked {
-  background: var(--primary);
-}
-
-.toggleSwitch input[type="checkbox"]::before {
-  content: '';
-  position: absolute;
-  width: 22px;
-  height: 22px;
-  border-radius: 50%;
-  top: 2px;
-  left: 2px;
-  background: white;
-  transition: transform 0.3s;
-  box-shadow: 0 2px 4px rgba(0,0,0,0.2);
-}
-
-.toggleSwitch input[type="checkbox"]:checked::before {
-  transform: translateX(22px);
-}
-
-.filterFooter {
-  padding: 16px 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 12px;
-}
-
-.filterResetBtn, .filterApplyBtn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.filterResetBtn {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.filterApplyBtn {
-  background: var(--primary);
-  color: white;
-  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
-}
-
-/* ========================================
-   Card Grid & Cards
-======================================== */
+/* Card Grid */
 #list {
   padding: 16px;
   display: grid;
@@ -820,55 +448,18 @@ button:active, a:active {
   }
 }
 
-@media (min-width: 768px) {
-  #list {
-    grid-template-columns: repeat(3, 1fr);
-  }
-}
-
-@media (min-width: 1200px) {
-  #list {
-    grid-template-columns: repeat(4, 1fr);
-  }
-}
-
 .card {
   background: white;
   border-radius: 16px;
   overflow: hidden;
   box-shadow: var(--shadow);
-  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  transition: all 0.3s;
   position: relative;
 }
 
 .card:active {
   transform: translateY(-2px);
   box-shadow: var(--shadow-lg);
-}
-
-.card.wishlisted {
-  border: 2px solid var(--hot);
-  box-shadow: 0 4px 16px rgba(255,68,68,0.2);
-}
-
-.cardCheckbox {
-  position: absolute;
-  top: 12px;
-  left: 12px;
-  width: 24px;
-  height: 24px;
-  z-index: 10;
-  cursor: pointer;
-  display: none;
-}
-
-.card.selection-mode .cardCheckbox {
-  display: block;
-}
-
-.card.selected {
-  background: #fffbeb;
-  border: 2px solid var(--warning);
 }
 
 .badge {
@@ -934,101 +525,6 @@ button:active, a:active {
   color: #06b6d4;
 }
 
-.pill.discount {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border: 2px solid #f59e0b;
-  position: relative;
-}
-
-.pill.discount::before {
-  content: '25%';
-  position: absolute;
-  top: -8px;
-  right: 8px;
-  background: var(--hot);
-  color: white;
-  font-size: 0.75rem;
-  font-weight: 800;
-  padding: 2px 8px;
-  border-radius: 4px;
-  box-shadow: 0 2px 6px rgba(255,68,68,0.4);
-}
-
-/* Compare Mode Cards */
-.compareCard {
-  background: white;
-  border-radius: 16px;
-  padding: 20px;
-  box-shadow: var(--shadow);
-  margin-bottom: 20px;
-}
-
-.compareCard .model {
-  font-size: 1.2rem;
-  font-weight: 800;
-  padding: 0 0 16px 0;
-  border-bottom: 2px solid var(--border);
-  margin-bottom: 16px;
-}
-
-.compareGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-}
-
-.compareItem {
-  text-align: center;
-  padding: 14px;
-  background: var(--bg);
-  border-radius: 12px;
-  position: relative;
-  transition: all 0.3s;
-}
-
-.compareItem.lowest {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  border: 2px solid var(--primary);
-}
-
-.compareItem.lowest::before {
-  content: '⭐';
-  position: absolute;
-  top: -8px;
-  right: -8px;
-  font-size: 1.2rem;
-}
-
-.compareItem .carrier {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 8px;
-}
-
-.compareItem .carrier.sk { background: var(--sk); }
-.compareItem .carrier.kt { background: var(--kt); }
-.compareItem .carrier.lg { background: var(--lg); }
-
-.compareItem .price {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 4px;
-}
-
-.compareItem .diff {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--error);
-}
-
-/* ========================================
-   Favorite Button (Heart)
-======================================== */
 .favoriteBtn {
   position: absolute;
   bottom: 12px;
@@ -1045,48 +541,8 @@ button:active, a:active {
   cursor: pointer;
   z-index: 5;
   box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55);
 }
 
-.favoriteBtn:active {
-  transform: scale(0.9);
-}
-
-.favoriteBtn.active {
-  animation: heartBeat 0.6s ease;
-}
-
-@keyframes heartBeat {
-  0%, 100% { transform: scale(1); }
-  25% { transform: scale(1.3); }
-  50% { transform: scale(1.1); }
-}
-
-.favoriteBtn::before {
-  content: '';
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  border-radius: 50%;
-  background: var(--hot);
-  opacity: 0;
-  transform: scale(0);
-}
-
-.favoriteBtn.active::before {
-  animation: heartRipple 0.6s ease;
-}
-
-@keyframes heartRipple {
-  to {
-    opacity: 0;
-    transform: scale(2);
-  }
-}
-
-/* ========================================
-   Wishlist Tab Badge
-======================================== */
 .wishlistBadge {
   display: none;
   background: var(--hot);
@@ -1096,1571 +552,13 @@ button:active, a:active {
   padding: 2px 6px;
   border-radius: 10px;
   margin-left: 6px;
-  animation: pulse 2s infinite;
 }
 
 .wishlistBadge.show {
   display: inline-block;
 }
 
-@keyframes pulse {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.6; }
-}
-
-/* ========================================
-   Wishlist Screen
-======================================== */
-.emptyWishlist {
-  text-align: center;
-  padding: 60px 20px;
-  color: var(--text-secondary);
-}
-
-.emptyWishlist .icon {
-  font-size: 4rem;
-  margin-bottom: 16px;
-  opacity: 0.5;
-}
-
-.emptyWishlist h3 {
-  font-size: 1.2rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-  color: var(--text);
-}
-
-.emptyWishlist p {
-  font-size: 0.95rem;
-  margin-bottom: 24px;
-}
-
-.emptyWishlist button {
-  padding: 12px 24px;
-  background: var(--primary);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.wishlistHeader {
-  padding: 20px 16px;
-  background: white;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.wishlistHeader h2 {
-  font-size: 1.3rem;
-  font-weight: 800;
-}
-
-.wishlistHeader .count {
-  color: var(--primary);
-}
-
-.wishlistActions {
-  display: flex;
-  gap: 8px;
-}
-
-.wishlistSort, .clearAllBtn {
-  padding: 8px 14px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.wishlistSort {
-  position: relative;
-}
-
-.wishlistSortMenu {
-  display: none;
-  position: absolute;
-  top: calc(100% + 8px);
-  right: 0;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 12px;
-  box-shadow: var(--shadow-lg);
-  min-width: 160px;
-  z-index: 100;
-  overflow: hidden;
-}
-
-.wishlistSortMenu.show {
-  display: block;
-  animation: slideDown 0.2s ease;
-}
-
-@keyframes slideDown {
-  from {
-    opacity: 0;
-    transform: translateY(-10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.wishlistSortMenu div {
-  padding: 12px 16px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: background 0.2s;
-}
-
-.wishlistSortMenu div:hover {
-  background: var(--bg);
-}
-
-.wishlistSortMenu div.selected {
-  background: var(--primary);
-  color: white;
-}
-
-.wishlistStats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  padding: 16px;
-  background: white;
-}
-
-.statCard {
-  background: linear-gradient(135deg, #f0f9ff 0%, #e0f2fe 100%);
-  padding: 16px;
-  border-radius: 12px;
-  text-align: center;
-  border: 1px solid #bae6fd;
-}
-
-.statCard .label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-
-.statCard .value {
-  font-size: 1.2rem;
-  font-weight: 800;
-  color: var(--primary);
-}
-
-.wishlistDate {
-  font-size: 0.8rem;
-  color: var(--text-secondary);
-  padding: 0 16px 8px;
-  font-weight: 600;
-}
-
-/* ========================================
-   Quick Share Section
-======================================== */
-.quickShareSection {
-  display: none;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-bottom: 1px solid #f59e0b;
-  gap: 8px;
-  flex-wrap: wrap;
-}
-
-.quickShareSection.show {
-  display: flex;
-}
-
-.quickShareBtn {
-  flex: 1;
-  min-width: 140px;
-  padding: 10px 16px;
-  background: white;
-  border: 2px solid #f59e0b;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  color: var(--text);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 6px;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.quickShareBtn:active {
-  transform: scale(0.97);
-  background: #fef3c7;
-}
-
-.resultCount {
-  width: 100%;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  padding-top: 8px;
-}
-
-/* ========================================
-   Selection Mode Bar
-======================================== */
-.selectionModeBar {
-  display: none;
-  padding: 12px 16px;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border-bottom: 1px solid #f59e0b;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.selectionModeBar.show {
-  display: flex;
-}
-
-.selectionModeBar .info {
-  font-size: 0.95rem;
-  font-weight: 700;
-  color: var(--text);
-}
-
-.selectionModeBar .info .count {
-  color: var(--primary);
-  font-size: 1.1rem;
-}
-
-.selectionModeBar button {
-  padding: 8px 16px;
-  background: white;
-  border: 2px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-/* ========================================
-   Share Floating Button
-======================================== */
-.shareFloatingBtn {
-  display: none;
-  position: fixed;
-  bottom: calc(80px + var(--footer-height));
-  right: 20px;
-  width: 60px;
-  height: 60px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.8rem;
-  box-shadow: 0 6px 20px rgba(16,185,129,0.4);
-  cursor: pointer;
-  z-index: 200;
-  animation: bounce 2s infinite;
-}
-
-.shareFloatingBtn.show {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-@keyframes bounce {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
-}
-
-.shareFloatingBtn .badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 24px;
-  height: 24px;
-  background: var(--error);
-  color: white;
-  border-radius: 50%;
-  font-size: 0.8rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(239,68,68,0.4);
-}
-
-/* ========================================
-   Share Preview Modal
-======================================== */
-.sharePreviewModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 1001;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
-}
-
-.sharePreviewModal.show {
-  display: flex;
-}
-
-.sharePreviewContent {
-  background: white;
-  border-radius: 20px;
-  max-width: 500px;
-  width: 100%;
-  max-height: 80vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  animation: slideUpIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-@keyframes slideUpIn {
-  from {
-    opacity: 0;
-    transform: translateY(50px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.sharePreviewHeader {
-  padding: 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.sharePreviewHeader h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-}
-
-.sharePreviewClose {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 4px;
-  line-height: 1;
-}
-
-.sharePreviewBody {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.shareStats {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 12px;
-  margin-bottom: 20px;
-}
-
-.shareStatCard {
-  background: var(--bg);
-  padding: 14px;
-  border-radius: 12px;
-  text-align: center;
-}
-
-.shareStatCard .label {
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-secondary);
-  margin-bottom: 6px;
-}
-
-.shareStatCard .value {
-  font-size: 1.1rem;
-  font-weight: 800;
-  color: var(--primary);
-}
-
-.shareMessagePreview {
-  background: var(--bg);
-  padding: 16px;
-  border-radius: 12px;
-  font-family: 'Courier New', monospace;
-  font-size: 0.85rem;
-  line-height: 1.6;
-  white-space: pre-wrap;
-  max-height: 300px;
-  overflow-y: auto;
-  margin-bottom: 16px;
-}
-
-.sharePreviewFooter {
-  padding: 16px 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 10px;
-}
-
-.shareCancelBtn, .shareConfirmBtn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.shareCancelBtn {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.shareConfirmBtn {
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  box-shadow: 0 4px 12px rgba(16,185,129,0.3);
-}
-
-/* ========================================
-   Download Modal
-======================================== */
-.downloadModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.6);
-  z-index: 1001;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
-}
-
-.downloadModal.show {
-  display: flex;
-}
-
-.downloadContent {
-  background: white;
-  border-radius: 20px;
-  max-width: 400px;
-  width: 100%;
-  overflow: hidden;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.3);
-  animation: slideUpIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.downloadHeader {
-  padding: 20px;
-  border-bottom: 1px solid var(--border);
-}
-
-.downloadHeader h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-  margin-bottom: 8px;
-}
-
-.downloadHeader p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.downloadBody {
-  padding: 20px;
-}
-
-.downloadOptions {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.downloadOption {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 16px;
-  border: 2px solid var(--border);
-  border-radius: 14px;
-  background: white;
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.downloadOption:active {
-  transform: scale(0.98);
-}
-
-.downloadOption.selected {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  border-color: var(--primary);
-}
-
-.downloadOption .icon {
-  font-size: 2rem;
-}
-
-.downloadOption .info {
-  flex: 1;
-}
-
-.downloadOption .info h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.downloadOption .info p {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-.downloadOption input[type="radio"] {
-  width: 20px;
-  height: 20px;
-  cursor: pointer;
-}
-
-.downloadFooter {
-  padding: 16px 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 10px;
-}
-
-.downloadCancelBtn, .downloadConfirmBtn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.downloadCancelBtn {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.downloadConfirmBtn {
-  background: var(--primary);
-  color: white;
-  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
-}
-
-.downloadToast {
-  display: none;
-  position: fixed;
-  bottom: calc(80px + var(--footer-height));
-  left: 50%;
-  transform: translateX(-50%);
-  background: var(--text);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.3);
-  z-index: 1002;
-  animation: slideUpIn 0.3s ease;
-}
-
-.downloadToast.show {
-  display: block;
-}
-
-/* ========================================
-   Price Alert Bell & Panel
-======================================== */
-.priceAlertBell {
-  position: fixed;
-  top: calc(var(--header-height) + 70px);
-  right: 16px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.5rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 150;
-  box-shadow: 0 4px 12px rgba(245,158,11,0.4);
-  transition: all 0.3s;
-}
-
-.priceAlertBell:active {
-  transform: scale(0.95);
-}
-
-.priceAlertBell .badge {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 22px;
-  height: 22px;
-  background: var(--error);
-  color: white;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(239,68,68,0.4);
-  animation: pulse 2s infinite;
-}
-
-.priceAlertOverlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
-}
-
-.priceAlertOverlay.show {
-  display: block;
-}
-
-.priceAlertPanel {
-  position: fixed;
-  top: 0;
-  right: 0;
-  width: 100%;
-  max-width: 400px;
-  height: 100%;
-  background: white;
-  z-index: 1000;
-  transform: translateX(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  display: flex;
-  flex-direction: column;
-  box-shadow: -10px 0 40px rgba(0,0,0,0.2);
-}
-
-.priceAlertPanel.show {
-  transform: translateX(0);
-}
-
-.priceAlertHeader {
-  padding: 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-}
-
-.priceAlertHeader h3 {
-  font-size: 1.2rem;
-  font-weight: 800;
-}
-
-.priceAlertClose {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 4px;
-  line-height: 1;
-}
-
-.priceAlertBody {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.priceAlertCard {
-  background: white;
-  border: 2px solid var(--border);
-  border-radius: 14px;
-  padding: 16px;
-  margin-bottom: 12px;
-  box-shadow: var(--shadow);
-  animation: slideIn 0.3s ease;
-}
-
-.priceAlertCard.down {
-  border-color: var(--success);
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-}
-
-.priceAlertCard.up {
-  border-color: var(--error);
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-}
-
-.priceAlertCard .alertHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
-}
-
-.priceAlertCard .model {
-  font-size: 1rem;
-  font-weight: 700;
-  padding: 0;
-  min-height: auto;
-}
-
-.priceAlertCard .time {
-  font-size: 0.75rem;
-  color: var(--text-secondary);
-  font-weight: 600;
-}
-
-.priceAlertCard .carrier {
-  display: inline-block;
-  padding: 4px 10px;
-  border-radius: 6px;
-  font-size: 0.8rem;
-  font-weight: 700;
-  color: white;
-  margin-bottom: 10px;
-}
-
-.priceAlertCard .carrier.sk { background: var(--sk); }
-.priceAlertCard .carrier.kt { background: var(--kt); }
-.priceAlertCard .carrier.lg { background: var(--lg); }
-
-.priceChangeIndicator {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin-bottom: 8px;
-}
-
-.priceChangeIndicator.down {
-  color: var(--success);
-}
-
-.priceChangeIndicator.up {
-  color: var(--error);
-}
-
-.priceChangeIndicator .icon {
-  font-size: 1.3rem;
-}
-
-.priceAlertCard .priceInfo {
-  display: flex;
-  justify-content: space-between;
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-top: 8px;
-}
-
-.priceAlertCard .dismissBtn {
-  width: 100%;
-  padding: 10px;
-  background: var(--bg);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  font-size: 0.85rem;
-  font-weight: 600;
-  cursor: pointer;
-  margin-top: 12px;
-}
-
-.priceAlertFooter {
-  padding: 16px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.priceAlertSettings {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 12px;
-  background: var(--bg);
-  border-radius: 10px;
-}
-
-.priceAlertSettings label {
-  font-size: 0.9rem;
-  font-weight: 600;
-}
-
-.dismissAllBtn, .clearAllAlertsBtn {
-  width: 100%;
-  padding: 12px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.dismissAllBtn {
-  background: var(--primary);
-  color: white;
-}
-
-.clearAllAlertsBtn {
-  background: var(--bg);
-  color: var(--text);
-  border: 1px solid var(--border);
-}
-
-/* ========================================
-   Sync Status Indicator
-======================================== */
-.syncStatus {
-  display: none;
-  position: fixed;
-  top: calc(var(--header-height) + 120px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: white;
-  padding: 12px 20px;
-  border-radius: 24px;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-  z-index: 200;
-  align-items: center;
-  gap: 10px;
-  font-size: 0.9rem;
-  font-weight: 600;
-  animation: slideIn 0.3s ease;
-}
-
-.syncStatus.show {
-  display: flex;
-}
-
-.syncStatus.syncing {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  color: var(--primary);
-}
-
-.syncStatus.success {
-  background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
-  color: var(--success);
-}
-
-.syncStatus.error {
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-  color: var(--error);
-}
-
-.syncStatus.conflict {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: var(--warning);
-}
-
-.syncSpinner {
-  width: 18px;
-  height: 18px;
-  border: 2px solid currentColor;
-  border-top-color: transparent;
-  border-radius: 50%;
-  animation: spin 0.8s linear infinite;
-}
-
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
-
-/* ========================================
-   Sync Queue Button
-======================================== */
-.syncQueue {
-  display: none;
-  position: fixed;
-  bottom: calc(150px + var(--footer-height));
-  right: 20px;
-  width: 50px;
-  height: 50px;
-  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
-  color: white;
-  border: none;
-  border-radius: 50%;
-  font-size: 1.4rem;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  z-index: 200;
-  box-shadow: 0 4px 12px rgba(139,92,246,0.4);
-}
-
-.syncQueue.show {
-  display: flex;
-}
-
-.syncQueue .queueCount {
-  position: absolute;
-  top: -4px;
-  right: -4px;
-  width: 22px;
-  height: 22px;
-  background: var(--error);
-  color: white;
-  border-radius: 50%;
-  font-size: 0.75rem;
-  font-weight: 700;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  box-shadow: 0 2px 6px rgba(239,68,68,0.4);
-}
-
-/* ========================================
-   Conflict Resolution Modal
-======================================== */
-.conflictModal {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 1100;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
-}
-
-.conflictModal.show {
-  display: flex;
-}
-
-.conflictModalContent {
-  background: white;
-  border-radius: 20px;
-  max-width: 600px;
-  width: 100%;
-  max-height: 85vh;
-  overflow: hidden;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  animation: slideUpIn 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-}
-
-.conflictModalHeader {
-  padding: 20px;
-  border-bottom: 1px solid var(--border);
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-}
-
-.conflictModalHeader h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 6px;
-}
-
-.conflictModalHeader p {
-  font-size: 0.9rem;
-  color: var(--text-secondary);
-}
-
-.conflictModalBody {
-  flex: 1;
-  overflow-y: auto;
-  padding: 20px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.conflictModalCard {
-  background: white;
-  border: 2px solid var(--warning);
-  border-radius: 14px;
-  padding: 18px;
-  margin-bottom: 16px;
-  box-shadow: var(--shadow);
-}
-
-.conflictModalCard h4 {
-  font-size: 1.1rem;
-  font-weight: 700;
-  margin-bottom: 14px;
-  color: var(--text);
-}
-
-.conflictVersions {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 12px;
-}
-
-.conflictVersion {
-  padding: 14px;
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  background: var(--bg);
-  cursor: pointer;
-  transition: all 0.2s;
-}
-
-.conflictVersion:active {
-  transform: scale(0.98);
-}
-
-.conflictVersion.selected {
-  background: linear-gradient(135deg, #dbeafe 0%, #bfdbfe 100%);
-  border-color: var(--primary);
-}
-
-.conflictVersion h5 {
-  font-size: 0.9rem;
-  font-weight: 700;
-  margin-bottom: 10px;
-  color: var(--primary);
-}
-
-.conflictVersion .info {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-  margin-bottom: 4px;
-}
-
-.conflictVersion .info strong {
-  color: var(--text);
-}
-
-.conflictModalFooter {
-  padding: 16px 20px;
-  border-top: 1px solid var(--border);
-  display: flex;
-  gap: 10px;
-}
-
-.conflictCancelBtn, .conflictResolveBtn {
-  flex: 1;
-  padding: 14px;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.conflictCancelBtn {
-  background: var(--bg);
-  color: var(--text);
-}
-
-.conflictResolveBtn {
-  background: var(--primary);
-  color: white;
-  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
-}
-
-.conflictResolveBtn:disabled {
-  opacity: 0.5;
-  cursor: not-allowed;
-}
-
-/* ========================================
-   Offline Badge
-======================================== */
-.offlineBadge {
-  display: inline-flex;
-  align-items: center;
-  gap: 6px;
-  padding: 4px 10px;
-  background: linear-gradient(135deg, #fee2e2 0%, #fecaca 100%);
-  border: 1px solid var(--error);
-  border-radius: 12px;
-  font-size: 0.75rem;
-  font-weight: 700;
-  color: var(--error);
-  margin-left: 8px;
-}
-
-.offlineBadge::before {
-  content: '📡';
-  font-size: 0.9rem;
-}
-
-/* ========================================
-   PWA Install Prompt
-======================================== */
-.pwaInstallPrompt {
-  display: none;
-  position: fixed;
-  bottom: calc(80px + var(--footer-height));
-  left: 16px;
-  right: 16px;
-  background: linear-gradient(135deg, #1e40af 0%, #1e3a8a 100%);
-  color: white;
-  padding: 16px;
-  border-radius: 16px;
-  box-shadow: 0 8px 24px rgba(0,0,0,0.3);
-  z-index: 300;
-  animation: slideUpIn 0.4s ease;
-}
-
-.pwaInstallPrompt.show {
-  display: block;
-}
-
-.pwaInstallPrompt .content {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  margin-bottom: 12px;
-}
-
-.pwaInstallPrompt .icon {
-  font-size: 2.5rem;
-  flex-shrink: 0;
-}
-
-.pwaInstallPrompt .text h4 {
-  font-size: 1rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.pwaInstallPrompt .text p {
-  font-size: 0.85rem;
-  opacity: 0.9;
-}
-
-.pwaInstallPrompt .actions {
-  display: flex;
-  gap: 10px;
-}
-
-.pwaInstallBtn, .pwaDismissBtn {
-  flex: 1;
-  padding: 10px;
-  border: none;
-  border-radius: 10px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.pwaInstallBtn {
-  background: white;
-  color: var(--primary);
-}
-
-.pwaDismissBtn {
-  background: rgba(255,255,255,0.2);
-  color: white;
-  border: 1px solid rgba(255,255,255,0.3);
-}
-
-.pwaInstalledBanner {
-  display: none;
-  position: fixed;
-  top: calc(var(--header-height) + 60px);
-  left: 50%;
-  transform: translateX(-50%);
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  padding: 12px 20px;
-  border-radius: 12px;
-  font-size: 0.9rem;
-  font-weight: 700;
-  box-shadow: 0 4px 12px rgba(16,185,129,0.4);
-  z-index: 300;
-  animation: slideIn 0.3s ease;
-}
-
-.pwaInstalledBanner.show {
-  display: block;
-}
-
-.offlineBanner {
-  display: none;
-  position: fixed;
-  top: var(--header-height);
-  left: 0;
-  right: 0;
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  color: var(--text);
-  padding: 10px 16px;
-  text-align: center;
-  font-size: 0.85rem;
-  font-weight: 700;
-  border-bottom: 2px solid var(--warning);
-  z-index: 250;
-}
-
-.offlineBanner.show {
-  display: block;
-}
-
-/* ========================================
-   Compare Drawer
-======================================== */
-.compareDrawerOverlay {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.5);
-  z-index: 999;
-  animation: fadeIn 0.3s ease;
-}
-
-.compareDrawerOverlay.show {
-  display: block;
-}
-
-.compareDrawer {
-  position: fixed;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  background: white;
-  border-radius: 24px 24px 0 0;
-  max-height: 70vh;
-  z-index: 1000;
-  transform: translateY(100%);
-  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-  box-shadow: 0 -10px 40px rgba(0,0,0,0.2);
-  display: flex;
-  flex-direction: column;
-}
-
-.compareDrawer.show {
-  transform: translateY(0);
-}
-
-.compareDrawerHandle {
-  width: 40px;
-  height: 4px;
-  background: var(--border);
-  border-radius: 2px;
-  margin: 12px auto 8px;
-}
-
-.compareDrawerHeader {
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--border);
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.compareDrawerHeader h3 {
-  font-size: 1.1rem;
-  font-weight: 700;
-}
-
-.compareDrawerHeader .count {
-  color: var(--primary);
-}
-
-.compareDrawerClose {
-  background: none;
-  border: none;
-  font-size: 1.5rem;
-  color: var(--text-secondary);
-  cursor: pointer;
-  padding: 4px;
-  line-height: 1;
-}
-
-.compareDrawerBody {
-  flex: 1;
-  overflow-y: auto;
-  padding: 16px;
-  -webkit-overflow-scrolling: touch;
-}
-
-.compareDrawerItem {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 14px;
-  background: var(--bg);
-  border-radius: 12px;
-  margin-bottom: 10px;
-}
-
-.compareDrawerItem .model {
-  flex: 1;
-  font-size: 0.95rem;
-  font-weight: 700;
-  padding: 0;
-  min-height: auto;
-}
-
-.compareDrawerItem .removeBtn {
-  width: 32px;
-  height: 32px;
-  background: white;
-  border: 1px solid var(--border);
-  border-radius: 50%;
-  font-size: 1.2rem;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  cursor: pointer;
-  color: var(--text-secondary);
-}
-
-.compareDrawerFooter {
-  padding: 16px 20px;
-  border-top: 1px solid var(--border);
-}
-
-.compareDrawerShareBtn {
-  width: 100%;
-  padding: 14px;
-  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
-  color: white;
-  border: none;
-  border-radius: 12px;
-  font-size: 1rem;
-  font-weight: 700;
-  cursor: pointer;
-  box-shadow: 0 4px 12px rgba(16,185,129,0.3);
-}
-
-/* ========================================
-   MVNO & Internet Tabs
-======================================== */
-#mvnoTabs, #internetTabs {
-  display: flex;
-  gap: 8px;
-  padding: 12px 16px;
-  background: white;
-  border-bottom: 1px solid var(--border);
-  overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
-  scrollbar-width: none;
-}
-
-#mvnoTabs::-webkit-scrollbar, #internetTabs::-webkit-scrollbar {
-  display: none;
-}
-
-.mvnoTabBtn, .internetTabBtn {
-  flex-shrink: 0;
-  padding: 10px 20px;
-  border: 2px solid var(--border);
-  border-radius: 24px;
-  background: white;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--text);
-  transition: all 0.3s ease;
-}
-
-.mvnoTabBtn.active, .internetTabBtn.active {
-  color: white;
-  border-color: transparent;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-}
-
-.mvnoTabBtn[data-carrier="LG"].active, .internetTabBtn[data-carrier="LG"].active {
-  background: var(--lg);
-}
-
-.mvnoTabBtn[data-carrier="KT"].active, .internetTabBtn[data-carrier="KT"].active {
-  background: var(--kt);
-}
-
-.mvnoTabBtn[data-carrier="SK"].active, .internetTabBtn[data-carrier="SK"].active {
-  background: var(--sk);
-}
-
-/* ========================================
-   Addons Accordion
-======================================== */
-.addonsSection {
-  padding: 16px;
-  background: white;
-}
-
-.addonCarrier {
-  border: 2px solid var(--border);
-  border-radius: 12px;
-  margin-bottom: 12px;
-  overflow: hidden;
-  transition: all 0.3s;
-}
-
-.addonCarrier.sk { border-color: var(--sk); }
-.addonCarrier.kt { border-color: var(--kt); }
-.addonCarrier.lg { border-color: var(--lg); }
-
-.addonHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 14px 16px;
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1rem;
-  background: var(--bg);
-}
-
-.addonHeader.sk { background: linear-gradient(135deg, #fee2e2, #fecaca); }
-.addonHeader.kt { background: linear-gradient(135deg, #e5e7eb, #d1d5db); }
-.addonHeader.lg { background: linear-gradient(135deg, #fce7f3, #fbcfe8); }
-
-.addonToggle {
-  font-size: 1.2rem;
-  transition: transform 0.3s;
-}
-
-.addonCarrier.open .addonToggle {
-  transform: rotate(180deg);
-}
-
-.addonBody {
-  max-height: 0;
-  overflow: hidden;
-  transition: max-height 0.3s ease;
-}
-
-.addonCarrier.open .addonBody {
-  max-height: 1000px;
-}
-
-.addonItem {
-  padding: 12px 16px;
-  border-top: 1px solid var(--border);
-}
-
-.addonItem strong {
-  display: block;
-  font-size: 0.95rem;
-  font-weight: 700;
-  margin-bottom: 4px;
-}
-
-.addonItem span {
-  font-size: 0.85rem;
-  color: var(--text-secondary);
-}
-
-/* ========================================
-   Internet Popup
-======================================== */
-#inetPopup {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.7);
-  z-index: 500;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
-}
-
-#inetPopup.show {
-  display: flex;
-}
-
-.inetPopupCard {
-  background: linear-gradient(135deg, #fef3c7 0%, #fde68a 100%);
-  border: 4px solid var(--error);
-  border-radius: 20px;
-  padding: 24px;
-  max-width: 350px;
-  text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  animation: slideUpIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.inetPopupCard h3 {
-  font-size: 1.3rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-  color: var(--error);
-}
-
-.inetPopupCard p {
-  font-size: 1rem;
-  font-weight: 600;
-  margin-bottom: 20px;
-  line-height: 1.6;
-}
-
-.inetPopupActions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.inetPopupBtn {
-  padding: 12px 20px;
-  border: none;
-  border-radius: 12px;
-  font-size: 0.95rem;
-  font-weight: 700;
-  cursor: pointer;
-}
-
-.inetPopupBtn.primary {
-  background: var(--error);
-  color: white;
-  box-shadow: 0 4px 12px rgba(239,68,68,0.3);
-}
-
-.inetPopupBtn.secondary {
-  background: white;
-  color: var(--text);
-  border: 2px solid var(--border);
-}
-
-/* ========================================
-   Quick Dock (Bottom Navigation)
-======================================== */
+/* Quick Dock */
 .quickDock {
   position: fixed;
   bottom: 0;
@@ -2699,9 +597,6 @@ button:active, a:active {
 .dockBtn.sms .icon { color: var(--success); }
 .dockBtn.kakao .icon { color: #FEE500; }
 
-/* ========================================
-   Toast (Global Notification)
-======================================== */
 .toast {
   display: none;
   position: fixed;
@@ -2718,71 +613,41 @@ button:active, a:active {
   z-index: 1002;
   max-width: 90%;
   text-align: center;
-  animation: slideUpIn 0.3s ease;
 }
 
 .toast.show {
   display: block;
 }
 
-/* ========================================
-   Guide Tooltip
-======================================== */
-.guideTooltip {
-  display: none;
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.8);
-  z-index: 1500;
-  align-items: center;
-  justify-content: center;
-  padding: 20px;
-  animation: fadeIn 0.3s ease;
-}
-
-.guideTooltip.show {
-  display: flex;
-}
-
-.guideTooltipContent {
-  background: white;
-  border-radius: 20px;
-  padding: 30px;
-  max-width: 400px;
+/* Empty States */
+.emptyWishlist {
   text-align: center;
-  box-shadow: 0 20px 60px rgba(0,0,0,0.4);
-  animation: slideUpIn 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55);
-}
-
-.guideTooltipContent .icon {
-  font-size: 3.5rem;
-  margin-bottom: 16px;
-}
-
-.guideTooltipContent h3 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  margin-bottom: 12px;
-}
-
-.guideTooltipContent p {
-  font-size: 1rem;
-  line-height: 1.6;
+  padding: 60px 20px;
   color: var(--text-secondary);
+}
+
+.emptyWishlist .icon {
+  font-size: 4rem;
+  margin-bottom: 16px;
+  opacity: 0.5;
+}
+
+.emptyWishlist h3 {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 8px;
+  color: var(--text);
+}
+
+.emptyWishlist p {
+  font-size: 0.95rem;
   margin-bottom: 24px;
 }
 
-.guideTooltipContent .actions {
-  display: flex;
-  flex-direction: column;
-  gap: 10px;
-}
-
-.guideTooltipContent button {
-  padding: 12px 20px;
+.emptyWishlist button {
+  padding: 12px 24px;
+  background: var(--primary);
+  color: white;
   border: none;
   border-radius: 12px;
   font-size: 0.95rem;
@@ -2790,28 +655,74 @@ button:active, a:active {
   cursor: pointer;
 }
 
-.guideTooltipContent button.primary {
-  background: var(--primary);
-  color: white;
-  box-shadow: 0 4px 12px rgba(37,99,235,0.3);
+/* Addons */
+.addonsSection {
+  padding: 16px;
+  background: white;
 }
 
-.guideTooltipContent button.secondary {
+.addonCarrier {
+  border: 2px solid var(--border);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  overflow: hidden;
+}
+
+.addonCarrier.sk { border-color: var(--sk); }
+.addonCarrier.kt { border-color: var(--kt); }
+.addonCarrier.lg { border-color: var(--lg); }
+
+.addonHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 14px 16px;
+  cursor: pointer;
+  font-weight: 700;
   background: var(--bg);
-  color: var(--text);
 }
 
-/* ========================================
-   Mobile Responsive Optimizations
-======================================== */
+.addonToggle {
+  transition: transform 0.3s;
+}
+
+.addonCarrier.open .addonToggle {
+  transform: rotate(180deg);
+}
+
+.addonBody {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+}
+
+.addonCarrier.open .addonBody {
+  max-height: 1000px;
+}
+
+.addonItem {
+  padding: 12px 16px;
+  border-top: 1px solid var(--border);
+}
+
+.addonItem strong {
+  display: block;
+  font-size: 0.95rem;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.addonItem span {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+/* Mobile Responsive */
 @media (max-width: 768px) {
-  /* Touch targets */
   button, a, .tabBtn, .filterChip {
     min-height: 44px;
-    min-width: 44px;
   }
 
-  /* Font size adjustments */
   body {
     font-size: 16px;
   }
@@ -2819,53 +730,11 @@ button:active, a:active {
   .hero h1 {
     font-size: 1.4rem;
   }
-
-  .model {
-    font-size: 1.05rem;
-  }
-
-  /* Improved spacing */
-  #list {
-    padding: 12px;
-    gap: 12px;
-  }
-
-  .card {
-    border-radius: 14px;
-  }
-
-  /* Filter sheet optimization */
-  .filterSheet {
-    max-height: 90vh;
-  }
-
-  .filterBody {
-    padding: 16px;
-  }
-
-  /* Dock optimization */
-  .quickDock {
-    padding: 10px 0;
-    padding-bottom: calc(10px + var(--footer-height));
-  }
-
-  .dockBtn {
-    padding: 10px 8px;
-  }
-
-  .dockBtn .icon {
-    font-size: 1.6rem;
-  }
 }
 
 @media (max-width: 375px) {
-  /* Extra small screens */
   .hero h1 {
     font-size: 1.25rem;
-  }
-
-  .hero p {
-    font-size: 0.85rem;
   }
 
   .tabBtn {
@@ -2873,175 +742,9 @@ button:active, a:active {
     padding: 12px 14px;
     min-width: 90px;
   }
-
-  .phoneTabBtn, .mvnoTabBtn, .internetTabBtn {
-    padding: 8px 16px;
-    font-size: 0.85rem;
-  }
-
-  .model {
-    font-size: 0.95rem;
-  }
-
-  .pill {
-    padding: 8px 12px;
-  }
-
-  .pill .k {
-    font-size: 0.8rem;
-  }
-
-  .pill .v {
-    font-size: 0.9rem;
-  }
 }
 
-@media (min-width: 376px) and (max-width: 414px) {
-  /* iPhone standard sizes */
-  .hero h1 {
-    font-size: 1.35rem;
-  }
-}
-
-@media (min-width: 415px) and (max-width: 768px) {
-  /* Large phones and small tablets */
-  #list {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 16px;
-  }
-
-  .hero h1 {
-    font-size: 1.5rem;
-  }
-}
-
-@media (min-width: 768px) and (max-width: 1024px) {
-  /* Tablets */
-  #list {
-    grid-template-columns: repeat(3, 1fr);
-    padding: 20px;
-  }
-
-  .filterSheet, .compareDrawer {
-    max-width: 500px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-  }
-
-  .filterSheet.show, .compareDrawer.show {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .priceAlertPanel {
-    max-width: 500px;
-  }
-}
-
-@media (min-width: 1024px) {
-  /* Desktop */
-  body {
-    max-width: 1400px;
-    margin: 0 auto;
-    box-shadow: 0 0 40px rgba(0,0,0,0.1);
-  }
-
-  #list {
-    grid-template-columns: repeat(4, 1fr);
-    padding: 24px;
-    gap: 20px;
-  }
-
-  .quickDock {
-    max-width: 1400px;
-    left: 50%;
-    transform: translateX(-50%);
-  }
-
-  .filterSheet, .compareDrawer {
-    max-width: 600px;
-    left: 50%;
-    transform: translateX(-50%) translateY(100%);
-  }
-
-  .filterSheet.show, .compareDrawer.show {
-    transform: translateX(-50%) translateY(0);
-  }
-
-  .priceAlertPanel {
-    max-width: 600px;
-    right: auto;
-    left: 50%;
-    transform: translateX(50%) translateX(100%);
-  }
-
-  .priceAlertPanel.show {
-    transform: translateX(50%) translateX(0);
-  }
-
-  /* Desktop hover effects */
-  .card:hover {
-    transform: translateY(-4px);
-    box-shadow: var(--shadow-lg);
-  }
-
-  button:hover, a:hover {
-    opacity: 0.9;
-  }
-}
-
-/* ========================================
-   Dark Mode Preview (Optional)
-======================================== */
-@media (prefers-color-scheme: dark) {
-  /* Uncomment to enable dark mode */
-  /*
-  :root {
-    --bg: #1a202c;
-    --card: #2d3748;
-    --text: #f7fafc;
-    --text-secondary: #a0aec0;
-    --border: #4a5568;
-  }
-  */
-}
-
-/* ========================================
-   Print Styles
-======================================== */
-@media print {
-  .hero, #serviceTabs, #phoneTabs, #viewModeTabs, #searchSection,
-  .quickDock, .adminBtn, .filterTrigger, .shareFloatingBtn,
-  .priceAlertBell, .syncQueue, .pwaInstallPrompt, .offlineBanner {
-    display: none !important;
-  }
-
-  body {
-    background: white;
-    padding: 0;
-  }
-
-  .card {
-    break-inside: avoid;
-    page-break-inside: avoid;
-  }
-
-  #list {
-    grid-template-columns: repeat(2, 1fr);
-  }
-}
-
-/* ========================================
-   Performance & Animation Optimizations
-======================================== */
-* {
-  -webkit-overflow-scrolling: touch;
-}
-
-.card, .tabBtn, button, a {
-  will-change: transform;
-}
-
-/* Reduce motion for accessibility */
+/* Reduced Motion */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
@@ -3061,31 +764,6 @@ button:active, a:active {
   <button class="adminBtn" id="noticeToggleBtn" onclick="toggleNotice()">🔔 공지 OFF</button>
 </div>
 
-<!-- PWA Install Prompt -->
-<div class="pwaInstallPrompt" id="pwaInstallPrompt">
-  <div class="content">
-    <div class="icon">📱</div>
-    <div class="text">
-      <h4>앱으로 설치하기</h4>
-      <p>홈 화면에 추가하고 더 빠르게 이용하세요</p>
-    </div>
-  </div>
-  <div class="actions">
-    <button class="pwaInstallBtn" id="pwaInstallBtn">설치하기</button>
-    <button class="pwaDismissBtn" id="pwaDismissBtn">나중에</button>
-  </div>
-</div>
-
-<!-- PWA Installed Banner -->
-<div class="pwaInstalledBanner" id="pwaInstalledBanner">
-  ✅ 앱이 설치되었습니다!
-</div>
-
-<!-- Offline Banner -->
-<div class="offlineBanner" id="offlineBanner">
-  📡 오프라인 모드 - 저장된 데이터로 작동 중
-</div>
-
 <!-- Service Tabs -->
 <div id="serviceTabs">
   <button class="tabBtn svc active" data-mode="PHONE">휴대폰</button>
@@ -3097,20 +775,20 @@ button:active, a:active {
   </button>
 </div>
 
-<!-- View Mode Toggle (Single / Compare) -->
+<!-- View Mode Toggle -->
 <div id="viewModeTabs" style="display:none;">
   <button class="viewModeBtn active" data-view="single">단일 보기</button>
   <button class="viewModeBtn" data-view="compare">가격 비교</button>
 </div>
 
-<!-- Phone Tabs (Carrier) -->
+<!-- Phone Tabs -->
 <div id="phoneTabs" style="display:none;">
   <button class="phoneTabBtn active" data-carrier="SK">SK</button>
   <button class="phoneTabBtn" data-carrier="KT">KT</button>
   <button class="phoneTabBtn" data-carrier="LG">LG</button>
 </div>
 
-<!-- Search & Filter Section -->
+<!-- Search Section -->
 <div id="searchSection" style="display:none;">
   <div class="searchContainer">
     <input type="text" id="searchInput" placeholder="모델명 검색...">
@@ -3128,28 +806,6 @@ button:active, a:active {
   </div>
 </div>
 
-<!-- Quick Share Section -->
-<div class="quickShareSection" id="quickShareSection">
-  <button class="quickShareBtn" id="selectShareBtn">
-    <span>📋</span> 선택해서 공유
-  </button>
-  <button class="quickShareBtn" id="shareAllBtn">
-    <span>💬</span> 전체 공유
-  </button>
-  <button class="quickShareBtn" id="downloadBtn">
-    <span>📥</span> 다운로드
-  </button>
-  <div class="resultCount" id="resultCount"></div>
-</div>
-
-<!-- Selection Mode Bar -->
-<div class="selectionModeBar" id="selectionModeBar">
-  <div class="info">
-    선택: <span class="count" id="selectionCount">0</span>개
-  </div>
-  <button id="exitSelectionBtn">취소</button>
-</div>
-
 <!-- MVNO Tabs -->
 <div id="mvnoTabs" style="display:none;">
   <button class="mvnoTabBtn active" data-carrier="LG">LG 헬로모바일</button>
@@ -3164,267 +820,10 @@ button:active, a:active {
   <button class="internetTabBtn" data-carrier="LG">LG U+</button>
 </div>
 
-<!-- Main List Container -->
+<!-- Main List -->
 <div id="list"></div>
 
-<!-- Price Alert Bell -->
-<button class="priceAlertBell" id="priceAlertBell">
-  🔔
-  <span class="badge" id="priceAlertBadge" style="display:none;">0</span>
-</button>
-
-<!-- Price Alert Panel -->
-<div class="priceAlertOverlay" id="priceAlertOverlay"></div>
-<div class="priceAlertPanel" id="priceAlertPanel">
-  <div class="priceAlertHeader">
-    <h3>💰 가격 변동 알림</h3>
-    <button class="priceAlertClose" id="priceAlertCloseBtn">×</button>
-  </div>
-  <div class="priceAlertBody" id="priceAlertList">
-    <!-- Alert cards will be rendered here -->
-  </div>
-  <div class="priceAlertFooter">
-    <div class="priceAlertSettings">
-      <label for="priceAlertToggle">알림 활성화</label>
-      <input type="checkbox" id="priceAlertToggle" checked>
-    </div>
-    <button class="dismissAllBtn" id="dismissAllAlertsBtn">모두 확인</button>
-    <button class="clearAllAlertsBtn" id="clearAllAlertsBtn">전체 삭제</button>
-  </div>
-</div>
-
-<!-- Sync Status Indicator -->
-<div class="syncStatus" id="syncStatus">
-  <div class="syncSpinner"></div>
-  <span id="syncStatusText">동기화 중...</span>
-</div>
-
-<!-- Sync Queue Button -->
-<button class="syncQueue" id="syncQueue">
-  ⏳
-  <span class="queueCount" id="queueCount">0</span>
-</button>
-
-<!-- Conflict Resolution Modal -->
-<div class="conflictModal" id="conflictModal">
-  <div class="conflictModalContent">
-    <div class="conflictModalHeader">
-      <h3>⚠️ 데이터 충돌 해결</h3>
-      <p>서버와 로컬 데이터가 달라요. 어떤 버전을 사용할까요?</p>
-    </div>
-    <div class="conflictModalBody" id="conflictModalBody">
-      <!-- Conflict cards will be rendered here -->
-    </div>
-    <div class="conflictModalFooter">
-      <button class="conflictCancelBtn" id="conflictCancelBtn">취소</button>
-      <button class="conflictResolveBtn" id="conflictResolveBtn" disabled>적용하기</button>
-    </div>
-  </div>
-</div>
-
-<!-- Share Floating Button -->
-<button class="shareFloatingBtn" id="shareFloatingBtn">
-  💬
-  <span class="badge" id="shareFloatingBadge">0</span>
-</button>
-
-<!-- Share Preview Modal -->
-<div class="sharePreviewModal" id="sharePreviewModal">
-  <div class="sharePreviewContent">
-    <div class="sharePreviewHeader">
-      <h3>💬 공유 미리보기</h3>
-      <button class="sharePreviewClose" id="sharePreviewClose">×</button>
-    </div>
-    <div class="sharePreviewBody">
-      <div class="shareStats">
-        <div class="shareStatCard">
-          <div class="label">선택 상품</div>
-          <div class="value" id="shareStatsCount">0</div>
-        </div>
-        <div class="shareStatCard">
-          <div class="label">최저가</div>
-          <div class="value" id="shareStatsMin">-</div>
-        </div>
-        <div class="shareStatCard">
-          <div class="label">평균가</div>
-          <div class="value" id="shareStatsAvg">-</div>
-        </div>
-      </div>
-      <div class="shareMessagePreview" id="shareMessagePreview"></div>
-    </div>
-    <div class="sharePreviewFooter">
-      <button class="shareCancelBtn" id="shareCancelBtn">취소</button>
-      <button class="shareConfirmBtn" id="shareConfirmBtn">카톡으로 공유</button>
-    </div>
-  </div>
-</div>
-
-<!-- Download Modal -->
-<div class="downloadModal" id="downloadModal">
-  <div class="downloadContent">
-    <div class="downloadHeader">
-      <h3>📥 다운로드</h3>
-      <p>파일 형식을 선택하세요</p>
-    </div>
-    <div class="downloadBody">
-      <div class="downloadOptions">
-        <div class="downloadOption" data-format="excel">
-          <div class="icon">📊</div>
-          <div class="info">
-            <h4>Excel (.xls)</h4>
-            <p>엑셀에서 바로 열 수 있어요</p>
-          </div>
-          <input type="radio" name="downloadFormat" value="excel" checked>
-        </div>
-        <div class="downloadOption" data-format="csv">
-          <div class="icon">📄</div>
-          <div class="info">
-            <h4>CSV (.csv)</h4>
-            <p>범용 데이터 형식</p>
-          </div>
-          <input type="radio" name="downloadFormat" value="csv">
-        </div>
-      </div>
-    </div>
-    <div class="downloadFooter">
-      <button class="downloadCancelBtn" id="downloadCancelBtn">취소</button>
-      <button class="downloadConfirmBtn" id="downloadConfirmBtn">다운로드</button>
-    </div>
-  </div>
-</div>
-
-<!-- Download Toast -->
-<div class="downloadToast" id="downloadToast"></div>
-
-<!-- Compare Drawer -->
-<div class="compareDrawerOverlay" id="compareDrawerOverlay"></div>
-<div class="compareDrawer" id="compareDrawer">
-  <div class="compareDrawerHandle"></div>
-  <div class="compareDrawerHeader">
-    <h3>비교함 <span class="count" id="compareDrawerCount">(0/5)</span></h3>
-    <button class="compareDrawerClose" id="compareDrawerClose">×</button>
-  </div>
-  <div class="compareDrawerBody" id="compareDrawerBody">
-    <!-- Compare items will be rendered here -->
-  </div>
-  <div class="compareDrawerFooter">
-    <button class="compareDrawerShareBtn" id="compareDrawerShareBtn">
-      💬 카톡으로 상담 요청
-    </button>
-  </div>
-</div>
-
-<!-- Filter Bottom Sheet -->
-<div class="filterSheetOverlay" id="filterSheetOverlay"></div>
-<div class="filterSheet" id="filterSheet">
-  <div class="filterHandle"></div>
-  <div class="filterHeader">
-    <h3>필터</h3>
-    <button class="filterCloseBtn" id="filterCloseBtn">×</button>
-  </div>
-  <div class="filterBody">
-    <!-- Price Range -->
-    <div class="filterGroup">
-      <h4>가격 범위</h4>
-      <div class="priceRangeContainer">
-        <div class="priceLabels">
-          <span id="minPriceLabel">0만원</span>
-          <span id="maxPriceLabel">200만원</span>
-        </div>
-        <div class="priceRangeInputs">
-          <div class="rangeInput">
-            <input type="range" id="minPriceRange" min="0" max="200" step="5" value="0">
-          </div>
-          <div class="rangeInput">
-            <input type="range" id="maxPriceRange" min="0" max="200" step="5" value="200">
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Brand Filter -->
-    <div class="filterGroup">
-      <h4>제조사</h4>
-      <div class="brandOptions">
-        <div class="brandOption" data-brand="samsung">
-          <input type="checkbox" id="brandSamsung" value="samsung">
-          <label for="brandSamsung">삼성</label>
-        </div>
-        <div class="brandOption" data-brand="apple">
-          <input type="checkbox" id="brandApple" value="apple">
-          <label for="brandApple">애플</label>
-        </div>
-        <div class="brandOption" data-brand="other">
-          <input type="checkbox" id="brandOther" value="other">
-          <label for="brandOther">기타</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Sort Options -->
-    <div class="filterGroup">
-      <h4>정렬</h4>
-      <div class="sortOptions">
-        <div class="sortOption selected" data-sort="default">
-          <input type="radio" id="sortDefault" name="sort" value="default" checked>
-          <label for="sortDefault">기본 순서</label>
-        </div>
-        <div class="sortOption" data-sort="price_low">
-          <input type="radio" id="sortPriceLow" name="sort" value="price_low">
-          <label for="sortPriceLow">낮은 가격순</label>
-        </div>
-        <div class="sortOption" data-sort="price_high">
-          <input type="radio" id="sortPriceHigh" name="sort" value="price_high">
-          <label for="sortPriceHigh">높은 가격순</label>
-        </div>
-        <div class="sortOption" data-sort="discount">
-          <input type="radio" id="sortDiscount" name="sort" value="discount">
-          <label for="sortDiscount">할인상품 우선</label>
-        </div>
-      </div>
-    </div>
-
-    <!-- Discount Only Toggle -->
-    <div class="filterGroup">
-      <h4>할인상품만 보기</h4>
-      <div class="toggleSwitch">
-        <label for="onlyDiscount">할인상품만</label>
-        <input type="checkbox" id="onlyDiscount">
-      </div>
-    </div>
-  </div>
-  <div class="filterFooter">
-    <button class="filterResetBtn" id="filterResetBtn">초기화</button>
-    <button class="filterApplyBtn" id="filterApplyBtn">필터 적용</button>
-  </div>
-</div>
-
-<!-- Guide Tooltip (First Visit) -->
-<div class="guideTooltip" id="guideTooltip">
-  <div class="guideTooltipContent">
-    <div class="icon">👋</div>
-    <h3>환영합니다!</h3>
-    <p><strong>이동</strong>은 새 번호로 가입할 때,<br><strong>기변</strong>은 기존 번호를 유지할 때 드는 비용이에요.</p>
-    <div class="actions">
-      <button class="primary" onclick="closeGuideTooltip()">알겠어요</button>
-      <button class="secondary" onclick="closeGuideTooltip(true)">다시 보지 않기</button>
-    </div>
-  </div>
-</div>
-
-<!-- Internet Popup -->
-<div id="inetPopup">
-  <div class="inetPopupCard">
-    <h3>🎉 인터넷 가입 이벤트</h3>
-    <p>지금 인터넷 가입 시<br><strong>최대 30% 할인</strong> 혜택!<br>상담 문의 주세요 📞</p>
-    <div class="inetPopupActions">
-      <button class="inetPopupBtn primary" onclick="closeInetPopup()">확인</button>
-      <button class="inetPopupBtn secondary" onclick="closeInetPopup(true)">24시간 보지 않기</button>
-    </div>
-  </div>
-</div>
-
-<!-- Quick Dock (Bottom Navigation) -->
+<!-- Quick Dock -->
 <div class="quickDock">
   <a href="tel:+82-42-821-2272" class="dockBtn tel">
     <div class="icon">📞</div>
@@ -3443,61 +842,24 @@ button:active, a:active {
 <!-- Toast -->
 <div class="toast" id="toast"></div>
 
-<!-- JavaScript -->
 <script>
 // ========================================
-// Global State & Constants
+// Global State
 // ========================================
 const CSV_VER = '2025-12-23';
 const KAKAO_LINK = 'https://open.kakao.com/o/s729bI5h';
-const TEL_NUMBER = '+82-42-821-2272';
-const SMS_NUMBER = '010-5839-1512';
 
-let MODE = 'PHONE'; // PHONE, MVNO, INTERNET, WISHLIST
-let VIEW_MODE = 'single'; // single, compare
-let CARRIER = 'SK'; // SK, KT, LG
+let MODE = 'PHONE';
+let VIEW_MODE = 'single';
+let CARRIER = 'SK';
 let SEARCH_QUERY = '';
-let selectedCards = new Set(); // For selection mode
-let isSelectionMode = false;
-
-// Data storage
 window.__CSV_ROWS__ = [];
 let filteredRows = [];
-
-// Wishlist
 let wishlist = [];
-let wishlistSortBy = 'recent'; // recent, price_low, price_high
 
-// Compare basket (max 5)
-let compareBasket = [];
-
-// Filter state
-let filterState = {
-  minPrice: 0,
-  maxPrice: 200, // In 만원 units
-  brands: [],
-  sort: 'default',
-  onlyDiscount: false
-};
-
-// Price history & alerts
-let priceHistory = {}; // { model_carrier: { price, timestamp } }
-let priceAlerts = []; // [ { id, model, carrier, oldPrice, newPrice, timestamp, type } ]
-let alertEnabled = true;
-
-// Sync manager state
-let syncQueue = [];
-let isSyncing = false;
-let conflicts = [];
-let lastSyncTime = null;
-
-// ========================================
 // Addons Data
-// ========================================
 const ADDON = {
-  SK: [
-    { t: '마이스마트콜(3,500)', d: '3개월 유지 / 미 가입시 +2' }
-  ],
+  SK: [{ t: '마이스마트콜(3,500)', d: '3개월 유지 / 미 가입시 +2' }],
   KT: [
     { t: '필수팩(9,900)', d: '4개월 유지 / 미 가입시 +5' },
     { t: '보험(모델별 상이)', d: '4개월 유지 / 미 가입시 +3' },
@@ -3511,9 +873,7 @@ const ADDON = {
   ]
 };
 
-// ========================================
-// MVNO Plans Data
-// ========================================
+// MVNO Plans
 const MVNO_PLANS = {
   LG: [
     { call: '무제한', sms: '무제한', data: '1GB+1Mbps무제한', fee: 9900 },
@@ -3521,11 +881,7 @@ const MVNO_PLANS = {
     { call: '무제한', sms: '무제한', data: '10GB+1Mbps무제한', fee: 18900 },
     { call: '100분', sms: '100건', data: '15GB+3Mbps무제한', fee: 25250 },
     { call: '무제한', sms: '무제한', data: '11GB+일2GB+3Mbps무제한', fee: 32990 },
-    { call: '무제한', sms: '무제한', data: '100GB+5Mbps무제한', fee: 38200 },
-    { call: '50분', sms: '50건', data: '500MB', fee: 3300 },
-    { call: '무제한', sms: '무제한', data: '1GB+1Mbps무제한', fee: 12900 },
-    { call: '무제한', sms: '무제한', data: '5GB+1Mbps무제한', fee: 17500 },
-    { call: '100분', sms: '100건', data: '15GB+망내1회선+3Mbps무제한', fee: 28820 }
+    { call: '무제한', sms: '무제한', data: '100GB+5Mbps무제한', fee: 38200 }
   ],
   KT: [
     { call: '무제한', sms: '무제한', data: '2.5GB+400Kbps무제한', fee: 9500 },
@@ -3545,9 +901,7 @@ const MVNO_PLANS = {
   ]
 };
 
-// ========================================
-// Internet Plans Data
-// ========================================
+// Internet Plans
 const INET_PLANS = {
   SK: [
     { inet: '100M', tv: 'X', fee: 22000, combo: 17600 },
@@ -3587,9 +941,7 @@ const INET_PLANS = {
   ]
 };
 
-// ========================================
 // Utility Functions
-// ========================================
 function asNum(v) {
   if (v == null || v === '') return Infinity;
   const s = String(v).replace(/[^0-9.-]/g, '');
@@ -3605,40 +957,6 @@ function fmtWon(v) {
   return n.toLocaleString() + '원';
 }
 
-function formatPrice(v) {
-  const n = asNum(v);
-  if (n === 0 || n === Infinity) return '0만원';
-  return n + '만원';
-}
-
-function formatPriceShort(v) {
-  const n = asNum(v);
-  if (n === Infinity || n === 0) return '-';
-  return Math.floor(n / 10000) + '만';
-}
-
-function getTimeAgo(timestamp) {
-  const now = Date.now();
-  const diff = now - timestamp;
-  const minutes = Math.floor(diff / 60000);
-  const hours = Math.floor(diff / 3600000);
-  const days = Math.floor(diff / 86400000);
-  if (minutes < 1) return '방금 전';
-  if (minutes < 60) return minutes + '분 전';
-  if (hours < 24) return hours + '시간 전';
-  return days + '일 전';
-}
-
-function getDateString() {
-  const now = new Date();
-  const y = now.getFullYear();
-  const m = String(now.getMonth() + 1).padStart(2, '0');
-  const d = String(now.getDate()).padStart(2, '0');
-  const h = String(now.getHours()).padStart(2, '0');
-  const min = String(now.getMinutes()).padStart(2, '0');
-  return `${y}${m}${d}_${h}${min}`;
-}
-
 function showToast(message, duration = 3000) {
   const toast = document.getElementById('toast');
   toast.textContent = message;
@@ -3648,44 +966,521 @@ function showToast(message, duration = 3000) {
   }, duration);
 }
 
-function showDownloadToast(message, duration = 3000) {
-  const toast = document.getElementById('downloadToast');
-  toast.textContent = message;
-  toast.classList.add('show');
-  setTimeout(() => {
-    toast.classList.remove('show');
-  }, duration);
+// CSV Loading
+async function fetchCSV() {
+  const url = `data.csv?v=${CSV_VER}`;
+  try {
+    const resp = await fetch(url, { cache: 'no-store' });
+    if (!resp.ok) throw new Error('CSV load failed');
+    return await resp.text();
+  } catch (error) {
+    console.error('Failed to fetch CSV:', error);
+    showToast('데이터 로드 실패');
+    return '';
+  }
 }
 
-// ========================================
-// IndexedDB Wrapper (OfflineDB)
-// ========================================
-class OfflineDB {
-  constructor() {
-    this.dbName = 'kukwayeon-offline';
-    this.version = 1;
-    this.db = null;
+function parseCSVLine(line) {
+  const result = [];
+  let current = '';
+  let inQuote = false;
+  
+  for (let i = 0; i < line.length; i++) {
+    const char = line[i];
+    if (char === '"') {
+      if (inQuote && line[i + 1] === '"') {
+        current += '"';
+        i++;
+      } else {
+        inQuote = !inQuote;
+      }
+    } else if (char === ',' && !inQuote) {
+      result.push(current.trim());
+      current = '';
+    } else {
+      current += char;
+    }
+  }
+  result.push(current.trim());
+  return result;
+}
+
+function makeUniqueHeader(headers) {
+  const seen = {};
+  return headers.map(h => {
+    let key = h || 'col';
+    if (seen[key]) {
+      seen[key]++;
+      key = key + '_' + seen[key];
+    } else {
+      seen[key] = 1;
+    }
+    return key;
+  });
+}
+
+async function loadData() {
+  try {
+    let csvText = await fetchCSV();
+    if (!csvText) {
+      window.__CSV_ROWS__ = [];
+      return;
+    }
+    
+    if (csvText.charCodeAt(0) === 0xFEFF) {
+      csvText = csvText.slice(1);
+    }
+
+    const lines = csvText.split(/\r?\n/).filter(line => line.trim());
+    if (lines.length < 2) {
+      window.__CSV_ROWS__ = [];
+      return;
+    }
+
+    const headerLine = lines[0];
+    const rawHeaders = parseCSVLine(headerLine);
+    const headers = makeUniqueHeader(rawHeaders);
+
+    const rows = [];
+    for (let i = 1; i < lines.length; i++) {
+      const line = lines[i];
+      if (line.startsWith('__NOTICE__')) continue;
+      
+      const values = parseCSVLine(line);
+      const obj = {};
+      headers.forEach((h, idx) => {
+        obj[h] = values[idx] || '';
+      });
+      rows.push(obj);
+    }
+
+    window.__CSV_ROWS__ = rows;
+    updateLastUpdate();
+  } catch (error) {
+    console.error('Failed to load data:', error);
+    showToast('데이터 로드 실패');
+  }
+}
+
+function updateLastUpdate() {
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('ko-KR', { hour: '2-digit', minute: '2-digit' });
+  document.getElementById('lastUpdate').textContent = timeStr;
+}
+
+function forceRefresh() {
+  location.reload();
+}
+
+function toggleNotice() {
+  showToast('공지 설정이 변경되었습니다');
+}
+
+// Admin button reveal
+let tapCount = 0;
+let tapTimer = null;
+document.getElementById('heroTapArea').addEventListener('click', () => {
+  tapCount++;
+  clearTimeout(tapTimer);
+  
+  if (tapCount >= 5) {
+    document.querySelectorAll('.adminBtn').forEach(btn => btn.classList.add('show'));
+    tapCount = 0;
+  }
+  
+  tapTimer = setTimeout(() => {
+    tapCount = 0;
+  }, 2000);
+});
+
+// Wishlist
+function loadWishlist() {
+  const saved = localStorage.getItem('wishlist');
+  if (saved) {
+    wishlist = JSON.parse(saved);
+  }
+  updateWishlistBadge();
+}
+
+function saveWishlist() {
+  localStorage.setItem('wishlist', JSON.stringify(wishlist));
+}
+
+function toggleWishlist(cardId, cardData) {
+  const index = wishlist.findIndex(w => w.id === cardId);
+  
+  if (index > -1) {
+    wishlist.splice(index, 1);
+    saveWishlist();
+    updateWishlistBadge();
+    showToast('찜 목록에서 제거되었습니다');
+    return false;
+  } else {
+    const item = {
+      id: cardId,
+      ...cardData,
+      timestamp: Date.now()
+    };
+    wishlist.push(item);
+    saveWishlist();
+    updateWishlistBadge();
+    showToast('❤️ 찜 목록에 추가되었습니다');
+    return true;
+  }
+}
+
+function isWishlisted(cardId) {
+  return wishlist.some(w => w.id === cardId);
+}
+
+function updateWishlistBadge() {
+  const badge = document.getElementById('wishlistTabBadge');
+  if (wishlist.length > 0) {
+    badge.textContent = wishlist.length;
+    badge.classList.add('show');
+  } else {
+    badge.classList.remove('show');
+  }
+}
+
+function renderWishlist() {
+  const container = document.getElementById('list');
+  
+  if (wishlist.length === 0) {
+    container.innerHTML = `
+      <div class="emptyWishlist">
+        <div class="icon">❤️</div>
+        <h3>찜한 상품이 없습니다</h3>
+        <p>마음에 드는 상품을 찜해보세요</p>
+        <button onclick="goToPhoneTab()">상품 둘러보기</button>
+      </div>
+    `;
+    return;
   }
 
-  async init() {
-    return new Promise((resolve, reject) => {
-      const request = indexedDB.open(this.dbName, this.version);
-      request.onerror = () => reject(request.error);
-      request.onsuccess = () => {
-        this.db = request.result;
-        resolve();
-      };
-      request.onupgradeneeded = (e) => {
-        const db = e.target.result;
-        if (!db.objectStoreNames.contains('syncQueue')) {
-          const store = db.createObjectStore('syncQueue', { keyPath: 'id', autoIncrement: true });
-          store.createIndex('timestamp', 'timestamp', { unique: false });
-          store.createIndex('type', 'type', { unique: false });
-        }
-        if (!db.objectStoreNames.contains('csvCache')) {
-          const store = db.createObjectStore('csvCache', { keyPath: 'id' });
-          store.createIndex('timestamp', 'timestamp', { unique: false });
-        }
-        if (!db.objectStoreNames.contains('wishlistSync')) {
-          const store = db.createObjectStore('wishlistSync', { keyPath: 'id' });
-          store.createIndex('timestamp', 'timestamp', { unique:
+  container.innerHTML = '<h2 style="padding:20px 16px; font-size:1.3rem;">찜 목록 (' + wishlist.length + '개)</h2>';
+
+  wishlist.forEach(item => {
+    addPhoneCard({
+      model: item.model,
+      carrier: item.carrier,
+      move: item.move,
+      change: item.change,
+      moveRaw: item.moveRaw,
+      changeRaw: item.changeRaw,
+      discount: item.discount,
+      cardId: item.id
+    });
+  });
+}
+
+window.goToPhoneTab = function() {
+  MODE = 'PHONE';
+  document.querySelectorAll('.tabBtn.svc').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.mode === 'PHONE');
+  });
+  render();
+};
+
+// Rendering
+function render() {
+  const listEl = document.getElementById('list');
+  const phoneTabsEl = document.getElementById('phoneTabs');
+  const mvnoTabsEl = document.getElementById('mvnoTabs');
+  const internetTabsEl = document.getElementById('internetTabs');
+  const viewModeEl = document.getElementById('viewModeTabs');
+  const searchEl = document.getElementById('searchSection');
+
+  phoneTabsEl.style.display = 'none';
+  mvnoTabsEl.style.display = 'none';
+  internetTabsEl.style.display = 'none';
+  viewModeEl.style.display = 'none';
+  searchEl.style.display = 'none';
+
+  listEl.innerHTML = '';
+
+  if (MODE === 'PHONE') {
+    phoneTabsEl.style.display = 'flex';
+    viewModeEl.style.display = 'flex';
+    searchEl.style.display = 'block';
+    renderPhone();
+  } else if (MODE === 'MVNO') {
+    mvnoTabsEl.style.display = 'flex';
+    renderMVNO();
+  } else if (MODE === 'INTERNET') {
+    internetTabsEl.style.display = 'flex';
+    renderINTERNET();
+  } else if (MODE === 'WISHLIST') {
+    renderWishlist();
+  }
+}
+
+function renderPhone() {
+  const rows = window.__CSV_ROWS__.filter(row => {
+    const carrier = row['통신사'] || row['carrier'] || '';
+    return carrier === CARRIER;
+  });
+
+  let filtered = rows;
+  if (SEARCH_QUERY) {
+    const query = SEARCH_QUERY.toLowerCase();
+    filtered = filtered.filter(row => {
+      const model = (row['모델명'] || row['model'] || '').toLowerCase();
+      return model.includes(query);
+    });
+  }
+
+  filteredRows = filtered;
+
+  const container = document.getElementById('list');
+  container.innerHTML = '';
+
+  filtered.forEach(row => {
+    const model = row['모델명'] || row['model'] || '';
+    const carrier = row['통신사'] || row['carrier'] || '';
+    const move = fmtWon(row['이동'] || row['move']);
+    const change = fmtWon(row['기변'] || row['change']);
+    const moveRaw = asNum(row['이동'] || row['move']);
+    const changeRaw = asNum(row['기변'] || row['change']);
+    const discount = row['요금할인'] || row['discount'] || '';
+    const hasDiscount = discount === 'O' || discount === '1' || discount === 'true' || discount === true;
+
+    addPhoneCard({ model, carrier, move, change, moveRaw, changeRaw, discount: hasDiscount });
+  });
+}
+
+function addPhoneCard(params) {
+  const { model, carrier, move, change, moveRaw, changeRaw, discount, cardId } = params;
+  
+  const id = cardId || `card_${Date.now()}_${Math.random()}`;
+  const wishlisted = isWishlisted(id);
+
+  const card = document.createElement('div');
+  card.className = 'card';
+  card.dataset.cardId = id;
+
+  const badgeClass = carrier.toLowerCase();
+  const moveClass = asNum(move) < 0 ? 'minus' : asNum(move) === 0 ? 'zero' : '';
+  const changeClass = asNum(change) < 0 ? 'minus' : asNum(change) === 0 ? 'zero' : '';
+
+  card.innerHTML = `
+    <div class="badge ${badgeClass}">${carrier}</div>
+    <div class="model">${model}</div>
+    <div class="pills">
+      <div class="pill">
+        <span class="k">이동</span>
+        <span class="v ${moveClass}">${move}</span>
+      </div>
+      <div class="pill">
+        <span class="k">기변</span>
+        <span class="v ${changeClass}">${change}</span>
+      </div>
+    </div>
+    <button class="favoriteBtn ${wishlisted ? 'active' : ''}" onclick="handleFavorite(event, '${id}')">
+      ${wishlisted ? '❤️' : '🤍'}
+    </button>
+  `;
+
+  document.getElementById('list').appendChild(card);
+}
+
+window.handleFavorite = function(event, cardId) {
+  event.stopPropagation();
+  
+  const card = document.querySelector(`[data-card-id="${cardId}"]`);
+  const model = card.querySelector('.model').textContent;
+  const carrier = card.querySelector('.badge').textContent;
+  const pills = card.querySelectorAll('.pill');
+  
+  let move = '', change = '', moveRaw = 0, changeRaw = 0;
+  
+  pills.forEach(pill => {
+    const label = pill.querySelector('.k').textContent;
+    const value = pill.querySelector('.v').textContent;
+    
+    if (label === '이동') {
+      move = value;
+      moveRaw = asNum(value);
+    } else if (label === '기변') {
+      change = value;
+      changeRaw = asNum(value);
+    }
+  });
+
+  const cardData = { model, carrier, move, change, moveRaw, changeRaw, discount: false };
+  const added = toggleWishlist(cardId, cardData);
+  
+  const btn = card.querySelector('.favoriteBtn');
+  btn.textContent = added ? '❤️' : '🤍';
+  btn.classList.toggle('active', added);
+};
+
+function renderMVNO() {
+  const container = document.getElementById('list');
+  const plans = MVNO_PLANS[CARRIER] || [];
+
+  container.innerHTML = `
+    <div class="addonsSection">
+      ${Object.keys(ADDON).map(c => {
+        const items = ADDON[c];
+        return `
+          <div class="addonCarrier ${c.toLowerCase()}">
+            <div class="addonHeader ${c.toLowerCase()}" onclick="toggleAddon(this)">
+              <span>${c} 부가서비스 유지조건</span>
+              <span class="addonToggle">▼</span>
+            </div>
+            <div class="addonBody">
+              ${items.map(item => `
+                <div class="addonItem">
+                  <strong>${item.t}</strong>
+                  <span>${item.d}</span>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+      }).join('')}
+    </div>
+  `;
+
+  plans.forEach(plan => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    card.innerHTML = `
+      <div class="badge ${CARRIER.toLowerCase()}">${CARRIER}</div>
+      <div class="model">${plan.call} / ${plan.sms}</div>
+      <div class="pills">
+        <div class="pill">
+          <span class="k">데이터</span>
+          <span class="v">${plan.data}</span>
+        </div>
+        <div class="pill">
+          <span class="k">월 요금</span>
+          <span class="v">${fmtWon(plan.fee)}</span>
+        </div>
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+window.toggleAddon = function(header) {
+  const parent = header.parentElement;
+  parent.classList.toggle('open');
+};
+
+function renderINTERNET() {
+  const container = document.getElementById('list');
+  const plans = INET_PLANS[CARRIER] || [];
+
+  plans.forEach(plan => {
+    const card = document.createElement('div');
+    card.className = 'card';
+    
+    const tvLabel = plan.tv === 'X' ? '인터넷 단독' : `인터넷 + ${plan.tv}`;
+    const discount = plan.fee - plan.combo;
+    
+    card.innerHTML = `
+      <div class="badge ${CARRIER.toLowerCase()}">${CARRIER}</div>
+      <div class="model">${plan.inet} ${tvLabel}</div>
+      <div class="pills">
+        <div class="pill">
+          <span class="k">정상가</span>
+          <span class="v">${fmtWon(plan.fee)}</span>
+        </div>
+        <div class="pill">
+          <span class="k">결합시</span>
+          <span class="v">${fmtWon(plan.combo)}</span>
+        </div>
+        ${discount > 0 ? `
+          <div class="pill">
+            <span class="k">할인</span>
+            <span class="v">${fmtWon(discount)}</span>
+          </div>
+        ` : ''}
+      </div>
+    `;
+    container.appendChild(card);
+  });
+}
+
+// Search
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  SEARCH_QUERY = e.target.value.trim();
+  if (MODE === 'PHONE') {
+    render();
+  }
+});
+
+// Tab Events
+document.querySelectorAll('.tabBtn.svc').forEach(btn => {
+  btn.addEventListener('click', () => {
+    MODE = btn.dataset.mode;
+    
+    document.querySelectorAll('.tabBtn.svc').forEach(b => {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    
+    if (MODE === 'WISHLIST') {
+      renderWishlist();
+    } else {
+      render();
+    }
+  });
+});
+
+document.querySelectorAll('.phoneTabBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    CARRIER = btn.dataset.carrier;
+    
+    document.querySelectorAll('.phoneTabBtn').forEach(b => {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    
+    render();
+  });
+});
+
+document.querySelectorAll('.mvnoTabBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    CARRIER = btn.dataset.carrier;
+    
+    document.querySelectorAll('.mvnoTabBtn').forEach(b => {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    
+    render();
+  });
+});
+
+document.querySelectorAll('.internetTabBtn').forEach(btn => {
+  btn.addEventListener('click', () => {
+    CARRIER = btn.dataset.carrier;
+    
+    document.querySelectorAll('.internetTabBtn').forEach(b => {
+      b.classList.remove('active');
+    });
+    btn.classList.add('active');
+    
+    render();
+  });
+});
+
+// Initialization
+async function init() {
+  console.log('Initializing app...');
+  
+  loadWishlist();
+  await loadData();
+  render();
+  
+  console.log('App initialized');
+}
+
+init();
+</script>
+</body>
+</html>
