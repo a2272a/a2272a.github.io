@@ -585,8 +585,111 @@ body{
   </a>
 </div>
 
+<!-- ✅ 통합 프로모션 팝업 (S26 + 인터넷TV) -->
+<div class="promoPopup" id="promoPopup" aria-hidden="true">
+  <div class="promoPopCard" role="dialog" aria-modal="true" aria-label="프로모션">
+    <button class="promoPopX" id="promoPopClose" type="button" aria-label="닫기">×</button>
+    
+    <!-- 탭 헤더 -->
+    <div class="promoTabs">
+      <button class="promoTab active" data-tab="s26" type="button">
+        <span class="promoTabIcon">📱</span>
+        <span class="promoTabText">S26 사전예약</span>
+      </button>
+      <button class="promoTab" data-tab="internet" type="button">
+        <span class="promoTabIcon">💰</span>
+        <span class="promoTabText">인터넷TV</span>
+      </button>
+    </div>
+    
+    <!-- S26 탭 내용 -->
+    <div class="promoTabContent active" id="s26Tab">
+      <div class="s26Container">
+        <!-- 상단 로고 영역 -->
+        <div class="s26Logo">
+          <div class="s26LogoText">SAMSUNG</div>
+          <div class="s26LogoSub">Galaxy</div>
+        </div>
+        
+        <!-- 메인 비주얼 -->
+        <div class="s26Hero">
+          <div class="s26Badge">Coming Soon</div>
+          <h2 class="s26Title">Galaxy S26</h2>
+          <p class="s26Subtitle">사전예약 시작</p>
+          
+          <!-- S26 디바이스 실루엣 -->
+          <div class="s26Device">
+            <div class="s26Screen"></div>
+          </div>
+        </div>
+        
+        <!-- 특징 -->
+        <div class="s26Features">
+          <div class="s26Feature">
+            <div class="s26FeatureIcon">🎁</div>
+            <div class="s26FeatureText">사전예약<br/>특별 혜택</div>
+          </div>
+          <div class="s26Feature">
+            <div class="s26FeatureIcon">💰</div>
+            <div class="s26FeatureText">최저가<br/>보장</div>
+          </div>
+          <div class="s26Feature">
+            <div class="s26FeatureIcon">⚡</div>
+            <div class="s26FeatureText">빠른<br/>상담</div>
+          </div>
+        </div>
+        
+        <!-- CTA 버튼 -->
+        <a class="s26CtaBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener">
+          <span class="s26CtaIcon">💬</span>
+          <span class="s26CtaText">카톡으로 문의하기</span>
+        </a>
+        
+        <div class="s26Contact">
+          <div class="s26ContactItem">
+            <span class="s26ContactIcon">📞</span>
+            <span>042-821-2272</span>
+          </div>
+          <div class="s26ContactItem">
+            <span class="s26ContactIcon">📍</span>
+            <span>복지관 2층 매장</span>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 인터넷TV 탭 내용 -->
+    <div class="promoTabContent" id="internetTab">
+      <div class="inetFrame">
+        <div class="inetCard">
+          <div class="inetRibbon"><span>인터넷 가입시</span></div>
+          <div class="inetHeadline">현금 최대 지급</div>
+
+          <div class="inetVisual" aria-hidden="true">
+            <div class="cash"></div>
+            <div class="coin c1"></div><div class="coin c2"></div>
+            <div class="coin c3"></div><div class="coin c4"></div>
+            <div class="spark s1"></div><div class="spark s2"></div><div class="spark s3"></div>
+          </div>
+
+          <a class="inetKakaoBtn" href="https://open.kakao.com/o/s729bI5h" target="_blank" rel="noopener" aria-label="카톡 문의로 이동">
+            <span class="kakaoBubble" aria-hidden="true"></span>
+            카톡 문의
+          </a>
+        </div>
+      </div>
+    </div>
+    
+    <!-- 푸터 -->
+    <label class="promoFooter" for="promoHide24">
+      <input id="promoHide24" type="checkbox" />
+      24시간 동안 보지 않기
+    </label>
+  </div>
+</div>
+
 <!-- ✅ 갤럭시 S26 사전예약 팝업 -->
-<div class="s26Popup" id="s26Popup" aria-hidden="true">
+<div class="s26Popup" id="s26Popup" aria-hidden="true" style="display:none !important;">
   <div class="s26PopCard" role="dialog" aria-modal="true" aria-label="갤럭시 S26 사전예약">
     <button class="s26PopX" id="s26PopClose" type="button" aria-label="닫기">×</button>
     
@@ -651,7 +754,8 @@ body{
 </div>
 
 <!-- ✅ 인터넷TV 현금 팝업 -->
-<div class="inetPopup" id="inetPopup" aria-hidden="true">
+<!-- ✅ 인터넷TV 현금 팝업 (비활성화) -->
+<div class="inetPopup" id="inetPopup" aria-hidden="true" style="display:none !important;">
   <div class="inetPopCard" role="dialog" aria-modal="true" aria-label="인터넷TV 현금 팝업">
     <button class="inetPopX" id="inetPopClose" type="button" aria-label="닫기">×</button>
 
@@ -1360,7 +1464,7 @@ async function setUpdateStamp(){
   }
 })();
 </script>
-<script src="./s26-popup.js"></script>
+<script src="./promo-popup.js"></script>
 <script src="./inet-popup-fix.js"></script>
 </body>
 </html>

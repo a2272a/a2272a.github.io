@@ -721,3 +721,314 @@ body {
   }
 }
 
+/* ===================================
+   통합 프로모션 팝업 (S26 + 인터넷TV)
+   =================================== */
+
+/* 팝업 오버레이 */
+.promoPopup {
+  position: fixed;
+  inset: 0;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(8px);
+  z-index: 100000;
+  padding: 20px;
+}
+
+.promoPopup.show {
+  display: flex !important;
+}
+
+/* 팝업 카드 */
+.promoPopCard {
+  width: min(520px, 95vw);
+  max-height: 90vh;
+  position: relative;
+  border-radius: 28px;
+  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f1419 100%);
+  padding: 0;
+  box-shadow: 
+    0 40px 100px rgba(0, 0, 0, 0.8),
+    0 0 0 1px rgba(255, 255, 255, 0.1),
+    inset 0 1px 0 rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  animation: promoPopIn 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+  display: flex;
+  flex-direction: column;
+}
+
+@keyframes promoPopIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* 닫기 버튼 */
+.promoPopX {
+  position: absolute;
+  top: 12px;
+  right: 12px;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  color: #ffffff;
+  font-size: 28px;
+  font-weight: 300;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 10;
+  transition: all 0.2s ease;
+}
+
+.promoPopX:hover {
+  background: rgba(255, 255, 255, 0.15);
+  border-color: rgba(255, 255, 255, 0.4);
+  transform: rotate(90deg);
+}
+
+/* 탭 헤더 */
+.promoTabs {
+  display: flex;
+  gap: 0;
+  padding: 16px 16px 0;
+  background: transparent;
+}
+
+.promoTab {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 14px 20px;
+  border: none;
+  background: rgba(255, 255, 255, 0.05);
+  color: rgba(255, 255, 255, 0.5);
+  font-size: 15px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border-radius: 16px 16px 0 0;
+  position: relative;
+}
+
+.promoTab:first-child {
+  border-top-left-radius: 16px;
+}
+
+.promoTab:last-child {
+  border-top-right-radius: 16px;
+}
+
+.promoTab:hover {
+  background: rgba(255, 255, 255, 0.08);
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.promoTab.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ffffff;
+  box-shadow: 
+    inset 0 -3px 0 #6482ff,
+    0 -2px 10px rgba(100, 130, 255, 0.3);
+}
+
+.promoTabIcon {
+  font-size: 20px;
+}
+
+.promoTabText {
+  line-height: 1;
+}
+
+/* 탭 내용 */
+.promoTabContent {
+  display: none;
+  padding: 24px;
+  flex: 1;
+  overflow-y: auto;
+  animation: tabFadeIn 0.3s ease;
+}
+
+.promoTabContent.active {
+  display: block !important;
+}
+
+@keyframes tabFadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* S26 탭 내용 스타일 조정 */
+.promoTabContent .s26Container {
+  padding: 0;
+}
+
+.promoTabContent .s26Logo {
+  margin-bottom: 20px;
+}
+
+.promoTabContent .s26Hero {
+  margin-bottom: 24px;
+}
+
+.promoTabContent .s26Device {
+  margin-bottom: 20px;
+}
+
+.promoTabContent .s26Features {
+  margin-bottom: 20px;
+}
+
+.promoTabContent .s26CtaBtn {
+  margin-bottom: 16px;
+}
+
+.promoTabContent .s26Contact {
+  margin-bottom: 0;
+}
+
+/* 인터넷TV 탭 내용 스타일 조정 */
+.promoTabContent .inetFrame {
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.promoTabContent .inetCard {
+  border-radius: 14px;
+  padding: 16px;
+}
+
+.promoTabContent .inetRibbon {
+  margin-bottom: 8px;
+}
+
+.promoTabContent .inetRibbon span {
+  font-size: 22px;
+  padding: 8px 14px;
+}
+
+.promoTabContent .inetHeadline {
+  font-size: 36px;
+  margin-bottom: 16px;
+}
+
+.promoTabContent .inetVisual {
+  height: 120px;
+  margin: 12px 0 16px;
+}
+
+.promoTabContent .inetKakaoBtn {
+  height: 64px;
+  font-size: 26px;
+  width: min(380px, 100%);
+}
+
+/* 푸터 */
+.promoFooter {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 16px 24px;
+  font-size: 13px;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.5);
+  cursor: pointer;
+  user-select: none;
+  background: rgba(0, 0, 0, 0.2);
+  border-top: 1px solid rgba(255, 255, 255, 0.05);
+}
+
+.promoFooter input {
+  width: 16px;
+  height: 16px;
+  accent-color: #6482ff;
+  cursor: pointer;
+}
+
+.promoFooter:hover {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* 모바일 최적화 */
+@media (max-width: 520px) {
+  .promoPopCard {
+    width: 94vw;
+    max-height: 92vh;
+  }
+  
+  .promoTabs {
+    padding: 12px 12px 0;
+  }
+  
+  .promoTab {
+    padding: 12px 16px;
+    font-size: 14px;
+    gap: 6px;
+  }
+  
+  .promoTabIcon {
+    font-size: 18px;
+  }
+  
+  .promoTabContent {
+    padding: 20px 16px;
+  }
+  
+  .promoTabContent .s26Title {
+    font-size: 36px;
+  }
+  
+  .promoTabContent .s26Subtitle {
+    font-size: 16px;
+  }
+  
+  .promoTabContent .s26Features {
+    gap: 8px;
+  }
+  
+  .promoTabContent .s26Feature {
+    padding: 12px 8px;
+  }
+  
+  .promoTabContent .s26CtaBtn {
+    height: 60px;
+    font-size: 16px;
+  }
+  
+  .promoTabContent .inetHeadline {
+    font-size: 30px;
+  }
+  
+  .promoTabContent .inetKakaoBtn {
+    height: 60px;
+    font-size: 24px;
+  }
+  
+  .promoFooter {
+    padding: 14px 20px;
+    font-size: 12px;
+  }
+}
+
+
