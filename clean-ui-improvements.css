@@ -1,0 +1,378 @@
+/* ===================================
+   깔끔한 UI 개선 스타일
+   =================================== */
+
+/* 루트 변수 업데이트 */
+:root {
+  --bg: #f8f9fa !important;
+  --ink: #1a1a1a !important;
+  --muted: #6b7280 !important;
+  --sk: #0066ff !important;
+  --kt: #e61e2b !important;
+  --lg: #a50034 !important;
+  --hot: #ff6b35 !important;
+  --call: #10b981 !important;
+  --sms: #3b82f6 !important;
+}
+
+/* 전역 스타일 개선 */
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Noto Sans KR", "Segoe UI", Roboto, system-ui, sans-serif !important;
+  line-height: 1.6 !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+.wrap {
+  max-width: 800px !important;
+  padding: 16px 16px 200px !important;
+}
+
+/* Hero 영역 개선 */
+.hero {
+  border-radius: 20px !important;
+  margin-bottom: 20px !important;
+  box-shadow: 0 8px 24px rgba(0,0,0,.12), 0 0 0 1px rgba(255,255,255,.08) !important;
+}
+
+/* 탭 스타일 개선 */
+.tabs {
+  gap: 10px !important;
+  margin-bottom: 16px !important;
+}
+
+.tabBtn {
+  padding: 14px 16px !important;
+  border-radius: 12px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  transition: all 0.2s ease !important;
+  box-shadow: 0 1px 3px rgba(0,0,0,.05) !important;
+}
+
+.tabBtn:hover {
+  transform: translateY(-1px) !important;
+  box-shadow: 0 4px 8px rgba(0,0,0,.08) !important;
+}
+
+.tabBtn.active {
+  box-shadow: 0 4px 12px rgba(0,0,0,.15) !important;
+}
+
+.tabBtn.svc {
+  font-size: 16px !important;
+}
+
+/* 패널 개선 */
+.panel {
+  padding: 20px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04) !important;
+}
+
+/* 서브탭 개선 */
+.subTabs {
+  margin-bottom: 16px !important;
+}
+
+.subTabBtn {
+  padding: 12px 14px !important;
+  border-radius: 10px !important;
+  background: #f9fafb !important;
+  font-weight: 600 !important;
+  transition: all 0.2s ease !important;
+}
+
+.subTabBtn:hover {
+  background: #f3f4f6 !important;
+}
+
+.subTabBtn.active {
+  box-shadow: 0 2px 6px rgba(0,0,0,.12) !important;
+}
+
+/* 리스트 그리드 개선 */
+.list {
+  gap: 14px !important;
+}
+
+@media (max-width: 520px) {
+  .list {
+    gap: 12px !important;
+  }
+}
+
+/* 카드 스타일 개선 */
+.card {
+  padding: 16px !important;
+  border-radius: 16px !important;
+  box-shadow: 0 2px 8px rgba(0,0,0,.04) !important;
+  transition: all 0.2s ease !important;
+}
+
+.card:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 16px rgba(0,0,0,.08) !important;
+}
+
+/* 타이틀 행 */
+.titleRow {
+  margin-bottom: 10px !important;
+}
+
+.model {
+  font-weight: 700 !important;
+  font-size: 17px !important;
+  letter-spacing: -.3px !important;
+}
+
+.badge {
+  font-weight: 700 !important;
+  padding: 7px 12px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1) !important;
+}
+
+/* 정보 라인 */
+.infoLine {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  margin-bottom: 8px !important;
+  line-height: 1.4 !important;
+}
+
+.subHint {
+  margin-top: 4px !important;
+  font-weight: 600 !important;
+}
+
+/* 할인 배지 */
+.discountPill {
+  margin: 4px 0 10px !important;
+  padding: 7px 12px !important;
+  border-radius: 20px !important;
+  font-weight: 700 !important;
+  background: rgba(37,99,235,.08) !important;
+  border: 1px solid rgba(37,99,235,.18) !important;
+}
+
+.discountPill strong {
+  font-weight: 800 !important;
+}
+
+/* 가격 행 개선 */
+.priceRow {
+  gap: 12px !important;
+}
+
+.pill {
+  padding: 12px !important;
+  border-radius: 14px !important;
+  background: #f9fafb !important;
+  transition: all 0.2s ease !important;
+}
+
+.pill:hover {
+  background: #f3f4f6 !important;
+}
+
+.pill .k {
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.pill .v {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  letter-spacing: -.5px !important;
+}
+
+.pos {
+  color: #1a1a1a !important;
+}
+
+/* 로딩 */
+.loading {
+  padding: 32px 18px !important;
+  font-weight: 600 !important;
+  font-size: 15px !important;
+}
+
+/* 부가서비스 카드 개선 */
+.addonCard {
+  padding: 16px !important;
+  border: 1px solid rgba(15,23,42,.10) !important;
+  background: linear-gradient(180deg, rgba(15,23,42,.02), rgba(15,23,42,.01)) !important;
+  transition: all 0.2s ease !important;
+}
+
+.addonCard:hover {
+  box-shadow: 0 4px 12px rgba(0,0,0,.06) !important;
+}
+
+.addonHead {
+  gap: 12px !important;
+  padding: 4px !important;
+}
+
+.addonTitle {
+  font-weight: 700 !important;
+  letter-spacing: -.3px !important;
+}
+
+.addonPill {
+  font-weight: 700 !important;
+  padding: 7px 12px !important;
+  border-radius: 20px !important;
+  box-shadow: 0 2px 4px rgba(0,0,0,.1) !important;
+}
+
+.addonChevron {
+  border: 1px solid rgba(15,23,42,.08) !important;
+  background: rgba(255,255,255,.9) !important;
+  transition: all 0.2s ease !important;
+}
+
+.addonChevron:hover {
+  background: rgba(255,255,255,1) !important;
+}
+
+.addonChevron svg {
+  width: 20px !important;
+  height: 20px !important;
+  stroke: rgba(15,23,42,.7) !important;
+  stroke-width: 2.5 !important;
+  transition: transform .2s ease !important;
+}
+
+.addonBody {
+  margin-top: 12px !important;
+}
+
+.addonList {
+  padding-left: 20px !important;
+}
+
+.addonList li {
+  margin: 12px 0 !important;
+  font-weight: 700 !important;
+  line-height: 1.5 !important;
+}
+
+.addonList .sub {
+  margin-top: 6px !important;
+  font-weight: 600 !important;
+  line-height: 1.4 !important;
+}
+
+/* 하단 독 개선 */
+.bottomDock {
+  left: 16px !important;
+  right: 16px !important;
+  bottom: calc(16px + env(safe-area-inset-bottom)) !important;
+  height: 64px !important;
+  padding: 10px !important;
+  gap: 12px !important;
+  border-radius: 20px !important;
+  background: rgba(255,255,255,.95) !important;
+  border: 1px solid rgba(15,23,42,.08) !important;
+  box-shadow: 0 8px 32px rgba(15,23,42,.12), 0 0 0 1px rgba(255,255,255,.5) !important;
+  backdrop-filter: blur(16px) saturate(180%) !important;
+}
+
+.dockBtn {
+  border-radius: 16px !important;
+  font-weight: 700 !important;
+  letter-spacing: -.3px !important;
+  border: 1px solid rgba(15,23,42,.08) !important;
+  box-shadow: 0 4px 12px rgba(15,23,42,.06) !important;
+  transition: all 0.2s ease !important;
+  min-height: 52px !important;
+  padding: 0 14px !important;
+}
+
+.dockBtn:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 8px 20px rgba(15,23,42,.10) !important;
+}
+
+.dockBtn:active {
+  transform: translateY(0) !important;
+  box-shadow: 0 4px 12px rgba(15,23,42,.08) !important;
+}
+
+.dockBtn svg {
+  width: 22px !important;
+  height: 22px !important;
+  stroke-width: 2.3 !important;
+}
+
+.dockBtn.call {
+  background: rgba(16,185,129,.10) !important;
+  border-color: rgba(16,185,129,.2) !important;
+  color: #065f46 !important;
+}
+
+.dockBtn.sms {
+  background: rgba(59,130,246,.10) !important;
+  border-color: rgba(59,130,246,.2) !important;
+  color: #1e40af !important;
+}
+
+.dockBtn.kakao {
+  background: rgba(254,229,0,.30) !important;
+  border-color: rgba(254,229,0,.5) !important;
+  color: #3b2f00 !important;
+}
+
+@media (max-width: 520px) {
+  .bottomDock {
+    height: 68px !important;
+    padding: 8px !important;
+    gap: 10px !important;
+  }
+  
+  .dockBtn {
+    min-height: 56px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* 팝업 스타일 개선 */
+.inetPopCard {
+  border-radius: 24px !important;
+  padding: 16px !important;
+  box-shadow: 0 24px 80px rgba(0,0,0,.45) !important;
+}
+
+.inetPopX {
+  width: 48px !important;
+  height: 48px !important;
+  font-size: 32px !important;
+  transition: all 0.2s ease !important;
+}
+
+.inetPopX:hover {
+  transform: scale(1.05) !important;
+}
+
+.inetFrame {
+  border-radius: 20px !important;
+  padding: 18px !important;
+}
+
+.inetCard {
+  border-radius: 18px !important;
+  padding: 18px 18px 20px !important;
+}
+
+.inetKakaoBtn {
+  height: 72px !important;
+  font-size: 30px !important;
+  border-radius: 999px !important;
+  transition: all 0.2s ease !important;
+}
+
+.inetKakaoBtn:hover {
+  transform: scale(1.02) !important;
+}
