@@ -24,13 +24,8 @@
   // 숨김 기간 체크
   const until = readUntil();
   if(Date.now() >= until){
-    // 인터넷 팝업이 표시되지 않을 때만 S26 팝업 표시
-    setTimeout(() => {
-      const inetPopup = document.getElementById("inetPopup");
-      if(!inetPopup || !inetPopup.classList.contains("show")) {
-        open();
-      }
-    }, 500);
+    // S26 팝업을 우선 표시
+    open();
   }
 
   // X 닫기

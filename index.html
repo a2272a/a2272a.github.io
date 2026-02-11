@@ -1299,7 +1299,6 @@ async function setUpdateStamp(){
   // 숨김 기간 체크
   const until = readUntil();
   if(Date.now() >= until){
-    open();
   }
 
   // X 닫기 (체크되어 있으면 24H 저장)
@@ -1362,6 +1361,7 @@ async function setUpdateStamp(){
 })();
 </script>
 <script src="./s26-popup.js"></script>
+<script src="./inet-popup-fix.js"></script>
 </body>
 </html>
 
