@@ -38,16 +38,9 @@
   --ledBg:#070b12; --ledBg2:#0b1220; --ledBorder:rgba(255,255,255,.14);
   --ledText:#f8fffc;
 
-  /* ✅ 팝업(홈쇼핑 밝은 스타일) */
-  --adBg1:#fff7e6;
-  --adBg2:#ffffff;
-  --adBorder:rgba(245,158,11,.55);
-  --adGlow: rgba(245,158,11,.45);
-  --adGlow2: rgba(245,158,11,.22);
-  --adRed:#ef4444;
-  --adOrange:#fb923c;
-  --adInk:#0f172a;
-  --adMuted:#475569;
+  --adBg1:#fff7e6; --adBg2:#ffffff; --adBorder:rgba(245,158,11,.55);
+  --adGlow: rgba(245,158,11,.45); --adGlow2: rgba(245,158,11,.22);
+  --adRed:#ef4444; --adOrange:#fb923c; --adInk:#0f172a; --adMuted:#475569;
 }
 *{box-sizing:border-box;}
 html,body{margin:0;padding:0;}
@@ -55,13 +48,11 @@ body{
   font-family:-apple-system,BlinkMacSystemFont,"Noto Sans KR",system-ui,sans-serif;
   background:var(--bg); color:var(--ink);
 }
-.wrap{max-width:760px;margin:0 auto;padding:14px 14px 190px;}
+.wrap{max-width:760px;margin:0 auto;padding:14px 14px 100px;} /* ✅ 개선: 하단 여백 줄임 */
 
 /* hero */
 .hero{
-  border-radius:18px;
-  overflow:hidden;
-  position:relative;
+  border-radius:18px; overflow:hidden; position:relative;
   background:
     radial-gradient(900px 160px at 50% 0%, rgba(0,255,180,.10), transparent 60%),
     linear-gradient(180deg, rgba(255,255,255,.05) 0%, rgba(0,0,0,.22) 100%),
@@ -76,56 +67,121 @@ body{
   background-size: 8px 8px;opacity:.22;pointer-events:none;
 }
 .marqueeLine{
-  width:100%;
-  height:auto;
-  display:flex;align-items:center;justify-content:space-between;overflow:hidden;
+  width:100%; height:auto; display:flex;align-items:center;justify-content:space-between;overflow:hidden;
   padding:6px 10px;border-radius:14px;background: rgba(255,255,255,.04);
   border:1px solid rgba(255,255,255,.10);box-shadow: inset 0 12px 20px rgba(0,0,0,.34);
   gap:10px;
 }
 .marqueeInner{display:flex;align-items:center;min-width:0;flex:1;}
 
-/* 업데이트 문구 */
-.updateWrap{
-  display:flex;
-  align-items:center;
-  gap:14px;
-  min-width:0;
-  width:100%;
-}
-.updateWrap .line1,
-.updateWrap .line2{
-  font-size:18px;
-  font-weight:1000;
-  letter-spacing:-.6px;
-  color:var(--ledText);
+.updateWrap{display:flex;align-items:center;gap:14px;min-width:0;width:100%;}
+.updateWrap .line1, .updateWrap .line2{
+  font-size:18px; font-weight:1000; letter-spacing:-.6px; color:var(--ledText);
   text-shadow:0 0 12px rgba(0,255,180,.70), 0 0 26px rgba(0,255,180,.40), 0 2px 14px rgba(0,0,0,.85);
-  overflow:hidden;
-  text-overflow:ellipsis;
-  white-space:nowrap;
-  min-width:0;
+  overflow:hidden; text-overflow:ellipsis; white-space:nowrap; min-width:0;
 }
 @media (max-width:480px){
   .updateWrap{flex-direction:column;align-items:flex-start;gap:2px;}
   .updateWrap .line1,.updateWrap .line2{font-size:16px;white-space:normal;}
 }
 
-/* 관리자 버튼(기본 숨김) */
 .heroRefreshBtn{
-  flex:0 0 auto;
-  height:28px;
-  padding:0 10px;
-  border-radius:999px;
-  border:1px solid rgba(0,255,180,.35);
-  background:rgba(0,255,180,.10);
-  color:var(--ledText);
-  font-weight:1000;
-  font-size:12px;
-  cursor:pointer;
-  text-shadow:0 0 10px rgba(0,255,180,.55);
-  display:none; /* ✅ 5번 탭하면 보이게 */
+  flex:0 0 auto; height:28px; padding:0 10px; border-radius:999px;
+  border:1px solid rgba(0,255,180,.35); background:rgba(0,255,180,.10);
+  color:var(--ledText); font-weight:1000; font-size:12px; cursor:pointer;
+  text-shadow:0 0 10px rgba(0,255,180,.55); display:none;
 }
 .heroRefreshBtn:active{transform:translateY(1px);filter:brightness(.98);}
+
+/* ✅ 신규: 검색 & 필터 영역 */
+.searchSection{
+  margin-top:14px;
+  background:#fff;
+  border:1px solid var(--line);
+  border-radius:16px;
+  padding:14px;
+  display:none; /* 기본 숨김, PHONE 모드에서만 표시 */
+}
+.searchSection.show{ display:block; }
+
+.searchBox{
+  position:relative;
+  margin-bottom:12px;
+}
+.searchBox input{
+  width:100%;
+  height:48px;
+  padding:0 16px 0 44px;
+  border:2px solid var(--line);
+  border-radius:12px;
+  font-size:16px;
+  font-weight:600;
+  transition: all .2s;
+}
+.searchBox input:focus{
+  outline:none;
+  border-color:var(--sk);
+  box-shadow:0 0 0 4px rgba(37,99,235,.1);
+}
+.searchBox::before{
+  content:"🔍";
+  position:absolute;
+  left:16px;
+  top:50%;
+  transform:translateY(-50%);
+  font-size:20px;
+}
+
+.quickFilters{
+  display:flex;
+  gap:8px;
+  flex-wrap:wrap;
+}
+.filterChip{
+  padding:8px 14px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-size:13px;
+  font-weight:1000;
+  cursor:pointer;
+  transition: all .2s;
+}
+.filterChip:hover{
+  border-color:var(--sk);
+  background:rgba(37,99,235,.05);
+}
+.filterChip.active{
+  background:var(--sk);
+  color:#fff;
+  border-color:var(--sk);
+}
+
+/* ✅ 신규: 비교 모드 토글 */
+.viewModeTabs{
+  display:flex;
+  gap:8px;
+  margin-top:12px;
+  display:none; /* PHONE 모드에서만 표시 */
+}
+.viewModeTabs.show{ display:flex; }
+
+.viewModeBtn{
+  flex:1;
+  padding:10px 0;
+  border-radius:12px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-weight:1000;
+  font-size:14px;
+  cursor:pointer;
+  transition: all .2s;
+}
+.viewModeBtn.active{
+  background:var(--sk);
+  color:#fff;
+  border-color:var(--sk);
+}
 
 /* tabs */
 .tabs{display:flex;gap:8px;margin-top:12px;}
@@ -158,37 +214,91 @@ body{
 .list{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px;}
 @media (max-width: 420px){ .list{ grid-template-columns:1fr; } }
 
-.card{border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+/* ✅ 개선: 카드에 즐겨찾기 버튼 추가 */
+.card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+  position:relative;
+  transition: all .2s;
+}
+.card:active{
+  transform: scale(0.98);
+}
+
+.favoriteBtn{
+  position:absolute;
+  top:10px;
+  right:10px;
+  width:32px;
+  height:32px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  font-size:18px;
+  cursor:pointer;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:10;
+  transition: all .2s;
+}
+.favoriteBtn:hover{
+  transform: scale(1.1);
+}
+.favoriteBtn.active{
+  background:rgba(239,68,68,.1);
+  border-color:rgba(239,68,68,.3);
+}
+
 .titleRow{display:flex;justify-content:space-between;margin-bottom:8px;gap:10px;align-items:center;}
-.model{font-weight:1000;font-size:16px;letter-spacing:-.2px;}
+.model{font-weight:1000;font-size:18px;letter-spacing:-.2px;} /* ✅ 개선: 폰트 크기 증가 */
 .badge{font-size:12px;font-weight:1000;padding:6px 10px;border-radius:999px;color:#fff;white-space:nowrap;}
 .badge.sk{background:var(--sk);} .badge.kt{background:var(--kt);} .badge.lg{background:var(--lg);}
 .badge.hot{background:var(--hot);} .badge.low{background:var(--low);}
 
+/* ✅ 신규: 용어 설명 툴팁 */
 .infoLine{font-size:12px;font-weight:1000;color:var(--muted);margin:0 0 6px; line-height:1.25;}
-
-.subHint{
-  display:block;
-  margin-top:2px;
-  color:var(--muted);
-  font-size:12px;
-  font-weight:1000;
-}
-
-/* ✅ B안: 모델 아래 작은 알약 배지 */
-.discountPill{
+.helpIcon{
   display:inline-flex;
   align-items:center;
-  gap:6px;
-  margin: 2px 0 8px;
-  padding:6px 10px;
+  justify-content:center;
+  width:16px;
+  height:16px;
   border-radius:999px;
+  background:rgba(37,99,235,.1);
+  color:var(--sk);
+  font-size:11px;
+  cursor:help;
+  margin-left:4px;
+  position:relative;
+}
+.helpIcon:hover::after{
+  content:attr(data-tooltip);
+  position:absolute;
+  bottom:120%;
+  left:50%;
+  transform:translateX(-50%);
+  padding:8px 12px;
+  background:#1f2937;
+  color:#fff;
   font-size:12px;
-  font-weight:1000;
-  color:#1d4ed8;
-  background: rgba(37,99,235,.10);
-  border:1px solid rgba(37,99,235,.22);
-  line-height:1;
+  font-weight:600;
+  white-space:nowrap;
+  border-radius:8px;
+  z-index:100;
+  box-shadow:0 4px 12px rgba(0,0,0,.3);
+}
+
+.subHint{display:block;margin-top:2px;color:var(--muted);font-size:12px;font-weight:1000;}
+
+.discountPill{
+  display:inline-flex; align-items:center; gap:6px;
+  margin: 2px 0 8px; padding:6px 10px; border-radius:999px;
+  font-size:12px; font-weight:1000;
+  color:#1d4ed8; background: rgba(37,99,235,.10);
+  border:1px solid rgba(37,99,235,.22); line-height:1;
 }
 .discountPill strong{font-weight:1000;}
 
@@ -202,40 +312,87 @@ body{
 
 .pill{border:1px solid var(--line);border-radius:12px;padding:10px;text-align:center;background:#fafafa;min-width:0;}
 .pill .k{font-size:12px;color:var(--muted);font-weight:1000;margin-bottom:4px;}
-.pill .v{font-size:20px;font-weight:1000;letter-spacing:-.4px;}
+.pill .v{font-size:22px;font-weight:1000;letter-spacing:-.4px;} /* ✅ 개선: 폰트 크기 증가 */
 .neg{color:#dc2626;} .zero{color:#0ea5e9;} .pos{color:#0f172a;}
 
 .loading{grid-column:1/-1;padding:18px;text-align:center;font-weight:1000;color:#64748b;}
 
-/* addon */
-.addonCard{
+/* ✅ 신규: 비교 모드 카드 스타일 */
+.compareCard{
   grid-column:1/-1;
   padding:14px;
-  border-radius:14px;
+  border:2px solid var(--sk);
+  background:rgba(37,99,235,.02);
+}
+.compareCard .model{
+  font-size:18px;
+  margin-bottom:12px;
+}
+.priceCompare{
+  display:grid;
+  grid-template-columns:repeat(3, 1fr);
+  gap:10px;
+}
+@media (max-width: 480px){
+  .priceCompare{ grid-template-columns:1fr; }
+}
+.carrierCompare{
+  padding:12px;
+  border-radius:10px;
+  border:1px solid var(--line);
+  background:#fff;
+  text-align:center;
+}
+.carrierCompare .badge{
+  display:inline-block;
+  margin-bottom:8px;
+}
+.carrierCompare .price{
+  font-size:18px;
+  font-weight:1000;
+  display:block;
+}
+.carrierCompare .priceDiff{
+  font-size:12px;
+  color:var(--muted);
+  margin-top:4px;
+  display:block;
+}
+.carrierCompare.best{
+  border:2px solid #fbbf24;
+  background:rgba(251,191,36,.05);
+}
+.carrierCompare.best::after{
+  content:"⭐ 최저가";
+  display:block;
+  margin-top:6px;
+  font-size:12px;
+  font-weight:1000;
+  color:#d97706;
+}
+
+/* addon */
+.addonCard{
+  grid-column:1/-1; padding:14px; border-radius:14px;
   border:1px solid rgba(15,23,42,.12);
   background: linear-gradient(180deg, rgba(15,23,42,.03), rgba(15,23,42,.015));
 }
 .addonHead{
   display:flex;align-items:center;justify-content:space-between;gap:10px;
-  cursor:pointer;user-select:none;
-  padding:2px 2px;
+  cursor:pointer;user-select:none; padding:2px 2px;
 }
 .addonTitle{font-size:16px;font-weight:1000;letter-spacing:-.2px;color:#0f172a;}
 .addonPill{font-size:13px;font-weight:1000;padding:7px 11px;border-radius:999px;color:#fff;white-space:nowrap;}
 .addonPill.sk{background:var(--sk);} .addonPill.kt{background:var(--kt);} .addonPill.lg{background:var(--lg);}
 
 .addonChevron{
-  flex:0 0 auto;
-  width:36px;height:36px;
+  flex:0 0 auto; width:36px;height:36px;
   display:inline-flex;align-items:center;justify-content:center;
-  border-radius:12px;
-  border:1px solid rgba(15,23,42,.10);
+  border-radius:12px; border:1px solid rgba(15,23,42,.10);
   background: rgba(255,255,255,.75);
 }
 .addonChevron svg{
-  width:18px;height:18px;
-  stroke: rgba(15,23,42,.65);
-  stroke-width:2.6;
+  width:18px;height:18px; stroke: rgba(15,23,42,.65); stroke-width:2.6;
   fill:none;stroke-linecap:round;stroke-linejoin:round;
   transition: transform .18s ease;
 }
@@ -247,96 +404,259 @@ body{
 .addonList li{margin:10px 0;font-size:15px;font-weight:1000;color:#0f172a;line-height:1.25;}
 .addonList .sub{margin-top:4px;font-size:14px;font-weight:1000;color:var(--muted);}
 
-/* bottom dock */
+/* ✅ 개선: 하단 독 최적화 */
 .bottomDock{
-  position:fixed;left:12px;right:12px;bottom:calc(10px + env(safe-area-inset-bottom));
-  height:60px;padding:8px;display:flex;gap:10px;border-radius:18px;
-  background:rgba(255,255,255,.88);border:1px solid rgba(15,23,42,.10);
-  box-shadow:0 14px 34px rgba(15,23,42,.14);backdrop-filter: blur(10px) saturate(160%);
+  position:fixed;
+  left:12px;right:12px;
+  bottom:calc(10px + env(safe-area-inset-bottom));
+  height:56px; /* ✅ 개선: 높이 줄임 */
+  padding:6px;
+  display:flex;gap:8px;
+  border-radius:18px;
+  background:rgba(255,255,255,.92); /* ✅ 개선: 투명도 증가 */
+  border:1px solid rgba(15,23,42,.10);
+  box-shadow:0 14px 34px rgba(15,23,42,.14);
+  backdrop-filter: blur(10px) saturate(160%);
   z-index:999;
+  transition: height .2s;
 }
+.bottomDock.expanded{
+  height:64px;
+}
+
 .dockBtn{
-  flex:1;display:flex;align-items:center;justify-content:center;gap:8px;border-radius:14px;
-  text-decoration:none;font-weight:1000;font-size:16px;letter-spacing:-.2px;
-  border:1px solid rgba(15,23,42,.10);background:#fff;color:#0f172a;
+  flex:1;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap:6px; /* ✅ 개선: 간격 줄임 */
+  border-radius:14px;
+  text-decoration:none;
+  font-weight:1000;
+  font-size:14px; /* ✅ 개선: 폰트 크기 조정 */
+  letter-spacing:-.2px;
+  border:1px solid rgba(15,23,42,.10);
+  background:#fff;
+  color:#0f172a;
   box-shadow:0 8px 18px rgba(15,23,42,.08);
+  position:relative;
 }
 .dockBtn:active{transform: translateY(1px);box-shadow:0 6px 14px rgba(15,23,42,.10);filter: brightness(.98);}
-.dockBtn svg{width:20px;height:20px;stroke: currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
+.dockBtn svg{width:18px;height:18px;stroke: currentColor;stroke-width:2.4;fill:none;stroke-linecap:round;stroke-linejoin:round;}
 .dockBtn.call{background:rgba(34,197,94,.12);border-color:rgba(34,197,94,.22);color:#0b3a22;}
 .dockBtn.sms{background:rgba(56,189,248,.12);border-color:rgba(56,189,248,.22);color:#083244;}
 .dockBtn.kakao{background:rgba(254,229,0,.35);border-color:rgba(254,229,0,.55);color:#3b2f00;}
-.dockBtn{ min-height:54px; padding:0 12px; }
+.dockBtn.compare{background:rgba(147,51,234,.12);border-color:rgba(147,51,234,.22);color:#5b21b6;}
 .dockBtn span{ line-height:1; }
-@media (max-width:480px){
-  .bottomDock{ height:64px; }
-  .dockBtn{ min-height:58px; }
+
+/* ✅ 신규: 비교함 배지 */
+.compareBadge{
+  position:absolute;
+  top:-6px;
+  right:-6px;
+  width:20px;
+  height:20px;
+  border-radius:999px;
+  background:#ef4444;
+  color:#fff;
+  font-size:11px;
+  font-weight:1000;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  box-shadow:0 2px 8px rgba(239,68,68,.4);
 }
 
-/* =========================================================
-   ✅ 팝업: 예시 이미지 스타일(노랑 프레임 + 빨강 리본 + 초록 버튼)
-   ========================================================= */
+/* ✅ 신규: 비교함 드로어 */
+.compareDrawer{
+  position:fixed;
+  left:0;
+  right:0;
+  bottom:0;
+  max-height:70vh;
+  background:#fff;
+  border-radius:24px 24px 0 0;
+  box-shadow:0 -10px 40px rgba(0,0,0,.2);
+  z-index:9999;
+  transform:translateY(100%);
+  transition: transform .3s ease;
+  padding:20px 20px calc(80px + env(safe-area-inset-bottom));
+  overflow-y:auto;
+}
+.compareDrawer.show{
+  transform:translateY(0);
+}
+.compareDrawer h3{
+  margin:0 0 16px;
+  font-size:20px;
+  font-weight:1000;
+}
+.compareList{
+  display:flex;
+  flex-direction:column;
+  gap:10px;
+  margin-bottom:16px;
+}
+.compareItem{
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  padding:14px;
+  border:1px solid var(--line);
+  border-radius:12px;
+  background:#fafafa;
+}
+.compareItem button{
+  width:28px;
+  height:28px;
+  border-radius:999px;
+  border:1px solid var(--line);
+  background:#fff;
+  cursor:pointer;
+  font-size:18px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+.primaryBtn{
+  width:100%;
+  height:52px;
+  border-radius:12px;
+  border:none;
+  background:var(--sk);
+  color:#fff;
+  font-size:16px;
+  font-weight:1000;
+  cursor:pointer;
+}
+.primaryBtn:active{
+  transform:translateY(1px);
+  filter:brightness(.95);
+}
+
+.drawerOverlay{
+  position:fixed;
+  inset:0;
+  background:rgba(0,0,0,.4);
+  z-index:9998;
+  opacity:0;
+  pointer-events:none;
+  transition: opacity .3s;
+}
+.drawerOverlay.show{
+  opacity:1;
+  pointer-events:auto;
+}
+
+/* ✅ 신규: 초기 방문자 가이드 */
+.guideTooltip{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  max-width:280px;
+  padding:16px;
+  background:#1f2937;
+  color:#fff;
+  border-radius:16px;
+  box-shadow:0 10px 30px rgba(0,0,0,.3);
+  z-index:1000;
+  animation: slideUp .3s ease;
+  display:none;
+}
+.guideTooltip.show{
+  display:block;
+}
+.guideTooltip::after{
+  content:"";
+  position:absolute;
+  bottom:-8px;
+  right:30px;
+  width:0;
+  height:0;
+  border-left:8px solid transparent;
+  border-right:8px solid transparent;
+  border-top:8px solid #1f2937;
+}
+.guideTooltip h4{
+  margin:0 0 10px;
+  font-size:16px;
+}
+.guideTooltip p{
+  margin:0 0 12px;
+  font-size:14px;
+  line-height:1.5;
+  opacity:.9;
+}
+.guideTooltip button{
+  width:100%;
+  padding:10px;
+  border-radius:8px;
+  border:none;
+  background:#3b82f6;
+  color:#fff;
+  font-weight:1000;
+  cursor:pointer;
+}
+.guideTooltip .closeGuide{
+  background:transparent;
+  border:1px solid rgba(255,255,255,.3);
+  margin-top:6px;
+}
+
+@keyframes slideUp{
+  from{ transform:translateY(20px); opacity:0; }
+  to{ transform:translateY(0); opacity:1; }
+}
+
+@media (max-width:480px){
+  .bottomDock{ height:60px; padding:8px; }
+  .dockBtn{ font-size:13px; gap:4px; }
+}
+
+/* 인터넷TV 팝업 */
 .inetPopup{
   position:fixed; inset:0;
-  display:none;
-  align-items:center; justify-content:center;
-  background:rgba(17,24,39,.72);
-  z-index:99999;
-  padding:18px;
+  display:none; align-items:center; justify-content:center;
+  background:rgba(17,24,39,.72); z-index:99999; padding:18px;
 }
 .inetPopup.show{ display:flex; }
 
 .inetPopCard{
-  width:min(560px, 96vw);
-  position:relative;
-  border-radius:22px;
-  background:rgba(255,255,255,.06);
-  padding:14px;
+  width:min(560px, 96vw); position:relative; border-radius:22px;
+  background:rgba(255,255,255,.06); padding:14px;
   box-shadow:0 30px 90px rgba(0,0,0,.55);
 }
 
-/* ✅ 동그란 X (무조건 위에 보이게) */
 .inetPopX{
-  position:absolute;
-  top:6px; right:6px;
-  width:44px; height:44px;
-  border-radius:999px;
+  position:absolute; top:6px; right:6px;
+  width:44px; height:44px; border-radius:999px;
   border:2px solid rgba(255,255,255,.9);
   background:linear-gradient(180deg,#ffffff 0%, #f3f4f6 100%);
-  box-shadow:0 16px 26px rgba(0,0,0,.35);
-  cursor:pointer;
+  box-shadow:0 16px 26px rgba(0,0,0,.35); cursor:pointer;
   display:flex; align-items:center; justify-content:center;
-  font-size:30px; font-weight:1000;
-  color:#111827;
-  z-index:50;
+  font-size:30px; font-weight:1000; color:#111827; z-index:50;
 }
 .inetPopX:active{ transform:translateY(1px); filter:brightness(.98); }
 
 .inetFrame{
-  border-radius:18px;
-  padding:16px;
+  border-radius:18px; padding:16px;
   background:
     radial-gradient(700px 260px at 50% 0%, rgba(255,255,255,.55), transparent 60%),
     linear-gradient(180deg, #fff7c9 0%, #ffe484 55%, #fff3b5 100%);
   border:1px solid rgba(0,0,0,.08);
 }
 
-/* 중앙 카드(빨간 패널) */
 .inetCard{
-  border-radius:16px;
-  padding:16px 16px 18px;
+  border-radius:16px; padding:16px 16px 18px;
   background:
     radial-gradient(520px 240px at 50% 15%, rgba(255,255,255,.18), transparent 60%),
     linear-gradient(180deg, #ff3b30 0%, #c80000 100%);
   box-shadow: inset 0 0 0 1px rgba(255,255,255,.18), 0 18px 40px rgba(0,0,0,.25);
-  position:relative;
-  overflow:hidden;
+  position:relative; overflow:hidden;
 }
 
-/* 은은한 광선 */
 .inetCard::before{
-  content:"";
-  position:absolute; inset:-50px;
+  content:""; position:absolute; inset:-50px;
   background:
     repeating-conic-gradient(from 10deg,
       rgba(255,255,255,.18) 0 10deg,
@@ -345,88 +665,53 @@ body{
 }
 .inetCard > *{ position:relative; z-index:2; }
 
-/* 빨간 리본 */
-.inetRibbon{
-  display:flex;
-  justify-content:center;
-  margin-bottom:10px;
-}
+.inetRibbon{display:flex;justify-content:center;margin-bottom:10px;}
 .inetRibbon span{
-  display:inline-block;
-  padding:10px 18px;
-  border-radius:12px;
+  display:inline-block; padding:10px 18px; border-radius:12px;
   background:linear-gradient(180deg,#ffb703 0%, #ff7a00 100%);
-  color:#1f2937;
-  font-weight:1000;
-  letter-spacing:-.8px;
-  box-shadow:0 14px 28px rgba(0,0,0,.28);
-  font-size:26px;
+  color:#1f2937; font-weight:1000; letter-spacing:-.8px;
+  box-shadow:0 14px 28px rgba(0,0,0,.28); font-size:26px;
 }
 @media (max-width:420px){
   .inetRibbon span{ font-size:22px; padding:9px 14px; }
 }
 
-/* 메인 텍스트 */
 .inetHeadline{
-  text-align:center;
-  font-size:42px;
-  font-weight:1000;
-  letter-spacing:-1.4px;
+  text-align:center; font-size:42px; font-weight:1000; letter-spacing:-1.4px;
   color:#ffe66b;
-  text-shadow:
-    0 4px 0 rgba(0,0,0,.25),
-    0 16px 34px rgba(0,0,0,.30);
+  text-shadow: 0 4px 0 rgba(0,0,0,.25), 0 16px 34px rgba(0,0,0,.30);
 }
 @media (max-width:420px){
   .inetHeadline{ font-size:34px; }
 }
 
-/* 중앙 비주얼(돈/코인) */
-.inetVisual{
-  height:132px;
-  margin:12px 0 10px;
-  position:relative;
-}
+.inetVisual{height:132px;margin:12px 0 10px;position:relative;}
 
 .cash{
-  position:absolute;
-  left:50%; top:44px;
-  transform:translateX(-50%);
-  width:240px; height:74px;
-  border-radius:12px;
+  position:absolute; left:50%; top:44px; transform:translateX(-50%);
+  width:240px; height:74px; border-radius:12px;
   background:linear-gradient(180deg,#eaffea 0%, #bff7c9 100%);
   box-shadow:0 18px 34px rgba(0,0,0,.28);
 }
 .cash::before{
-  content:"";
-  position:absolute; inset:10px;
-  border-radius:10px;
+  content:""; position:absolute; inset:10px; border-radius:10px;
   background:linear-gradient(180deg, rgba(255,255,255,.72), rgba(255,255,255,.22));
   box-shadow: inset 0 0 0 2px rgba(16,185,129,.25);
 }
 .cash::after{
-  content:"";
-  position:absolute;
-  left:50%; top:6px;
-  transform:translateX(-50%);
-  width:56px; height:62px;
-  border-radius:10px;
+  content:""; position:absolute; left:50%; top:6px; transform:translateX(-50%);
+  width:56px; height:62px; border-radius:10px;
   background:linear-gradient(180deg,#fff 0%, #e5e7eb 100%);
-  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12);
-  opacity:.92;
+  box-shadow: inset 0 0 0 1px rgba(0,0,0,.12); opacity:.92;
 }
 
 .coin{
-  position:absolute;
-  width:46px; height:46px;
-  border-radius:999px;
+  position:absolute; width:46px; height:46px; border-radius:999px;
   background: radial-gradient(circle at 30% 30%, #fff3b0 0%, #ffd166 35%, #f59e0b 70%, #b45309 100%);
   box-shadow:0 16px 26px rgba(0,0,0,.24);
 }
 .coin::after{
-  content:"";
-  position:absolute; inset:8px;
-  border-radius:999px;
+  content:""; position:absolute; inset:8px; border-radius:999px;
   box-shadow: inset 0 0 0 3px rgba(255,255,255,.28);
 }
 .coin.c1{ left:26px; top:66px; transform:rotate(-10deg); }
@@ -434,36 +719,21 @@ body{
 .coin.c3{ right:26px; top:66px; transform:rotate(12deg); }
 .coin.c4{ right:78px; top:86px; transform:scale(.92) rotate(-8deg); }
 
-/* 반짝이 */
 .spark{
-  position:absolute;
-  width:10px; height:10px;
-  background:rgba(255,255,255,.9);
-  border-radius:2px;
-  transform:rotate(45deg);
-  opacity:.9;
+  position:absolute; width:10px; height:10px;
+  background:rgba(255,255,255,.9); border-radius:2px;
+  transform:rotate(45deg); opacity:.9;
   box-shadow:0 0 14px rgba(255,255,255,.55);
 }
 .spark.s1{ left:22%; top:20px; }
 .spark.s2{ left:56%; top:12px; transform:rotate(20deg); opacity:.75; }
 .spark.s3{ left:78%; top:28px; opacity:.7; }
 
-/* ✅ 카톡 문의 버튼(예시처럼 광택+두께) */
 .inetKakaoBtn{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap:10px;
-  width:min(420px, 94%);
-  height:70px;
-  margin:0 auto;
-  border-radius:999px;
-  text-decoration:none;
-  font-size:30px;
-  font-weight:1000;
-  letter-spacing:-1px;
-  color:#ffffff;
-
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  width:min(420px, 94%); height:70px; margin:0 auto;
+  border-radius:999px; text-decoration:none;
+  font-size:30px; font-weight:1000; letter-spacing:-1px; color:#ffffff;
   background:
     radial-gradient(260px 120px at 30% 15%, rgba(255,255,255,.35), transparent 60%),
     linear-gradient(180deg,#28d463 0%, #169e49 100%);
@@ -475,38 +745,23 @@ body{
 }
 .inetKakaoBtn:active{ transform:translateY(1px); filter:brightness(.98); }
 
-/* 말풍선 아이콘 */
 .kakaoBubble{
-  width:36px; height:36px;
-  border-radius:999px;
+  width:36px; height:36px; border-radius:999px;
   background: radial-gradient(circle at 35% 30%, #fff 0%, #ffe76a 55%, #fbbf24 100%);
-  position:relative;
-  box-shadow: inset 0 0 0 2px rgba(0,0,0,.10);
+  position:relative; box-shadow: inset 0 0 0 2px rgba(0,0,0,.10);
 }
 .kakaoBubble::after{
-  content:"";
-  position:absolute;
-  left:7px; bottom:-6px;
+  content:""; position:absolute; left:7px; bottom:-6px;
   width:12px; height:12px;
   background: radial-gradient(circle at 35% 30%, #fff 0%, #ffe76a 55%, #fbbf24 100%);
-  transform:rotate(25deg);
-  border-bottom-left-radius:10px;
+  transform:rotate(25deg); border-bottom-left-radius:10px;
 }
 
-/* 하단 24H */
 .inetFoot{
-  margin-top:12px;
-  display:flex;
-  align-items:center;
-  gap:8px;
-  color:#111827;
-  font-weight:900;
-  font-size:14px;
+  margin-top:12px; display:flex; align-items:center; gap:8px;
+  color:#111827; font-weight:900; font-size:14px;
 }
-.inetFoot input{
-  width:18px; height:18px;
-  accent-color:#111827;
-}
+.inetFoot input{width:18px; height:18px; accent-color:#111827;}
 </style>
 </head>
 
@@ -527,6 +782,26 @@ body{
         <button class="heroRefreshBtn" id="noticeAdminToggleBtn" type="button" aria-label="공지 토글">공지OFF</button>
       </div>
     </div>
+  </div>
+
+  <!-- ✅ 신규: 검색 & 필터 섹션 -->
+  <div class="searchSection" id="searchSection">
+    <div class="searchBox">
+      <input type="text" id="modelSearch" placeholder="모델명 검색 (예: 갤럭시 S24, 아이폰 15)" />
+    </div>
+    <div class="quickFilters" id="quickFilters">
+      <button class="filterChip" data-filter="samsung">삼성</button>
+      <button class="filterChip" data-filter="apple">애플</button>
+      <button class="filterChip" data-filter="under50">50만원 이하</button>
+      <button class="filterChip" data-filter="discount">할인상품</button>
+      <button class="filterChip" data-filter="all">전체보기</button>
+    </div>
+  </div>
+
+  <!-- ✅ 신규: 비교 모드 토글 -->
+  <div class="viewModeTabs" id="viewModeTabs">
+    <button class="viewModeBtn active" data-view="single">통신사별 보기</button>
+    <button class="viewModeBtn" data-view="compare">가격 비교</button>
   </div>
 
   <!-- 서비스 탭 -->
@@ -559,7 +834,17 @@ body{
   </div>
 </div>
 
+<!-- ✅ 개선: 하단 독에 비교함 버튼 추가 -->
 <div class="bottomDock" role="navigation" aria-label="빠른 연락">
+  <button class="dockBtn compare" id="compareBtn" aria-label="비교함">
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M9 11l3 3L22 4"/>
+      <path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/>
+    </svg>
+    <span>비교</span>
+    <span class="compareBadge" id="compareBadge" style="display:none;">0</span>
+  </button>
+
   <a class="dockBtn call" href="tel:042-821-2272" aria-label="전화">
     <svg viewBox="0 0 24 24" aria-hidden="true">
       <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.8 19.8 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2.08 4.18 2 2 0 0 1 4.06 2h3a2 2 0 0 1 2 1.72c.12.9.32 1.77.6 2.6a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.48-1.12a2 2 0 0 1 2.11-.45c.83.28 1.7.48 2.6.6A2 2 0 0 1 22 16.92z"/>
@@ -584,7 +869,25 @@ body{
   </a>
 </div>
 
-<!-- ✅ 인터넷TV 현금 팝업 -->
+<!-- ✅ 신규: 비교함 드로어 -->
+<div class="drawerOverlay" id="drawerOverlay"></div>
+<div class="compareDrawer" id="compareDrawer" aria-hidden="true">
+  <h3>선택한 상품 (<span id="compareCount">0</span>/5)</h3>
+  <div class="compareList" id="compareList"></div>
+  <button class="primaryBtn" id="shareCompareBtn">
+    📤 카톡으로 상담 요청
+  </button>
+</div>
+
+<!-- ✅ 신규: 초기 방문자 가이드 -->
+<div class="guideTooltip" id="guideTooltip">
+  <h4>👋 처음이신가요?</h4>
+  <p>이동은 다른 통신사에서 번호 옮기기,<br>기변은 같은 통신사에서 폰만 교체해요!</p>
+  <button onclick="closeGuide()">알겠어요</button>
+  <button class="closeGuide" onclick="closeGuide()">다시 보지 않기</button>
+</div>
+
+<!-- 인터넷TV 현금 팝업 -->
 <div class="inetPopup" id="inetPopup" aria-hidden="true">
   <div class="inetPopCard" role="dialog" aria-modal="true" aria-label="인터넷TV 현금 팝업">
     <button class="inetPopX" id="inetPopClose" type="button" aria-label="닫기">×</button>
@@ -621,13 +924,19 @@ const phoneTabsEl = document.getElementById("phoneTabs");
 const serviceTabsEl = document.getElementById("serviceTabs");
 const mvnoTabsEl = document.getElementById("mvnoTabs");
 const internetTabsEl = document.getElementById("internetTabs");
+const searchSection = document.getElementById("searchSection");
+const viewModeTabs = document.getElementById("viewModeTabs");
 
 const CSV_VER = "2025-12-23";
 
 let mode = "PHONE";
+let viewMode = "single"; // ✅ 신규: single | compare
 let lastPhoneTab = "SK";
 let mvnoNet = "LG";
 let inetCarrier = "SK";
+
+// ✅ 신규: 즐겨찾기 관리
+let favorites = JSON.parse(localStorage.getItem("favorites") || "[]");
 
 const ADDON = {
   SK: [{ t:"마이스마트콜(3,500)", d:"3개월 유지 / 미 가입시 +2" }],
@@ -644,9 +953,6 @@ const ADDON = {
   ],
 };
 
-/* =========================
-   ✅ 알뜰요금(표) - CSV 없이 바로 표시
-   ========================= */
 const MVNO_PLANS = {
   LG: [
     { call:"무제한", sms:"무제한", data:"1GB+1Mbps무제한", fee:  9900 },
@@ -678,9 +984,6 @@ const MVNO_PLANS = {
   ],
 };
 
-/* =========================
-   ✅ 인터넷TV(표) - CSV 없이 바로 표시
-   ========================= */
 const INET_PLANS = {
   SK: [
     { inet:"100M", tv:"X", fee:22000, combo:17600 },
@@ -755,7 +1058,6 @@ function fmtWon(x){
   return n.toLocaleString("ko-KR");
 }
 
-/* ✅ 휴대폰 infoLine */
 const fixedInfoLine = (c) => {
   if (c === "SK") return `이동: SK 109요금 6개월<br>기변: SK 109요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
   if (c === "KT") return `이동: KT 110요금 6개월<br>기변: KT 110요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
@@ -769,7 +1071,7 @@ const infoLineWithPlan = (c, row) => {
   if(!movePlan && !changePlan) return fixedInfoLine(c);
   const m = movePlan || changePlan;
   const k = changePlan || movePlan;
-  return `이동: ${esc(c)} ${esc(m)}요금 6개월<br>기변: ${esc(c)} ${esc(k)}요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  return `이동: ${esc(c)} ${esc(m)}요금 6개월 <span class="helpIcon" data-tooltip="다른 통신사에서 번호 이동">ℹ️</span><br>기변: ${esc(c)} ${esc(k)}요금 6개월 <span class="helpIcon" data-tooltip="같은 통신사에서 폰만 교체">ℹ️</span><span class="subHint">부가서비스 유지조건 클릭</span>`;
 };
 
 function clearList(){ list.innerHTML = ""; }
@@ -809,7 +1111,91 @@ function activateInetCarrier(c){
   });
 }
 
-/* ✅ 부가서비스 카드 */
+// ✅ 신규: 검색/필터 표시 제어
+function showSearchSection(show){
+  if(show){
+    searchSection.classList.add("show");
+    viewModeTabs.classList.add("show");
+  }else{
+    searchSection.classList.remove("show");
+    viewModeTabs.classList.remove("show");
+  }
+}
+
+// ✅ 신규: 즐겨찾기 토글
+function toggleFavorite(model, carrier, move, change){
+  const item = { model, carrier, move, change };
+  const idx = favorites.findIndex(f => f.model === model && f.carrier === carrier);
+  
+  if(idx >= 0){
+    favorites.splice(idx, 1);
+  }else{
+    if(favorites.length >= 5){
+      alert("최대 5개까지만 비교할 수 있습니다.");
+      return false;
+    }
+    favorites.push(item);
+  }
+  
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  updateCompareBadge();
+  updateCompareDrawer();
+  return idx < 0; // 추가되었으면 true
+}
+
+function isFavorited(model, carrier){
+  return favorites.some(f => f.model === model && f.carrier === carrier);
+}
+
+function updateCompareBadge(){
+  const badge = document.getElementById("compareBadge");
+  if(favorites.length > 0){
+    badge.textContent = favorites.length;
+    badge.style.display = "flex";
+  }else{
+    badge.style.display = "none";
+  }
+}
+
+function updateCompareDrawer(){
+  const compareList = document.getElementById("compareList");
+  const compareCount = document.getElementById("compareCount");
+  compareCount.textContent = favorites.length;
+  
+  if(favorites.length === 0){
+    compareList.innerHTML = '<div class="loading">선택한 상품이 없습니다</div>';
+    return;
+  }
+  
+  compareList.innerHTML = favorites.map((item, idx) => `
+    <div class="compareItem">
+      <div>
+        <strong>${esc(item.model)}</strong> - ${esc(item.carrier)}
+        <div style="font-size:13px;color:var(--muted);margin-top:4px;">
+          이동: ${esc(item.move)} / 기변: ${esc(item.change)}
+        </div>
+      </div>
+      <button onclick="removeFavorite(${idx})" aria-label="삭제">×</button>
+    </div>
+  `).join("");
+}
+
+function removeFavorite(idx){
+  favorites.splice(idx, 1);
+  localStorage.setItem("favorites", JSON.stringify(favorites));
+  updateCompareBadge();
+  updateCompareDrawer();
+  
+  // 현재 화면 갱신
+  if(mode === "PHONE" && window.__CSV_ROWS__){
+    if(viewMode === "single"){
+      renderPhone(window.__CSV_ROWS__, lastPhoneTab);
+    }else{
+      renderPhoneCompare(window.__CSV_ROWS__);
+    }
+  }
+}
+
 function addAddonCard(carrier){
   const items = ADDON[carrier] || [];
   const pillClass = carrier === "SK" ? "sk" : (carrier === "KT" ? "kt" : "lg");
@@ -861,7 +1247,7 @@ function isDiscountRow(x){
   return (v === "o" || v === "1" || v === "true" || v === "y" || v === "yes" || v === "on");
 }
 
-function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount}){
+function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount, carrier, row}){
   const mv = (move ?? "");
   const ch = (change ?? "");
   const mvNum = asNum(mv);
@@ -869,9 +1255,17 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
   const hasMove = (mv !== "");
   const hasChange = (ch !== "");
   const rowClass = (hasMove && hasChange) ? "" : "one";
+  
+  const favorited = carrier ? isFavorited(model, carrier) : false;
+  const heartIcon = favorited ? "❤️" : "🤍";
+  const heartClass = favorited ? "active" : "";
+
+  const cardId = `card_${Date.now()}_${Math.random().toString(36).substr(2, 9)}`;
 
   list.insertAdjacentHTML("beforeend", `
-    <div class="card">
+    <div class="card" id="${cardId}" data-model="${esc(model)}" data-carrier="${esc(carrier || '')}" data-move="${esc(mv)}" data-change="${esc(ch)}" data-discount="${discount ? '1' : '0'}">
+      ${carrier ? `<button class="favoriteBtn ${heartClass}" onclick="handleFavorite('${cardId}')" aria-label="즐겨찾기">${heartIcon}</button>` : ''}
+      
       <div class="titleRow">
         <div class="model">${esc(model)}</div>
         <div class="badge ${badgeClass}">${esc(badgeText)}</div>
@@ -894,9 +1288,43 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
       </div>
     </div>
   `);
+  
+  // ✅ 신규: 롱프레스로 상담 요청
+  if(carrier){
+    const card = document.getElementById(cardId);
+    let pressTimer;
+    card.addEventListener("touchstart", (e) => {
+      if(e.target.closest(".favoriteBtn")) return;
+      pressTimer = setTimeout(() => {
+        const text = `${model} (${carrier}) 상담 요청\n이동: ${mv} / 기변: ${ch}`;
+        window.location.href = `https://open.kakao.com/o/s729bI5h?text=${encodeURIComponent(text)}`;
+      }, 800);
+    });
+    card.addEventListener("touchend", () => clearTimeout(pressTimer));
+    card.addEventListener("touchmove", () => clearTimeout(pressTimer));
+  }
 }
 
-/* CSV parser */
+// ✅ 신규: 즐겨찾기 버튼 클릭 핸들러
+window.handleFavorite = function(cardId){
+  const card = document.getElementById(cardId);
+  const model = card.dataset.model;
+  const carrier = card.dataset.carrier;
+  const move = card.dataset.move;
+  const change = card.dataset.change;
+  
+  const added = toggleFavorite(model, carrier, move, change);
+  const btn = card.querySelector(".favoriteBtn");
+  
+  if(added){
+    btn.textContent = "❤️";
+    btn.classList.add("active");
+  }else{
+    btn.textContent = "🤍";
+    btn.classList.remove("active");
+  }
+};
+
 function parseCSVLine(line){
   const out = [];
   let cur = "";
@@ -915,7 +1343,6 @@ function parseCSVLine(line){
   return out;
 }
 
-/* ✅✅✅ 중복 헤더 자동 .1 부여 */
 function makeUniqueHeader(rawHeader){
   const seen = Object.create(null);
   return rawHeader.map(h=>{
@@ -958,9 +1385,7 @@ function getRowBestPrice(row, carrier){
   return Math.min(mv, ch);
 }
 
-/* =========================
-   ✅ PHONE 렌더 (CSV)
-   ========================= */
+// ✅ 개선: 통신사별 보기
 function renderPhone(rows, carrier){
   clearList();
   addAddonCard(carrier);
@@ -995,14 +1420,81 @@ function renderPhone(rows, carrier){
       move,
       change,
       infoText: infoLineWithPlan(carrier, r),
-      discount
+      discount,
+      carrier,
+      row: r
     });
   });
 }
 
-/* =========================
-   ✅ MVNO 렌더 (하드코딩)
-   ========================= */
+// ✅ 신규: 가격 비교 모드
+function renderPhoneCompare(rows){
+  clearList();
+
+  const filtered = rows.filter(r => {
+    const type = String(r["기종"] ?? "").trim();
+    if (type === "__NOTICE__") return false;
+    
+    const skMv = showVal(r["SK_이동"]);
+    const skCh = showVal(r["SK_기변"]);
+    const ktMv = showVal(r["KT_이동"]);
+    const ktCh = showVal(r["KT_기변"]);
+    const lgMv = showVal(r["LG_이동"]);
+    const lgCh = showVal(r["LG_기변"]);
+    
+    return (skMv || skCh || ktMv || ktCh || lgMv || lgCh);
+  });
+
+  if(!filtered.length){
+    list.insertAdjacentHTML("beforeend", `<div class="loading">표시할 카드가 없습니다.</div>`);
+    return;
+  }
+
+  filtered.forEach(r => {
+    const model = String(r["기종"] ?? "").trim() || "-";
+    
+    const carriers = [
+      { name: "SK", move: r["SK_이동"], change: r["SK_기변"], class: "sk" },
+      { name: "KT", move: r["KT_이동"], change: r["KT_기변"], class: "kt" },
+      { name: "LG", move: r["LG_이동"], change: r["LG_기변"], class: "lg" }
+    ];
+    
+    const prices = carriers.map(c => {
+      const mv = asNum(c.move);
+      const ch = asNum(c.change);
+      if(mv === null && ch === null) return { carrier: c.name, price: null, text: "-", class: c.class };
+      const best = (mv === null) ? ch : (ch === null ? mv : Math.min(mv, ch));
+      return { carrier: c.name, price: best, text: fmtWon(best) + "원", class: c.class };
+    }).filter(p => p.price !== null);
+    
+    if(prices.length === 0) return;
+    
+    prices.sort((a, b) => a.price - b.price);
+    const minPrice = prices[0].price;
+    
+    const compareHtml = prices.map(p => {
+      const diff = p.price - minPrice;
+      const isBest = diff === 0;
+      return `
+        <div class="carrierCompare ${isBest ? 'best' : ''}">
+          <span class="badge ${p.class}">${esc(p.carrier)}</span>
+          <span class="price">${esc(p.text)}</span>
+          ${!isBest && diff > 0 ? `<span class="priceDiff">(+${fmtWon(diff)}원)</span>` : ''}
+        </div>
+      `;
+    }).join("");
+    
+    list.insertAdjacentHTML("beforeend", `
+      <div class="card compareCard">
+        <div class="model">${esc(model)}</div>
+        <div class="priceCompare">
+          ${compareHtml}
+        </div>
+      </div>
+    `);
+  });
+}
+
 function renderMVNO(_rowsIgnored, net){
   clearList();
   const arr = MVNO_PLANS[net] || [];
@@ -1025,9 +1517,6 @@ function renderMVNO(_rowsIgnored, net){
   });
 }
 
-/* =========================
-   ✅ INTERNET 렌더 (하드코딩)
-   ========================= */
 function renderINTERNET(_rowsIgnored, carrier){
   clearList();
   const arr = INET_PLANS[carrier] || [];
@@ -1052,9 +1541,163 @@ function renderINTERNET(_rowsIgnored, carrier){
   });
 }
 
-/* =========================
-   탭 이벤트
-   ========================= */
+// ✅ 신규: 검색 기능
+document.getElementById("modelSearch").addEventListener("input", (e) => {
+  const query = e.target.value.toLowerCase();
+  document.querySelectorAll(".card:not(.addonCard)").forEach(card => {
+    const model = card.querySelector(".model")?.textContent.toLowerCase() || "";
+    card.style.display = model.includes(query) ? "" : "none";
+  });
+});
+
+// ✅ 신규: 필터 기능
+document.getElementById("quickFilters").addEventListener("click", (e) => {
+  const btn = e.target.closest(".filterChip");
+  if(!btn) return;
+  
+  // 필터 버튼 활성화
+  document.querySelectorAll(".filterChip").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  
+  const filter = btn.dataset.filter;
+  
+  document.querySelectorAll(".card:not(.addonCard)").forEach(card => {
+    if(filter === "all"){
+      card.style.display = "";
+      return;
+    }
+    
+    const model = card.querySelector(".model")?.textContent.toLowerCase() || "";
+    const discount = card.dataset.discount === "1";
+    const priceText = card.querySelector(".pill .v")?.textContent || "";
+    const price = asNum(priceText);
+    
+    let show = true;
+    
+    if(filter === "samsung"){
+      show = model.includes("갤럭시") || model.includes("galaxy");
+    }else if(filter === "apple"){
+      show = model.includes("아이폰") || model.includes("iphone");
+    }else if(filter === "under50"){
+      show = price !== null && price <= 500000;
+    }else if(filter === "discount"){
+      show = discount;
+    }
+    
+    card.style.display = show ? "" : "none";
+  });
+});
+
+// ✅ 신규: 비교 모드 전환
+document.getElementById("viewModeTabs").addEventListener("click", (e) => {
+  const btn = e.target.closest(".viewModeBtn");
+  if(!btn) return;
+  
+  document.querySelectorAll(".viewModeBtn").forEach(b => b.classList.remove("active"));
+  btn.classList.add("active");
+  
+  viewMode = btn.dataset.view;
+  
+  if(!window.__CSV_ROWS__) return;
+  
+  if(viewMode === "single"){
+    renderPhone(window.__CSV_ROWS__, lastPhoneTab);
+  }else{
+    renderPhoneCompare(window.__CSV_ROWS__);
+  }
+});
+
+// ✅ 신규: 비교함 드로어
+document.getElementById("compareBtn").addEventListener("click", () => {
+  const drawer = document.getElementById("compareDrawer");
+  const overlay = document.getElementById("drawerOverlay");
+  
+  drawer.classList.add("show");
+  overlay.classList.add("show");
+  drawer.setAttribute("aria-hidden", "false");
+  updateCompareDrawer();
+});
+
+document.getElementById("drawerOverlay").addEventListener("click", () => {
+  const drawer = document.getElementById("compareDrawer");
+  const overlay = document.getElementById("drawerOverlay");
+  
+  drawer.classList.remove("show");
+  overlay.classList.remove("show");
+  drawer.setAttribute("aria-hidden", "true");
+});
+
+document.getElementById("shareCompareBtn").addEventListener("click", () => {
+  if(favorites.length === 0){
+    alert("비교할 상품을 선택해주세요.");
+    return;
+  }
+  
+  const text = favorites.map(f => 
+    `${f.model} (${f.carrier})\n이동: ${f.move} / 기변: ${f.change}`
+  ).join("\n\n");
+  
+  window.location.href = `https://open.kakao.com/o/s729bI5h?text=${encodeURIComponent("선택한 상품 상담 요청\n\n" + text)}`;
+});
+
+// ✅ 신규: 초기 방문자 가이드
+function showGuide(){
+  const shown = localStorage.getItem("guide_shown");
+  if(!shown){
+    setTimeout(() => {
+      document.getElementById("guideTooltip").classList.add("show");
+    }, 2000);
+  }
+}
+
+window.closeGuide = function(){
+  document.getElementById("guideTooltip").classList.remove("show");
+  localStorage.setItem("guide_shown", "1");
+};
+
+// ✅ 신규: 스와이프 제스처 (휴대폰 탭 전환)
+let touchStartX = 0;
+let touchStartY = 0;
+
+document.querySelector(".panel").addEventListener("touchstart", (e) => {
+  touchStartX = e.touches[0].clientX;
+  touchStartY = e.touches[0].clientY;
+});
+
+document.querySelector(".panel").addEventListener("touchend", (e) => {
+  if(mode !== "PHONE") return;
+  
+  const touchEndX = e.changedTouches[0].clientX;
+  const touchEndY = e.changedTouches[0].clientY;
+  
+  const diffX = touchStartX - touchEndX;
+  const diffY = Math.abs(touchStartY - touchEndY);
+  
+  // 세로 스크롤이 아닌 가로 스와이프만 감지
+  if(Math.abs(diffX) > 100 && diffY < 50){
+    const tabs = ["SK", "KT", "LG"];
+    const currentIdx = tabs.indexOf(lastPhoneTab);
+    
+    let nextIdx;
+    if(diffX > 0){ // 왼쪽으로 스와이프
+      nextIdx = (currentIdx + 1) % tabs.length;
+    }else{ // 오른쪽으로 스와이프
+      nextIdx = (currentIdx - 1 + tabs.length) % tabs.length;
+    }
+    
+    const nextTab = tabs[nextIdx];
+    activatePhoneTab(nextTab);
+    
+    if(window.__CSV_ROWS__){
+      if(viewMode === "single"){
+        renderPhone(window.__CSV_ROWS__, nextTab);
+      }else{
+        renderPhoneCompare(window.__CSV_ROWS__);
+      }
+    }
+  }
+});
+
 serviceTabsEl.addEventListener("click", (e)=>{
   const b = e.target.closest(".tabBtn");
   if(!b) return;
@@ -1066,6 +1709,7 @@ serviceTabsEl.addEventListener("click", (e)=>{
     hideAllSubTabs();
     showMvnoTabs(true);
     showInternetTabs(false);
+    showSearchSection(false);
     activateMvnoNet(mvnoNet);
     renderMVNO(null, mvnoNet);
     return;
@@ -1076,6 +1720,7 @@ serviceTabsEl.addEventListener("click", (e)=>{
     hideAllSubTabs();
     showInternetTabs(true);
     showMvnoTabs(false);
+    showSearchSection(false);
     activateInetCarrier(inetCarrier);
     renderINTERNET(null, inetCarrier);
     return;
@@ -1089,8 +1734,15 @@ phoneTabsEl.addEventListener("click", (e)=>{
   mode = "PHONE";
   setServiceActive(null);
   hideAllSubTabs();
+  showSearchSection(true);
   activatePhoneTab(tab);
-  if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
+  if(window.__CSV_ROWS__){
+    if(viewMode === "single"){
+      renderPhone(window.__CSV_ROWS__, tab);
+    }else{
+      renderPhoneCompare(window.__CSV_ROWS__);
+    }
+  }
 });
 
 mvnoTabsEl.addEventListener("click", (e)=>{
@@ -1101,6 +1753,7 @@ mvnoTabsEl.addEventListener("click", (e)=>{
   mode = "MVNO";
   setServiceActive("MVNO");
   showMvnoTabs(true); showInternetTabs(false);
+  showSearchSection(false);
   renderMVNO(null, net);
 });
 
@@ -1112,10 +1765,10 @@ internetTabsEl.addEventListener("click", (e)=>{
   mode = "INTERNET";
   setServiceActive("INTERNET");
   showInternetTabs(true); showMvnoTabs(false);
+  showSearchSection(false);
   renderINTERNET(null, c);
 });
 
-/* 업데이트 날짜/시간 자동 표시 (data.csv Last-Modified) */
 async function setUpdateStamp(){
   const el = document.getElementById("updateStamp");
   if(!el) return;
@@ -1134,11 +1787,6 @@ async function setUpdateStamp(){
   }catch(e){}
 }
 
-/* =========================
-   ✅ 관리자 버튼: 공지영역 5번 탭하면 노출
-   - 새로고침: 휴대폰 CSV만 강력 갱신 + 현재 모드 재렌더
-   - 공지OFF: __NOTICE__ 숨김 저장
-   ========================= */
 (function adminButtonsInit(){
   const hero = document.querySelector(".hero");
   const refreshBtn = document.getElementById("refreshBtn");
@@ -1174,7 +1822,13 @@ async function setUpdateStamp(){
 
   function rerenderByMode(){
     if(mode === "PHONE") {
-      if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, lastPhoneTab);
+      if(window.__CSV_ROWS__){
+        if(viewMode === "single"){
+          renderPhone(window.__CSV_ROWS__, lastPhoneTab);
+        }else{
+          renderPhoneCompare(window.__CSV_ROWS__);
+        }
+      }
       return;
     }
     if(mode === "MVNO") { renderMVNO(null, mvnoNet); return; }
@@ -1205,11 +1859,6 @@ async function setUpdateStamp(){
   applyNoticeBtnUI();
 })();
 
-/* =========================================================
-   ✅ 팝업 로직
-   - 기본: 매번 뜸
-   - 체크 후 닫으면 24시간 숨김
-   ========================================================= */
 (function inetPopupInit(){
   const popup = document.getElementById("inetPopup");
   const btnClose = document.getElementById("inetPopClose");
@@ -1230,23 +1879,20 @@ async function setUpdateStamp(){
     document.body.style.overflow = "";
   };
 
-  // 숨김 기간 체크
   const until = readUntil();
   if(Date.now() >= until){
     open();
   }
 
-  // X 닫기 (체크되어 있으면 24H 저장)
   btnClose.addEventListener("click", ()=>{
     if(chk.checked){
       localStorage.setItem(KEY, String(Date.now() + 24*60*60*1000));
     }else{
-      localStorage.removeItem(KEY); // 체크 안하면 매번 뜨게
+      localStorage.removeItem(KEY);
     }
     close();
   });
 
-  // 바깥 클릭 닫기(동일 규칙)
   popup.addEventListener("click", (e)=>{
     if(e.target === popup){
       if(chk.checked){
@@ -1258,7 +1904,6 @@ async function setUpdateStamp(){
     }
   });
 
-  // ESC 닫기
   window.addEventListener("keydown", (e)=>{
     if(e.key === "Escape" && popup.classList.contains("show")){
       if(chk.checked){
@@ -1271,7 +1916,6 @@ async function setUpdateStamp(){
   });
 })();
 
-/* 초기 로딩 */
 (async function init(){
   showLoading("data.csv 불러오는 중…");
   await setUpdateStamp();
@@ -1283,11 +1927,15 @@ async function setUpdateStamp(){
     mode = "PHONE";
     setServiceActive(null);
     hideAllSubTabs();
+    showSearchSection(true);
     activatePhoneTab(lastPhoneTab);
     renderPhone(rows, lastPhoneTab);
 
     activateMvnoNet(mvnoNet);
     activateInetCarrier(inetCarrier);
+    
+    updateCompareBadge();
+    showGuide();
 
   }catch(err){
     console.error(err);
