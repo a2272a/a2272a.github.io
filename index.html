@@ -540,7 +540,6 @@ body{
   <!-- 휴대폰 탭 -->
   <div class="tabs" id="phoneTabs" aria-label="휴대폰 탭">
     <button class="tabBtn sk active" data-tab="SK">SK</button>
-    <button class="tabBtn sk" data-tab="SK_NEW">SK신규키즈폰</button>
     <button class="tabBtn kt" data-tab="KT">KT</button>
     <button class="tabBtn lg" data-tab="LG">LG</button>
   </div>
@@ -1169,10 +1168,15 @@ function renderPhone(rows, carrier){
     const move = showVal(r[`${carrier}_이동`]);
     const change = showVal(r[`${carrier}_기변`]);
     const discount = isDiscountRow(r);
+    
+    // "신규" 표시가 있으면 배지를 "신규"로 변경
+    const isNew = String(r["요금할인"] ?? "").trim() === "신규";
+    const badgeText = isNew ? "신규" : carrier;
+    const badgeClass = isNew ? "hot" : (carrier === "SK" ? "sk" : carrier === "KT" ? "kt" : "lg");
 
     addPhoneCard({
-      badgeText: carrier,
-      badgeClass: carrier === "SK" ? "sk" : carrier === "KT" ? "kt" : "lg",
+      badgeText,
+      badgeClass,
       model,
       move,
       change,
@@ -1296,13 +1300,7 @@ phoneTabsEl.addEventListener("click", (e)=>{
   setServiceActive(null);
   hideAllSubTabs();
   activatePhoneTab(tab);
-  
-  // SK 신규 탭: 키즈폰 전용 데이터 표시
-  if(tab === "SK_NEW") {
-    renderSKNew();
-  } else {
-    if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
-  }
+  if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
 });
 
 mvnoTabsEl.addEventListener("click", (e)=>{
