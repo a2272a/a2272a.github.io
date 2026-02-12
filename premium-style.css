@@ -1,0 +1,673 @@
+/* ===================================
+   🎨 프리미엄 세련된 UI 스타일
+   - 글래스모피즘
+   - 부드러운 애니메이션
+   - 고급스러운 그라데이션
+   =================================== */
+
+/* 루트 변수 - 프리미엄 색상 팔레트 */
+:root {
+  --bg-gradient: linear-gradient(135deg, #f5f7fa 0%, #e8ecf2 100%);
+  --glass-bg: rgba(255, 255, 255, 0.75);
+  --glass-border: rgba(255, 255, 255, 0.25);
+  --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.04);
+  --shadow-md: 0 4px 16px rgba(0, 0, 0, 0.08);
+  --shadow-lg: 0 8px 32px rgba(0, 0, 0, 0.12);
+  --shadow-xl: 0 16px 48px rgba(0, 0, 0, 0.16);
+  
+  /* 브랜드 색상 - 더 세련된 톤 */
+  --sk-gradient: linear-gradient(135deg, #0066ff 0%, #0052cc 100%);
+  --kt-gradient: linear-gradient(135deg, #e61e2b 0%, #c41724 100%);
+  --lg-gradient: linear-gradient(135deg, #a50034 0%, #8a002b 100%);
+  
+  /* 강조 색상 */
+  --hot-gradient: linear-gradient(135deg, #ff6b6b 0%, #ee5a52 100%);
+  --low-gradient: linear-gradient(135deg, #7c3aed 0%, #6b2fd1 100%);
+  --call-gradient: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  --sms-gradient: linear-gradient(135deg, #3b82f6 0%, #2563eb 100%);
+  --kakao-gradient: linear-gradient(135deg, #fee500 0%, #fdd900 100%);
+}
+
+/* 전역 배경 개선 */
+body {
+  background: var(--bg-gradient) !important;
+  background-attachment: fixed !important;
+  -webkit-font-smoothing: antialiased !important;
+  -moz-osx-font-smoothing: grayscale !important;
+}
+
+/* Wrapper 개선 */
+.wrap {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Hero 영역 - 프리미엄 느낌 */
+.hero {
+  border-radius: 24px !important;
+  margin-bottom: 24px !important;
+  box-shadow: var(--shadow-xl) !important;
+  position: relative !important;
+  overflow: hidden !important;
+  transition: transform 0.3s ease, box-shadow 0.3s ease !important;
+}
+
+.hero:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.2) !important;
+}
+
+/* 글로우 효과 추가 */
+.hero::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(0, 255, 180, 0.1) 0%, transparent 70%);
+  animation: glow 6s ease-in-out infinite;
+  pointer-events: none;
+}
+
+@keyframes glow {
+  0%, 100% { transform: translate(0, 0) scale(1); opacity: 0.5; }
+  50% { transform: translate(10px, 10px) scale(1.05); opacity: 0.8; }
+}
+
+/* 탭 버튼 - 글래스모피즘 */
+.tabs {
+  gap: 12px !important;
+  margin-top: 16px !important;
+  margin-bottom: 0 !important;
+}
+
+.tabBtn {
+  padding: 14px 16px !important;
+  border-radius: 16px !important;
+  font-weight: 700 !important;
+  font-size: 15px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 반짝이는 효과 */
+.tabBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.5s;
+}
+
+.tabBtn:hover::before {
+  left: 100%;
+}
+
+.tabBtn:hover {
+  transform: translateY(-3px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.tabBtn:active {
+  transform: translateY(-1px) !important;
+}
+
+/* 활성화된 탭 - 그라데이션 배경 */
+.tabBtn.active {
+  color: #fff !important;
+  box-shadow: var(--shadow-lg) !important;
+  border: none !important;
+}
+
+.tabBtn.sk.active {
+  background: var(--sk-gradient) !important;
+}
+
+.tabBtn.kt.active {
+  background: var(--kt-gradient) !important;
+}
+
+.tabBtn.lg.active {
+  background: var(--lg-gradient) !important;
+}
+
+.tabBtn.svc.mvno.active {
+  background: var(--lg-gradient) !important;
+}
+
+.tabBtn.svc.internet.active {
+  background: var(--kt-gradient) !important;
+}
+
+/* 패널 - 글래스 효과 */
+.panel {
+  margin-top: 20px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--glass-border) !important;
+  border-radius: 24px !important;
+  padding: 20px !important;
+  box-shadow: var(--shadow-lg) !important;
+  animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 서브탭 스타일 개선 */
+.subTabs {
+  gap: 10px !important;
+  margin-bottom: 20px !important;
+}
+
+.subTabBtn {
+  padding: 12px 16px !important;
+  border-radius: 14px !important;
+  background: rgba(255, 255, 255, 0.5) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  font-weight: 600 !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  border: 1px solid rgba(255, 255, 255, 0.3) !important;
+  box-shadow: var(--shadow-sm) !important;
+}
+
+.subTabBtn:hover {
+  background: rgba(255, 255, 255, 0.7) !important;
+  transform: translateY(-2px) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.subTabBtn.active {
+  color: #fff !important;
+  border: none !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.subTabBtn.sk.active {
+  background: var(--sk-gradient) !important;
+}
+
+.subTabBtn.kt.active {
+  background: var(--kt-gradient) !important;
+}
+
+.subTabBtn.lg.active {
+  background: var(--lg-gradient) !important;
+}
+
+/* 리스트 그리드 */
+.list {
+  gap: 16px !important;
+}
+
+/* 카드 스타일 - 프리미엄 */
+.card {
+  padding: 18px !important;
+  border-radius: 20px !important;
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--shadow-sm) !important;
+  transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 카드 배경 그라데이션 효과 */
+.card::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  right: -50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(99, 102, 241, 0.05) 0%, transparent 70%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.card:hover::before {
+  opacity: 1;
+}
+
+.card:hover {
+  transform: translateY(-4px) scale(1.02) !important;
+  box-shadow: var(--shadow-xl) !important;
+  border-color: rgba(99, 102, 241, 0.2) !important;
+}
+
+/* 타이틀 행 */
+.titleRow {
+  margin-bottom: 12px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.model {
+  font-weight: 800 !important;
+  font-size: 18px !important;
+  letter-spacing: -0.5px !important;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* 배지 - 프리미엄 스타일 */
+.badge {
+  font-weight: 700 !important;
+  padding: 8px 14px !important;
+  border-radius: 12px !important;
+  font-size: 12px !important;
+  letter-spacing: 0.5px !important;
+  text-transform: uppercase !important;
+  box-shadow: var(--shadow-md) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.badge.sk {
+  background: var(--sk-gradient) !important;
+}
+
+.badge.kt {
+  background: var(--kt-gradient) !important;
+}
+
+.badge.lg {
+  background: var(--lg-gradient) !important;
+}
+
+.badge.hot {
+  background: var(--hot-gradient) !important;
+  animation: pulse 2s ease-in-out infinite;
+}
+
+.badge.low {
+  background: var(--low-gradient) !important;
+}
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); box-shadow: var(--shadow-md); }
+  50% { transform: scale(1.05); box-shadow: var(--shadow-lg); }
+}
+
+/* 정보 라인 */
+.infoLine {
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
+  margin-bottom: 10px !important;
+  line-height: 1.6 !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.subHint {
+  margin-top: 6px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #94a3b8 !important;
+}
+
+/* 할인 배지 - 강조 */
+.discountPill {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 6px !important;
+  margin: 4px 0 12px !important;
+  padding: 8px 14px !important;
+  border-radius: 20px !important;
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #1e40af !important;
+  background: linear-gradient(135deg, rgba(59, 130, 246, 0.15) 0%, rgba(37, 99, 235, 0.1) 100%) !important;
+  border: 1px solid rgba(59, 130, 246, 0.3) !important;
+  box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15) !important;
+  animation: shimmer 3s ease-in-out infinite;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+@keyframes shimmer {
+  0%, 100% { box-shadow: 0 2px 8px rgba(59, 130, 246, 0.15); }
+  50% { box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3); }
+}
+
+/* 가격 영역 */
+.priceRow {
+  gap: 12px !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+
+.pill {
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+  border-radius: 16px !important;
+  padding: 12px !important;
+  text-align: center !important;
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.5) 0%, rgba(248, 250, 252, 0.5) 100%) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), var(--shadow-sm) !important;
+  transition: all 0.3s ease !important;
+}
+
+.pill:hover {
+  transform: translateY(-2px) !important;
+  box-shadow: inset 0 1px 2px rgba(255, 255, 255, 0.5), var(--shadow-md) !important;
+}
+
+.pill .k {
+  font-size: 12px !important;
+  color: #64748b !important;
+  font-weight: 700 !important;
+  margin-bottom: 6px !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
+.pill .v {
+  font-size: 22px !important;
+  font-weight: 800 !important;
+  letter-spacing: -0.5px !important;
+}
+
+/* 가격 색상 */
+.neg {
+  background: linear-gradient(135deg, #dc2626 0%, #b91c1c 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.zero {
+  background: linear-gradient(135deg, #0ea5e9 0%, #0284c7 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.pos {
+  background: linear-gradient(135deg, #0f172a 0%, #334155 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+/* 부가서비스 카드 */
+.addonCard {
+  background: linear-gradient(135deg, rgba(240, 242, 247, 0.8) 0%, rgba(255, 255, 255, 0.8) 100%) !important;
+  backdrop-filter: blur(10px) !important;
+  -webkit-backdrop-filter: blur(10px) !important;
+  border: 1px solid rgba(148, 163, 184, 0.2) !important;
+}
+
+.addonCard:hover {
+  background: linear-gradient(135deg, rgba(240, 242, 247, 0.9) 0%, rgba(255, 255, 255, 0.9) 100%) !important;
+}
+
+.addonHead {
+  transition: all 0.3s ease !important;
+}
+
+.addonTitle {
+  font-weight: 800 !important;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.addonPill {
+  box-shadow: var(--shadow-md) !important;
+}
+
+.addonPill.sk {
+  background: var(--sk-gradient) !important;
+}
+
+.addonPill.kt {
+  background: var(--kt-gradient) !important;
+}
+
+.addonPill.lg {
+  background: var(--lg-gradient) !important;
+}
+
+.addonChevron {
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.addonCard:hover .addonChevron {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.05) !important;
+}
+
+/* 하단 독 - 프리미엄 */
+.bottomDock {
+  background: var(--glass-bg) !important;
+  backdrop-filter: blur(20px) saturate(180%) !important;
+  -webkit-backdrop-filter: blur(20px) saturate(180%) !important;
+  border: 1px solid var(--glass-border) !important;
+  box-shadow: var(--shadow-xl) !important;
+  border-radius: 24px !important;
+  animation: slideUpDock 0.6s ease-out;
+}
+
+@keyframes slideUpDock {
+  from {
+    opacity: 0;
+    transform: translateY(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.dockBtn {
+  border-radius: 18px !important;
+  font-weight: 700 !important;
+  font-size: 16px !important;
+  transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1) !important;
+  box-shadow: var(--shadow-sm) !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+
+/* 버튼 내부 그라데이션 효과 */
+.dockBtn::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+  transition: left 0.6s;
+}
+
+.dockBtn:hover::before {
+  left: 100%;
+}
+
+.dockBtn:hover {
+  transform: translateY(-4px) scale(1.05) !important;
+  box-shadow: var(--shadow-lg) !important;
+}
+
+.dockBtn:active {
+  transform: translateY(-2px) scale(1.02) !important;
+  box-shadow: var(--shadow-md) !important;
+}
+
+.dockBtn.call {
+  background: var(--call-gradient) !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.dockBtn.sms {
+  background: var(--sms-gradient) !important;
+  border: none !important;
+  color: #fff !important;
+}
+
+.dockBtn.kakao {
+  background: var(--kakao-gradient) !important;
+  border: 1px solid rgba(253, 224, 71, 0.4) !important;
+  color: #3b2f00 !important;
+}
+
+/* 로딩 스타일 */
+.loading {
+  animation: fadeIn 0.6s ease-out !important;
+  color: #64748b !important;
+  font-weight: 600 !important;
+}
+
+/* 반응형 조정 */
+@media (max-width: 520px) {
+  .list {
+    gap: 14px !important;
+  }
+  
+  .card {
+    padding: 16px !important;
+  }
+  
+  .model {
+    font-size: 17px !important;
+  }
+  
+  .pill .v {
+    font-size: 20px !important;
+  }
+}
+
+/* 스크롤바 스타일링 (Webkit) */
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: rgba(241, 245, 249, 0.5);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(135deg, #cbd5e1 0%, #94a3b8 100%);
+  border-radius: 10px;
+  border: 2px solid rgba(241, 245, 249, 0.5);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(135deg, #94a3b8 0%, #64748b 100%);
+}
+
+/* 포커스 스타일 개선 */
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid #3b82f6 !important;
+  outline-offset: 2px !important;
+  border-radius: inherit !important;
+}
+
+/* 선택 영역 스타일 */
+::selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #1e293b;
+}
+
+::-moz-selection {
+  background: rgba(59, 130, 246, 0.3);
+  color: #1e293b;
+}
+
+/* 미세한 페이드인 애니메이션 추가 */
+.tabBtn,
+.card,
+.pill {
+  animation: fadeInUp 0.5s ease-out backwards;
+}
+
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.3s; }
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* 다크모드 미디어 쿼리 준비 (선택사항) */
+@media (prefers-color-scheme: dark) {
+  /* 필요시 다크모드 스타일 추가 */
+}
+
+/* 고성능 애니메이션을 위한 하드웨어 가속 */
+.card,
+.tabBtn,
+.dockBtn,
+.pill {
+  will-change: transform;
+  transform: translateZ(0);
+  backface-visibility: hidden;
+}
+
+/* 터치 디바이스 최적화 */
+@media (hover: none) and (pointer: coarse) {
+  .card:hover,
+  .tabBtn:hover,
+  .dockBtn:hover {
+    transform: none !important;
+  }
+  
+  .card:active {
+    transform: scale(0.98) !important;
+  }
+}
