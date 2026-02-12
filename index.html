@@ -32,6 +32,40 @@
 </script>
 
 <style>
+/* ========================================
+   🚀 모바일 스크롤 성능 최적화
+   ======================================== */
+* {
+  -webkit-tap-highlight-color: transparent;
+  -webkit-touch-callout: none;
+}
+
+html {
+  -webkit-overflow-scrolling: touch;
+  scroll-behavior: smooth;
+}
+
+body {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* GPU 가속 활성화 */
+.card, .tabBtn, .dockBtn, .heroRefreshBtn {
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* 모바일에서 backdrop-filter 비활성화 */
+@media (max-width: 768px) {
+  .bottomDock {
+    backdrop-filter: none !important;
+    background: rgba(255,255,255,.95) !important;
+  }
+}
+
 :root{
   --bg:#f5f6f8; --card:#ffffff; --ink:#0f172a; --muted:#64748b; --line:#e5e7eb;
   --sk:#2563eb; --kt:#111827; --lg:#16a34a; --hot:#f97316; --low:#7c3aed;
@@ -160,7 +194,23 @@ body{
 .list{display:grid;grid-template-columns:repeat(2, minmax(0, 1fr));gap:10px;}
 @media (max-width: 420px){ .list{ grid-template-columns:1fr; } }
 
-.card{border:1px solid var(--line);border-radius:14px;padding:12px;box-shadow:0 2px 10px rgba(0,0,0,.05);}
+.card{
+  border:1px solid var(--line);
+  border-radius:14px;
+  padding:12px;
+  box-shadow:0 2px 10px rgba(0,0,0,.05);
+  transform: translateZ(0);
+  will-change: transform;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+/* 모바일 최적화: box-shadow 경량화 */
+@media (max-width: 768px) {
+  .card {
+    box-shadow: 0 1px 3px rgba(0,0,0,.08);
+  }
+}
 .titleRow{display:flex;justify-content:space-between;margin-bottom:8px;gap:10px;align-items:center;}
 .model{font-weight:1000;font-size:16px;letter-spacing:-.2px;}
 .badge{font-size:12px;font-weight:1000;padding:6px 10px;border-radius:999px;color:#fff;white-space:nowrap;}
