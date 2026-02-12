@@ -1173,14 +1173,19 @@ function renderPhone(rows, carrier){
     const isNew = String(r["요금할인"] ?? "").trim() === "신규";
     const badgeText = isNew ? "신규" : carrier;
     const badgeClass = isNew ? "hot" : (carrier === "SK" ? "sk" : carrier === "KT" ? "kt" : "lg");
+    
+    // 신규 항목: 요금제 정보만 표시 (이동/기변 구분 없음)
+    const infoText = isNew 
+      ? `요금제: ${r[carrier+"_요금제"] || "-"}<span class="subHint">신규 가입 전용</span>` 
+      : infoLineWithPlan(carrier, r);
 
     addPhoneCard({
       badgeText,
       badgeClass,
       model,
-      move,
-      change,
-      infoText: infoLineWithPlan(carrier, r),
+      move: isNew ? move : move,  // 신규는 하나의 가격만
+      change: isNew ? "" : change, // 신규는 기변 가격 없음
+      infoText,
       discount
     });
   });
