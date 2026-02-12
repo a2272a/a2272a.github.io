@@ -639,6 +639,37 @@ body::before {
   box-shadow: 0 0 40px rgba(102, 126, 234, 0.3) !important;
 }
 
+.addonHead {
+  cursor: pointer !important;
+  user-select: none !important;
+  transition: all 0.3s ease !important;
+}
+
+.addonHead:hover {
+  transform: translateX(3px) !important;
+}
+
+.addonTitle {
+  font-weight: 800 !important;
+  font-size: 16px !important;
+  letter-spacing: -0.2px !important;
+  background: linear-gradient(135deg, #1e293b 0%, #475569 100%) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+}
+
+.addonPill {
+  font-size: 13px !important;
+  font-weight: 900 !important;
+  padding: 7px 11px !important;
+  border-radius: 999px !important;
+  color: #fff !important;
+  white-space: nowrap !important;
+  text-transform: uppercase !important;
+  letter-spacing: 0.5px !important;
+}
+
 .addonPill.sk {
   background: linear-gradient(135deg, #0066ff 0%, #00d4ff 100%) !important;
   box-shadow: 0 0 20px rgba(0, 212, 255, 0.5) !important;
@@ -652,6 +683,85 @@ body::before {
 .addonPill.lg {
   background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%) !important;
   box-shadow: 0 0 20px rgba(0, 255, 136, 0.5) !important;
+}
+
+.addonChevron {
+  flex: 0 0 auto !important;
+  width: 36px !important;
+  height: 36px !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 12px !important;
+  border: 1px solid rgba(15, 23, 42, 0.10) !important;
+  background: rgba(255, 255, 255, 0.8) !important;
+  backdrop-filter: blur(5px) !important;
+  -webkit-backdrop-filter: blur(5px) !important;
+  transition: all 0.3s ease !important;
+}
+
+.addonChevron svg {
+  width: 18px !important;
+  height: 18px !important;
+  stroke: rgba(15, 23, 42, 0.65) !important;
+  stroke-width: 2.6 !important;
+  fill: none !important;
+  stroke-linecap: round !important;
+  stroke-linejoin: round !important;
+  transition: transform 0.3s ease !important;
+}
+
+.addonCard.open .addonChevron svg {
+  transform: rotate(180deg) !important;
+}
+
+.addonCard:hover .addonChevron {
+  background: rgba(255, 255, 255, 1) !important;
+  transform: scale(1.05) !important;
+}
+
+/* 부가서비스 본문 - 중요: display 설정 */
+.addonBody {
+  margin-top: 10px !important;
+  display: none !important;
+  overflow: hidden !important;
+}
+
+.addonBody.show {
+  display: block !important;
+  animation: slideDown 0.3s ease-out !important;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.addonList {
+  margin: 0 !important;
+  padding-left: 18px !important;
+  list-style: decimal !important;
+}
+
+.addonList li {
+  margin: 10px 0 !important;
+  font-size: 15px !important;
+  font-weight: 700 !important;
+  color: #0f172a !important;
+  line-height: 1.5 !important;
+}
+
+.addonList .sub {
+  margin-top: 4px !important;
+  font-size: 14px !important;
+  font-weight: 600 !important;
+  color: #64748b !important;
 }
 
 /* 하단 독 - 네온 스타일 */
