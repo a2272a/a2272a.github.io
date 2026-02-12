@@ -540,6 +540,7 @@ body{
   <!-- 휴대폰 탭 -->
   <div class="tabs" id="phoneTabs" aria-label="휴대폰 탭">
     <button class="tabBtn sk active" data-tab="SK">SK</button>
+    <button class="tabBtn sk" data-tab="SK_NEW">SK 신규</button>
     <button class="tabBtn kt" data-tab="KT">KT</button>
     <button class="tabBtn lg" data-tab="LG">LG</button>
   </div>
@@ -852,6 +853,16 @@ const MVNO_PLANS = {
 /* =========================
    ✅ 인터넷TV(표) - CSV 없이 바로 표시
    ========================= */
+
+/* =========================
+   ✅ SK 신규 (키즈폰 전용)
+   ========================= */
+const SK_NEW_PLANS = [
+  { model: "키즈폰1", plan: "109", price: 0, info: "요금제 109 / 신규 가입" },
+  { model: "키즈폰2", plan: "89", price: 0, info: "요금제 89 / 신규 가입" },
+  { model: "키즈폰3", plan: "69", price: 0, info: "요금제 69 / 신규 가입" },
+];
+
 const INET_PLANS = {
   SK: [
     { inet:"100M", tv:"X", fee:22000, combo:17600 },
@@ -1224,6 +1235,30 @@ function renderINTERNET(_rowsIgnored, carrier){
 }
 
 /* =========================
+   ✅ SK 신규 렌더 (키즈폰 전용)
+   ========================= */
+function renderSKNew(){
+  clearList();
+  
+  if(!SK_NEW_PLANS || !SK_NEW_PLANS.length){
+    list.insertAdjacentHTML("beforeend", `<div class="loading">SK 신규 키즈폰 데이터가 없습니다.</div>`);
+    return;
+  }
+  
+  SK_NEW_PLANS.forEach(x=>{
+    addPhoneCard({
+      badgeText: "SK 신규",
+      badgeClass: "sk",
+      model: x.model || "키즈폰",
+      move: x.price !== undefined ? `${x.price}만원` : "0만원",
+      change: "",
+      infoText: x.info || `요금제: ${x.plan}`,
+      discount: false
+    });
+  });
+}
+
+/* =========================
    탭 이벤트
    ========================= */
 serviceTabsEl.addEventListener("click", (e)=>{
@@ -1261,7 +1296,13 @@ phoneTabsEl.addEventListener("click", (e)=>{
   setServiceActive(null);
   hideAllSubTabs();
   activatePhoneTab(tab);
-  if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
+  
+  // SK 신규 탭: 키즈폰 전용 데이터 표시
+  if(tab === "SK_NEW") {
+    renderSKNew();
+  } else {
+    if(window.__CSV_ROWS__) renderPhone(window.__CSV_ROWS__, tab);
+  }
 });
 
 mvnoTabsEl.addEventListener("click", (e)=>{
