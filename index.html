@@ -1580,6 +1580,7 @@ async function setUpdateStamp(){
   function isMobile(){ return window.innerWidth <= 600; }
 
   function open(){
+    try {
     savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
 
     /* 오버레이 스타일 */
@@ -1624,6 +1625,7 @@ async function setUpdateStamp(){
       document.body.style.top      = "-" + savedScrollY + "px";
       document.body.style.width    = "100%";
     }
+    } catch(err){ console.error("[팝업] open() 에러:", err); }
   }
 
   function close(){

@@ -1071,7 +1071,7 @@ body::before {
    body에 transform:translateZ(0)이 있어도 fixed가 제대로 동작하도록
    팔업을 flex로, 카드를 position:relative + margin:auto로 중앙 정렬 */
 .promoPopup {
-  display: none !important;
+  display: none;
   position: fixed !important;
   top: 0 !important;
   left: 0 !important;
