@@ -1064,106 +1064,80 @@ body::before {
 }
 
 /* ===================================
-   🎪 프로모션 팝업 - 네온 스타일
+   🎪 프로모션 팝업 - 모바일 완전 호환
    =================================== */
 
-/* 팝업 배경 오버레이 */
+/* ✅ 팝업 오버레이 - 어두운 배경만 */
 .promoPopup {
-  position: fixed !important;
-  inset: 0 !important;
   display: none !important;
-  align-items: center !important;
-  justify-content: center !important;
-  background: rgba(15, 23, 42, 0.85) !important;
-  backdrop-filter: blur(20px) !important;
-  -webkit-backdrop-filter: blur(20px) !important;
-  z-index: 99999 !important;
-  padding: 20px !important;
-  animation: fadeIn 0.3s ease-out !important;
+  position: fixed !important;
+  top: 0 !important;
+  left: 0 !important;
+  right: 0 !important;
+  bottom: 0 !important;
+  width: 100% !important;
+  height: 100% !important;
+  background: rgba(0, 0, 0, 0.75) !important;
+  z-index: 999999 !important;
 }
 
 .promoPopup.show {
-  display: flex !important;
+  display: block !important;
 }
 
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-/* 팝업 카드 */
+/* ✅ 팝업 카드 - 정중앙 고정 */
 .promoPopCard {
-  width: min(600px, 95vw) !important;
-  max-height: 90vh !important;
+  position: fixed !important;
+  top: 50% !important;
+  left: 50% !important;
+  transform: translate(-50%, -50%) !important;
+  width: calc(100% - 40px) !important;
+  max-width: 480px !important;
+  max-height: 85vh !important;
+  border-radius: 20px !important;
+  background: #ffffff !important;
+  padding: 0 !important;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+  box-sizing: border-box !important;
   overflow-y: auto !important;
-  position: relative !important;
-  border-radius: 30px !important;
-  background: linear-gradient(135deg, 
-    rgba(255, 255, 255, 0.98) 0%, 
-    rgba(240, 242, 255, 0.98) 100%) !important;
-  backdrop-filter: blur(30px) !important;
-  -webkit-backdrop-filter: blur(30px) !important;
-  padding: 30px !important;
-  border: 3px solid rgba(255, 255, 255, 0.8) !important;
-  box-shadow: 
-    0 0 60px rgba(102, 126, 234, 0.4),
-    0 30px 90px rgba(0, 0, 0, 0.5),
-    inset 0 1px 0 rgba(255, 255, 255, 1) !important;
-  animation: popupSlideUp 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) !important;
+  -webkit-overflow-scrolling: touch !important;
+  z-index: 1000000 !important;
 }
 
-@keyframes popupSlideUp {
-  from {
-    opacity: 0;
-    transform: translateY(50px) scale(0.9);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
-
-/* X 닫기 버튼 - 네온 스타일 */
+/* ✅ X 닫기 버튼 */
 .promoPopX {
   position: absolute !important;
-  top: 15px !important;
-  right: 15px !important;
-  width: 48px !important;
-  height: 48px !important;
+  top: 12px !important;
+  right: 12px !important;
+  width: 44px !important;
+  height: 44px !important;
   border-radius: 50% !important;
-  border: 3px solid rgba(239, 68, 68, 0.6) !important;
-  background: linear-gradient(135deg, #ff006e 0%, #e61e2b 100%) !important;
-  color: #fff !important;
-  font-size: 28px !important;
-  font-weight: 900 !important;
+  border: 2px solid rgba(0,0,0,0.15) !important;
+  background: #f1f5f9 !important;
+  color: #374151 !important;
+  font-size: 26px !important;
+  font-weight: 700 !important;
   cursor: pointer !important;
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  box-shadow: 
-    0 0 30px rgba(255, 0, 110, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.3) !important;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-  z-index: 10 !important;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.8) !important;
-}
-
-.promoPopX:hover {
-  transform: rotate(90deg) scale(1.1) !important;
-  box-shadow: 
-    0 0 50px rgba(255, 0, 110, 0.8),
-    0 12px 32px rgba(0, 0, 0, 0.4) !important;
+  z-index: 100 !important;
+  line-height: 1 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
 .promoPopX:active {
-  transform: rotate(90deg) scale(1.05) !important;
+  background: #e2e8f0 !important;
+  transform: scale(0.95) !important;
 }
 
-/* 탭 헤더 */
+/* ✅ 탭 헤더 */
 .promoTabs {
   display: flex !important;
-  gap: 12px !important;
-  margin-bottom: 24px !important;
+  gap: 8px !important;
+  padding: 52px 16px 0 !important;
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f2540 100%) !important;
 }
 
 .promoTab {
@@ -1171,397 +1145,324 @@ body::before {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 8px !important;
-  padding: 16px 20px !important;
-  border-radius: 20px !important;
-  border: 3px solid rgba(148, 163, 184, 0.3) !important;
-  background: rgba(248, 250, 252, 0.8) !important;
-  backdrop-filter: blur(10px) !important;
-  cursor: pointer !important;
-  transition: all 0.3s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
+  gap: 6px !important;
+  padding: 12px 8px !important;
+  border: none !important;
+  background: rgba(255,255,255,0.12) !important;
+  color: rgba(255,255,255,0.65) !important;
+  font-size: 14px !important;
   font-weight: 700 !important;
-  font-size: 15px !important;
-}
-
-.promoTab:hover {
-  transform: translateY(-3px) !important;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15) !important;
+  cursor: pointer !important;
+  border-radius: 12px 12px 0 0 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
 }
 
 .promoTab.active {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  color: #fff !important;
-  border-color: transparent !important;
-  box-shadow: 
-    0 0 30px rgba(102, 126, 234, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.2) !important;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
+  background: #ffffff !important;
+  color: #1e3a5f !important;
 }
 
 .promoTabIcon {
-  font-size: 20px !important;
+  font-size: 18px !important;
 }
 
 .promoTabText {
-  font-weight: 800 !important;
-  letter-spacing: -0.3px !important;
+  font-weight: 700 !important;
 }
 
-/* 탭 컨텐츠 */
+/* ✅ 탭 내용 */
 .promoTabContent {
   display: none !important;
+  padding: 20px 16px !important;
+  background: #ffffff !important;
 }
 
 .promoTabContent.active {
   display: block !important;
-  animation: tabFadeIn 0.4s ease-out !important;
 }
 
-@keyframes tabFadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-/* S26 컨테이너 */
+/* ✅ S26 컨테이너 */
 .s26Container {
   text-align: center !important;
 }
 
 .s26Logo {
-  margin-bottom: 20px !important;
+  margin-bottom: 16px !important;
 }
 
 .s26LogoText {
-  font-size: 24px !important;
+  font-size: 22px !important;
   font-weight: 900 !important;
   letter-spacing: 3px !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
+  color: #1e3a5f !important;
 }
 
 .s26LogoSub {
-  font-size: 14px !important;
+  font-size: 13px !important;
   font-weight: 600 !important;
   color: #64748b !important;
   letter-spacing: 2px !important;
-  text-transform: uppercase !important;
 }
 
-/* S26 Hero */
+/* ✅ S26 Hero */
 .s26Hero {
-  position: relative !important;
-  padding: 30px 20px !important;
-  margin-bottom: 24px !important;
-  border-radius: 24px !important;
-  background: linear-gradient(135deg, 
-    rgba(102, 126, 234, 0.1) 0%, 
-    rgba(118, 75, 162, 0.1) 100%) !important;
-  border: 2px solid rgba(102, 126, 234, 0.2) !important;
+  padding: 24px 16px !important;
+  margin-bottom: 16px !important;
+  border-radius: 16px !important;
+  background: linear-gradient(135deg, #1e3a5f 0%, #0f2540 100%) !important;
 }
 
 .s26Badge {
   display: inline-block !important;
-  padding: 8px 16px !important;
+  padding: 6px 14px !important;
   border-radius: 20px !important;
-  background: linear-gradient(135deg, #ff006e 0%, #ffea00 100%) !important;
+  background: #ef4444 !important;
   color: #fff !important;
-  font-size: 12px !important;
-  font-weight: 900 !important;
+  font-size: 11px !important;
+  font-weight: 800 !important;
   letter-spacing: 1px !important;
   text-transform: uppercase !important;
-  box-shadow: 
-    0 0 20px rgba(255, 0, 110, 0.5),
-    0 4px 12px rgba(0, 0, 0, 0.2) !important;
-  margin-bottom: 16px !important;
-  animation: badgePulse 2s ease-in-out infinite !important;
+  margin-bottom: 12px !important;
 }
 
 .s26Title {
-  font-size: 42px !important;
+  font-size: 38px !important;
   font-weight: 900 !important;
+  color: #ffffff !important;
+  margin: 8px 0 !important;
   letter-spacing: -1px !important;
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
-  -webkit-background-clip: text !important;
-  -webkit-text-fill-color: transparent !important;
-  background-clip: text !important;
-  margin: 12px 0 8px !important;
-  text-shadow: 0 0 30px rgba(102, 126, 234, 0.3) !important;
 }
 
 .s26Subtitle {
-  font-size: 18px !important;
-  font-weight: 600 !important;
-  color: #64748b !important;
-  margin: 0 0 20px !important;
+  font-size: 16px !important;
+  color: rgba(255,255,255,0.75) !important;
+  margin: 0 0 16px !important;
 }
 
-/* S26 디바이스 */
+/* ✅ S26 디바이스 */
 .s26Device {
-  width: 180px !important;
-  height: 220px !important;
-  margin: 0 auto !important;
-  border-radius: 30px !important;
-  background: linear-gradient(135deg, #1e293b 0%, #334155 100%) !important;
-  box-shadow: 
-    0 0 40px rgba(102, 126, 234, 0.4),
-    0 20px 60px rgba(0, 0, 0, 0.3),
-    inset 0 2px 0 rgba(255, 255, 255, 0.1) !important;
-  border: 3px solid rgba(255, 255, 255, 0.1) !important;
+  width: 120px !important;
+  height: 150px !important;
+  margin: 0 auto 0 !important;
+  border-radius: 20px !important;
+  background: rgba(255,255,255,0.1) !important;
+  border: 2px solid rgba(255,255,255,0.25) !important;
   position: relative !important;
-  animation: deviceFloat 3s ease-in-out infinite !important;
-}
-
-@keyframes deviceFloat {
-  0%, 100% { transform: translateY(0); }
-  50% { transform: translateY(-10px); }
 }
 
 .s26Screen {
   position: absolute !important;
-  inset: 8px !important;
-  border-radius: 25px !important;
+  inset: 6px !important;
+  border-radius: 14px !important;
   background: linear-gradient(135deg, #667eea 0%, #764ba2 50%, #f093fb 100%) !important;
-  background-size: 200% 200% !important;
-  animation: screenGradient 4s ease infinite !important;
 }
 
-@keyframes screenGradient {
-  0%, 100% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-}
-
-/* S26 특징 */
+/* ✅ S26 특징 */
 .s26Features {
   display: flex !important;
-  gap: 12px !important;
-  margin-bottom: 24px !important;
+  gap: 8px !important;
+  margin-bottom: 16px !important;
 }
 
 .s26Feature {
   flex: 1 !important;
-  padding: 16px !important;
-  border-radius: 16px !important;
-  background: rgba(248, 250, 252, 0.8) !important;
-  backdrop-filter: blur(10px) !important;
-  border: 2px solid rgba(148, 163, 184, 0.2) !important;
-  transition: all 0.3s ease !important;
-}
-
-.s26Feature:hover {
-  transform: translateY(-4px) !important;
-  border-color: rgba(102, 126, 234, 0.4) !important;
-  box-shadow: 0 8px 24px rgba(102, 126, 234, 0.2) !important;
+  padding: 12px 8px !important;
+  border-radius: 12px !important;
+  background: #f8fafc !important;
+  border: 1px solid #e2e8f0 !important;
 }
 
 .s26FeatureIcon {
-  font-size: 32px !important;
-  margin-bottom: 8px !important;
+  font-size: 24px !important;
+  margin-bottom: 6px !important;
 }
 
 .s26FeatureText {
-  font-size: 13px !important;
+  font-size: 12px !important;
   font-weight: 700 !important;
   color: #334155 !important;
   line-height: 1.4 !important;
 }
 
-/* S26 CTA 버튼 - 네온 스타일 */
+/* ✅ CTA 버튼 */
 .s26CtaBtn {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 10px !important;
+  gap: 8px !important;
   width: 100% !important;
-  padding: 18px 24px !important;
-  border-radius: 25px !important;
-  background: linear-gradient(135deg, #00ff88 0%, #00d4ff 100%) !important;
-  color: #fff !important;
-  font-size: 18px !important;
+  padding: 16px 20px !important;
+  border-radius: 14px !important;
+  background: #fee500 !important;
+  color: #3b2f00 !important;
+  font-size: 17px !important;
   font-weight: 900 !important;
-  letter-spacing: -0.3px !important;
   text-decoration: none !important;
-  border: 3px solid rgba(0, 255, 136, 0.5) !important;
-  box-shadow: 
-    0 0 40px rgba(0, 255, 136, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.2) !important;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-  margin-bottom: 20px !important;
-  text-shadow: 0 0 10px rgba(255, 255, 255, 0.5) !important;
-  text-transform: uppercase !important;
-}
-
-.s26CtaBtn:hover {
-  transform: translateY(-4px) scale(1.02) !important;
-  box-shadow: 
-    0 0 60px rgba(0, 255, 136, 0.8),
-    0 12px 32px rgba(0, 0, 0, 0.3) !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
 }
 
 .s26CtaBtn:active {
-  transform: translateY(-2px) scale(1.01) !important;
+  filter: brightness(0.95) !important;
 }
 
 .s26CtaIcon {
-  font-size: 24px !important;
+  font-size: 22px !important;
 }
 
-/* S26 연락처 */
+.s26CtaText {
+  font-weight: 900 !important;
+}
+
+/* ✅ 연락처 */
 .s26Contact {
   display: flex !important;
-  gap: 12px !important;
+  gap: 8px !important;
   justify-content: center !important;
+  flex-wrap: wrap !important;
 }
 
 .s26ContactItem {
   display: flex !important;
   align-items: center !important;
-  gap: 6px !important;
-  padding: 10px 16px !important;
-  border-radius: 12px !important;
-  background: rgba(248, 250, 252, 0.8) !important;
-  border: 2px solid rgba(148, 163, 184, 0.2) !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
+  gap: 4px !important;
+  padding: 8px 12px !important;
+  border-radius: 10px !important;
+  background: #f1f5f9 !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
   color: #334155 !important;
 }
 
 .s26ContactIcon {
-  font-size: 16px !important;
+  font-size: 14px !important;
 }
 
-/* 인터넷TV 스타일 - 기존 유지하되 개선 */
-.inetFrame {
-  border-radius: 24px !important;
-  padding: 20px !important;
-  background: linear-gradient(135deg, 
-    rgba(255, 247, 230, 0.8) 0%, 
-    rgba(255, 255, 255, 0.8) 100%) !important;
-  border: 2px solid rgba(245, 158, 11, 0.3) !important;
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1) !important;
+/* ✅ 인터넷TV 탭 */
+.promoTabContent .inetFrame {
+  border-radius: 14px !important;
+  padding: 14px !important;
+  background: linear-gradient(180deg, #fff7c9 0%, #ffe484 100%) !important;
+  border: 1px solid rgba(0,0,0,0.08) !important;
 }
 
-.inetCard {
-  border-radius: 20px !important;
-  padding: 24px !important;
-  background: linear-gradient(135deg, #ff3b30 0%, #c80000 100%) !important;
-  box-shadow: 
-    0 0 40px rgba(255, 59, 48, 0.4),
-    0 20px 60px rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 rgba(255, 255, 255, 0.2) !important;
+.promoTabContent .inetCard {
+  border-radius: 12px !important;
+  padding: 14px !important;
+  background: linear-gradient(180deg, #ff3b30 0%, #c80000 100%) !important;
 }
 
-.inetRibbon span {
-  display: inline-block !important;
-  padding: 10px 20px !important;
-  border-radius: 15px !important;
-  background: linear-gradient(135deg, #ffb703 0%, #ff7a00 100%) !important;
+.promoTabContent .inetRibbon {
+  margin-bottom: 8px !important;
+}
+
+.promoTabContent .inetRibbon span {
+  font-size: 18px !important;
+  padding: 6px 12px !important;
+  border-radius: 10px !important;
+  background: linear-gradient(180deg, #ffb703 0%, #ff7a00 100%) !important;
   color: #1f2937 !important;
   font-weight: 900 !important;
-  font-size: 22px !important;
-  letter-spacing: -0.5px !important;
-  box-shadow: 
-    0 0 30px rgba(255, 183, 3, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.3) !important;
+  display: inline-block !important;
 }
 
-.inetHeadline {
-  font-size: 38px !important;
+.promoTabContent .inetHeadline {
+  font-size: 32px !important;
   font-weight: 900 !important;
-  letter-spacing: -1px !important;
   color: #ffe66b !important;
-  text-shadow: 
-    0 0 20px rgba(255, 230, 107, 0.8),
-    0 4px 0 rgba(0, 0, 0, 0.3) !important;
-  margin: 16px 0 !important;
+  text-align: center !important;
+  margin: 10px 0 !important;
 }
 
-.inetKakaoBtn {
+.promoTabContent .inetVisual {
+  height: 110px !important;
+  margin: 8px 0 12px !important;
+  position: relative !important;
+}
+
+.promoTabContent .inetKakaoBtn {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
-  gap: 12px !important;
+  gap: 8px !important;
   width: 100% !important;
-  padding: 18px 24px !important;
-  border-radius: 25px !important;
-  background: linear-gradient(135deg, #28d463 0%, #169e49 100%) !important;
-  color: #fff !important;
-  font-size: 24px !important;
+  padding: 14px !important;
+  border-radius: 14px !important;
+  background: #fee500 !important;
+  color: #3b2f00 !important;
+  font-size: 20px !important;
   font-weight: 900 !important;
-  letter-spacing: -0.5px !important;
   text-decoration: none !important;
-  border: 3px solid rgba(40, 212, 99, 0.5) !important;
-  box-shadow: 
-    0 0 40px rgba(40, 212, 99, 0.5),
-    0 8px 24px rgba(0, 0, 0, 0.3),
-    inset 0 2px 0 rgba(255, 255, 255, 0.3) !important;
-  transition: all 0.4s cubic-bezier(0.68, -0.55, 0.265, 1.55) !important;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2) !important;
+  box-sizing: border-box !important;
 }
 
-.inetKakaoBtn:hover {
-  transform: translateY(-4px) scale(1.02) !important;
-  box-shadow: 
-    0 0 60px rgba(40, 212, 99, 0.8),
-    0 12px 32px rgba(0, 0, 0, 0.4) !important;
-}
-
-/* 푸터 */
+/* ✅ 푸터 */
 .promoFooter {
   display: flex !important;
   align-items: center !important;
-  gap: 8px !important;
   justify-content: center !important;
-  margin-top: 20px !important;
-  padding-top: 20px !important;
-  border-top: 2px solid rgba(148, 163, 184, 0.2) !important;
-  color: #64748b !important;
-  font-size: 14px !important;
+  gap: 8px !important;
+  padding: 14px 16px !important;
+  font-size: 13px !important;
   font-weight: 600 !important;
+  color: #64748b !important;
   cursor: pointer !important;
+  background: #f8fafc !important;
+  border-top: 1px solid #e2e8f0 !important;
   user-select: none !important;
+  -webkit-user-select: none !important;
 }
 
-.promoFooter input {
-  width: 18px !important;
-  height: 18px !important;
-  accent-color: #667eea !important;
+.promoFooter input[type="checkbox"] {
+  width: 17px !important;
+  height: 17px !important;
   cursor: pointer !important;
+  accent-color: #1e3a5f !important;
 }
 
-/* 모바일 최적화 */
+/* ✅ 모바일 최적화 (≤520px) - 하단 시트 형태 */
 @media (max-width: 520px) {
+  /* 모바일에서는 카드를 화면 하단에 붙임 */
   .promoPopCard {
-    padding: 20px !important;
+    top: auto !important;
+    left: 0 !important;
+    right: 0 !important;
+    bottom: 0 !important;
+    transform: none !important;
+    width: 100% !important;
+    max-width: 100% !important;
+    max-height: 90vh !important;
+    border-radius: 20px 20px 0 0 !important;
   }
-  
-  .promoPopX {
-    width: 42px !important;
-    height: 42px !important;
-    font-size: 24px !important;
+
+  .promoTabs {
+    padding-top: 52px !important;
   }
-  
+
+  .promoTab {
+    font-size: 13px !important;
+  }
+
   .s26Title {
-    font-size: 32px !important;
+    font-size: 30px !important;
   }
-  
-  .s26Features {
-    flex-direction: column !important;
+
+  .s26Device {
+    width: 90px !important;
+    height: 115px !important;
   }
-  
-  .inetHeadline {
-    font-size: 28px !important;
+
+  .s26CtaBtn {
+    font-size: 15px !important;
+    padding: 14px !important;
   }
-  
-  .inetKakaoBtn {
-    font-size: 20px !important;
-    padding: 16px 20px !important;
+
+  .promoTabContent .inetHeadline {
+    font-size: 26px !important;
+  }
+
+  .promoTabContent .inetKakaoBtn {
+    font-size: 18px !important;
   }
 }
