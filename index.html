@@ -1561,8 +1561,112 @@ async function setUpdateStamp(){
   }
 })();
 </script>
-<script src="./promo-popup.js"></script>
-<script src="./inet-popup-fix.js"></script>
+<script>
+/* =========================================================
+   S26 사전예약 팝업 - inline (외부 파일 의존 없음)
+   ========================================================= */
+(function(){
+  var popup = document.getElementById("promoPopup");
+  var btnClose = document.getElementById("promoPopClose");
+  var chk = document.getElementById("promoHide24");
+  var tabs = document.querySelectorAll(".promoTab");
+  var tabContents = document.querySelectorAll(".promoTabContent");
+
+  if(!popup || !btnClose || !chk) return;
+
+  var KEY = "PROMO_POPUP_HIDE_UNTIL";
+  var savedScrollY = 0;
+
+  function isMobile(){ return window.innerWidth <= 600; }
+
+  function open(){
+    savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
+
+    /* 오버레이 스타일 */
+    popup.style.display        = "flex";
+    popup.style.position       = "fixed";
+    popup.style.top            = "0";
+    popup.style.left           = "0";
+    popup.style.right          = "0";
+    popup.style.bottom         = "0";
+    popup.style.width          = "100%";
+    popup.style.height         = "100%";
+    popup.style.background     = "rgba(0,0,0,0.75)";
+    popup.style.zIndex         = "999999";
+    popup.style.alignItems     = isMobile() ? "flex-end" : "center";
+    popup.style.justifyContent = "center";
+    popup.style.padding        = isMobile() ? "0" : "20px";
+    popup.style.boxSizing      = "border-box";
+    popup.style.transform      = "none";
+    popup.setAttribute("aria-hidden","false");
+
+    /* 카드 스타일 */
+    var card = popup.querySelector(".promoPopCard");
+    if(card){
+      card.style.position              = "relative";
+      card.style.width                 = "100%";
+      card.style.maxWidth              = isMobile() ? "100%" : "480px";
+      card.style.maxHeight             = isMobile() ? "90vh" : "85vh";
+      card.style.background            = "#ffffff";
+      card.style.borderRadius          = isMobile() ? "20px 20px 0 0" : "20px";
+      card.style.overflowY             = "auto";
+      card.style.webkitOverflowScrolling = "touch";
+      card.style.boxShadow             = "0 20px 60px rgba(0,0,0,0.6)";
+      card.style.flexShrink            = "0";
+      card.style.margin                = isMobile() ? "0" : "auto";
+      card.style.transform             = "none";
+    }
+
+    /* body 스크롤 고정 */
+    document.body.style.overflow = "hidden";
+    if(isMobile()){
+      document.body.style.position = "fixed";
+      document.body.style.top      = "-" + savedScrollY + "px";
+      document.body.style.width    = "100%";
+    }
+  }
+
+  function close(){
+    popup.style.display = "none";
+    popup.setAttribute("aria-hidden","true");
+    document.body.style.overflow = "";
+    document.body.style.position = "";
+    document.body.style.top      = "";
+    document.body.style.width    = "";
+    window.scrollTo(0, savedScrollY);
+  }
+
+  function saveAndClose(){
+    if(chk.checked) localStorage.setItem(KEY, String(Date.now() + 24*60*60*1000));
+    else            localStorage.removeItem(KEY);
+    close();
+  }
+
+  /* 탭 전환 */
+  tabs.forEach(function(tab){
+    tab.addEventListener("click", function(){
+      var t = tab.dataset.tab;
+      tabs.forEach(function(x){ x.classList.remove("active"); });
+      tabContents.forEach(function(x){ x.classList.remove("active"); });
+      tab.classList.add("active");
+      var content = document.getElementById(t + "Tab");
+      if(content){ content.classList.add("active"); }
+      var card = popup.querySelector(".promoPopCard");
+      if(card) card.scrollTop = 0;
+    });
+  });
+
+  btnClose.addEventListener("click", saveAndClose);
+  popup.addEventListener("click", function(e){ if(e.target===popup) saveAndClose(); });
+  document.addEventListener("keydown", function(e){ if(e.key==="Escape") saveAndClose(); });
+
+  /* 표시 여부 결정 */
+  var until = Number(localStorage.getItem(KEY) || "0");
+  if(Date.now() >= until){
+    setTimeout(open, 300);
+  }
+})();
+</script>
 </body>
 </html>
 
