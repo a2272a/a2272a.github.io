@@ -1067,7 +1067,9 @@ body::before {
    🎪 프로모션 팝업 - 모바일 완전 호환
    =================================== */
 
-/* ✅ 팝업 오버레이 - 어두운 배경만 */
+/* ✅ 팝업 오버레이
+   body에 transform:translateZ(0)이 있어도 fixed가 제대로 동작하도록
+   팔업을 flex로, 카드를 position:relative + margin:auto로 중앙 정렬 */
 .promoPopup {
   display: none !important;
   position: fixed !important;
@@ -1079,19 +1081,26 @@ body::before {
   height: 100% !important;
   background: rgba(0, 0, 0, 0.75) !important;
   z-index: 999999 !important;
+  /* flex로 코컨츠 중앙 정렬 */
+  align-items: center !important;
+  justify-content: center !important;
+  /* 스크롤할 내용이 널친 경우 패딩 */
+  padding: 20px !important;
+  box-sizing: border-box !important;
+  /* body transform 영향 차단 */
+  transform: none !important;
+  will-change: auto !important;
 }
 
 .promoPopup.show {
-  display: block !important;
+  display: flex !important;
 }
 
-/* ✅ 팝업 카드 - 정중앙 고정 */
+/* ✅ 팝업 카드 - 오버레이 flex 안에서 margin:auto로 중앙 */
 .promoPopCard {
-  position: fixed !important;
-  top: 50% !important;
-  left: 50% !important;
-  transform: translate(-50%, -50%) !important;
-  width: calc(100% - 40px) !important;
+  position: relative !important;
+  margin: auto !important;
+  width: 100% !important;
   max-width: 480px !important;
   max-height: 85vh !important;
   border-radius: 20px !important;
@@ -1101,7 +1110,8 @@ body::before {
   box-sizing: border-box !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
-  z-index: 1000000 !important;
+  flex-shrink: 0 !important;
+  transform: none !important;
 }
 
 /* ✅ X 닫기 버튼 */
@@ -1132,12 +1142,13 @@ body::before {
   transform: scale(0.95) !important;
 }
 
-/* ✅ 탭 헤더 */
+/* ✅ 탭 헤더 - X버튼(44px) + 여유(8px) = 52px 상단 패딩 */
 .promoTabs {
   display: flex !important;
   gap: 8px !important;
   padding: 52px 16px 0 !important;
   background: linear-gradient(135deg, #1e3a5f 0%, #0f2540 100%) !important;
+  flex-shrink: 0 !important;
 }
 
 .promoTab {
@@ -1423,17 +1434,17 @@ body::before {
 
 /* ✅ 모바일 최적화 (≤520px) - 하단 시트 형태 */
 @media (max-width: 520px) {
-  /* 모바일에서는 카드를 화면 하단에 붙임 */
+  .promoPopup {
+    align-items: flex-end !important;
+    padding: 0 !important;
+  }
+
   .promoPopCard {
-    top: auto !important;
-    left: 0 !important;
-    right: 0 !important;
-    bottom: 0 !important;
-    transform: none !important;
     width: 100% !important;
     max-width: 100% !important;
     max-height: 90vh !important;
     border-radius: 20px 20px 0 0 !important;
+    margin: 0 !important;
   }
 
   .promoTabs {
