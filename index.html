@@ -1660,11 +1660,9 @@ async function setUpdateStamp(){
   popup.addEventListener("click", function(e){ if(e.target===popup) saveAndClose(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape") saveAndClose(); });
 
-  /* 표시 여부 결정 */
-  var until = Number(localStorage.getItem(KEY) || "0");
-  if(Date.now() >= until){
-    setTimeout(open, 300);
-  }
+  /* 표시 여부 결정 - localStorage 초기화 후 항상 표시 */
+  localStorage.removeItem(KEY);
+  setTimeout(open, 300);
 })();
 </script>
 </body>
