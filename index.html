@@ -46,7 +46,7 @@ html {
 }
 
 body {
-  transform: translateZ(0);
+  /* transform: translateZ(0); <- 팝업 position:fixed 깨짐 원인, 제거 */
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
 }
@@ -637,8 +637,8 @@ body{
 </div>
 
 <!-- ✅ 통합 프로모션 팝업 (S26 + 인터넷TV) -->
-<div class="promoPopup" id="promoPopup" aria-hidden="true" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.75);z-index:999999;align-items:center;justify-content:center;padding:20px;box-sizing:border-box;">
-  <div class="promoPopCard" role="dialog" aria-modal="true" aria-label="프로모션" style="position:relative;width:100%;max-width:480px;max-height:85vh;background:#fff;border-radius:20px;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,0.6);flex-shrink:0;">
+<div class="promoPopup" id="promoPopup" aria-hidden="true" style="display:none;">
+  <div class="promoPopCard" role="dialog" aria-modal="true" aria-label="프로모션">
     <button class="promoPopX" id="promoPopClose" type="button" aria-label="닫기">×</button>
     
     <!-- 탭 헤더 -->
@@ -1563,98 +1563,48 @@ async function setUpdateStamp(){
 </script>
 <script>
 /* =========================================================
-   S26 사전예약 팝업 - inline (외부 파일 의존 없음)
+   S26 사전예약 팝업
    ========================================================= */
 (function(){
-  var popup = document.getElementById("promoPopup");
+  var popup    = document.getElementById("promoPopup");
   var btnClose = document.getElementById("promoPopClose");
-  var chk = document.getElementById("promoHide24");
-  var tabs = document.querySelectorAll(".promoTab");
+  var chk      = document.getElementById("promoHide24");
+  var tabs        = document.querySelectorAll(".promoTab");
   var tabContents = document.querySelectorAll(".promoTabContent");
 
-  if(!popup || !btnClose || !chk) return;
+  if(!popup || !btnClose || !chk) { console.warn("[팝업] 요소 없음"); return; }
 
   var KEY = "PROMO_POPUP_HIDE_UNTIL";
   var savedScrollY = 0;
 
-  function isMobile(){ return window.innerWidth <= 600; }
-
-  function open(){
-    try {
-    savedScrollY = window.pageYOffset || document.documentElement.scrollTop || 0;
-
-    /* 오버레이 스타일 */
-    popup.style.display        = "flex";
-    popup.style.position       = "fixed";
-    popup.style.top            = "0";
-    popup.style.left           = "0";
-    popup.style.right          = "0";
-    popup.style.bottom         = "0";
-    popup.style.width          = "100%";
-    popup.style.height         = "100%";
-    popup.style.background     = "rgba(0,0,0,0.75)";
-    popup.style.zIndex         = "999999";
-    popup.style.alignItems     = isMobile() ? "flex-end" : "center";
-    popup.style.justifyContent = "center";
-    popup.style.padding        = isMobile() ? "0" : "20px";
-    popup.style.boxSizing      = "border-box";
-    popup.style.transform      = "none";
+  function openPopup(){
+    savedScrollY = window.pageYOffset || 0;
+    popup.style.display = "flex";
     popup.setAttribute("aria-hidden","false");
-
-    /* 카드 스타일 */
-    var card = popup.querySelector(".promoPopCard");
-    if(card){
-      card.style.position              = "relative";
-      card.style.width                 = "100%";
-      card.style.maxWidth              = isMobile() ? "100%" : "480px";
-      card.style.maxHeight             = isMobile() ? "90vh" : "85vh";
-      card.style.background            = "#ffffff";
-      card.style.borderRadius          = isMobile() ? "20px 20px 0 0" : "20px";
-      card.style.overflowY             = "auto";
-      card.style.webkitOverflowScrolling = "touch";
-      card.style.boxShadow             = "0 20px 60px rgba(0,0,0,0.6)";
-      card.style.flexShrink            = "0";
-      card.style.margin                = isMobile() ? "0" : "auto";
-      card.style.transform             = "none";
-    }
-
-    /* body 스크롤 고정 */
     document.body.style.overflow = "hidden";
-    if(isMobile()){
-      document.body.style.position = "fixed";
-      document.body.style.top      = "-" + savedScrollY + "px";
-      document.body.style.width    = "100%";
-    }
-    } catch(err){ console.error("[팝업] open() 에러:", err); }
   }
 
-  function close(){
+  function closePopup(){
     popup.style.display = "none";
     popup.setAttribute("aria-hidden","true");
     document.body.style.overflow = "";
-    document.body.style.position = "";
-    document.body.style.top      = "";
-    document.body.style.width    = "";
     window.scrollTo(0, savedScrollY);
   }
 
   function saveAndClose(){
     if(chk.checked) localStorage.setItem(KEY, String(Date.now() + 24*60*60*1000));
     else            localStorage.removeItem(KEY);
-    close();
+    closePopup();
   }
 
   /* 탭 전환 */
   tabs.forEach(function(tab){
     tab.addEventListener("click", function(){
-      var t = tab.dataset.tab;
       tabs.forEach(function(x){ x.classList.remove("active"); });
       tabContents.forEach(function(x){ x.classList.remove("active"); });
       tab.classList.add("active");
-      var content = document.getElementById(t + "Tab");
+      var content = document.getElementById(tab.dataset.tab + "Tab");
       if(content){ content.classList.add("active"); }
-      var card = popup.querySelector(".promoPopCard");
-      if(card) card.scrollTop = 0;
     });
   });
 
@@ -1662,9 +1612,11 @@ async function setUpdateStamp(){
   popup.addEventListener("click", function(e){ if(e.target===popup) saveAndClose(); });
   document.addEventListener("keydown", function(e){ if(e.key==="Escape") saveAndClose(); });
 
-  /* 표시 여부 결정 - localStorage 초기화 후 항상 표시 */
-  localStorage.removeItem(KEY);
-  setTimeout(open, 300);
+  /* 표시 여부 결정 */
+  var until = Number(localStorage.getItem(KEY) || "0");
+  if(Date.now() >= until){
+    setTimeout(openPopup, 300);
+  }
 })();
 </script>
 </body>

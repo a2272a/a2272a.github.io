@@ -1077,19 +1077,16 @@ body::before {
   left: 0 !important;
   right: 0 !important;
   bottom: 0 !important;
-  width: 100% !important;
-  height: 100% !important;
+  width: 100vw !important;
+  height: 100vh !important;
   background: rgba(0, 0, 0, 0.75) !important;
   z-index: 999999 !important;
-  /* flex로 코컨츠 중앙 정렬 */
   align-items: center !important;
   justify-content: center !important;
-  /* 스크롤할 내용이 널친 경우 패딩 */
   padding: 20px !important;
   box-sizing: border-box !important;
-  /* body transform 영향 차단 */
   transform: none !important;
-  will-change: auto !important;
+  overflow: hidden !important;
 }
 
 .promoPopup.show {
@@ -1102,7 +1099,7 @@ body::before {
   margin: auto !important;
   width: 100% !important;
   max-width: 480px !important;
-  max-height: 85vh !important;
+  max-height: 80vh !important;
   border-radius: 20px !important;
   background: #ffffff !important;
   padding: 0 !important;
@@ -1110,7 +1107,8 @@ body::before {
   box-sizing: border-box !important;
   overflow-y: auto !important;
   -webkit-overflow-scrolling: touch !important;
-  flex-shrink: 0 !important;
+  flex-shrink: 1 !important;
+  min-height: 0 !important;
   transform: none !important;
 }
 
