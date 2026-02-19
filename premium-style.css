@@ -1093,20 +1093,21 @@ body::before {
   display: flex !important;
 }
 
-/* ✅ 팝업 카드 - 오버레이 flex 안에서 margin:auto로 중앙 */
+/* ✅ 팝업 카드 */
 .promoPopCard {
   position: relative !important;
   margin: auto !important;
   width: 100% !important;
   max-width: 480px !important;
-  max-height: 80vh !important;
+  max-height: 85vh !important;
   border-radius: 20px !important;
   background: #ffffff !important;
   padding: 0 !important;
   box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
   box-sizing: border-box !important;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
+  overflow: hidden !important;
+  display: flex !important;
+  flex-direction: column !important;
   flex-shrink: 1 !important;
   min-height: 0 !important;
   transform: none !important;
@@ -1180,11 +1181,15 @@ body::before {
   font-weight: 700 !important;
 }
 
-/* ✅ 탭 내용 */
+/* ✅ 탭 내용 - 스크롤 영역 */
 .promoTabContent {
   display: none !important;
   padding: 20px 16px !important;
   background: #ffffff !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
+  flex: 1 !important;
+  min-height: 0 !important;
 }
 
 .promoTabContent.active {
@@ -1421,6 +1426,7 @@ body::before {
   border-top: 1px solid #e2e8f0 !important;
   user-select: none !important;
   -webkit-user-select: none !important;
+  flex-shrink: 0 !important;
 }
 
 .promoFooter input[type="checkbox"] {
