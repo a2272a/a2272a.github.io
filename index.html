@@ -1120,13 +1120,13 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
       </div>
 
       ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
-      ${(condType || discount) ? `
-        <div class="condBadgeRow">
-          ${condType === 'gosi' ? `<span class="condBadge gosi">📢 공시지원금</span>` : ''}
-          ${condType === 'seonYak' ? `<span class="condBadge seonYak">✅ 선택약정 25%</span>` : ''}
-          ${condType === 'both' ? `<span class="condBadge gosi">📢 공시지원금</span><span class="condBadge seonYak">✅ 선택약정 25%</span>` : ''}
-          ${(!condType && discount) ? `<span class="condBadge seonYak">✅ 선택약정 25%</span>` : ''}
-        </div>` : ``}
+      ${(condType || discount) ? (() => {
+        let b = '';
+        if (condType === 'gosi' || condType === 'both') b += '<span class="condBadge gosi">📢 공시지원금</span>';
+        if (condType === 'seonYak' || condType === 'both') b += '<span class="condBadge seonYak">✅ 선택약정 25%</span>';
+        if (!condType && discount) b += '<span class="condBadge seonYak">✅ 선택약정 25%</span>';
+        return '<div class="condBadgeRow">' + b + '</div>';
+      })() : ''}
 
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
