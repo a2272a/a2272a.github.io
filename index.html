@@ -999,9 +999,9 @@ function fmtWon(x){
 
 /* ✅ 휴대폰 infoLine */
 const fixedInfoLine = (c) => {
-  if (c === "SK") return `이동: SK 109요금 6개월<br>기변: SK 109요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
-  if (c === "KT") return `이동: KT 110요금 6개월<br>기변: KT 110요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
-  return `이동: LG 115요금 6개월<br>기변: LG 115요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  if (c === "SK") return `이동: SK 109요금 6개월<br>기변: SK 109요금 6개월<span class="subHint">부가서비스 유지조건 상단 클릭</span>`;
+  if (c === "KT") return `이동: KT 110요금 6개월<br>기변: KT 110요금 6개월<span class="subHint">부가서비스 유지조건 상단 클릭</span>`;
+  return `이동: LG 115요금 6개월<br>기변: LG 115요금 6개월<span class="subHint">부가서비스 유지조건 상단 클릭</span>`;
 };
 const infoLineWithPlan = (c, row) => {
   const moveRaw   = row?.[`${c}_요금제`];
@@ -1011,7 +1011,7 @@ const infoLineWithPlan = (c, row) => {
   if(!movePlan && !changePlan) return fixedInfoLine(c);
   const m = movePlan || changePlan;
   const k = changePlan || movePlan;
-  return `이동: ${esc(c)} ${esc(m)}요금 6개월<br>기변: ${esc(c)} ${esc(k)}요금 6개월<span class="subHint">부가서비스 유지조건 클릭</span>`;
+  return `이동: ${esc(c)} ${esc(m)}요금 6개월<br>기변: ${esc(c)} ${esc(k)}요금 6개월<span class="subHint">부가서비스 유지조건 상단 클릭</span>`;
 };
 
 function clearList(){ list.innerHTML = ""; }
