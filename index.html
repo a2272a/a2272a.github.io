@@ -244,6 +244,35 @@ body{
 }
 .discountPill strong{font-weight:1000;}
 
+/* ✅ 공시/선약 뱃지 */
+.condBadgeRow{
+  display:flex;
+  gap:5px;
+  flex-wrap:wrap;
+  margin: 2px 0 8px;
+}
+.condBadge{
+  display:inline-flex;
+  align-items:center;
+  gap:4px;
+  padding:4px 9px;
+  border-radius:999px;
+  font-size:11px;
+  font-weight:1000;
+  line-height:1;
+  white-space:nowrap;
+}
+.condBadge.gosi{
+  color:#b45309;
+  background:rgba(245,158,11,.12);
+  border:1px solid rgba(245,158,11,.30);
+}
+.condBadge.seonYak{
+  color:#6d28d9;
+  background:rgba(109,40,217,.10);
+  border:1px solid rgba(109,40,217,.26);
+}
+
 /* price row */
 .priceRow{
   display:grid;
@@ -1074,7 +1103,7 @@ function isDiscountRow(x){
   return (v === "o" || v === "1" || v === "true" || v === "y" || v === "yes" || v === "on");
 }
 
-function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount}){
+function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, discount, condType}){
   const mv = (move ?? "");
   const ch = (change ?? "");
   const mvNum = asNum(mv);
@@ -1091,7 +1120,13 @@ function addPhoneCard({badgeText, badgeClass, model, move, change, infoText, dis
       </div>
 
       ${infoText ? `<p class="infoLine">${infoText}</p>` : ``}
-      ${discount ? `<div class="discountPill">요금할인 <strong>25%</strong></div>` : ``}
+      ${(condType || discount) ? `
+        <div class="condBadgeRow">
+          ${condType === 'gosi' ? `<span class="condBadge gosi">📢 공시지원금</span>` : ''}
+          ${condType === 'seonYak' ? `<span class="condBadge seonYak">✅ 선택약정 25%</span>` : ''}
+          ${condType === 'both' ? `<span class="condBadge gosi">📢 공시지원금</span><span class="condBadge seonYak">✅ 선택약정 25%</span>` : ''}
+          ${(!condType && discount) ? `<span class="condBadge seonYak">✅ 선택약정 25%</span>` : ''}
+        </div>` : ``}
 
       <div class="priceRow ${rowClass}">
         ${hasMove ? `
@@ -1201,6 +1236,14 @@ function renderPhone(rows, carrier){
     const change = showVal(r[`${carrier}_기변`]);
     const discount = isDiscountRow(r);
     
+    // 공시/선약 조건 판단
+    const seonYakRaw = String(r["선택약정"] ?? "").trim().toUpperCase();
+    // X → 공시지원금, O/Y/1/TRUE → 선택약정, 빈값 → 표시없음
+    let condType = null;
+    if (seonYakRaw === "X" || seonYakRaw === "N" || seonYakRaw === "NO" || seonYakRaw === "0") condType = "gosi";
+    else if (seonYakRaw === "O" || seonYakRaw === "Y" || seonYakRaw === "YES" || seonYakRaw === "1" || seonYakRaw === "TRUE") condType = "seonYak";
+    else if (seonYakRaw === "BOTH" || seonYakRaw === "둘다") condType = "both";
+    
     // "신규" 표시가 있으면 배지를 "신규"로 변경
     const isNew = String(r["요금할인"] ?? "").trim() === "신규";
     const badgeText = isNew ? "신규" : carrier;
@@ -1218,7 +1261,8 @@ function renderPhone(rows, carrier){
       move: isNew ? move : move,  // 신규는 하나의 가격만
       change: isNew ? "" : change, // 신규는 기변 가격 없음
       infoText,
-      discount
+      discount,
+      condType: isNew ? null : condType
     });
   });
 }
