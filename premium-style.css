@@ -1070,31 +1070,22 @@ body::before {
 /* ✅ 팝업 오버레이
    body에 transform:translateZ(0)이 있어도 fixed가 제대로 동작하도록
    팔업을 flex로, 카드를 position:relative + margin:auto로 중앙 정렬 */
-.promoPopup {
+/* ✅ 분리 팝업 공통 오버레이 */
+.singlePopup {
   display: none;
   position: fixed !important;
-  top: 0 !important;
-  left: 0 !important;
-  right: 0 !important;
-  bottom: 0 !important;
-  width: 100vw !important;
-  height: 100vh !important;
-  background: rgba(0, 0, 0, 0.75) !important;
+  top: 0 !important; left: 0 !important; right: 0 !important; bottom: 0 !important;
+  width: 100% !important; height: 100% !important;
+  background: rgba(0,0,0,0.75) !important;
   z-index: 999999 !important;
   align-items: center !important;
   justify-content: center !important;
   padding: 20px !important;
   box-sizing: border-box !important;
-  transform: none !important;
-  overflow: hidden !important;
-}
-
-.promoPopup.show {
-  display: flex !important;
 }
 
 /* ✅ 팝업 카드 */
-.promoPopCard {
+.singlePopCard {
   position: relative !important;
   margin: auto !important;
   width: 100% !important;
@@ -1103,23 +1094,21 @@ body::before {
   border-radius: 20px !important;
   background: #ffffff !important;
   padding: 0 !important;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.6) !important;
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6) !important;
   box-sizing: border-box !important;
-  overflow: hidden !important;
+  overflow-y: auto !important;
+  -webkit-overflow-scrolling: touch !important;
   display: flex !important;
   flex-direction: column !important;
   flex-shrink: 1 !important;
   min-height: 0 !important;
-  transform: none !important;
 }
 
 /* ✅ X 닫기 버튼 */
-.promoPopX {
+.singlePopX {
   position: absolute !important;
-  top: 12px !important;
-  right: 12px !important;
-  width: 44px !important;
-  height: 44px !important;
+  top: 12px !important; right: 12px !important;
+  width: 44px !important; height: 44px !important;
   border-radius: 50% !important;
   border: 2px solid rgba(0,0,0,0.15) !important;
   background: #f1f5f9 !important;
@@ -1136,258 +1125,13 @@ body::before {
   appearance: none !important;
 }
 
-.promoPopX:active {
+.singlePopX:active {
   background: #e2e8f0 !important;
   transform: scale(0.95) !important;
 }
 
-/* ✅ 탭 헤더 - X버튼(44px) + 여유(8px) = 52px 상단 패딩 */
-.promoTabs {
-  display: flex !important;
-  gap: 8px !important;
-  padding: 52px 16px 0 !important;
-  background: linear-gradient(135deg, #1e3a5f 0%, #0f2540 100%) !important;
-  flex-shrink: 0 !important;
-}
-
-.promoTab {
-  flex: 1 !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 6px !important;
-  padding: 12px 8px !important;
-  border: none !important;
-  background: rgba(255,255,255,0.12) !important;
-  color: rgba(255,255,255,0.65) !important;
-  font-size: 14px !important;
-  font-weight: 700 !important;
-  cursor: pointer !important;
-  border-radius: 12px 12px 0 0 !important;
-  -webkit-appearance: none !important;
-  appearance: none !important;
-}
-
-.promoTab.active {
-  background: #ffffff !important;
-  color: #1e3a5f !important;
-}
-
-.promoTabIcon {
-  font-size: 18px !important;
-}
-
-.promoTabText {
-  font-weight: 700 !important;
-}
-
-/* ✅ 탭 내용 - 스크롤 영역 */
-.promoTabContent {
-  display: none !important;
-  padding: 20px 16px !important;
-  background: #ffffff !important;
-  overflow-y: auto !important;
-  -webkit-overflow-scrolling: touch !important;
-  flex: 1 !important;
-  min-height: 0 !important;
-}
-
-.promoTabContent.active {
-  display: block !important;
-}
-
-/* S26 탭은 자체 배경/패딩 사용 */
-#s26Tab {
-  padding: 0 !important;
-  background: transparent !important;
-}
-
-/* =============================================
-   S26 팝업 - 이미지 디자인 스타일
-   배경: 다크 네이비 그라디언트
-   ============================================= */
-
-/* 전체 래퍼 - 다크 배경 */
-.s26Wrap {
-  background: linear-gradient(170deg, #1c2340 0%, #1a1f35 40%, #16213e 100%) !important;
-  padding: 20px 20px 16px !important;
-  text-align: center !important;
-  color: #ffffff !important;
-}
-
-/* 상단 모델명 소형 텍스트 */
-.s26ModelLine {
-  font-size: 12px !important;
-  font-weight: 500 !important;
-  color: rgba(255,255,255,0.55) !important;
-  margin: 0 0 6px !important;
-  letter-spacing: 0.5px !important;
-}
-
-/* 메인 브랜드 제목 */
-.s26MainTitle {
-  font-size: 15px !important;
-  font-weight: 700 !important;
-  color: rgba(255,255,255,0.85) !important;
-  margin: 0 0 4px !important;
-  letter-spacing: -0.2px !important;
-}
-
-/* 사·전·예·약 큰 텍스트 */
-.s26PreText {
-  font-size: 40px !important;
-  font-weight: 900 !important;
-  color: #ffffff !important;
-  margin: 4px 0 14px !important;
-  letter-spacing: 4px !important;
-  line-height: 1.1 !important;
-}
-
-/* T world biz 배너 */
-.s26BizBanner {
-  display: inline-block !important;
-  background: rgba(255,255,255,0.12) !important;
-  border: 1px solid rgba(255,255,255,0.2) !important;
-  border-radius: 6px !important;
-  padding: 8px 14px !important;
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: rgba(255,255,255,0.9) !important;
-  margin-bottom: 16px !important;
-  width: 100% !important;
-  box-sizing: border-box !important;
-}
-
-/* 폰 이미지 영역 */
-.s26PhoneArea {
-  margin: 0 auto 16px !important;
-  height: 140px !important;
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  position: relative !important;
-}
-
-/* 폰 이미지 이모지 (임시) */
-.s26PhoneImg {
-  font-size: 100px !important;
-  line-height: 1 !important;
-  filter: drop-shadow(0 8px 24px rgba(0,0,0,0.5)) !important;
-}
-
-/* 날짜 정보 */
-.s26DateInfo {
-  margin-bottom: 18px !important;
-}
-
-.s26DateRow {
-  font-size: 14px !important;
-  font-weight: 600 !important;
-  color: rgba(255,255,255,0.9) !important;
-  margin: 4px 0 !important;
-  line-height: 1.5 !important;
-}
-
-/* ✅ CTA 버튼 (카카오) */
-.s26CtaBtn {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  width: 100% !important;
-  padding: 15px 20px !important;
-  border-radius: 12px !important;
-  background: #fee500 !important;
-  color: #3b2f00 !important;
-  font-size: 16px !important;
-  font-weight: 900 !important;
-  text-decoration: none !important;
-  margin-bottom: 12px !important;
-  box-sizing: border-box !important;
-  letter-spacing: -0.3px !important;
-}
-
-.s26CtaBtn:active {
-  filter: brightness(0.92) !important;
-}
-
-/* ✅ 연락처 */
-.s26Contact {
-  display: flex !important;
-  gap: 8px !important;
-  justify-content: center !important;
-  flex-wrap: wrap !important;
-}
-
-.s26ContactItem {
-  font-size: 13px !important;
-  font-weight: 600 !important;
-  color: rgba(255,255,255,0.7) !important;
-  padding: 6px 10px !important;
-  background: rgba(255,255,255,0.08) !important;
-  border-radius: 8px !important;
-}
-
-/* ✅ 인터넷TV 탭 */
-.promoTabContent .inetFrame {
-  border-radius: 14px !important;
-  padding: 14px !important;
-  background: linear-gradient(180deg, #fff7c9 0%, #ffe484 100%) !important;
-  border: 1px solid rgba(0,0,0,0.08) !important;
-}
-
-.promoTabContent .inetCard {
-  border-radius: 12px !important;
-  padding: 14px !important;
-  background: linear-gradient(180deg, #ff3b30 0%, #c80000 100%) !important;
-}
-
-.promoTabContent .inetRibbon {
-  margin-bottom: 8px !important;
-}
-
-.promoTabContent .inetRibbon span {
-  font-size: 18px !important;
-  padding: 6px 12px !important;
-  border-radius: 10px !important;
-  background: linear-gradient(180deg, #ffb703 0%, #ff7a00 100%) !important;
-  color: #1f2937 !important;
-  font-weight: 900 !important;
-  display: inline-block !important;
-}
-
-.promoTabContent .inetHeadline {
-  font-size: 32px !important;
-  font-weight: 900 !important;
-  color: #ffe66b !important;
-  text-align: center !important;
-  margin: 10px 0 !important;
-}
-
-.promoTabContent .inetVisual {
-  height: 110px !important;
-  margin: 8px 0 12px !important;
-  position: relative !important;
-}
-
-.promoTabContent .inetKakaoBtn {
-  display: flex !important;
-  align-items: center !important;
-  justify-content: center !important;
-  gap: 8px !important;
-  width: 100% !important;
-  padding: 14px !important;
-  border-radius: 14px !important;
-  background: #fee500 !important;
-  color: #3b2f00 !important;
-  font-size: 20px !important;
-  font-weight: 900 !important;
-  text-decoration: none !important;
-  box-sizing: border-box !important;
-}
-
-/* ✅ 푸터 */
-.promoFooter {
+/* ✅ 24시간 보지않기 푸터 */
+.singlePopFoot {
   display: flex !important;
   align-items: center !important;
   justify-content: center !important;
@@ -1404,59 +1148,409 @@ body::before {
   flex-shrink: 0 !important;
 }
 
-.promoFooter input[type="checkbox"] {
+.singlePopFoot input[type="checkbox"] {
   width: 17px !important;
   height: 17px !important;
   cursor: pointer !important;
   accent-color: #1e3a5f !important;
 }
 
-/* ✅ 모바일 최적화 (≤520px) - 하단 시트 형태 */
+/* =============================================
+   ✅ 팝업 1 — 갤럭시 S26
+   ============================================= */
+.s26Wrap {
+  padding: 48px 22px 22px !important;
+  text-align: center !important;
+  background: linear-gradient(160deg, #1a237e 0%, #283593 50%, #1565c0 100%) !important;
+  color: #fff !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+}
+/* 반짝이는 빛 효과 */
+.s26Wrap::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -60px !important; left: -40px !important;
+  width: 200px !important; height: 200px !important;
+  background: radial-gradient(circle, rgba(255,255,255,0.12) 0%, transparent 70%) !important;
+  pointer-events: none !important;
+}
+.s26ModelLine {
+  display: inline-block !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  color: #1a237e !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  background: #e3f2fd !important;
+  padding: 4px 14px !important;
+  border-radius: 20px !important;
+  margin: 0 0 10px !important;
+}
+.s26MainTitle {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: rgba(255,255,255,0.7) !important;
+  margin: 0 0 6px !important;
+}
+.s26PreText {
+  font-size: 44px !important;
+  font-weight: 900 !important;
+  color: #ffffff !important;
+  margin: 4px 0 6px !important;
+  letter-spacing: 5px !important;
+  line-height: 1.1 !important;
+  text-shadow: 0 2px 16px rgba(100,181,246,0.5) !important;
+}
+.s26SubBadge {
+  display: inline-block !important;
+  background: rgba(255,255,255,0.15) !important;
+  border: 1px solid rgba(255,255,255,0.3) !important;
+  border-radius: 8px !important;
+  padding: 5px 14px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.9) !important;
+  margin-bottom: 16px !important;
+}
+.s26PhoneArea {
+  margin: 0 auto 14px !important;
+  height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+}
+.s26PhoneImg {
+  font-size: 82px !important;
+  line-height: 1 !important;
+  filter: drop-shadow(0 8px 20px rgba(0,0,0,0.35)) !important;
+}
+.s26DateInfo {
+  background: rgba(255,255,255,0.12) !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+  backdrop-filter: blur(4px) !important;
+  -webkit-backdrop-filter: blur(4px) !important;
+  border-radius: 14px !important;
+  padding: 12px 16px !important;
+  margin-bottom: 16px !important;
+}
+.s26DateRow {
+  font-size: 13px !important;
+  font-weight: 700 !important;
+  color: #e3f2fd !important;
+  margin: 3px 0 !important;
+  line-height: 1.6 !important;
+}
+.s26CtaBtn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 15px 20px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #fee500, #ffb300) !important;
+  color: #3b1f00 !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 6px 20px rgba(254,229,0,0.55) !important;
+  letter-spacing: 0.3px !important;
+}
+.s26CtaBtn:active { filter: brightness(0.92) !important; transform: scale(0.98) !important; }
+.s26Contact {
+  display: flex !important;
+  gap: 8px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+}
+.s26ContactItem {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: rgba(255,255,255,0.85) !important;
+  padding: 6px 12px !important;
+  background: rgba(255,255,255,0.13) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(255,255,255,0.2) !important;
+}
+
+/* =============================================
+   ✅ 팝업 2 — 아이폰 17 에어
+   ============================================= */
+.airWrap {
+  padding: 48px 22px 22px !important;
+  text-align: center !important;
+  background: linear-gradient(160deg, #fce4ec 0%, #f3e5f5 40%, #ede7f6 100%) !important;
+  color: #111 !important;
+  position: relative !important;
+  overflow: hidden !important;
+  border-radius: 20px !important;
+}
+/* 상단 강조 바 */
+.airWrap::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 5px !important;
+  background: linear-gradient(90deg, #ab47bc, #ec407a, #ff7043) !important;
+  border-radius: 20px 20px 0 0 !important;
+  pointer-events: none !important;
+}
+/* 배경 장식 원 */
+.airWrap::after {
+  content: "" !important;
+  position: absolute !important;
+  top: -80px !important; right: -60px !important;
+  width: 220px !important; height: 220px !important;
+  background: radial-gradient(circle, rgba(171,71,188,0.12) 0%, transparent 70%) !important;
+  pointer-events: none !important;
+}
+.airTop { text-align: center !important; position: relative !important; z-index: 1 !important; }
+.airModelLine {
+  display: inline-block !important;
+  font-size: 10px !important;
+  font-weight: 800 !important;
+  letter-spacing: 1px !important;
+  text-transform: uppercase !important;
+  background: linear-gradient(135deg, #ab47bc, #ec407a) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  border: 1.5px solid #ce93d8 !important;
+  padding: 4px 14px !important;
+  border-radius: 20px !important;
+  margin: 0 0 10px !important;
+}
+.airMainTitle {
+  font-size: 13px !important;
+  font-weight: 500 !important;
+  color: #888 !important;
+  margin: 0 0 4px !important;
+}
+.airPreText {
+  font-size: 60px !important;
+  font-weight: 900 !important;
+  margin: 4px 0 16px !important;
+  letter-spacing: 0px !important;
+  line-height: 1 !important;
+  background: linear-gradient(135deg, #7b1fa2, #c2185b, #e91e63) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  filter: drop-shadow(0 2px 8px rgba(194,24,91,0.22)) !important;
+}
+.airPhoneArea {
+  margin: 0 auto 16px !important;
+  height: 100px !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+.airPhoneImg {
+  font-size: 84px !important;
+  line-height: 1 !important;
+  filter: drop-shadow(0 6px 18px rgba(171,71,188,0.3)) !important;
+}
+.airCtaBtn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 15px 20px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #fee500, #ffb300) !important;
+  color: #3b1f00 !important;
+  font-size: 16px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  margin-bottom: 12px !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 6px 20px rgba(254,229,0,0.55) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+.airCtaBtn:active { filter: brightness(0.92) !important; transform: scale(0.98) !important; }
+.airContact {
+  display: flex !important;
+  gap: 8px !important;
+  justify-content: center !important;
+  flex-wrap: wrap !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+.airContactItem {
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #666 !important;
+  padding: 6px 12px !important;
+  background: rgba(255,255,255,0.75) !important;
+  border-radius: 8px !important;
+  border: 1px solid rgba(171,71,188,0.2) !important;
+}
+
+/* =============================================
+   ✅ 팝업 3 — 인터넷TV
+   ============================================= */
+.singlePopCard .inetFrame {
+  background: linear-gradient(160deg, #fff8e1 0%, #fff3e0 100%) !important;
+  padding: 52px 20px 20px !important;
+  border-radius: 20px !important;
+  border: none !important;
+  position: relative !important;
+  overflow: hidden !important;
+}
+.singlePopCard .inetFrame::before {
+  content: "" !important;
+  position: absolute !important;
+  top: 0 !important; left: 0 !important; right: 0 !important;
+  height: 5px !important;
+  background: linear-gradient(90deg, #ff6f00, #ff8f00, #ffa000) !important;
+  border-radius: 20px 20px 0 0 !important;
+  pointer-events: none !important;
+}
+.singlePopCard .inetFrame::after {
+  content: "" !important;
+  position: absolute !important;
+  bottom: -50px !important; right: -50px !important;
+  width: 180px !important; height: 180px !important;
+  background: radial-gradient(circle, rgba(255,167,38,0.2) 0%, transparent 70%) !important;
+  pointer-events: none !important;
+}
+.singlePopCard .inetCard {
+  background: linear-gradient(135deg, #ffffff 0%, #fffde7 100%) !important;
+  border-radius: 16px !important;
+  padding: 20px 16px !important;
+  border: 2px solid #ffe082 !important;
+  text-align: center !important;
+  box-shadow: 0 4px 20px rgba(255,160,0,0.18) !important;
+  position: relative !important;
+  z-index: 1 !important;
+}
+.singlePopCard .inetRibbon { margin-bottom: 10px !important; }
+.singlePopCard .inetRibbon span {
+  font-size: 12px !important;
+  font-weight: 800 !important;
+  padding: 5px 18px !important;
+  border-radius: 20px !important;
+  background: linear-gradient(90deg, #ff6f00, #ff8f00) !important;
+  color: #fff !important;
+  display: inline-block !important;
+  letter-spacing: 0.3px !important;
+  box-shadow: 0 3px 10px rgba(255,111,0,0.35) !important;
+}
+.singlePopCard .inetHeadline {
+  font-size: 34px !important;
+  font-weight: 900 !important;
+  background: linear-gradient(135deg, #e65100, #ff6f00) !important;
+  -webkit-background-clip: text !important;
+  -webkit-text-fill-color: transparent !important;
+  background-clip: text !important;
+  text-align: center !important;
+  margin: 8px 0 4px !important;
+  line-height: 1.2 !important;
+}
+.singlePopCard .inetVisual {
+  height: 100px !important;
+  margin: 8px 0 16px !important;
+  position: relative !important;
+}
+.singlePopCard .inetKakaoBtn {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  width: 100% !important;
+  padding: 15px !important;
+  border-radius: 14px !important;
+  background: linear-gradient(135deg, #fee500, #ffb300) !important;
+  color: #3b1f00 !important;
+  font-size: 17px !important;
+  font-weight: 900 !important;
+  text-decoration: none !important;
+  box-sizing: border-box !important;
+  box-shadow: 0 6px 20px rgba(254,229,0,0.55) !important;
+}
+.singlePopCard .inetKakaoBtn:active { filter: brightness(0.92) !important; transform: scale(0.98) !important; }
+
+/* =============================================
+   ✅ 공통 X버튼 / 푸터
+   ============================================= */
+.singlePopX {
+  position: absolute !important;
+  top: 12px !important; right: 12px !important;
+  width: 32px !important; height: 32px !important;
+  border-radius: 50% !important;
+  border: none !important;
+  background: rgba(255,255,255,0.35) !important;
+  backdrop-filter: blur(6px) !important;
+  -webkit-backdrop-filter: blur(6px) !important;
+  color: #555 !important;
+  font-size: 17px !important;
+  font-weight: 700 !important;
+  cursor: pointer !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  z-index: 100 !important;
+  line-height: 1 !important;
+  -webkit-appearance: none !important;
+  appearance: none !important;
+  box-shadow: 0 1px 4px rgba(0,0,0,0.12) !important;
+}
+.singlePopX:active { background: rgba(255,255,255,0.55) !important; transform: scale(0.93) !important; }
+
+.singlePopFoot {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 8px !important;
+  padding: 13px 16px !important;
+  font-size: 12px !important;
+  font-weight: 600 !important;
+  color: #aaa !important;
+  cursor: pointer !important;
+  background: #fafafa !important;
+  border-top: 1px solid #f0f0f0 !important;
+  user-select: none !important;
+  -webkit-user-select: none !important;
+  flex-shrink: 0 !important;
+  border-radius: 0 0 20px 20px !important;
+}
+.singlePopFoot input[type="checkbox"] {
+  width: 15px !important; height: 15px !important;
+  cursor: pointer !important;
+  accent-color: #9333ea !important;
+}
+
+/* ✅ 모바일 최적화 (≤520px) */
 @media (max-width: 520px) {
-  .promoPopup {
+  .singlePopup {
     align-items: flex-end !important;
     padding: 0 !important;
   }
-
-  .promoPopCard {
+  .singlePopCard {
     width: 100% !important;
     max-width: 100% !important;
     max-height: 90vh !important;
-    border-radius: 20px 20px 0 0 !important;
+    border-radius: 24px 24px 0 0 !important;
     margin: 0 !important;
   }
-
-  .promoTabs {
-    padding-top: 52px !important;
+  .s26Wrap, .airWrap, .singlePopCard .inetFrame {
+    border-radius: 24px 24px 0 0 !important;
   }
-
-  .promoTab {
-    font-size: 13px !important;
+  .s26Wrap::before, .airWrap::before,
+  .singlePopCard .inetFrame::before {
+    border-radius: 24px 24px 0 0 !important;
   }
-
-  .s26PreText {
-    font-size: 32px !important;
-    letter-spacing: 3px !important;
-  }
-
-  .s26PhoneArea {
-    height: 110px !important;
-  }
-
-  .s26PhoneImg {
-    font-size: 80px !important;
-  }
-
-  .s26CtaBtn {
-    font-size: 15px !important;
-    padding: 13px !important;
-  }
-
-  .promoTabContent .inetHeadline {
-    font-size: 26px !important;
-  }
-
-  .promoTabContent .inetKakaoBtn {
-    font-size: 18px !important;
-  }
+  .s26PreText { font-size: 36px !important; }
+  .airPreText { font-size: 48px !important; }
+  .singlePopCard .inetHeadline { font-size: 28px !important; }
+  .singlePopFoot { border-radius: 0 !important; }
 }
